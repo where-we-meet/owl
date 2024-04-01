@@ -16,6 +16,7 @@
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-kakao-maps-sdk": "^1.1.26",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
+    "kakao.maps.d.ts": "^0.1.39",
     "typescript": "^5"
   }
 }
