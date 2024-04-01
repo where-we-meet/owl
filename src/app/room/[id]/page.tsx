@@ -1,4 +1,4 @@
-import UserList from "@/components/room/UserList";
+import UserList from "@/components/room/meeting/user/UserList";
 import Meeting from "@/components/room/meeting/Meeting";
 
 const RoomPage = () => {

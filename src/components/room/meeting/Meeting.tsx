@@ -1,8 +1,8 @@
 "use client";
 
 import { type ReactElement, useState } from "react";
-import Calender from "./Calender";
-import Place from "./Place";
+import Calender from "./calender/Calender";
+import Place from "./place/Place";
 
 type TabList = { [key: string]: ReactElement };
 
