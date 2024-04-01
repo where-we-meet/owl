@@ -1,8 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { format, startOfWeek, startOfMonth, endOfMonth, endOfWeek, addDays, isSunday, isSaturday } from 'date-fns';
-import { start } from 'repl';
+import {
+  format,
+  startOfWeek,
+  startOfMonth,
+  endOfMonth,
+  endOfWeek,
+  addDays,
+  isSunday,
+  isSaturday,
+  subMonths,
+  addMonths
+} from 'date-fns';
 
 const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
@@ -52,9 +62,19 @@ const Calender = () => {
     return <li>{weekdays}</li>;
   });
 
+  const prevMonth = () => {
+    setNowDate(subMonths(nowDate, 1));
+  };
+
+  const afterMonth = () => {
+    setNowDate(addMonths(nowDate, 1));
+  };
+
   return (
     <>
       <div>Calender</div>
+      <button onClick={prevMonth}>◀</button>
+      <button onClick={afterMonth}>▶</button>
       <div>
         {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
       </div>
