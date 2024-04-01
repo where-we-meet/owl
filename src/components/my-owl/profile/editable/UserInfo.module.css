@@ -1,0 +1,12 @@
+.profile_image {
+}
+
+.user_name {
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+
+  gap: 10px;
+}
