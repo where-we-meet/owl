@@ -33,24 +33,23 @@ const Calender = () => {
       //
       const formOfDate = format(startWeek, 'd');
       entireOfWeek.push(
-        <ul key={startWeek.getDate()}>
-          <li
-            style={{
-              color:
-                // 현재 날짜가 이번 달의 데이터가 아닐 경우 회색으로 표시
-                // date-fns의 함수를 사용해 일요일이면 빨간색, 토요일이면 파란색으로 표시
-                format(nowDate, 'M') !== format(startWeek, 'M')
-                  ? '#ddd'
-                  : isSunday(startWeek)
-                  ? 'red'
-                  : isSaturday(startWeek)
-                  ? 'blue'
-                  : '#000'
-            }}
-          >
-            {formOfDate}
-          </li>
-        </ul>
+        <li
+          key={startWeek.getDate()}
+          style={{
+            color:
+              // 현재 날짜가 이번 달의 데이터가 아닐 경우 회색으로 표시
+              // date-fns의 함수를 사용해 일요일이면 빨간색, 토요일이면 파란색으로 표시
+              format(nowDate, 'M') !== format(startWeek, 'M')
+                ? '#ddd'
+                : isSunday(startWeek)
+                ? 'red'
+                : isSaturday(startWeek)
+                ? 'blue'
+                : '#000'
+          }}
+        >
+          {formOfDate}
+        </li>
       );
       startWeek = addDays(startWeek, 1);
     }
