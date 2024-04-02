@@ -3,7 +3,7 @@ import { createClient } from '@/utils/supabase/client';
 const supabase = createClient();
 
 export const getUserSession = async () => {
-  const { data, error } = await supabase.auth.getSession();
+  const { data, error } = await supabase.auth.getUser();
   if (error) throw error;
   return data;
 };
@@ -24,7 +24,18 @@ export const getUserSchedule = async (id: string) => {
 };
 
 export const getRoomUsersData = async (id: string) => {
-  const { data, error } = await supabase.from('userdata_room').select('*');
+  const { data, error } = await supabase
+    .from('userdata_room')
+    .select(
+      `*,
+      users(
+        profile_url,
+        name
+      )
+      `
+    )
+    .eq('room_id', id);
+
   if (error) throw error;
   return data;
 };
