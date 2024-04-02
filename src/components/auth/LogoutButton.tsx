@@ -10,6 +10,7 @@ const Logout = () => {
   const signOut = async () => {
     await supabase.auth.signOut();
     router.push('/login');
+
   };
 
   return <button onClick={signOut}>로그아웃</button>;
