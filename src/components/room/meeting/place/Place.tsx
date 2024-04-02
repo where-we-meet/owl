@@ -1,5 +1,13 @@
+'use client';
+
+import KakaoMap from './KakaoMap';
+
 const Place = () => {
-  return <div>Place</div>;
+  return (
+    <div>
+      <KakaoMap />
+    </div>
+  );
 };
 
 export default Place;
