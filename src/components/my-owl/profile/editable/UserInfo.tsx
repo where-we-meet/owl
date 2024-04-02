@@ -17,6 +17,7 @@ export interface UserInfoProps {
 const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(name);
+  const [toggleModal, setToggleModal] = useState(false);
   //이름 바꾸고나서 이 state 가 업데이트가 안됨
 
   const handleChangeUserInfo = (event: ChangeEvent<HTMLInputElement>) => {
@@ -42,13 +43,17 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
     setEditMode(false);
   };
 
+  const handleToggleModal = () => {
+    setToggleModal((prev) => !prev);
+  };
+
   return (
     <div className={styles.user_container}>
       <div className={styles.profile_image} style={{ backgroundImage: `url(${profileURL})` }}>
         {editMode ? (
           <Image
             className={styles.edit}
-            onClick={() => {}}
+            onClick={handleToggleModal}
             src="/images/edit_mode.svg"
             alt="edit mode"
             width={24}
