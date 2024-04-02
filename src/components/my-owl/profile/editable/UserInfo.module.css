@@ -2,6 +2,20 @@
 }
 
 .user_name {
+  border: none;
+  outline: none;
+
+  font-size: 16px;
+  text-align: center;
+}
+
+.user_name:hover {
+  outline: none;
+}
+
+.user_name:disabled {
+  background-color: transparent;
+  color: black;
 }
 
 .button_container {
