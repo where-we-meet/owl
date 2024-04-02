@@ -79,7 +79,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
           </button>
         )}
       </div>
-      {toggleModal && <ImageUploadModal setToggleModal={setToggleModal} />}
+      {toggleModal && <ImageUploadModal handleToggleModal={handleToggleModal} />}
     </div>
   );
 };

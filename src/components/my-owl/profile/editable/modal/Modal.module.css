@@ -1,0 +1,34 @@
+.background {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 300px;
+
+  padding: 1.5rem 3rem;
+  border-radius: 10px;
+
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  background-color: #ffffff;
+}
+
+.close_btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  cursor: pointer;
+}
