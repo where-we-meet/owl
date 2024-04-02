@@ -7,6 +7,7 @@ import { createClient } from '@/utils/supabase/server';
 const Profile = async () => {
   const supabase = createClient();
 
+  // authSNS, userId 제외한 요소는 supabase Auth가 아닌 supabse DB의 users에서 가져와야함.
   const getUserData = async () => {
     const {
       data: { user },
@@ -18,12 +19,18 @@ const Profile = async () => {
     }
 
     if (user !== null) {
+      const { data, error } = await supabase.from('users').select('name, profile_url').eq('id', user.id).single();
+
+      if (error) {
+        throw error;
+      }
+
       return {
         authSNS: user.app_metadata.providers,
         userInfo: {
           userId: user.id,
-          name: user.user_metadata.full_name,
-          profileURL: user.user_metadata.avatar_url
+          name: data.name,
+          profileURL: data.profile_url
         }
       };
     } else {

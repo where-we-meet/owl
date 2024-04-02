@@ -11,15 +11,15 @@ import { createClient } from '@/utils/supabase/client';
 export interface UserInfoProps {
   userId: string;
   name: string;
-  profileURL: string;
+  profileURL: string | null;
 }
 
 const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(name);
+  //이름 바꾸고나서 이 state 가 업데이트가 안됨
 
   const handleChangeUserInfo = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
     const name = event.target.value;
     setUserName(name);
   };
@@ -44,7 +44,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
 
   return (
     <div className={styles.user_container}>
-      <div className={styles.profile_image}>
+      <div className={styles.profile_image} style={{ backgroundImage: `url(${profileURL})` }}>
         {editMode ? (
           <Image
             className={styles.edit}
