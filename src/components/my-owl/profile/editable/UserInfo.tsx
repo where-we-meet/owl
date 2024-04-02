@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from 'react';
 
 import styles from './UserInfo.module.css';
 import { supabase } from '@/shared/supabase';
+import Image from 'next/image';
 
 export interface UserInfoProps {
   userId: string;
@@ -42,8 +43,11 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
 
   return (
     <div className={styles.user_container}>
-      <div className={styles.profile_image} />
-      {editMode ? <button>사진 업로드하기</button> : null}
+      <div className={styles.profile_image}>
+        {editMode ? (
+          <Image className={styles.edit} src="/images/edit_mode.svg" alt="edit mode" width={24} height={21}></Image>
+        ) : null}
+      </div>
       <input className={styles.user_name} onChange={handleChangeUserInfo.name} value={userName} disabled={!editMode} />
       <div className={styles.button_container}>
         {editMode ? (

@@ -16,6 +16,10 @@
 
   border-radius: 50%;
   background-color: gray;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .user_name {
@@ -40,4 +44,12 @@
   justify-content: center;
 
   gap: 10px;
+}
+
+.edit {
+  position: absolute;
+  bottom: 3px;
+  right: 2px;
+
+  scale: 1.2;
 }
