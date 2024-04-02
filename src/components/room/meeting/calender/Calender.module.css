@@ -29,3 +29,10 @@
   width: 50px;
   padding: 30px;
 }
+.SelectedDateCircle {
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  border-radius: 50%; /* 원형 모양 */
+  position: absolute; /* 위치 지정 */
+}
