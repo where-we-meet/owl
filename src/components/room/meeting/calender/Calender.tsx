@@ -14,8 +14,7 @@ import {
   isSunday,
   isSaturday,
   subMonths,
-  addMonths,
-  isSameDay
+  addMonths
 } from 'date-fns';
 
 const Calender = () => {
@@ -33,8 +32,6 @@ const Calender = () => {
   let startWeek = startDay;
   let entireOfWeek = [];
 
-  // const isDateInRange = selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
-
   const handleDateClick = (date: Date) => {
     setSelectedDate((prev) => [...prev, date]);
   };
@@ -44,7 +41,6 @@ const Calender = () => {
       setSelectedRange([date]);
     } else if (selectedRange.length === 1) {
       setSelectedRange((prev) => [...prev, date]);
-      //  setSelectedDate([]);
     }
   };
 
