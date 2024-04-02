@@ -54,8 +54,5 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  const { data } = await supabase.auth.getUser();
-  console.log("미들웨어", data);
-
   return response;
 }
