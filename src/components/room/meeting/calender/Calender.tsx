@@ -14,11 +14,13 @@ import {
   isSunday,
   isSaturday,
   subMonths,
-  addMonths
+  addMonths,
+  getDate
 } from 'date-fns';
 
 const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -26,16 +28,27 @@ const Calender = () => {
   const startDay = startOfWeek(monthStart);
   const endDay = endOfWeek(monthEnd);
 
+  const weeks = weekDay.map((weekdays) => {
+    return <li className={`${styles.Weekdays}`}>{weekdays}</li>;
+  });
+
   const entireOfMonth = []; // 월 전체 데이터
 
   let startWeek = startDay; // 첫 주 시작 날짜
   let entireOfWeek = []; // 주 전체 데이터
+
+  const handleDateClick = (date: Date) => {
+    setSelectedDate(date);
+    console.log(typeof startWeek);
+  };
 
   while (startWeek <= endDay) {
     for (let i = 0; i < 7; i++) {
       const formOfDate = format(startWeek, 'd');
       entireOfWeek.push(
         <li
+          //클릭 시 날짜 담기
+          onClick={() => handleDateClick(startWeek)}
           className={`${styles.Days}`}
           key={startWeek.getDate()}
           style={{
@@ -54,6 +67,9 @@ const Calender = () => {
           }}
         >
           {formOfDate}
+          {selectedDate && selectedDate.getDate() === startWeek.getDate() && (
+            <span className={styles.SelectedDateCircle}></span>
+          )}
         </li>
       );
       startWeek = addDays(startWeek, 1);
@@ -65,10 +81,6 @@ const Calender = () => {
     );
     entireOfWeek = [];
   }
-
-  const weeks = weekDay.map((weekdays) => {
-    return <li className={`${styles.Weekdays}`}>{weekdays}</li>;
-  });
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
