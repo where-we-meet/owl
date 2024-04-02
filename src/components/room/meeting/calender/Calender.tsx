@@ -36,6 +36,7 @@ const Calender = () => {
       const formOfDate = format(startWeek, 'd');
       entireOfWeek.push(
         <li
+          className={`${styles.Days}`}
           key={startWeek.getDate()}
           style={{
             color:
@@ -80,12 +81,13 @@ const Calender = () => {
   return (
     <>
       <div className={`${styles.CalenderCnontainer}`}>Calender</div>
-      <button onClick={prevMonth}>◀</button>
-      <button onClick={afterMonth}>▶</button>
+
       <div>
         <div>
-          {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
+          <button onClick={prevMonth}>◀</button>
+          {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월<button onClick={afterMonth}>▶</button>
         </div>
+
         <ul>{weeks}</ul>
         <div className={`${styles.Dates}`}>{entireOfMonth}</div>
       </div>
