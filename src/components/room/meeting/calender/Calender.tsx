@@ -14,8 +14,7 @@ import {
   isSunday,
   isSaturday,
   subMonths,
-  addMonths,
-  getDate
+  addMonths
 } from 'date-fns';
 
 const Calender = () => {
@@ -39,16 +38,17 @@ const Calender = () => {
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
-    console.log(typeof startWeek);
   };
 
   while (startWeek <= endDay) {
     for (let i = 0; i < 7; i++) {
       const formOfDate = format(startWeek, 'd');
+      const newDate = new Date(startWeek);
+
       entireOfWeek.push(
         <li
           //클릭 시 날짜 담기
-          onClick={() => handleDateClick(startWeek)}
+          onClick={() => handleDateClick(newDate)}
           className={`${styles.Days}`}
           key={startWeek.getDate()}
           style={{
