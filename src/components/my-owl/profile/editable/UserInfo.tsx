@@ -45,18 +45,31 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
     <div className={styles.user_container}>
       <div className={styles.profile_image}>
         {editMode ? (
-          <Image className={styles.edit} src="/images/edit_mode.svg" alt="edit mode" width={24} height={21}></Image>
+          <Image
+            className={styles.edit}
+            onClick={() => {}}
+            src="/images/edit_mode.svg"
+            alt="edit mode"
+            width={24}
+            height={21}
+          ></Image>
         ) : null}
       </div>
       <input className={styles.user_name} onChange={handleChangeUserInfo.name} value={userName} disabled={!editMode} />
       <div className={styles.button_container}>
         {editMode ? (
           <>
-            <button onClick={handleEditExit}>취소</button>
-            <button onClick={handleEditDone}>완료</button>
+            <button className={styles.button} onClick={handleEditExit}>
+              취소
+            </button>
+            <button className={styles.button} onClick={handleEditDone}>
+              완료
+            </button>
           </>
         ) : (
-          <button onClick={handleEditMode}>프로필 편집</button>
+          <button className={styles.button} onClick={handleEditMode}>
+            프로필 편집
+          </button>
         )}
       </div>
     </div>
