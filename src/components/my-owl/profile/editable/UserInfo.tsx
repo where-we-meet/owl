@@ -41,8 +41,9 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   };
 
   return (
-    <div>
-      <div className={styles.profile_image}>UserInfo Image</div>
+    <div className={styles.user_container}>
+      <div className={styles.profile_image} />
+      {editMode ? <button>사진 업로드하기</button> : null}
       <input className={styles.user_name} onChange={handleChangeUserInfo.name} value={userName} disabled={!editMode} />
       <div className={styles.button_container}>
         {editMode ? (
