@@ -14,8 +14,7 @@ import {
   isSunday,
   isSaturday,
   subMonths,
-  addMonths,
-  getDate
+  addMonths
 } from 'date-fns';
 
 const Calender = () => {
