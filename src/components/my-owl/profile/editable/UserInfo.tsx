@@ -3,8 +3,10 @@
 import { ChangeEvent, useState } from 'react';
 
 import styles from './UserInfo.module.css';
-import { supabase } from '@/shared/supabase';
 import Image from 'next/image';
+import { createClient } from '@/utils/supabase/client';
+
+// import { supabase } from '@/shared/supabase';
 
 export interface UserInfoProps {
   userId: string;
@@ -16,12 +18,10 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(name);
 
-  const handleChangeUserInfo = {
-    name: (event: ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      const name = event.target.value;
-      setUserName(name);
-    }
+  const handleChangeUserInfo = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const name = event.target.value;
+    setUserName(name);
   };
 
   const handleEditExit = () => {
@@ -34,10 +34,11 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   };
 
   const handleEditDone = async () => {
+    const supabase = createClient();
     //update user name
     const { data, error } = await supabase.from('users').update({ name: userName }).eq('id', userId);
     //update user profile
-    console.log(data);
+
     setEditMode(false);
   };
 
@@ -52,10 +53,10 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
             alt="edit mode"
             width={24}
             height={21}
-          ></Image>
+          />
         ) : null}
       </div>
-      <input className={styles.user_name} onChange={handleChangeUserInfo.name} value={userName} disabled={!editMode} />
+      <input className={styles.user_name} onChange={handleChangeUserInfo} value={userName} disabled={!editMode} />
       <div className={styles.button_container}>
         {editMode ? (
           <>
