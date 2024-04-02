@@ -1,6 +1,6 @@
-import type { Database } from "@/types/supabase";
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import type { Database } from '@/types/supabase';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { cookies } from 'next/headers';
 
 export function createClient() {
   const cookieStore = cookies();
@@ -17,17 +17,17 @@ export function createClient() {
           try {
             cookieStore.set({ name, value, ...options });
           } catch (error) {
-            console.log(error, "cookieStore set Error");
+            console.log(error, 'cookieStore set Error');
           }
         },
         remove(name: string, options: CookieOptions) {
           try {
-            cookieStore.set({ name, value: "", ...options });
+            cookieStore.set({ name, value: '', ...options });
           } catch (error) {
-            console.log(error, "cookieStore remove Error");
+            console.log(error, 'cookieStore remove Error');
           }
-        },
-      },
+        }
+      }
     }
   );
 }
