@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import styles from './Calender.module.css';
+
 import {
   format,
   startOfWeek,
@@ -8,6 +10,7 @@ import {
   endOfMonth,
   endOfWeek,
   addDays,
+  isToday,
   isSunday,
   isSaturday,
   subMonths,
@@ -30,7 +33,6 @@ const Calender = () => {
 
   while (startWeek <= endDay) {
     for (let i = 0; i < 7; i++) {
-      //
       const formOfDate = format(startWeek, 'd');
       entireOfWeek.push(
         <li
@@ -45,6 +47,8 @@ const Calender = () => {
                 ? 'red'
                 : isSaturday(startWeek)
                 ? 'blue'
+                : isToday(startWeek)
+                ? 'pink'
                 : '#000'
           }}
         >
@@ -53,12 +57,16 @@ const Calender = () => {
       );
       startWeek = addDays(startWeek, 1);
     }
-    entireOfMonth.push(<div key={startWeek.getDate()}>{entireOfWeek}</div>);
+    entireOfMonth.push(
+      <ul className={`${styles.DayContainer}`} key={startWeek.getDate()}>
+        {entireOfWeek}
+      </ul>
+    );
     entireOfWeek = [];
   }
 
   const weeks = weekDay.map((weekdays) => {
-    return <li>{weekdays}</li>;
+    return <li className={`${styles.Weekdays}`}>{weekdays}</li>;
   });
 
   const prevMonth = () => {
@@ -71,14 +79,16 @@ const Calender = () => {
 
   return (
     <>
-      <div>Calender</div>
+      <div className={`${styles.CalenderCnontainer}`}>Calender</div>
       <button onClick={prevMonth}>◀</button>
       <button onClick={afterMonth}>▶</button>
       <div>
-        {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
+        <div>
+          {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
+        </div>
+        <ul>{weeks}</ul>
+        <div className={`${styles.Dates}`}>{entireOfMonth}</div>
       </div>
-      <ul>{weeks}</ul>
-      <div>{entireOfMonth}</div>
     </>
   );
 };
