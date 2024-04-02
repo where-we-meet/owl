@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from 'react';
 import styles from './UserInfo.module.css';
 import Image from 'next/image';
 import { createClient } from '@/utils/supabase/client';
+import { ImageUploadModal } from './modal/Modal';
 
 // import { supabase } from '@/shared/supabase';
 
@@ -78,6 +79,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
           </button>
         )}
       </div>
+      {toggleModal && <ImageUploadModal setToggleModal={setToggleModal} />}
     </div>
   );
 };
