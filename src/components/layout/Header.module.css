@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+}
+
+.menu {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}

@@ -1,3 +1,9 @@
+import Profile from "@/components/my-owl/profile/Profile";
+
 export default function MyOwl() {
-  return <p>MyOwl Page</p>;
+  return (
+    <main>
+      <Profile />
+    </main>
+  );
 }

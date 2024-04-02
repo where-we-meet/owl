@@ -1,0 +1,15 @@
+.profile_container {
+  width: 300px;
+
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
