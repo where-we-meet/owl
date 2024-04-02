@@ -20,4 +20,10 @@
   left: 50%;
   z-index: 999;
   transform: translate(-50%, -50%);
+  transition: top 0.3s ease, opacity 0.3s ease;
+}
+
+.center_pin_drag {
+  top: 48%;
+  opacity: 0.5;
 }
