@@ -7,8 +7,11 @@ import { dragCenter } from '@/utils/dragCenter';
 import styles from './KakaoMap.module.css';
 import Image from 'next/image';
 import { useGetRoadAddress } from '@/hooks/useGetRoadAddress';
+import { useState } from 'react';
 
 const KakaoMap = () => {
+  const [isDrag, setIsDrag] = useState(false);
+
   const [loading, error] = useKakaoMap();
   const { centerData, setCenterData } = useCenterState();
 
@@ -20,12 +23,21 @@ const KakaoMap = () => {
   return (
     <div>
       <div className={styles.map_container}>
-        <Image src={'/pin.svg'} className={styles.center_pin} width={50} height={50} alt="pin" />
+        <Image
+          src={'/pin.svg'}
+          className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
+          width={50}
+          height={50}
+          alt="pin"
+        />
         <Map
           center={centerData.center}
           className={styles.map}
-          onDragStart={() => {}}
-          onDragEnd={(map) => dragCenter(map, setCenterData)}
+          onDragStart={() => setIsDrag(true)}
+          onDragEnd={(map) => {
+            setIsDrag(false);
+            dragCenter(map, setCenterData);
+          }}
         >
           {centerData.isLoading && <div>위치 정보를 불러오고 있습니다.</div>}
         </Map>
