@@ -14,12 +14,13 @@ import {
   isSunday,
   isSaturday,
   subMonths,
-  addMonths
+  addMonths,
+  getDaysInMonth
 } from 'date-fns';
 
 const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date[]>([]);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -31,13 +32,14 @@ const Calender = () => {
     return <li className={`${styles.Weekdays}`}>{weekdays}</li>;
   });
 
+  //while문으로 만든 날짜
   const entireOfMonth = []; // 월 전체 데이터
 
   let startWeek = startDay; // 첫 주 시작 날짜
   let entireOfWeek = []; // 주 전체 데이터
 
   const handleDateClick = (date: Date) => {
-    setSelectedDate(date);
+    setSelectedDate((prev) => [...prev, date]);
   };
 
   while (startWeek <= endDay) {
@@ -67,8 +69,8 @@ const Calender = () => {
           }}
         >
           {formOfDate}
-          {selectedDate && selectedDate.getDate() === startWeek.getDate() && (
-            <span className={styles.SelectedDateCircle}></span>
+          {selectedDate.map((date) =>
+            date.toISOString() === startWeek.toISOString() ? <span className={styles.SelectedDateCircle}></span> : null
           )}
         </li>
       );
