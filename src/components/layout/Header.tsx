@@ -6,20 +6,22 @@ import Link from 'next/link';
 const Header = async () => {
   const supabase = createClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
+    data: { user }
+  } = await supabase.auth.getUser();
 
   return (
     <header className={styles.header}>
       <Link href="/">owl-link</Link>
-      {session ? (
-        <Logout />
-      ) : (
-        <>
-          <Link href="/my-owl">마이페이지</Link>
+      <div className={styles.menu}>
+        {user ? (
+          <>
+            <Link href="/my-owl">마이페이지</Link>
+            <Logout />
+          </>
+        ) : (
           <Link href="/login">로그인</Link>
-        </>
-      )}
+        )}
+      </div>
     </header>
   );
 };

@@ -1,4 +1,9 @@
 .header {
   display: flex;
-  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
 }
