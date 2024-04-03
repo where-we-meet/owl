@@ -1,38 +1,31 @@
-.CalendarContainer {
-  width: 300px;
-  margin: 30px auto;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-}
-
-.Weekdays {
+.weekdays {
   display: inline-block;
   width: 50px;
   padding: 30px;
   background-color: #f0f0f0;
 }
 
-.Dates {
+.dates {
   display: flex;
   flex-direction: column;
   grid-gap: 5px;
 }
 
-.DayContainer {
+.day_container {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.Days {
+.days {
   width: 50px;
   padding: 30px;
 }
-.SelectedDateCircle {
+
+.selected_date_circle {
   width: 20px;
   height: 20px;
-  background-color: green;
+  background-color: #00800033;
   border-radius: 50%; /* 원형 모양 */
   position: absolute; /* 위치 지정 */
 }

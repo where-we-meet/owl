@@ -15,72 +15,53 @@ import {
   isSaturday,
   subMonths,
   addMonths,
-  getDaysInMonth
+  isSameDay
 } from 'date-fns';
 
 const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
+  const [selectedRange, setSelecteRange] = useState<Date[]>([]);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
   const monthEnd = endOfMonth(monthStart);
   const startDay = startOfWeek(monthStart);
   const endDay = endOfWeek(monthEnd);
+  const entireOfMonth = [];
 
-  const weeks = weekDay.map((weekdays) => {
-    return <li className={`${styles.Weekdays}`}>{weekdays}</li>;
-  });
+  let startWeek = startDay;
+  let entireOfWeek = [];
 
-  //while문으로 만든 날짜
-  const entireOfMonth = []; // 월 전체 데이터
-
-  let startWeek = startDay; // 첫 주 시작 날짜
-  let entireOfWeek = []; // 주 전체 데이터
+  // const isDateInRange = selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
 
   const handleDateClick = (date: Date) => {
     setSelectedDate((prev) => [...prev, date]);
   };
 
+  const handleRangeSelect = (date: Date) => {
+    if (selectedRange.length === 0 || selectedRange.length === 2) {
+      setSelecteRange([date]);
+    } else if (selectedRange.length === 1) {
+      setSelecteRange((prev) => [...prev, date]);
+      //  setSelectedDate([]);
+    }
+  };
+
+  const isInRange = (date: Date) => {
+    if (selectedRange.length === 2) {
+      const [start, end] = selectedRange;
+      return date >= start && date <= end;
+    }
+    return false;
+  };
+
   while (startWeek <= endDay) {
     for (let i = 0; i < 7; i++) {
-      const formOfDate = format(startWeek, 'd');
-      const newDate = new Date(startWeek);
-
-      entireOfWeek.push(
-        <li
-          //클릭 시 날짜 담기
-          onClick={() => handleDateClick(newDate)}
-          className={`${styles.Days}`}
-          key={startWeek.getDate()}
-          style={{
-            color:
-              // 현재 날짜가 이번 달의 데이터가 아닐 경우 회색으로 표시
-              // date-fns의 함수를 사용해 일요일이면 빨간색, 토요일이면 파란색으로 표시
-              format(nowDate, 'M') !== format(startWeek, 'M')
-                ? '#ddd'
-                : isSunday(startWeek)
-                ? 'red'
-                : isSaturday(startWeek)
-                ? 'blue'
-                : isToday(startWeek)
-                ? 'pink'
-                : '#000'
-          }}
-        >
-          {formOfDate}
-          {selectedDate.map((date) =>
-            date.toISOString() === startWeek.toISOString() ? <span className={styles.SelectedDateCircle}></span> : null
-          )}
-        </li>
-      );
+      entireOfWeek.push(startWeek);
       startWeek = addDays(startWeek, 1);
     }
-    entireOfMonth.push(
-      <ul className={`${styles.DayContainer}`} key={startWeek.getDate()}>
-        {entireOfWeek}
-      </ul>
-    );
+    entireOfMonth.push(entireOfWeek);
     entireOfWeek = [];
   }
 
@@ -92,18 +73,69 @@ const Calender = () => {
     setNowDate(addMonths(nowDate, 1));
   };
 
+  const dayStyle = (day: Date) => {
+    const color =
+      format(nowDate, 'M') !== format(day, 'M')
+        ? '#ddd'
+        : isSunday(day)
+        ? 'red'
+        : isSaturday(day)
+        ? 'blue'
+        : isToday(day)
+        ? 'pink'
+        : '#000';
+    return { color };
+  };
+
+  const rangeStyle = (day: Date) => {
+    return isInRange(day) ? 'lightblue' : 'transparent';
+  };
+
   return (
     <>
-      <div className={`${styles.CalenderCnontainer}`}>Calender</div>
+      <div>Calender</div>
 
       <div>
         <div>
           <button onClick={prevMonth}>◀</button>
-          {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월<button onClick={afterMonth}>▶</button>
+          <span>
+            {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
+          </span>
+          <button onClick={afterMonth}>▶</button>
         </div>
 
-        <ul>{weeks}</ul>
-        <div className={`${styles.Dates}`}>{entireOfMonth}</div>
+        <ul>
+          {weekDay.map((weekdays) => {
+            return (
+              <li key={weekdays} className={styles.weekdays}>
+                {weekdays}
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className={styles.dates}>
+          {entireOfMonth.map((week, i) => {
+            return (
+              <ul className={styles.day_container} key={i}>
+                {week.map((day) => (
+                  <li
+                    onClick={() => handleDateClick(day)}
+                    onDoubleClick={() => handleRangeSelect(day)}
+                    className={styles.days}
+                    key={day.toISOString()}
+                    style={{ ...dayStyle(day), backgroundColor: rangeStyle(day) }}
+                  >
+                    {selectedDate.some((date) => date.toISOString() === day.toISOString()) ? (
+                      <span className={styles.selected_date_circle}></span>
+                    ) : null}
+                    {day.getDate()}
+                  </li>
+                ))}
+              </ul>
+            );
+          })}
+        </div>
       </div>
     </>
   );
