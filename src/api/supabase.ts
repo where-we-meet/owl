@@ -2,7 +2,7 @@ import { createClient } from '@/utils/supabase/client';
 
 const supabase = createClient();
 
-export const getUserData = async () => {
+export const getCurrentUserData = async () => {
   const { data, error } = await supabase.auth.getUser();
   if (error) throw error;
   return data;
@@ -44,4 +44,31 @@ export const getUsersData = async (id: string) => {
   const { data, error } = await supabase.from('users').select('*').eq('id', id);
   if (error) throw error;
   return data;
+};
+
+//테스트 중
+
+type Payload = {};
+
+export const getRealtimeRoomData = (
+  id: string,
+  start_location: string,
+  onUpdateUserData: (payload: Payload) => void,
+  refetch: () => void
+) => {
+  const subscription = supabase
+    .channel('room')
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
+      (payload) => {
+        console.log('변경 사항을 표기합니다 : ', payload);
+        onUpdateUserData(payload);
+        refetch();
+      }
+    )
+    .subscribe();
+  return () => {
+    supabase.removeChannel(subscription);
+  };
 };
