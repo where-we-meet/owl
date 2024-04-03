@@ -21,9 +21,7 @@ import {
 const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
-  const [selectedRange, setSelecteRange] = useState<Date[]>([]);
-  const [startRangeDate, setStartRangeDate] = useState<Date[]>([]);
-  const [endRangeDate, setEndRangeDate] = useState<Date[]>([]);
+  const [selectedRange, setSelectedRange] = useState<Date[]>([]);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -42,29 +40,20 @@ const Calender = () => {
   };
 
   const handleRangeSelect = (date: Date) => {
-    console.log(startRangeDate);
-    if (startRangeDate.length === 0) {
-      setStartRangeDate([date]);
-    } else {
-      // 시작일이 선택된 상태라면 종료일로 설정
-      setEndRangeDate([date]);
-      const [start] = startRangeDate;
-      const [end] = endRangeDate;
-
-      // 시작일과 종료일 사이의 모든 날짜를 구하여 범위로 설정
-      let range: Date[] = [];
-      let currentDate = new Date(start);
-      while (currentDate <= end) {
-        range.push(new Date(currentDate));
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-      console.log(range);
-      setSelecteRange(range);
+    if (selectedRange.length === 0 || selectedRange.length === 2) {
+      setSelectedRange([date]);
+    } else if (selectedRange.length === 1) {
+      setSelectedRange((prev) => [...prev, date]);
+      //  setSelectedDate([]);
     }
   };
 
   const isInRange = (date: Date) => {
-    return selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
+    if (selectedRange.length === 2) {
+      const [start, end] = selectedRange;
+      return date >= start && date <= end;
+    }
+    return false;
   };
 
   while (startWeek <= endDay) {
