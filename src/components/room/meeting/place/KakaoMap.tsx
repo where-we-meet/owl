@@ -6,7 +6,7 @@ import { useCenterState } from '@/hooks/useCenterState';
 import { dragCenter } from '@/utils/dragCenter';
 import styles from './KakaoMap.module.css';
 import Image from 'next/image';
-import { useGetRoadAddress } from '@/hooks/useGetRoadAddress';
+import { useGetRoadAddress } from '@/hooks/useGetPlace';
 import { useState } from 'react';
 import RangeController from './RangeController';
 
