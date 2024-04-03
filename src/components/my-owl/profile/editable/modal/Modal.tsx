@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { MouseEvent, MouseEventHandler, useState } from 'react';
 import styles from './Modal.module.css';
 import { createClient } from '@/utils/supabase/client';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
-export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () => void }) => {
+export const ImageUploadModal = async ({ handconstoggleModal }: { handconstoggleModal: () => void }) => {
   const [fileSizeExceed, setFileSizeExceed] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const supabase = createClient();
@@ -51,32 +51,43 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
     }
   };
 
+  const getFileName = () => {
+    const today = new Date();
+
+    const year = today.getFullYear(); // 년
+    const month = ('0' + (today.getMonth() + 1)).slice(-2); // 월
+    const date = ('0' + today.getDate()).slice(-2); // 일
+    const hours = today.getHours(); // 시
+    const minutes = today.getMinutes(); // 분
+    const seconds = today.getSeconds(); // 초
+
+    return `Owl_Photo_${year}-${month}-${date}-${hours}-${minutes}-${seconds}`;
+  };
+
   const uploadImage = async () => {
-    console.log('지금부터 이미지를 업로드 해볼게?');
+    const file_name = getFileName();
 
     if (file) {
-      const { data, error } = await supabase.storage.from('images').upload(`users_profile/${file.name}`, file);
-      console.log(error);
+      const { data, error } = await supabase.storage.from('images').upload(`users_profile/${file_name}`, file);
+      setFile(null);
       if (error) {
-        console.error('Error uploading image:', error.message);
-        console.log('에러났다구?');
+        alert(`이미지 업로드에 실패하였습니다.\n 원인 : ${error.message} `);
       } else {
-        console.log('ㅋㅋ');
-        console.log('Image uploaded successfully:', data);
-
-        setFile(null);
-        return `${process.env.NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${file.name}`;
+        handconstoggleModal();
+        return `${process.env.NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${file_name}`;
       }
     }
   };
 
-  const handleUploadImage = async () => {
+  const handleUploadImage = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     const profile_url = uploadImage();
+    console.log(profile_url);
     //profile_url
   };
 
   return (
-    <div className={styles.background} onClick={handleToggleModal}>
+    <div className={styles.background} onClick={handconstoggleModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <form>
           <input type="file" accept="image/jpeg,image/png,image/jpg" onChange={handleFileMaxSize} />
@@ -89,7 +100,7 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
           <input type="url" placeholder="Paste link to an image..." />
           <button>링크 첨부하기</button>
         </form>
-        <div className={styles.close_btn} onClick={handleToggleModal}>
+        <div className={styles.close_btn} onClick={handconstoggleModal}>
           Exit
         </div>
       </div>
