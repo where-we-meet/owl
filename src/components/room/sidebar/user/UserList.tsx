@@ -1,5 +1,5 @@
 'use client';
-import { getRealtimeRoomData, getRoomUsersData, getCurrentUserData } from '@/api/supabase';
+import { getRoomUsersData } from '@/api/supabase';
 import { userDataFetch } from '@/utils/supabase/userDataFetch';
 import { useEffect, useState } from 'react';
 
