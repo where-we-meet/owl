@@ -1,9 +1,9 @@
 'use client';
 
 import { getCurrentUserData, getRoomUsersData } from '@/api/supabase';
-import { Users } from '@/components/room/sidebar/user/UserList';
+import { RoomData } from '@/components/room/sidebar/user/UserList';
 
-export const userDataFetch = async (id: string, setRoomData: (users: Users) => void) => {
+export const userDataFetch = async (id: string, setRoomData: (roomData: RoomData) => void) => {
   const { user } = await getCurrentUserData();
   const userRoomData = await getRoomUsersData(id);
   const currentUserId = user.id;

@@ -3,25 +3,13 @@ import { getRealtimeRoomData, getRoomUsersData, getCurrentUserData } from '@/api
 import { userDataFetch } from '@/utils/supabase/userDataFetch';
 import { useEffect, useState } from 'react';
 
-export type Users = Awaited<ReturnType<typeof getRoomUsersData>>;
+export type RoomData = Awaited<ReturnType<typeof getRoomUsersData>>;
 
 const UserList = ({ id }: { id: string }) => {
-  const [roomData, setRoomData] = useState<Users>([]);
+  const [roomData, setRoomData] = useState<RoomData>([]);
 
   useEffect(() => {
     userDataFetch(id, setRoomData);
-    // const userData = async () => {
-    //   const { user } = await getCurrentUserData();
-    //   const userRoomData = await getRoomUsersData(id);
-    //   const currentUserId = user.id;
-
-    //   const adminUser = userRoomData.filter((user) => user.is_admin);
-    //   const currentUser = userRoomData.filter((user) => !user.is_admin && user.user_id === currentUserId);
-    //   const otherUsers = userRoomData.filter((user) => !user.is_admin && user.user_id !== currentUserId);
-
-    //   const sortedUsers = [...adminUser, ...currentUser, ...otherUsers];
-    //   setRoomData(sortedUsers);
-    // };
   }, [id]);
 
   return (
