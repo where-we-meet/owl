@@ -1,7 +1,12 @@
+import { createClient } from '@/utils/supabase/server';
 import styles from './Meeting.module.css';
 
+const supabase = createClient();
 export const Meeting = () => {
-  const getUserMeetings = () => {};
+  const getUserInfo = async () => {};
+  const getUserMeetings = async () => {
+    const { data, error } = await supabase.from('room_schedule').select('room_id, start_date, end_date, created_by');
+  };
   return (
     <div className={styles.meeting_container}>
       <div className={styles.rooms_box}>
