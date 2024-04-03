@@ -1,8 +1,8 @@
 'use client';
 import { createClient } from '@/utils/supabase/client';
 import styles from './Meeting.module.css';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { MouseEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface UserInfo {
   name: string;
@@ -10,6 +10,7 @@ interface UserInfo {
 }
 
 interface MeetingInfo {
+  id: string | null;
   name: string | null;
   location: string | null;
   participants: UserInfo[];
@@ -17,20 +18,21 @@ interface MeetingInfo {
 
 export const Meeting = () => {
   const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchMeetingInfo = async () => {
       const meetingIds = await getUserMeetingsId();
-      const meetingInfoPromises = meetingIds.map(async (meetingId) => {
+      const meetingInfoPromises = meetingIds.map(async (meetingId: { room_id: string }) => {
         const roomId = meetingId.room_id;
         const roomInfo = await getRoomInfo(roomId);
         const participantsIds = await getRoomParticipantsId(roomId);
-        const participantsInfoPromises = participantsIds.map(async (participantId) => {
+        const participantsInfoPromises = participantsIds.map(async (participantId: { user_id: string }) => {
           const userInfo = await getUserInfo(participantId.user_id);
           return userInfo[0];
         });
         const participantsInfo = await Promise.all(participantsInfoPromises);
         return {
+          id: roomId,
           name: roomInfo[0].name,
           location: roomInfo[0].location,
           participants: participantsInfo
@@ -43,10 +45,13 @@ export const Meeting = () => {
     fetchMeetingInfo();
   }, []);
 
+  const handleClickRoom = (roomId: string | null) => {
+    router.push(`/room/${roomId}`);
+  };
   return (
     <div className={styles.meeting_container}>
       {meetingInfo.map((meeting, index) => (
-        <div key={index} className={styles.rooms_box}>
+        <div key={index} className={styles.rooms_box} onClick={() => handleClickRoom(meeting.id)}>
           <div className={styles.room_box}>
             <div className={styles.room_box_left}>
               <h3>{meeting.name}</h3>
