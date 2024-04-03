@@ -1,5 +1,5 @@
 'use client';
-import { getRoomUsersData } from '@/api/supabase';
+import { getRealtimeRoomData, getRoomUsersData } from '@/api/supabase';
 import { userDataFetch } from '@/utils/supabase/userDataFetch';
 import { useEffect, useState } from 'react';
 
@@ -10,6 +10,8 @@ const UserList = ({ id }: { id: string }) => {
 
   useEffect(() => {
     userDataFetch(id, setRoomData);
+    getRealtimeRoomData(id, setRoomData);
+    console.log('실행됨?', getRealtimeRoomData(id, setRoomData));
   }, [id]);
 
   return (

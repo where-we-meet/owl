@@ -1,3 +1,4 @@
+import { RoomData } from '@/components/room/sidebar/user/UserList';
 import { createClient } from '@/utils/supabase/client';
 
 const supabase = createClient();
@@ -48,27 +49,25 @@ export const getUsersData = async (id: string) => {
 
 //테스트 중
 
-type Payload = {};
-
-export const getRealtimeRoomData = (
-  id: string,
-  start_location: string,
-  onUpdateUserData: (payload: Payload) => void,
-  refetch: () => void
-) => {
+export const getRealtimeRoomData = (id: string, setRoomData: (roomData: RoomData) => void) => {
   const subscription = supabase
     .channel('room')
     .on(
       'postgres_changes',
       { event: '*', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
-      (payload) => {
+      async (payload) => {
         console.log('변경 사항을 표기합니다 : ', payload);
-        onUpdateUserData(payload);
-        refetch();
+        const { error, data } = await supabase
+          .from('userdata_room')
+          .select(`*, users(profile_url, name)`)
+          .eq('room_id', id);
+        if (error) {
+          console.error('불러오기 실패', error);
+        } else {
+          setRoomData(data);
+        }
       }
     )
     .subscribe();
-  return () => {
-    supabase.removeChannel(subscription);
-  };
+  return subscription;
 };
