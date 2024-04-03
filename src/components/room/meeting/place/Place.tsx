@@ -1,7 +1,7 @@
 'use client';
 
 import KakaoMap from './KakaoMap';
-import SearchBar from './SearchBar';
+import SearchBar from './search/SearchBar';
 
 const Place = () => {
   return (
