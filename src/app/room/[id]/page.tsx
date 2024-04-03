@@ -1,6 +1,6 @@
-import UserList from '@/components/room/meeting/user/UserList';
 import Meeting from '@/components/room/meeting/Meeting';
 import { getRoomData } from '@/api/supabase';
+import Sidebar from '@/components/room/sidebar/Sidebar';
 
 const RoomPage = async ({ params }: { params: { id: string } }) => {
   const data = await getRoomData(params.id);
@@ -8,7 +8,7 @@ const RoomPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <main>
-      <UserList />
+      <Sidebar id={params.id} />
       <Meeting />
     </main>
   );
