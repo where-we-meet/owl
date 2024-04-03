@@ -1,32 +1,20 @@
-'use client';
-import { createClient } from '@/utils/supabase/client';
+import { createClient } from '@/utils/supabase/server';
 import Logout from '../auth/LogoutButton';
 import styles from './Header.module.css';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
-const Header = () => {
+const Header = async () => {
   const supabase = createClient();
-  const [isLogin, setIsLogin] = useState(false);
 
-  useEffect(() => {
-    const checkUser = async () => {
-      supabase.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_OUT') {
-          setIsLogin(false);
-        } else if (event === 'SIGNED_IN') {
-          setIsLogin(true);
-        }
-      });
-    };
-    checkUser();
-  }, []);
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
 
   return (
     <header className={styles.header}>
       <Link href="/">owl-link</Link>
       <div className={styles.menu}>
-        {isLogin ? (
+        {user ? (
           <>
             <Link href="/my-owl">마이페이지</Link>
             <Logout />
