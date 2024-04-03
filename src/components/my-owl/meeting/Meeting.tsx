@@ -14,6 +14,8 @@ interface MeetingInfo {
   name: string | null;
   location: string | null;
   participants: UserInfo[];
+  created_at: string | null;
+  verified: boolean;
 }
 
 export const Meeting = () => {
@@ -35,16 +37,21 @@ export const Meeting = () => {
           id: roomId,
           name: roomInfo[0].name,
           location: roomInfo[0].location,
-          participants: participantsInfo
+          participants: participantsInfo,
+          created_at: roomInfo[0].created_at,
+          verified: roomInfo[0].verified
         };
       });
       const fetchedMeetingInfo = await Promise.all(meetingInfoPromises);
-      setMeetingInfo(fetchedMeetingInfo.filter((meeting) => meeting !== null) as MeetingInfo[]);
+
+      const sortedMeetingInfo = sortMeetingInfo(fetchedMeetingInfo as MeetingInfo[]);
+      setMeetingInfo(sortedMeetingInfo);
     };
 
     fetchMeetingInfo();
   }, []);
 
+  //meetingInfo를 시간순으로
   const handleClickRoom = (roomId: string | null) => {
     router.push(`/room/${roomId}`);
   };
@@ -57,6 +64,7 @@ export const Meeting = () => {
               <h3>{meeting.name}</h3>
               <p>날짜</p>
               <p>위치 : {meeting.location}</p>
+              <p>방 생성일 : {meeting.created_at}</p>
             </div>
             <div className={styles.room_box_right}>
               <div className={styles.participants_container}>
@@ -99,7 +107,7 @@ const getUserMeetingsId = async () => {
 };
 
 const getRoomInfo = async (roomId: string) => {
-  const { data, error } = await supabase.from('rooms').select('name, location').eq('id', roomId);
+  const { data, error } = await supabase.from('rooms').select('name, location, created_at, verified').eq('id', roomId);
   if (error) throw error;
   return data;
 };
@@ -114,4 +122,15 @@ const getUserInfo = async (userId: string) => {
   const { data, error } = await supabase.from('users').select('name, profile_url').eq('id', userId);
   if (error) throw error;
   return data;
+};
+
+const sortMeetingInfo = (meetingInfo: MeetingInfo[]): MeetingInfo[] => {
+  return meetingInfo.sort((a, b) => {
+    // 정렬 1순위 : verified가 true
+    if (a.verified && !b.verified) return -1;
+    if (!a.verified && b.verified) return 1;
+    // 정렬 2순위 : created_at
+    if (a.created_at && b.created_at) return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    return 0;
+  });
 };
