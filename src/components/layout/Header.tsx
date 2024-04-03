@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-const Header = async () => {
+const Header = () => {
   const supabase = createClient();
   const [isLogin, setIsLogin] = useState(false);
 
