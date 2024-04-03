@@ -9,8 +9,8 @@ const UserList = ({ id }: { id: string }) => {
   const [roomData, setRoomData] = useState<RoomData>([]);
 
   useEffect(() => {
-    userDataFetch(id, setRoomData);
     getRealtimeRoomData(id, setRoomData);
+    userDataFetch(id, setRoomData);
     console.log('실행됨?', getRealtimeRoomData(id, setRoomData));
   }, [id]);
 
