@@ -5,12 +5,10 @@ import styles from './RangeController.module.css';
 const radiusRanges = [300, 1000, 2000, 4000];
 
 const RangeController = ({ center }: { center: { lat: number; lng: number } }) => {
-  const [radiusLevel, setRadiusLevel] = useState(0);
-  const [radius, setRadius] = useState(radiusRanges[radiusLevel]);
+  const [radius, setRadius] = useState(radiusRanges[0]);
 
   const handleChangeRange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRadiusLevel(+e.currentTarget.value);
-    setRadius(radiusRanges[+e.currentTarget.value]);
+    setRadius(+e.currentTarget.value);
   };
 
   const resetRange = () => {
@@ -31,14 +29,14 @@ const RangeController = ({ center }: { center: { lat: number; lng: number } }) =
       />
       <div className={styles.range_controller}>
         <form className={styles.range_wrap}>
-          {radiusRanges.map((option, idx) => (
-            <label key={idx} htmlFor={`radius-${option}`} data-radius={option}>
+          {radiusRanges.map((value) => (
+            <label key={value} htmlFor={`radius-${value}`} data-radius={value}>
               <input
-                id={`radius-${option}`}
+                id={`radius-${value}`}
                 name="radius"
                 type="radio"
-                value={idx}
-                checked={radiusLevel === idx}
+                value={value}
+                checked={radius === value}
                 onChange={handleChangeRange}
                 required
               />
