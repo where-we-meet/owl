@@ -1,0 +1,25 @@
+.meeting_container {
+  margin: 20px;
+  background-color: gray;
+
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.rooms_box {
+  padding: 20px;
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.room_box {
+  padding: 20px;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: white;
+}
