@@ -15,13 +15,13 @@ import {
   isSaturday,
   subMonths,
   addMonths,
-  getDaysInMonth
+  isSameDay
 } from 'date-fns';
 
 const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
-  const [selectedRange, setSelectedRange] = useState<Date[]>([]);
+  const [selectedRange, setSelecteRange] = useState<Date[]>([]);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -33,15 +33,18 @@ const Calender = () => {
   let startWeek = startDay;
   let entireOfWeek = [];
 
+  // const isDateInRange = selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
+
   const handleDateClick = (date: Date) => {
     setSelectedDate((prev) => [...prev, date]);
   };
 
   const handleRangeSelect = (date: Date) => {
     if (selectedRange.length === 0 || selectedRange.length === 2) {
-      setSelectedRange([date]);
+      setSelecteRange([date]);
     } else if (selectedRange.length === 1) {
-      setSelectedRange((prev) => [...prev, date]);
+      setSelecteRange((prev) => [...prev, date]);
+      //  setSelectedDate([]);
     }
   };
 
@@ -117,7 +120,6 @@ const Calender = () => {
               <ul className={styles.day_container} key={i}>
                 {week.map((day) => (
                   <li
-                    draggable="true"
                     onClick={() => handleDateClick(day)}
                     onDoubleClick={() => handleRangeSelect(day)}
                     className={styles.days}
