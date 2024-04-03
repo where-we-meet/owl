@@ -1,19 +1,29 @@
-'use client';
+import { createClient } from '@/utils/supabase/server';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
-import { createClient } from '@/utils/supabase/client';
-import { useRouter } from 'next/navigation';
-
-const Logout = () => {
-  const supabase = createClient();
-  const router = useRouter();
-
+const Logout = async () => {
   const signOut = async () => {
-    await supabase.auth.signOut();
-    router.push('/login');
+    'use server';
+    const supabase = createClient();
 
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      redirect('/error');
+    }
+
+    revalidatePath('/', 'layout');
+    redirect('/');
   };
 
-  return <button onClick={signOut}>로그아웃</button>;
+  return (
+    <form>
+      <button formAction={signOut} role="button">
+        로그아웃
+      </button>
+    </form>
+  );
 };
 
 export default Logout;
