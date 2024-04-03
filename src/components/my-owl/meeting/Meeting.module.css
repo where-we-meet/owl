@@ -3,12 +3,13 @@
   background-color: gray;
 
   height: 80vh;
+  width: 70vw;
+
   overflow-y: scroll;
 }
 
 .rooms_box {
-  padding: 20px;
-  width: 500px;
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
@@ -17,9 +18,40 @@
 .room_box {
   padding: 20px;
   border-radius: 10px;
+  height: 100%;
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   background-color: white;
+}
+
+.room_box_left {
+  text-align: left;
+  line-height: 25px;
+}
+
+.room_box_right {
+  text-align: right;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.participants_container {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.participant_profile {
+  width: 20px;
+  height: 20px;
+
+  background-size: cover;
+  background-position: center;
 }
