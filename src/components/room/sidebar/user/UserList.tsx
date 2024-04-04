@@ -11,7 +11,6 @@ const UserList = ({ id }: { id: string }) => {
   useEffect(() => {
     getRealtimeRoomData(id, setRoomData);
     userDataFetch(id, setRoomData);
-    console.log('실행됨?', getRealtimeRoomData(id, setRoomData));
   }, [id]);
 
   return (

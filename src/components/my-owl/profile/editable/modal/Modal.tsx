@@ -1,6 +1,7 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import styles from './Modal.module.css';
 import { createClient } from '@/utils/supabase/client';
+import { getCurrentUserData } from '@/api/supabase';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
@@ -10,7 +11,7 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
   const supabase = createClient();
 
   //util
-  const byteCalculater = (byte: number) => {
+  const byteCalculator = (byte: number) => {
     const KB = byte / 1024;
     const MB = KB / 1024;
     const GB = MB / 1024;
@@ -37,7 +38,7 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
       const file = files[0];
       if (size > MAX_FILE_SIZE_BYTE) {
         alert(
-          `선택하신 파일의 용량은 ${byteCalculater(size)}입니다. ${byteCalculater(
+          `선택하신 파일의 용량은 ${byteCalculator(size)}입니다. ${byteCalculator(
             MAX_FILE_SIZE_BYTE
           )} 이하의 파일을 골라주세요.`
         );
@@ -72,6 +73,7 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
     if (file) {
       const { data, error } = await supabase.storage.from('images').upload(`users_profile/${file_name}`, file);
       setFile(null);
+
       if (error) {
         alert(`이미지 업로드에 실패하였습니다.\n 원인 : ${error.message} `);
       } else {
@@ -83,16 +85,12 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
   };
 
   //유저 아이디 조회 로직
-  const getUserId = async () => {
-    const {
-      data: { user },
-      error
-    } = await supabase.auth.getUser();
-    if (error) {
-      throw error;
-    }
 
-    return user !== null ? user.id : null;
+  const getUserId = async () => {
+    const response = await getCurrentUserData();
+    const userData = response.user.id;
+
+    return userData;
   };
 
   //유저 프로필 사진 업데이트 로직

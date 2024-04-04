@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/client';
 
 const supabase = createClient();
 
+//하단은 CSR
 export const getCurrentUserData = async () => {
   const { data, error } = await supabase.auth.getUser();
   if (error) throw error;
