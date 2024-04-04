@@ -1,33 +1,14 @@
 import { MouseEvent, useState } from 'react';
-import styles from './Modal.module.css';
-import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData, changeUserProfile, uploadImage } from '@/api/supabase';
+import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
+
+import styles from './Modal.module.css';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
 export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () => void }) => {
   const [fileSizeExceed, setFileSizeExceed] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-
-  //util
-  const byteCalculator = (byte: number) => {
-    const KB = byte / 1024;
-    const MB = KB / 1024;
-    const GB = MB / 1024;
-    const TB = GB / 1024;
-
-    if (TB >= 1) {
-      return `${TB.toFixed(2)} TB`;
-    } else if (GB >= 1) {
-      return `${GB.toFixed(2)} GB`;
-    } else if (MB >= 1) {
-      return `${MB.toFixed(2)} MB`;
-    } else if (KB >= 1) {
-      return `${KB.toFixed(2)} KB`;
-    } else {
-      return `${byte} bytes`;
-    }
-  };
 
   //파일 용량 제한 로직
   const handleFileMaxSize = (e: React.ChangeEvent<HTMLInputElement>) => {
