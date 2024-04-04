@@ -64,7 +64,6 @@ export const Meeting = () => {
               <h3>{meeting.name}</h3>
               <p>날짜</p>
               <p>위치 : {meeting.location}</p>
-              <p>방 생성일 : {meeting.created_at}</p>
             </div>
             <div className={styles.room_box_right}>
               <div className={styles.participants_container}>
