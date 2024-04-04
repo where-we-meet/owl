@@ -7,3 +7,7 @@ export type CenterData = {
   isLoading: boolean;
   roadAddress: string | null;
 };
+
+export type Place = {
+  [key: string]: string;
+};
