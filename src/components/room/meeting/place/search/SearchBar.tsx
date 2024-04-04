@@ -13,13 +13,11 @@ const SearchBar = () => {
     containerHovered: false
   });
 
-  const handleSearchInput = useCallback(
-    _.debounce((event: ChangeEvent<HTMLInputElement>) => {
-      event.stopPropagation();
-      setSearchKeyword(event.target.value);
-    }, 600),
-    []
-  );
+  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(event.target.value);
+  };
+
+  const handleSearchInput = useCallback(_.debounce(handleChangeInput, 600), []);
 
   const handleInputFocus = () => {
     setListViewState((prev) => ({ ...prev, inputFocused: !prev.inputFocused }));
