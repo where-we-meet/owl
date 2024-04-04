@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData } from '@/api/supabase';
-import { RoomData } from '../../sidebar/user/UserList';
 
 import {
   format,
@@ -23,8 +22,6 @@ import {
 
 const Calender = ({ id }: { id: String }) => {
   const currentUserData = getCurrentUserData();
-
-  console.log('userData', currentUserData);
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
@@ -72,11 +69,13 @@ const Calender = ({ id }: { id: String }) => {
   const handleDateUpload = async () => {
     const supabase = createClient();
     try {
+      const roomId: string = id.toString();
       for (const date of selectedDate) {
         const { data, error } = await supabase
           .from('room_schedule')
           .insert([
             {
+              room_id: roomId,
               created_by: (await currentUserData).user.id,
               start_date: date.toDateString(),
               end_date: date.toDateString()
@@ -95,6 +94,8 @@ const Calender = ({ id }: { id: String }) => {
           .from('room_schedule')
           .insert([
             {
+              room_id: roomId,
+              created_by: (await currentUserData).user.id,
               start_date: startRange.toDateString(),
               end_date: endRange.toDateString()
             }
