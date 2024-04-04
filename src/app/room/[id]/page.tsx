@@ -5,7 +5,7 @@ const RoomPage = async ({ params }: { params: { id: string } }) => {
   return (
     <main style={{ display: 'flex' }}>
       <Sidebar id={params.id} />
-      <Meeting />
+      <Meeting id={params.id} />
     </main>
   );
 };

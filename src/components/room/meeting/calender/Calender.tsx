@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
-import { getRoomData } from '@/api/supabase';
+import { getCurrentUserData } from '@/api/supabase';
 import { RoomData } from '../../sidebar/user/UserList';
 
 import {
@@ -21,23 +21,14 @@ import {
   isSameDay
 } from 'date-fns';
 
-const Calender = () => {
+const Calender = ({ id }: { id: String }) => {
+  const currentUserData = getCurrentUserData();
+
+  console.log('userData', currentUserData);
+
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
   const [selectedRange, setSelectedRange] = useState<Date[]>([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await getRoomData(id); // 방 ID를 전달하여 방 데이터 가져오기
-  //       setRoomData(data);
-  //     } catch (error) {
-  //       console.error('방 데이터 가져오기 오류:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -52,13 +43,13 @@ const Calender = () => {
   // const isDateInRange = selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
 
   const handleDateClick = (date: Date) => {
-    const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
+    // const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
 
-    if (isAlreadySelected) {
-      setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
-    } else {
-      setSelectedDate((prev) => [...prev, date]);
-    }
+    // if (isAlreadySelected) {
+    //   setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
+    // } else {
+    setSelectedDate((prev) => [...prev, date]);
+
     console.log(selectedDate);
   };
 
@@ -86,6 +77,7 @@ const Calender = () => {
           .from('room_schedule')
           .insert([
             {
+              created_by: (await currentUserData).user.id,
               start_date: date.toDateString(),
               end_date: date.toDateString()
             }
@@ -97,20 +89,21 @@ const Calender = () => {
           console.log('데이터 추가하기 성공!', data);
         }
       }
-      for (const date of selectedRange) {
-        const { data, error } = await supabase
+      if (selectedRange.length === 2) {
+        const [startRange, endRange] = selectedRange;
+        const { data: rangeData, error: rangeError } = await supabase
           .from('room_schedule')
           .insert([
             {
-              start_date: date.toDateString(),
-              end_date: date.toDateString()
+              start_date: startRange.toDateString(),
+              end_date: endRange.toDateString()
             }
           ])
           .select();
-        if (error) {
-          console.error('데이터 추가 중 오류 생김!', error);
+        if (rangeError) {
+          console.log('범위 데이터 추가 중 오류 생김!', rangeError);
         } else {
-          console.log('데이터 추가하기 성공!', data);
+          console.log('범위 데이터 추가하기 성공!', rangeData);
         }
       }
     } catch (error) {
