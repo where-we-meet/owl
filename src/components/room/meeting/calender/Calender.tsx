@@ -1,7 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Calender.module.css';
+import { createClient } from '@/utils/supabase/client';
+import { getRoomData } from '@/api/supabase';
+import { RoomData } from '../../sidebar/user/UserList';
 
 import {
   format,
@@ -22,6 +25,20 @@ const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
   const [selectedRange, setSelectedRange] = useState<Date[]>([]);
+  const [roomData, setRoomData] = useState<RoomData>([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await getRoomData(id); // 방 ID를 전달하여 방 데이터 가져오기
+  //       setRoomData(data);
+  //     } catch (error) {
+  //       console.error('방 데이터 가져오기 오류:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -37,6 +54,7 @@ const Calender = () => {
 
   const handleDateClick = (date: Date) => {
     setSelectedDate((prev) => [...prev, date]);
+    console.log(selectedDate);
   };
 
   const handleRangeSelect = (date: Date) => {
@@ -44,7 +62,6 @@ const Calender = () => {
       setSelectedRange([date]);
     } else if (selectedRange.length === 1) {
       setSelectedRange((prev) => [...prev, date]);
-      //  setSelectedDate([]);
     }
   };
 
@@ -54,6 +71,32 @@ const Calender = () => {
       return date >= start && date <= end;
     }
     return false;
+  };
+
+  const handleDateUpload = async () => {
+    const supabase = createClient();
+    try {
+      for (const date of selectedDate) {
+        const { data, error } = await supabase
+          .from('room_schedule')
+          .insert([
+            {
+              start_date: date.toISOString(),
+              end_date: date.toISOString()
+              // created_by: roomData.created_by,
+              // room_id: roomData.id
+            }
+          ])
+          .select();
+        if (error) {
+          console.error('데이터 추가 중 오류 생김!', error);
+        } else {
+          console.log('데이터 추가하기 성공!', data);
+        }
+      }
+    } catch (error) {
+      console.error('데이터 업로드 중 오류 발생', error);
+    }
   };
 
   while (startWeek <= endDay) {
@@ -115,14 +158,14 @@ const Calender = () => {
         </ul>
 
         <div className={styles.dates}>
-          {entireOfMonth.map((week, i) => {
+          {entireOfMonth.map((week, index) => {
             return (
-              <ul className={styles.day_container} key={i}>
+              <ul className={styles.day_container} key={index}>
                 {week.map((day) => (
                   <li
                     draggable="true"
-                    onClick={() => handleDateClick(day)}
-                    onDoubleClick={() => handleRangeSelect(day)}
+                    onDoubleClick={() => handleDateClick(day)}
+                    onClick={() => handleRangeSelect(day)}
                     className={styles.days}
                     key={day.toISOString()}
                     style={{ ...dayStyle(day), backgroundColor: rangeStyle(day) }}
@@ -137,6 +180,8 @@ const Calender = () => {
             );
           })}
         </div>
+        <button>건너뛰기</button>
+        <button onClick={handleDateUpload}>다음</button>
       </div>
     </>
   );
