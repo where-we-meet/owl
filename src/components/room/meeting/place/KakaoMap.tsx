@@ -16,11 +16,11 @@ const KakaoMap = () => {
   const [addressName, setAddressName] = useState('');
 
   const [loading, error] = useKakaoMap();
-  const { centerData, setCenterData } = useCenterState();
-  const searchCenter = useSearchDataStore((state) => state.center);
-  console.log(searchCenter);
 
+  const { centerData, setCenterData } = useCenterState();
   const { data, isPending } = useGetRoadAddress(centerData.center);
+
+  const searchCenter = useSearchDataStore((state) => state.center);
 
   useEffect(() => {
     if (searchCenter) {
