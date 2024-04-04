@@ -6,6 +6,7 @@ import styles from './UserInfo.module.css';
 import Image from 'next/image';
 import { createClient } from '@/utils/supabase/client';
 import { ImageUploadModal } from './modal/Modal';
+import { updateUserName } from '@/api/supabase';
 
 // import { supabase } from '@/shared/supabase';
 
@@ -19,7 +20,6 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(name);
   const [toggleModal, setToggleModal] = useState(false);
-  //이름 바꾸고나서 이 state 가 업데이트가 안됨
 
   const handleChangeUserInfo = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value;
@@ -31,16 +31,12 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
     setEditMode(false);
   };
 
-  const handleEditMode = () => {
+  const handleToggleEditMode = () => {
     setEditMode((prev) => !prev);
   };
 
-  const handleEditDone = async () => {
-    const supabase = createClient();
-    //update user name
-    const { data, error } = await supabase.from('users').update({ name: userName }).eq('id', userId);
-    //update user profile
-
+  const handleNameEditDone = async () => {
+    updateUserName(userId, userName);
     setEditMode(false);
   };
 
@@ -69,12 +65,12 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
             <button className={styles.button} onClick={handleEditExit}>
               취소
             </button>
-            <button className={styles.button} onClick={handleEditDone}>
+            <button className={styles.button} onClick={handleNameEditDone}>
               완료
             </button>
           </>
         ) : (
-          <button className={styles.button} onClick={handleEditMode}>
+          <button className={styles.button} onClick={handleToggleEditMode}>
             프로필 편집
           </button>
         )}
