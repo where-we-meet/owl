@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
-import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
+import { getUserSchedule, getCurrentUserData } from '@/api/supabaseCSR/supabase';
 
 import {
   format,
@@ -25,7 +25,20 @@ const Calender = ({ id }: { id: String }) => {
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
-  const [selectedRange, setSelectedRange] = useState<Date[]>([]);
+  const [userSchedules, setUserSchedules] = useState<any[]>([]);
+
+  useEffect(() => {
+    const dateOfusers = async () => {
+      try {
+        const data = await getUserSchedule(id.toString());
+        setUserSchedules(data);
+        console.log(data);
+      } catch (error) {
+        console.error('다른 유저들의 일정을 가져오는 중 오류 발생', error);
+      }
+    };
+    dateOfusers();
+  }, [id]);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -45,7 +58,6 @@ const Calender = ({ id }: { id: String }) => {
     } else {
       setSelectedDate((prev) => [...prev, date]);
     }
-    console.log(selectedDate);
   };
 
   const handleDateUpload = async () => {
@@ -75,6 +87,21 @@ const Calender = ({ id }: { id: String }) => {
     }
   };
 
+  const renderScheduleCircles = (date: Date) => {
+    const schedulesOnDay = userSchedules.reduce((acc, schedule) => {
+      if (isSameDay(new Date(schedule.start_date), new Date(schedule.start_date))) {
+        acc.push(schedule);
+      }
+      return acc;
+    }, []);
+    console.log(userSchedules);
+    const circles = schedulesOnDay.map((schedule: any, index: number) => (
+      <span key={`${date.toISOString()}-${index}`} className={styles.schedule_circle}></span>
+    ));
+
+    return circles;
+  };
+
   while (startWeek <= endDay) {
     for (let i = 0; i < 7; i++) {
       entireOfWeek.push(startWeek);
@@ -93,6 +120,8 @@ const Calender = ({ id }: { id: String }) => {
   };
 
   const dayStyle = (day: Date) => {
+    const hasSchedule = userSchedules.some((schedule) => isSameDay(new Date(schedule.start_date), day));
+
     const color =
       format(nowDate, 'M') !== format(day, 'M')
         ? '#ddd'
@@ -135,14 +164,17 @@ const Calender = ({ id }: { id: String }) => {
               <ul className={styles.day_container} key={index}>
                 {week.map((day) => (
                   <li
-                    draggable="true"
                     onClick={() => handleDateClick(day)}
                     className={styles.days}
                     key={day.toISOString()}
                     style={{ ...dayStyle(day) }}
                   >
-                    {selectedDate.some((date) => date.toISOString() === day.toISOString()) ? (
-                      <span className={styles.selected_date_circle}></span>
+                    {selectedDate.some((date) => isSameDay(date, day)) ||
+                    userSchedules.some((schedule) => isSameDay(new Date(schedule.start_date), day)) ? (
+                      <>
+                        <span className={styles.selected_date_circle}></span>
+                        {renderScheduleCircles(day)}
+                      </>
                     ) : null}
                     {day.getDate()}
                   </li>
