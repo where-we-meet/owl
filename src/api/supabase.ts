@@ -19,7 +19,10 @@ export const getCurrentUserData = async () => {
 
 // supabase에서 roomId를 통해 room에 관련된 모든 Data 반환
 export const getRoomData = async (id: string) => {
-  const { data, error } = await supabase.from('rooms').select('id, created_by, location, name, verified').eq('id', id);
+  const { data, error } = await supabase
+    .from('rooms')
+    .select('id, created_at, created_by, location, name, verified')
+    .eq('id', id);
   if (error) throw error;
   return data;
 };
@@ -93,6 +96,22 @@ export const uploadImage = async (file: File, setFile: Dispatch<SetStateAction<F
 export const updateUserName = async (userId: string, newName: string) => {
   const { data, error } = await supabase.from('users').update({ name: newName }).eq('id', userId);
   if (error) throw error;
+};
+
+// room에 참여하고 있는 유저의 Id Data 반환
+export const getRoomParticipantsId = async (roomId: string) => {
+  const { data, error } = await supabase.from('userdata_room').select('user_id').eq('room_id', roomId);
+  if (error) throw error;
+  return data;
+};
+
+export const getUserMeetingsId = async (userId: string) => {
+  if (userId !== null) {
+    const { data, error } = await supabase.from('userdata_room').select('room_id').eq('user_id', userId);
+    if (error) throw error;
+    return data;
+  }
+  return [];
 };
 //테스트 중
 

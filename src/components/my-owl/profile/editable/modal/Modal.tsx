@@ -1,6 +1,7 @@
 import { MouseEvent, useState } from 'react';
 import { getCurrentUserData, changeUserProfile, uploadImage } from '@/api/supabase';
 import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
+import { getUserId } from '@/utils/my-owl/getUserId';
 
 import styles from './Modal.module.css';
 
@@ -30,14 +31,6 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
     } else {
       console.log('no data');
     }
-  };
-
-  //유저 아이디 조회 로직
-  const getUserId = async () => {
-    const { user } = await getCurrentUserData();
-    const userId = user.id;
-
-    return userId;
   };
 
   //유저 이미지 변경 전체 핸들러

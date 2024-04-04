@@ -1,15 +1,19 @@
 'use client';
-import { createClient } from '@/utils/supabase/client';
-import styles from './Meeting.module.css';
-import { MouseEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
-interface UserInfo {
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { getUserId } from '@/utils/my-owl/getUserId';
+import { getRoomData, getUsersData, getRoomParticipantsId, getUserMeetingsId } from '@/api/supabase';
+import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
+
+import styles from './Meeting.module.css';
+
+export interface UserInfo {
   name: string;
   profile_url: string;
 }
 
-interface MeetingInfo {
+export interface MeetingInfo {
   id: string | null;
   name: string | null;
   location: string | null;
@@ -23,13 +27,14 @@ export const Meeting = () => {
   const router = useRouter();
   useEffect(() => {
     const fetchMeetingInfo = async () => {
-      const meetingIds = await getUserMeetingsId();
+      const userId = await getUserId();
+      const meetingIds = await getUserMeetingsId(userId);
       const meetingInfoPromises = meetingIds.map(async (meetingId: { room_id: string }) => {
         const roomId = meetingId.room_id;
-        const roomInfo = await getRoomInfo(roomId);
+        const roomInfo = await getRoomData(roomId);
         const participantsIds = await getRoomParticipantsId(roomId);
         const participantsInfoPromises = participantsIds.map(async (participantId: { user_id: string }) => {
-          const userInfo = await getUserInfo(participantId.user_id);
+          const userInfo = await getUsersData(participantId.user_id);
           return userInfo[0];
         });
         const participantsInfo = await Promise.all(participantsInfoPromises);
@@ -51,7 +56,6 @@ export const Meeting = () => {
     fetchMeetingInfo();
   }, []);
 
-  //meetingInfo를 시간순으로
   const handleClickRoom = (roomId: string | null) => {
     router.push(`/room/${roomId}`);
   };
@@ -82,54 +86,4 @@ export const Meeting = () => {
       ))}
     </div>
   );
-};
-
-const supabase = createClient();
-
-const getUserId = async () => {
-  const {
-    data: { user },
-    error
-  } = await supabase.auth.getUser();
-  if (error) throw error;
-  return user !== null ? user.id : null;
-};
-
-const getUserMeetingsId = async () => {
-  const userId = await getUserId();
-  if (userId !== null) {
-    const { data, error } = await supabase.from('userdata_room').select('room_id').eq('user_id', userId);
-    if (error) throw error;
-    return data;
-  }
-  return [];
-};
-
-const getRoomInfo = async (roomId: string) => {
-  const { data, error } = await supabase.from('rooms').select('name, location, created_at, verified').eq('id', roomId);
-  if (error) throw error;
-  return data;
-};
-
-const getRoomParticipantsId = async (roomId: string) => {
-  const { data, error } = await supabase.from('userdata_room').select('user_id').eq('room_id', roomId);
-  if (error) throw error;
-  return data;
-};
-
-const getUserInfo = async (userId: string) => {
-  const { data, error } = await supabase.from('users').select('name, profile_url').eq('id', userId);
-  if (error) throw error;
-  return data;
-};
-
-const sortMeetingInfo = (meetingInfo: MeetingInfo[]): MeetingInfo[] => {
-  return meetingInfo.sort((a, b) => {
-    // 정렬 1순위 : verified가 true
-    if (a.verified && !b.verified) return -1;
-    if (!a.verified && b.verified) return 1;
-    // 정렬 2순위 : created_at
-    if (a.created_at && b.created_at) return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-    return 0;
-  });
 };
