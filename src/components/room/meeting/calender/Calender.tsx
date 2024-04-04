@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
-import { getCurrentUserData } from '@/api/supabase';
+import { getCurrentUserData, updateSchedule } from '@/api/supabase';
 
 import {
   format,
@@ -25,7 +25,6 @@ const Calender = ({ id }: { id: String }) => {
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
-  const [selectedRange, setSelectedRange] = useState<Date[]>([]);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -59,8 +58,7 @@ const Calender = ({ id }: { id: String }) => {
             {
               room_id: roomId,
               created_by: (await currentUserData).user.id,
-              start_date: date.toDateString(),
-              end_date: date.toDateString()
+              date_list: selectedDate
             }
           ])
           .select();
