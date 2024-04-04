@@ -37,33 +37,15 @@ const Calender = ({ id }: { id: String }) => {
   let startWeek = startDay;
   let entireOfWeek = [];
 
-  // const isDateInRange = selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
-
   const handleDateClick = (date: Date) => {
-    // const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
+    const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
 
-    // if (isAlreadySelected) {
-    //   setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
-    // } else {
-    setSelectedDate((prev) => [...prev, date]);
-
+    if (isAlreadySelected) {
+      setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
+    } else {
+      setSelectedDate((prev) => [...prev, date]);
+    }
     console.log(selectedDate);
-  };
-
-  const handleRangeSelect = (date: Date) => {
-    if (selectedRange.length === 0 || selectedRange.length === 2) {
-      setSelectedRange([date]);
-    } else if (selectedRange.length === 1) {
-      setSelectedRange((prev) => [...prev, date]);
-    }
-  };
-
-  const isInRange = (date: Date) => {
-    if (selectedRange.length === 2) {
-      const [start, end] = selectedRange;
-      return date >= start && date <= end;
-    }
-    return false;
   };
 
   const handleDateUpload = async () => {
@@ -86,25 +68,6 @@ const Calender = ({ id }: { id: String }) => {
           console.error('데이터 추가 중 오류 생김!', error);
         } else {
           console.log('데이터 추가하기 성공!', data);
-        }
-      }
-      if (selectedRange.length === 2) {
-        const [startRange, endRange] = selectedRange;
-        const { data: rangeData, error: rangeError } = await supabase
-          .from('room_schedule')
-          .insert([
-            {
-              room_id: roomId,
-              created_by: (await currentUserData).user.id,
-              start_date: startRange.toDateString(),
-              end_date: endRange.toDateString()
-            }
-          ])
-          .select();
-        if (rangeError) {
-          console.log('범위 데이터 추가 중 오류 생김!', rangeError);
-        } else {
-          console.log('범위 데이터 추가하기 성공!', rangeData);
         }
       }
     } catch (error) {
@@ -143,10 +106,6 @@ const Calender = ({ id }: { id: String }) => {
     return { color };
   };
 
-  const rangeStyle = (day: Date) => {
-    return isInRange(day) ? 'lightblue' : 'transparent';
-  };
-
   return (
     <>
       <div>Calender</div>
@@ -178,10 +137,9 @@ const Calender = ({ id }: { id: String }) => {
                   <li
                     draggable="true"
                     onClick={() => handleDateClick(day)}
-                    onDoubleClick={() => handleRangeSelect(day)}
                     className={styles.days}
                     key={day.toISOString()}
-                    style={{ ...dayStyle(day), backgroundColor: rangeStyle(day) }}
+                    style={{ ...dayStyle(day) }}
                   >
                     {selectedDate.some((date) => date.toISOString() === day.toISOString()) ? (
                       <span className={styles.selected_date_circle}></span>
