@@ -25,7 +25,6 @@ const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
   const [selectedRange, setSelectedRange] = useState<Date[]>([]);
-  const [roomData, setRoomData] = useState<RoomData>([]);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -53,7 +52,13 @@ const Calender = () => {
   // const isDateInRange = selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
 
   const handleDateClick = (date: Date) => {
-    setSelectedDate((prev) => [...prev, date]);
+    const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
+
+    if (isAlreadySelected) {
+      setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
+    } else {
+      setSelectedDate((prev) => [...prev, date]);
+    }
     console.log(selectedDate);
   };
 
@@ -81,10 +86,24 @@ const Calender = () => {
           .from('room_schedule')
           .insert([
             {
-              start_date: date.toISOString(),
-              end_date: date.toISOString()
-              // created_by: roomData.created_by,
-              // room_id: roomData.id
+              start_date: date.toDateString(),
+              end_date: date.toDateString()
+            }
+          ])
+          .select();
+        if (error) {
+          console.error('데이터 추가 중 오류 생김!', error);
+        } else {
+          console.log('데이터 추가하기 성공!', data);
+        }
+      }
+      for (const date of selectedRange) {
+        const { data, error } = await supabase
+          .from('room_schedule')
+          .insert([
+            {
+              start_date: date.toDateString(),
+              end_date: date.toDateString()
             }
           ])
           .select();
@@ -164,8 +183,8 @@ const Calender = () => {
                 {week.map((day) => (
                   <li
                     draggable="true"
-                    onDoubleClick={() => handleDateClick(day)}
-                    onClick={() => handleRangeSelect(day)}
+                    onClick={() => handleDateClick(day)}
+                    onDoubleClick={() => handleRangeSelect(day)}
                     className={styles.days}
                     key={day.toISOString()}
                     style={{ ...dayStyle(day), backgroundColor: rangeStyle(day) }}
