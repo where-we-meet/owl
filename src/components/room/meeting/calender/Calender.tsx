@@ -58,7 +58,8 @@ const Calender = ({ id }: { id: String }) => {
             {
               room_id: roomId,
               created_by: (await currentUserData).user.id,
-              date_list: selectedDate
+              start_date: date.toDateString(),
+              end_date: date.toDateString()
             }
           ])
           .select();
