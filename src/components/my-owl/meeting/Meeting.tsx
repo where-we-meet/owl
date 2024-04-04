@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getUserId } from '@/utils/my-owl/getUserId';
+
 import { getRoomData, getUsersData, getRoomParticipantsId, getUserMeetingsId } from '@/api/supabaseCSR/supabase';
+import { getUserId } from '@/utils/my-owl/getUserId';
 import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
 
 import styles from './Meeting.module.css';
