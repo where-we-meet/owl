@@ -1,6 +1,6 @@
 'use client';
 
-import { getCurrentUserData, getRoomUsersData } from '@/api/supabase';
+import { getCurrentUserData, getRoomUsersData } from '@/api/supabaseCSR/supabase';
 import { RoomData } from '@/components/room/sidebar/user/UserList';
 
 export const userDataFetch = async (id: string, setRoomData: (roomData: RoomData) => void) => {

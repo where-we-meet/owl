@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from 'react';
-import { getCurrentUserData, changeUserProfile, uploadImage } from '@/api/supabase';
+import { getCurrentUserData, changeUserProfile, uploadImage } from '@/api/supabaseCSR/supabase';
 import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
 import { getUserId } from '@/utils/my-owl/getUserId';
 

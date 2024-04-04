@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from 'react';
 import styles from './UserInfo.module.css';
 import Image from 'next/image';
 import { ImageUploadModal } from './modal/Modal';
-import { updateUserName } from '@/api/supabase';
+import { updateUserName } from '@/api/supabaseCSR/supabase';
 
 // import { supabase } from '@/shared/supabase';
 

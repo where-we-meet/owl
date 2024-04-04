@@ -1,4 +1,4 @@
-import { getCurrentUserData } from '@/api/supabase';
+import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 
 //유저 아이디 조회 로직
 export const getUserId = async () => {
