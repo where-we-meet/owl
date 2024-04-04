@@ -13,7 +13,9 @@ export const useGetRoadAddress = (center: { lat: number; lng: number }) => {
 export const useGetSearchPlace = (searchKeyword: string) => {
   const { data, isPending } = useQuery({
     queryKey: ['room', searchKeyword],
-    queryFn: async () => await getSearchPlace(searchKeyword)
+    queryFn: async () => await getSearchPlace(searchKeyword),
+    select: (data) => data.documents,
+    enabled: !!searchKeyword
   });
   return { data, isPending };
 };
