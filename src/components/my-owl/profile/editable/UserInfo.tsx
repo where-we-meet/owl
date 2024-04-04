@@ -4,7 +4,6 @@ import { ChangeEvent, useState } from 'react';
 
 import styles from './UserInfo.module.css';
 import Image from 'next/image';
-import { createClient } from '@/utils/supabase/client';
 import { ImageUploadModal } from './modal/Modal';
 import { updateUserName } from '@/api/supabase';
 
@@ -35,7 +34,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
     setEditMode((prev) => !prev);
   };
 
-  const handleNameEditDone = async () => {
+  const handleNameEditDone = () => {
     updateUserName(userId, userName);
     setEditMode(false);
   };
