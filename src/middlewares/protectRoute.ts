@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/server';
 
 export function protectRoute(middleware: CustomMiddleware) {
   return async (request: NextRequest, event: NextFetchEvent, response: NextResponse) => {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
 
     const pathname = request.nextUrl.pathname;
