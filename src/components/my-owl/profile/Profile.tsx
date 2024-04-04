@@ -16,10 +16,9 @@ const Profile = async () => {
 
 export default Profile;
 
-const supabase = createClient();
-
 // authSNS, userId 제외한 요소는 supabase Auth가 아닌 supabse DB의 users에서 가져와야함.
 export const getUserData = async () => {
+  const supabase = await createClient();
   const {
     data: { user },
     error
