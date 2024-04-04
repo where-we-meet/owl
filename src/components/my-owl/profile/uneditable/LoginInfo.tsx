@@ -1,5 +1,4 @@
 const LoginInfo = ({ authSNS }: { authSNS: Array<string> }) => {
-  //  로그인 로직 완료되면 테스트 필요
   return (
     <div>
       {authSNS.map((SNS, index) => (
