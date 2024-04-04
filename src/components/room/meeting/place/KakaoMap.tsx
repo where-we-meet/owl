@@ -8,6 +8,7 @@ import styles from './KakaoMap.module.css';
 import Image from 'next/image';
 import { useGetRoadAddress } from '@/hooks/useGetRoadAddress';
 import { useState } from 'react';
+import RangeController from './RangeController';
 
 const KakaoMap = () => {
   const [isDrag, setIsDrag] = useState(false);
@@ -40,6 +41,7 @@ const KakaoMap = () => {
           }}
         >
           {centerData.isLoading && <div>위치 정보를 불러오고 있습니다.</div>}
+          <RangeController center={centerData.center} />
         </Map>
       </div>
       <div>{`lat: ${centerData.center.lat} lng: ${centerData.center.lng}`}</div>
