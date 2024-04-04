@@ -3,20 +3,34 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useCenterState } from '@/hooks/useCenterState';
 
-import { dragCenter } from '@/utils/dragCenter';
+import { dragCenter } from '@/utils/place/dragCenter';
 import styles from './KakaoMap.module.css';
 import Image from 'next/image';
 import { useGetRoadAddress } from '@/hooks/useGetPlace';
-import { useState } from 'react';
 import RangeController from './RangeController';
+import { useEffect, useState } from 'react';
+import { useSearchDataStore } from '@/store/store';
 
 const KakaoMap = () => {
   const [isDrag, setIsDrag] = useState(false);
+  const [addressName, setAddressName] = useState('');
 
   const [loading, error] = useKakaoMap();
   const { centerData, setCenterData } = useCenterState();
+  const searchCenter = useSearchDataStore((state) => state.center);
+  console.log(searchCenter);
 
   const { data, isPending } = useGetRoadAddress(centerData.center);
+
+  useEffect(() => {
+    if (searchCenter) {
+      setCenterData((prev) => ({ ...prev, center: { lat: searchCenter.lat, lng: searchCenter.lng } }));
+      setAddressName(searchCenter.addressName);
+    } else if (data) {
+      const address = data.road_address?.address_name || data.address?.address_name;
+      setAddressName(address);
+    }
+  }, [searchCenter, data]);
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
@@ -45,7 +59,7 @@ const KakaoMap = () => {
         </Map>
       </div>
       <div>{`lat: ${centerData.center.lat} lng: ${centerData.center.lng}`}</div>
-      <div>{data?.road_address?.address_name || data?.address?.address_name}</div>
+      <div>{addressName}</div>
     </div>
   );
 };
