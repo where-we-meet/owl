@@ -1,14 +1,13 @@
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import styles from './Modal.module.css';
 import { createClient } from '@/utils/supabase/client';
-import { getCurrentUserData } from '@/api/supabase';
+import { getCurrentUserData, changeUserProfile, uploadImage } from '@/api/supabase';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
 export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () => void }) => {
   const [fileSizeExceed, setFileSizeExceed] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-  const supabase = createClient();
 
   //util
   const byteCalculator = (byte: number) => {
@@ -52,64 +51,26 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
     }
   };
 
-  //파일 이름 중복 방지용 파일 이름 생성 로직
-  const getFileName = () => {
-    const today = new Date();
-
-    const year = today.getFullYear(); // 년
-    const month = ('0' + (today.getMonth() + 1)).slice(-2); // 월
-    const date = ('0' + today.getDate()).slice(-2); // 일
-    const hours = today.getHours(); // 시
-    const minutes = today.getMinutes(); // 분
-    const seconds = today.getSeconds(); // 초
-
-    return `Owl_Photo_${year}-${month}-${date}-${hours}-${minutes}-${seconds}`;
-  };
-
-  //supabase store 이미지 업로드 로직
-  const uploadImage = async () => {
-    const file_name = getFileName();
-
-    if (file) {
-      const { data, error } = await supabase.storage.from('images').upload(`users_profile/${file_name}`, file);
-      setFile(null);
-
-      if (error) {
-        alert(`이미지 업로드에 실패하였습니다.\n 원인 : ${error.message} `);
-      } else {
-        alert(`이미지를 성공적으로 업로드하였습니다.`);
-        handleToggleModal();
-        return `${process.env.NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${file_name}`;
-      }
-    }
-  };
-
   //유저 아이디 조회 로직
-
   const getUserId = async () => {
-    const response = await getCurrentUserData();
-    const userData = response.user.id;
+    const { user } = await getCurrentUserData();
+    const userId = user.id;
 
-    return userData;
-  };
-
-  //유저 프로필 사진 업데이트 로직
-  const changeUserProfile = async ({ userId, profile_url }: { userId: string; profile_url: string }) => {
-    const { data, error } = await supabase.from('users').update({ profile_url }).eq('id', userId);
-    if (error) {
-      alert(`문제가 발생하였습니다. ${error.message}`);
-    }
+    return userId;
   };
 
   //유저 이미지 변경 전체 핸들러
   const handleUploadImage = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const profile_url = await uploadImage();
-    const userId = await getUserId();
-    if (userId && profile_url) {
-      await changeUserProfile({ userId, profile_url });
-    } else {
-      alert(`문제가 발생하였습니다`);
+    if (file) {
+      const profile_url = await uploadImage(file, setFile);
+      const userId = await getUserId();
+      handleToggleModal();
+      if (userId && profile_url) {
+        await changeUserProfile({ userId, profile_url });
+      } else {
+        alert(`문제가 발생하였습니다`);
+      }
     }
   };
 

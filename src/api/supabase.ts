@@ -1,21 +1,30 @@
 import { RoomData } from '@/components/room/sidebar/user/UserList';
 import { createClient } from '@/utils/supabase/client';
 
+import { getFileName } from '@/utils/my-owl/profile/modal/getFileName';
+import { Dispatch, SetStateAction } from 'react';
+
 const supabase = createClient();
 
-//하단은 CSR
+/*
+ * CSR
+ */
+
+//  supabase auth에서 user Data 반환
 export const getCurrentUserData = async () => {
   const { data, error } = await supabase.auth.getUser();
   if (error) throw error;
   return data;
 };
 
+// supabase에서 roomId를 통해 room에 관련된 모든 Data 반환
 export const getRoomData = async (id: string) => {
   const { data, error } = await supabase.from('rooms').select('id, created_by, location, name, verified').eq('id', id);
   if (error) throw error;
   return data;
 };
 
+// supabase에서 roomId를 통해 해당 room 일정과 관련된 모든 Data 반환
 export const getUserSchedule = async (id: string) => {
   const { data, error } = await supabase
     .from('room_schedule')
@@ -55,6 +64,30 @@ export const getUsersData = async (id: string) => {
   return data;
 };
 
+//유저 프로필 사진 업데이트 로직
+export const changeUserProfile = async ({ userId, profile_url }: { userId: string; profile_url: string }) => {
+  const { data, error } = await supabase.from('users').update({ profile_url }).eq('id', userId);
+  if (error) {
+    alert(`문제가 발생하였습니다. ${error.message}`);
+  }
+};
+
+//supabase store 이미지 업로드 로직
+export const uploadImage = async (file: File, setFile: Dispatch<SetStateAction<File | null>>) => {
+  const file_name = getFileName();
+
+  if (file) {
+    const { data, error } = await supabase.storage.from('images').upload(`users_profile/${file_name}`, file);
+    setFile(null);
+
+    if (error) {
+      alert(`이미지 업로드에 실패하였습니다.\n 원인 : ${error.message} `);
+    } else {
+      alert(`이미지를 성공적으로 업로드하였습니다.`);
+      return `${process.env.NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${file_name}`;
+    }
+  }
+};
 //테스트 중
 
 export const getRealtimeRoomData = (id: string, setRoomData: (roomData: RoomData) => void) => {
