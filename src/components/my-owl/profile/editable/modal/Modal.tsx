@@ -48,6 +48,30 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
     }
   };
 
+  const isValidImageUrl = async (url: string) => {
+    const imageExtensions = ['jpg', 'jpeg', 'png'];
+    const extension = url.split('.').pop();
+    if (extension) {
+      if (!imageExtensions.includes(extension)) {
+        return false;
+      }
+    }
+    try {
+      // HTTP 요청을 보내서 응답의 Content-Type 확인
+      const response = await fetch(url);
+      const contentType = response.headers.get('content-type');
+
+      // Content-Type이 이미지인지 확인
+      if (contentType && contentType.startsWith('image/')) {
+        return true;
+      }
+    } catch (error) {
+      console.error('Error while validating image URL:', error);
+    }
+
+    return false;
+  };
+
   return (
     <div className={styles.background} onClick={handleToggleModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
