@@ -1,6 +1,7 @@
 'use client';
 
 import KakaoMap from './KakaoMap';
+import LocationPicker from './LocationPicker';
 import SearchBar from './search/SearchBar';
 
 const Place = () => {
@@ -8,6 +9,7 @@ const Place = () => {
     <div>
       <SearchBar />
       <KakaoMap />
+      <LocationPicker />
     </div>
   );
 };

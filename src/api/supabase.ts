@@ -78,3 +78,13 @@ export const getRealtimeRoomData = (id: string, setRoomData: (roomData: RoomData
     .subscribe();
   return subscription;
 };
+
+// Insert rows
+
+export const updateStartLocation = async (roomId: string, userId: string, location: string) => {
+  const { data, error } = await supabase
+    .from('userdata_room')
+    .update({ room_id: roomId, user_id: userId, start_location: location })
+    .eq('room_id', roomId)
+    .eq('user_id', userId);
+};
