@@ -24,6 +24,13 @@ export const getUserSchedule = async (id: string) => {
   return data;
 };
 
+export const updateSchedule = async (id: string, dateList: []) => {
+  const { data, error } = await supabase.from('room_schedule').upsert({ id: id, date_list: dateList }).select();
+
+  if (error) throw error;
+  return data;
+};
+
 export const getRoomUsersData = async (id: string) => {
   const { data, error } = await supabase
     .from('userdata_room')
