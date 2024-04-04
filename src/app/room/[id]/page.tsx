@@ -7,7 +7,7 @@ const RoomPage = async ({ params }: { params: { id: string } }) => {
   console.log('roomData : ', data, 'id : ', params.id);
 
   return (
-    <main>
+    <main style={{ display: 'flex' }}>
       <Sidebar id={params.id} />
       <Meeting />
     </main>
