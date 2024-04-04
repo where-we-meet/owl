@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData, updateSchedule } from '@/api/supabaseCSR/supabase';
+import { RoomData } from '../../sidebar/user/UserList';
 
 import {
   format,
@@ -20,11 +21,24 @@ import {
   isSameDay
 } from 'date-fns';
 
-const Calender = ({ id }: { id: String }) => {
-  const currentUserData = getCurrentUserData();
-
+const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
+  const [selectedRange, setSelectedRange] = useState<Date[]>([]);
+  const [roomData, setRoomData] = useState<RoomData>([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await getRoomData(id); // 방 ID를 전달하여 방 데이터 가져오기
+  //       setRoomData(data);
+  //     } catch (error) {
+  //       console.error('방 데이터 가져오기 오류:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const monthStart = startOfMonth(nowDate);
@@ -36,30 +50,41 @@ const Calender = ({ id }: { id: String }) => {
   let startWeek = startDay;
   let entireOfWeek = [];
 
-  const handleDateClick = (date: Date) => {
-    const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
+  // const isDateInRange = selectedRange.length === 2 && date >= selectedRange[0] && date <= selectedRange[1];
 
-    if (isAlreadySelected) {
-      setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
-    } else {
-      setSelectedDate((prev) => [...prev, date]);
-    }
+  const handleDateClick = (date: Date) => {
+    setSelectedDate((prev) => [...prev, date]);
     console.log(selectedDate);
+  };
+
+  const handleRangeSelect = (date: Date) => {
+    if (selectedRange.length === 0 || selectedRange.length === 2) {
+      setSelectedRange([date]);
+    } else if (selectedRange.length === 1) {
+      setSelectedRange((prev) => [...prev, date]);
+    }
+  };
+
+  const isInRange = (date: Date) => {
+    if (selectedRange.length === 2) {
+      const [start, end] = selectedRange;
+      return date >= start && date <= end;
+    }
+    return false;
   };
 
   const handleDateUpload = async () => {
     const supabase = createClient();
     try {
-      const roomId: string = id.toString();
       for (const date of selectedDate) {
         const { data, error } = await supabase
           .from('room_schedule')
           .insert([
             {
-              room_id: roomId,
-              created_by: (await currentUserData).user.id,
-              start_date: date.toDateString(),
-              end_date: date.toDateString()
+              start_date: date.toISOString(),
+              end_date: date.toISOString()
+              // created_by: roomData.created_by,
+              // room_id: roomData.id
             }
           ])
           .select();
@@ -105,6 +130,10 @@ const Calender = ({ id }: { id: String }) => {
     return { color };
   };
 
+  const rangeStyle = (day: Date) => {
+    return isInRange(day) ? 'lightblue' : 'transparent';
+  };
+
   return (
     <>
       <div>Calender</div>
@@ -135,10 +164,11 @@ const Calender = ({ id }: { id: String }) => {
                 {week.map((day) => (
                   <li
                     draggable="true"
-                    onClick={() => handleDateClick(day)}
+                    onDoubleClick={() => handleDateClick(day)}
+                    onClick={() => handleRangeSelect(day)}
                     className={styles.days}
                     key={day.toISOString()}
-                    style={{ ...dayStyle(day) }}
+                    style={{ ...dayStyle(day), backgroundColor: rangeStyle(day) }}
                   >
                     {selectedDate.some((date) => date.toISOString() === day.toISOString()) ? (
                       <span className={styles.selected_date_circle}></span>
