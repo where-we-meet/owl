@@ -1,14 +1,8 @@
-import { RoomData } from '@/components/room/sidebar/user/UserList';
 import { createClient } from '@/utils/supabase/client';
-
 import { getFileName } from '@/utils/my-owl/profile/modal/getFileName';
 import { Dispatch, SetStateAction } from 'react';
 
 const supabase = createClient();
-
-/*
- * CSR
- */
 
 //  supabase auth에서 user Data 반환
 export const getCurrentUserData = async () => {
@@ -112,30 +106,6 @@ export const getUserMeetingsId = async (userId: string) => {
     return data;
   }
   return [];
-};
-//테스트 중
-
-export const getRealtimeRoomData = (id: string, setRoomData: (roomData: RoomData) => void) => {
-  const subscription = supabase
-    .channel('room')
-    .on(
-      'postgres_changes',
-      { event: '*', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
-      async (payload) => {
-        console.log('변경 사항을 표기합니다 : ', payload);
-        const { error, data } = await supabase
-          .from('userdata_room')
-          .select(`*, users(profile_url, name)`)
-          .eq('room_id', id);
-        if (error) {
-          console.error('불러오기 실패', error);
-        } else {
-          setRoomData(data);
-        }
-      }
-    )
-    .subscribe();
-  return subscription;
 };
 
 // Insert rows
