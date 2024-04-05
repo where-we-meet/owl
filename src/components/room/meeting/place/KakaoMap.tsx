@@ -38,7 +38,6 @@ const KakaoMap = () => {
           <RangeController center={userLocationData.location} />
         </Map>
       </div>
-      <div>{`lat: ${userLocationData.location.lat} lng: ${userLocationData.location.lng}`}</div>
       <div>{userLocationData.address}</div>
     </div>
   );
