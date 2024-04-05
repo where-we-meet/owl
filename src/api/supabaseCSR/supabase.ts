@@ -119,12 +119,6 @@ export const getRealtimeScheduleData = (id: string) => {
       { event: '*', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${id}` },
       async (payload) => {
         console.log('날짜 적용 됨', payload);
-        const { data, error } = await supabase.from('room_schedule').select(`*`).eq('room_id', id);
-        if (error) {
-          console.error('스케줄 불러오기 실패', error);
-        } else {
-          console.log('올바르게 전송 된 데이터', data);
-        }
       }
     )
     .subscribe();
