@@ -9,7 +9,7 @@ import styles from './KakaoMap.module.css';
 const KakaoMap = () => {
   const [loading, error] = useKakaoMap();
 
-  const { centerData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage } = useCenterState();
+  const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage } = useCenterState();
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
@@ -29,17 +29,17 @@ const KakaoMap = () => {
           />
         )}
         <Map
-          center={centerData.location}
+          center={userLocationData.location}
           className={styles.map}
           onCenterChanged={(map) => handleChangeCenter(map)}
           onDragStart={() => setIsDrag(true)}
           onDragEnd={() => setIsDrag(false)}
         >
-          <RangeController center={centerData.location} />
+          <RangeController center={userLocationData.location} />
         </Map>
       </div>
-      <div>{`lat: ${centerData.location.lat} lng: ${centerData.location.lng}`}</div>
-      <div>{centerData.address}</div>
+      <div>{`lat: ${userLocationData.location.lat} lng: ${userLocationData.location.lng}`}</div>
+      <div>{userLocationData.address}</div>
     </div>
   );
 };
