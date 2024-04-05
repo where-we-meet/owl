@@ -1,9 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
 
-/*
- * SSR
- */
-
 // my-owl 페이지의 유저 프로필 정보에 필요한 Data를 supabase, supabase auth에서 가져와 반환
 export const getUserProfileData = async () => {
   const supabase = await createClient();
