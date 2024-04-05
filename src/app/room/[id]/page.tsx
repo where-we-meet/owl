@@ -13,6 +13,8 @@ const RoomPage = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     getRealtimeRoomData(params.id, setRoomData);
     const sortedUserData = async () => {
+      // const updateLocation = await
+
       const data = await userDataFetch(params.id);
 
       setRoomData(data);
