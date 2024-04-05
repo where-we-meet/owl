@@ -39,6 +39,7 @@
   padding: 1rem 1.2rem;
   border-radius: 10px;
   border: 1px solid #002987;
+  text-decoration: none;
 }
 
 .paypal > span {
@@ -47,4 +48,5 @@
   font-size: 20px;
   font-family: Roboto;
   color: #002987;
+  text-align: center;
 }
