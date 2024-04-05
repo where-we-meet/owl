@@ -1,19 +1,26 @@
 import { create } from 'zustand';
 
 type State = {
-  center: {
-    name: string;
-    addressName: string;
+  location: {
     lat: number;
     lng: number;
-  } | null;
+  };
+  address?: string;
+  addressName?: string;
 };
 
 type Action = {
-  setCenter: (point: State['center']) => void;
+  setLocation: (location: State['location']) => void;
+  setAddress: (address: State['address']) => void;
 };
 
 export const useSearchDataStore = create<State & Action>((set) => ({
-  center: null,
-  setCenter: (point) => set(() => ({ center: point }))
+  location: {
+    lat: 33.450701,
+    lng: 126.570667
+  },
+  address: '',
+  addressName: '',
+  setLocation: (location) => set({ location }),
+  setAddress: (address) => set({ address })
 }));
