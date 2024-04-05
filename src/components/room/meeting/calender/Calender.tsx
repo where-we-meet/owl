@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
-import { getCurrentUserData, updateSchedule } from '@/api/supabase';
+import { getCurrentUserData, updateSchedule } from '@/api/supabaseCSR/supabase';
 
 import {
   format,
