@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
-import { useCenterState } from '@/hooks/useCenterState';
+import { useMapController } from '@/hooks/useMapController';
 
 import RangeController from './RangeController';
 import styles from './KakaoMap.module.css';
@@ -9,7 +9,7 @@ import styles from './KakaoMap.module.css';
 const KakaoMap = () => {
   const [loading, error] = useKakaoMap();
 
-  const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage } = useCenterState();
+  const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage } = useMapController();
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
