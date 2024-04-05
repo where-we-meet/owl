@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+
+.main h1 {
+  font-size: 135px;
+  letter-spacing: -5px;
+  margin-bottom: 4rem;
+}
