@@ -3,11 +3,48 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 100vh;
 }
 
-.main h1 {
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  margin-bottom: 4rem;
+}
+
+.logo > a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
   font-size: 135px;
   letter-spacing: -5px;
-  margin-bottom: 4rem;
+}
+
+.paypal {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 2rem;
+  width: 438px;
+  height: 66px;
+  outline: none;
+  border: none;
+  background: white;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #002987;
+}
+
+.paypal > span {
+  flex: 1;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Roboto;
+  color: #002987;
 }
