@@ -9,8 +9,12 @@ type TabList = { [key: string]: ReactElement };
 const Meeting = ({ id }: { id: String }) => {
   const [currentTab, setCurrentTab] = useState('일정');
 
+  const changeTab = (tabName: string) => {
+    setCurrentTab(tabName);
+  };
+
   const tabList: TabList = {
-    일정: <Calender id={id} />,
+    일정: <Calender id={id} changeTab={changeTab} />,
     장소: <Place />
   };
 

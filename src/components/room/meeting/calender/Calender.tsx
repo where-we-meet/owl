@@ -23,7 +23,7 @@ import { Tables } from '@/types/supabase';
 
 type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
 
-const Calender = ({ id }: { id: String }) => {
+const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => void }) => {
   const currentUserData = getCurrentUserData();
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
@@ -51,43 +51,6 @@ const Calender = ({ id }: { id: String }) => {
 
   let startWeek = startDay;
   let entireOfWeek = [];
-
-  const handleDateClick = (date: Date) => {
-    const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
-
-    if (isAlreadySelected) {
-      setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
-    } else {
-      setSelectedDate((prev) => [...prev, date]);
-    }
-  };
-
-  const handleDateUpload = async () => {
-    const supabase = createClient();
-    try {
-      const roomId: string = id.toString();
-      for (const date of selectedDate) {
-        const { data, error } = await supabase
-          .from('room_schedule')
-          .insert([
-            {
-              room_id: roomId,
-              created_by: (await currentUserData).user.id,
-              start_date: date.toDateString(),
-              end_date: date.toDateString()
-            }
-          ])
-          .select();
-        if (error) {
-          console.error('데이터 추가 중 오류 생김!', error);
-        } else {
-          console.log('데이터 추가하기 성공!', data);
-        }
-      }
-    } catch (error) {
-      console.error('데이터 업로드 중 오류 발생', error);
-    }
-  };
 
   while (startWeek <= endDay) {
     for (let i = 0; i < 7; i++) {
@@ -118,6 +81,40 @@ const Calender = ({ id }: { id: String }) => {
         ? 'pink'
         : '#000';
     return { color };
+  };
+
+  const handleJump = () => {
+    changeTab('장소');
+  };
+
+  const handleDateClick = (date: Date) => {
+    const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
+
+    if (isAlreadySelected) {
+      setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
+    } else {
+      setSelectedDate((prev) => [...prev, date]);
+    }
+  };
+
+  const handleDateUpload = async () => {
+    const supabase = createClient();
+    const roomId: string = id.toString();
+    for (const date of selectedDate) {
+      const { error } = await supabase
+        .from('room_schedule')
+        .insert([
+          {
+            room_id: roomId,
+            created_by: (await currentUserData).user.id,
+            start_date: date.toDateString(),
+            end_date: date.toDateString()
+          }
+        ])
+        .select();
+      if (error) throw error;
+    }
+    changeTab('장소');
   };
 
   return (
@@ -173,7 +170,7 @@ const Calender = ({ id }: { id: String }) => {
             );
           })}
         </div>
-        <button>건너뛰기</button>
+        <button onClick={handleJump}>건너뛰기</button>
         <button onClick={handleDateUpload}>다음</button>
       </div>
     </>
