@@ -51,7 +51,7 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
         setFile(file);
       }
     } else {
-      console.log('no data');
+      alert('no data');
     }
   };
 
