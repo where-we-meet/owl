@@ -1,13 +1,11 @@
 'use client';
-import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
+import { RoomUser } from '@/types/roomUser';
 
-export type RoomData = Awaited<ReturnType<typeof getRoomUsersData>>;
-
-const UserList = ({ roomData }: { roomData: RoomData }) => {
+const UserList = ({ roomUsers }: { roomUsers: RoomUser[] }) => {
   return (
     <section>
       <ul>
-        {roomData.map((user) => {
+        {roomUsers.map((user) => {
           return (
             user.users && (
               <li key={user.id}>
