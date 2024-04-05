@@ -1,6 +1,6 @@
 .weekdays {
   display: inline-block;
-  width: 50px;
+  width: 70px;
   padding: 30px;
   background-color: #f0f0f0;
 }
@@ -18,14 +18,14 @@
 }
 
 .days {
-  width: 50px;
+  width: 70px;
   padding: 30px;
 }
 
 .selected_date_circle {
-  width: 20px;
-  height: 20px;
-  background-color: #00800033;
+  width: 35px;
+  height: 35px;
+  background-color: #00800014;
   border-radius: 50%; /* 원형 모양 */
   position: absolute; /* 위치 지정 */
 }
