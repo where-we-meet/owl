@@ -1,4 +1,4 @@
-import { getCurrentUserData, updateStartLocation } from '@/api/supabase';
+import { getCurrentUserData, updateStartLocation } from '@/api/supabaseCSR/supabase';
 import { useSearchDataStore } from '@/store/store';
 import { useParams } from 'next/navigation';
 

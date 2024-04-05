@@ -1,18 +1,9 @@
 'use client';
-import { getRealtimeRoomData, getRoomUsersData } from '@/api/supabaseCSR/supabase';
-import { userDataFetch } from '@/utils/supabase/userDataFetch';
-import { useEffect, useState } from 'react';
+import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
 
 export type RoomData = Awaited<ReturnType<typeof getRoomUsersData>>;
 
-const UserList = ({ id }: { id: string }) => {
-  const [roomData, setRoomData] = useState<RoomData>([]);
-
-  useEffect(() => {
-    getRealtimeRoomData(id, setRoomData);
-    userDataFetch(id, setRoomData);
-  }, [id]);
-
+const UserList = ({ roomData }: { roomData: RoomData }) => {
   return (
     <section>
       <ul>

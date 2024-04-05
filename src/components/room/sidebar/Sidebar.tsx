@@ -1,7 +1,7 @@
 import React from 'react';
-import UserList from './user/UserList';
+import UserList, { RoomData } from './user/UserList';
 
-const Sidebar = ({ id }: { id: string }) => {
+const Sidebar = ({ roomData }: { roomData: RoomData }) => {
   return (
     <>
       <section>
@@ -11,7 +11,7 @@ const Sidebar = ({ id }: { id: string }) => {
           <button>공유하기</button>
         </div>
       </section>
-      <UserList id={id} />
+      <UserList roomData={roomData} />
     </>
   );
 };
