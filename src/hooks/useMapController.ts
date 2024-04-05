@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSearchDataStore } from '@/store/store';
 import _ from 'lodash';
 
-export const useCenterState = () => {
+export const useMapController = () => {
   const [isGpsLoading, setIsGpsLoading] = useState(true);
   const [errorMassage, setErrorMassage] = useState('');
   const [isDrag, setIsDrag] = useState(false);
