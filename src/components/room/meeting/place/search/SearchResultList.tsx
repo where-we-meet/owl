@@ -17,7 +17,7 @@ const SearchResultList = ({
     }>
   >;
 }) => {
-  const setCenter = useSearchDataStore((state) => state.setCenter);
+  const setLocation = useSearchDataStore((state) => state.setLocation);
 
   const handleListFocus = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -26,7 +26,7 @@ const SearchResultList = ({
 
   const handleChangeViewPoint = (place: Place) => {
     const point = changeToViewPoint(place);
-    setCenter(point);
+    setLocation(point);
   };
   return (
     <div className={styles.places_container} onMouseEnter={handleListFocus} onMouseLeave={handleListFocus}>
