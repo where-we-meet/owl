@@ -2,13 +2,8 @@ import { createClient } from '@/utils/supabase/server';
 import Logout from '../auth/LogoutButton';
 import styles from './Header.module.css';
 import Link from 'next/link';
-import { headers } from 'next/headers';
 
 const Header = async () => {
-  const headersList = headers();
-  const fullUrl = headersList.get('referer') || '';
-  if (fullUrl.split('/')[3] === 'login') return null;
-
   const supabase = await createClient();
 
   const {
