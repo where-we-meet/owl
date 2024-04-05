@@ -1,36 +1,15 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
-
+import Image from 'next/image';
+import { Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useCenterState } from '@/hooks/useCenterState';
 
-import { dragCenter } from '@/utils/place/dragCenter';
-import styles from './KakaoMap.module.css';
-import Image from 'next/image';
-import { useGetRoadAddress } from '@/hooks/useGetPlace';
 import RangeController from './RangeController';
-import { useEffect, useState } from 'react';
-import { useSearchDataStore } from '@/store/store';
+import styles from './KakaoMap.module.css';
 
 const KakaoMap = () => {
-  const [isDrag, setIsDrag] = useState(false);
-  const [addressName, setAddressName] = useState('');
-
   const [loading, error] = useKakaoMap();
 
-  const { centerData, setCenterData } = useCenterState();
-  const { data, isPending } = useGetRoadAddress(centerData.center);
-
-  const searchCenter = useSearchDataStore((state) => state.center);
-
-  useEffect(() => {
-    if (searchCenter) {
-      setCenterData((prev) => ({ ...prev, center: { lat: searchCenter.lat, lng: searchCenter.lng } }));
-      setAddressName(searchCenter.addressName);
-    } else if (data) {
-      const address = data.road_address?.address_name || data.address?.address_name;
-      setAddressName(address);
-    }
-  }, [searchCenter, data]);
+  const { centerData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage } = useCenterState();
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
@@ -38,28 +17,29 @@ const KakaoMap = () => {
   return (
     <div>
       <div className={styles.map_container}>
-        <Image
-          src={'/pin.svg'}
-          className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
-          width={50}
-          height={50}
-          alt="pin"
-        />
+        {isGpsLoading ? (
+          <div className={`${styles.center_pin}`}>loading...</div>
+        ) : (
+          <Image
+            src={'/pin.svg'}
+            className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
+            width={50}
+            height={50}
+            alt="pin"
+          />
+        )}
         <Map
-          center={centerData.center}
+          center={centerData.location}
           className={styles.map}
+          onCenterChanged={(map) => handleChangeCenter(map)}
           onDragStart={() => setIsDrag(true)}
-          onDragEnd={(map) => {
-            setIsDrag(false);
-            dragCenter(map, setCenterData);
-          }}
+          onDragEnd={() => setIsDrag(false)}
         >
-          {centerData.isLoading && <div>위치 정보를 불러오고 있습니다.</div>}
-          <RangeController center={centerData.center} />
+          <RangeController center={centerData.location} />
         </Map>
       </div>
-      <div>{`lat: ${centerData.center.lat} lng: ${centerData.center.lng}`}</div>
-      <div>{addressName}</div>
+      <div>{`lat: ${centerData.location.lat} lng: ${centerData.location.lng}`}</div>
+      <div>{centerData.address}</div>
     </div>
   );
 };
