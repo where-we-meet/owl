@@ -1,11 +1,11 @@
 import { getAddress, getSearchPlace } from '@/api/place/placeData';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetRoadAddress = (center: { lat: number; lng: number }) => {
+export const useGetRoadAddress = (location: { lat: number; lng: number }, isDrag: boolean) => {
   const { data, isPending } = useQuery({
-    queryKey: ['room', center],
-    queryFn: async () => await getAddress(center),
-    enabled: !!center
+    queryKey: ['room', location],
+    queryFn: async () => await getAddress(location),
+    enabled: !!location && !isDrag
   });
   return { data, isPending };
 };
