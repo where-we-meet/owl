@@ -13,10 +13,10 @@ export default function LoginPage() {
         <LoginButton />
       </section>
 
-      <button className={styles.paypal} role="button">
+      <a target="_blank" className={styles.paypal} href="https://paypal.me/owllink">
         <PaypalMark />
         <span>개발자 응원하기</span>
-      </button>
+      </a>
     </main>
   );
 }
