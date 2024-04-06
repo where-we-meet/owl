@@ -8,27 +8,32 @@ export const useGetRoomData = (id: string) => {
   const [roomUsers, setRoomUsers] = useState<RoomUser[]>([]);
 
   useEffect(() => {
+    const sortedUserData = async () => {
+      const data = await userDataFetch(id);
+      setRoomUsers(data);
+    };
+    sortedUserData();
+  }, []);
+
+  useEffect(() => {
     const subscription = supabase
       .channel('room')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
         async (payload) => {
-          setRoomUsers([...roomUsers, payload.new as RoomUser]);
+          const changed = payload.new as RoomUser;
+          setRoomUsers((prev) =>
+            prev.map((user) => (user.id === changed.id ? { ...user, start_location: changed.start_location } : user))
+          );
         }
       )
       .subscribe();
 
-    const sortedUserData = async () => {
-      const data = await userDataFetch(id);
-      setRoomUsers(data);
-    };
-    sortedUserData();
-
     return () => {
       supabase.removeChannel(subscription);
     };
-  }, [id, roomUsers]);
+  }, [id]);
 
   return { roomUsers };
 };
