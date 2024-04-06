@@ -98,8 +98,13 @@ const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => 
   };
 
   const handleDateUpload = async () => {
+    if (selectedDate.length === 0) {
+      return;
+    }
+
     const supabase = createClient();
     const roomId: string = id.toString();
+
     for (const date of selectedDate) {
       const { error } = await supabase
         .from('room_schedule')
@@ -171,7 +176,9 @@ const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => 
           })}
         </div>
         <button onClick={handleJump}>건너뛰기</button>
-        <button onClick={handleDateUpload}>다음</button>
+        <button onClick={handleDateUpload} disabled={selectedDate.length === 0}>
+          다음
+        </button>
       </div>
     </>
   );

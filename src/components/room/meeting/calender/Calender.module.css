@@ -26,6 +26,6 @@
   width: 35px;
   height: 35px;
   background-color: #00800014;
-  border-radius: 50%; /* 원형 모양 */
-  position: absolute; /* 위치 지정 */
+  border-radius: 50%;
+  position: absolute;
 }
