@@ -5,7 +5,7 @@ type State = {
     lat: number;
     lng: number;
   };
-  address?: string;
+  address: string;
   addressName?: string;
 };
 
