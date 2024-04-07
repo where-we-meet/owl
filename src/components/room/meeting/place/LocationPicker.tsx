@@ -1,17 +1,32 @@
 import { useParams } from 'next/navigation';
 import { getCurrentUserData, updateStartLocation } from '@/api/supabaseCSR/supabase';
 import { useSearchDataStore } from '@/store/store';
+import { objectValidate } from '@/utils/objectValidate';
 
 const LocationPicker = () => {
   const { id: roomId }: { id: string } = useParams();
-  const address = useSearchDataStore((state) => state.address);
+  const {
+    location: { lat, lng },
+    address
+  } = useSearchDataStore((state) => state);
 
   const handleSubmitLocation = async () => {
     const {
       user: { id: userId }
     } = await getCurrentUserData();
-    if (roomId && userId && address) {
-      await updateStartLocation(roomId, userId, address);
+
+    const userLocationData = {
+      room_id: roomId,
+      user_id: userId,
+      start_location: address,
+      lat: lat.toString(),
+      lng: lng.toString()
+    };
+
+    const resultCheck = objectValidate(userLocationData);
+
+    if (resultCheck) {
+      await updateStartLocation(userLocationData);
     } else {
       alert('no');
     }
