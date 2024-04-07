@@ -51,5 +51,5 @@ export const useMapController = () => {
     }
   }, [data]);
 
-  return { userLocationData, setLocation, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage };
+  return { userLocationData, setLocation, handleChangeCenter, isGpsLoading, isDrag, setIsDrag };
 };
