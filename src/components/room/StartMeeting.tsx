@@ -21,7 +21,7 @@ const StartMeeting = ({ user }: { user: User | null }) => {
 
     if (error) throw error;
 
-    await supabase.from('userdata_room').insert([{ room_id: room[0].id, user_id: user.id }]);
+    await supabase.from('userdata_room').insert([{ room_id: room[0].id, user_id: user.id, is_admin: true }]);
 
     router.push(`/room/${room[0].id}`);
   };
