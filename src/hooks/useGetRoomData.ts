@@ -1,13 +1,19 @@
 import { getCurrentUserData, getRoomUsersData } from '@/api/supabaseCSR/supabase';
 import { useRoomUserDataStore } from '@/store/store';
-import { RoomUser } from '@/types/roomUser';
 import { createClient } from '@/utils/supabase/client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import type { RoomUser } from '@/types/roomUser';
 
 export const useGetRoomData = (id: string) => {
   const supabase = createClient();
+  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
   const setRoomUsers = useRoomUserDataStore((state) => state.setRoomUsers);
+  const addRoomUserData = useRoomUserDataStore((state) => state.addRoomUserData);
   const updateRoomUserData = useRoomUserDataStore((state) => state.updateRoomUserData);
+  const [userId, setUserId] = useState<string | null>(null);
+
+  const roomUsersLength = roomUsers.length;
 
   useEffect(() => {
     const getUserData = async () => {
@@ -24,9 +30,10 @@ export const useGetRoomData = (id: string) => {
       const sortedUsers = [...adminUser, ...currentUser, ...otherUsers];
 
       setRoomUsers(sortedUsers);
+      setUserId(currentUserId);
     };
     getUserData();
-  }, []);
+  }, [roomUsersLength]);
 
   useEffect(() => {
     const subscription = supabase
@@ -34,9 +41,15 @@ export const useGetRoomData = (id: string) => {
       .on(
         'postgres_changes',
         { event: 'UPDATE', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
-        async (payload) => {
-          const changed = payload.new as RoomUser;
-          updateRoomUserData(changed);
+        (payload) => {
+          updateRoomUserData(payload.new as RoomUser);
+        }
+      )
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
+        (payload) => {
+          addRoomUserData(payload.new as RoomUser);
         }
       )
       .subscribe();
@@ -45,4 +58,6 @@ export const useGetRoomData = (id: string) => {
       supabase.removeChannel(subscription);
     };
   }, [id]);
+
+  return { userId };
 };
