@@ -7,12 +7,15 @@ import RangeController from './RangeController';
 import styles from './KakaoMap.module.css';
 import UserMarker from './UserMarker';
 import { useRoomUserDataStore } from '@/store/store';
+import { useGetHalfway } from '@/hooks/useGetHalfway';
+import Halfway from './Halfway';
 
 const KakaoMap = () => {
   const [loading, error] = useKakaoMap();
-  const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage } = useMapController();
+  const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag } = useMapController();
 
   const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
+  const { halfwayPoint } = useGetHalfway(roomUsers);
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
@@ -39,7 +42,8 @@ const KakaoMap = () => {
           onDragEnd={() => setIsDrag(false)}
         >
           {roomUsers.map(({ id, lat, lng }) => lat && lng && <UserMarker key={id} id={id} lat={lat} lng={lng} />)}
-          <RangeController center={userLocationData.location} />
+          {halfwayPoint && <Halfway location={halfwayPoint} />}
+          <RangeController center={halfwayPoint} />
         </Map>
       </div>
       <div>{userLocationData.address}</div>
