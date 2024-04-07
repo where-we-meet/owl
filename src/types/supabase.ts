@@ -47,25 +47,34 @@ export type Database = {
       };
       rooms: {
         Row: {
+          confirmed_date: string | null;
           created_at: string;
           created_by: string | null;
           id: string;
+          lat: string | null;
+          lng: string | null;
           location: string | null;
           name: string | null;
           verified: boolean | null;
         };
         Insert: {
+          confirmed_date?: string | null;
           created_at?: string;
           created_by?: string | null;
           id?: string;
+          lat?: string | null;
+          lng?: string | null;
           location?: string | null;
           name?: string | null;
           verified?: boolean | null;
         };
         Update: {
+          confirmed_date?: string | null;
           created_at?: string;
           created_by?: string | null;
           id?: string;
+          lat?: string | null;
+          lng?: string | null;
           location?: string | null;
           name?: string | null;
           verified?: boolean | null;
@@ -85,6 +94,8 @@ export type Database = {
           created_at: string;
           id: string;
           is_admin: boolean;
+          lat: string | null;
+          lng: string | null;
           room_id: string;
           start_location: string | null;
           user_id: string;
@@ -93,6 +104,8 @@ export type Database = {
           created_at?: string;
           id?: string;
           is_admin?: boolean;
+          lat?: string | null;
+          lng?: string | null;
           room_id: string;
           start_location?: string | null;
           user_id: string;
@@ -101,6 +114,8 @@ export type Database = {
           created_at?: string;
           id?: string;
           is_admin?: boolean;
+          lat?: string | null;
+          lng?: string | null;
           room_id?: string;
           start_location?: string | null;
           user_id?: string;
