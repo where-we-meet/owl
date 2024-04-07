@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/client';
 import { getFileName } from '@/utils/my-owl/profile/modal/getFileName';
 import { Dispatch, SetStateAction } from 'react';
 import { Tables } from '@/types/supabase';
+import { UserLocationData } from '@/types/place.types';
 
 const supabase = createClient();
 
@@ -127,10 +128,10 @@ export const getRealtimeScheduleData = (id: string) => {
 
 // Insert rows
 
-export const updateStartLocation = async (roomId: string, userId: string, location: string) => {
+export const updateStartLocation = async (payload: UserLocationData) => {
   const { data, error } = await supabase
     .from('userdata_room')
-    .update({ room_id: roomId, user_id: userId, start_location: location })
-    .eq('room_id', roomId)
-    .eq('user_id', userId);
+    .update(payload)
+    .eq('room_id', payload.room_id)
+    .eq('user_id', payload.user_id);
 };
