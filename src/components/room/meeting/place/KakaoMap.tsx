@@ -5,11 +5,14 @@ import { useMapController } from '@/hooks/useMapController';
 
 import RangeController from './RangeController';
 import styles from './KakaoMap.module.css';
+import UserMarker from './UserMarker';
+import { useRoomUserDataStore } from '@/store/store';
 
 const KakaoMap = () => {
   const [loading, error] = useKakaoMap();
-
   const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag, errorMassage } = useMapController();
+
+  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
@@ -35,6 +38,7 @@ const KakaoMap = () => {
           onDragStart={() => setIsDrag(true)}
           onDragEnd={() => setIsDrag(false)}
         >
+          {roomUsers.map(({ id, lat, lng }) => lat && lng && <UserMarker key={id} id={id} lat={lat} lng={lng} />)}
           <RangeController center={userLocationData.location} />
         </Map>
       </div>
