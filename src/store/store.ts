@@ -15,6 +15,7 @@ type Location = {
 type RoomUserData = {
   roomUsers: RoomUser[];
   setRoomUsers: (roomUsers: RoomUser[]) => void;
+  addRoomUserData: (payload: RoomUser) => void;
   updateRoomUserData: (payload: RoomUser) => void;
 };
 
@@ -32,6 +33,10 @@ export const useSearchDataStore = create<Location>((set) => ({
 export const useRoomUserDataStore = create<RoomUserData>((set) => ({
   roomUsers: [],
   setRoomUsers: (roomUsers) => set({ roomUsers }),
+  addRoomUserData: (payload) =>
+    set((state) => ({
+      roomUsers: [...state.roomUsers, payload]
+    })),
   updateRoomUserData: (payload) =>
     set((state) => ({
       roomUsers: state.roomUsers.map((user) =>
