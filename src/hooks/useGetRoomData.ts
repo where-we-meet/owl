@@ -1,6 +1,6 @@
+import { getCurrentUserData, getRoomUsersData } from '@/api/supabaseCSR/supabase';
 import { RoomUser } from '@/types/roomUser';
 import { createClient } from '@/utils/supabase/client';
-import { userDataFetch } from '@/utils/supabase/userDataFetch';
 import { useEffect, useState } from 'react';
 
 export const useGetRoomData = (id: string) => {
@@ -8,11 +8,20 @@ export const useGetRoomData = (id: string) => {
   const [roomUsers, setRoomUsers] = useState<RoomUser[]>([]);
 
   useEffect(() => {
-    const sortedUserData = async () => {
-      const data = await userDataFetch(id);
-      setRoomUsers(data);
+    const getUserData = async () => {
+      const {
+        user: { id: currentUserId }
+      } = await getCurrentUserData();
+      const roomUsers = await getRoomUsersData(id);
+
+      const adminUser = roomUsers.filter((user) => user.is_admin);
+      const currentUser = roomUsers.filter((user) => !user.is_admin && user.user_id === currentUserId);
+      const otherUsers = roomUsers.filter((user) => !user.is_admin && user.user_id !== currentUserId);
+
+      const sortedUsers = [...adminUser, ...currentUser, ...otherUsers];
+      setRoomUsers(sortedUsers);
     };
-    sortedUserData();
+    getUserData();
   }, []);
 
   useEffect(() => {
