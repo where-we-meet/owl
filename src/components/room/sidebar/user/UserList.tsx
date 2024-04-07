@@ -1,7 +1,8 @@
 'use client';
-import { RoomUser } from '@/types/roomUser';
+import { useRoomUserDataStore } from '@/store/store';
 
-const UserList = ({ roomUsers }: { roomUsers: RoomUser[] }) => {
+const UserList = () => {
+  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
   return (
     <section>
       <ul>

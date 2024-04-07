@@ -1,24 +1,28 @@
 import { getCurrentUserData, getRoomUsersData } from '@/api/supabaseCSR/supabase';
+import { useRoomUserDataStore } from '@/store/store';
 import { RoomUser } from '@/types/roomUser';
 import { createClient } from '@/utils/supabase/client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export const useGetRoomData = (id: string) => {
   const supabase = createClient();
-  const [roomUsers, setRoomUsers] = useState<RoomUser[]>([]);
+  const setRoomUsers = useRoomUserDataStore((state) => state.setRoomUsers);
+  const updateRoomUserData = useRoomUserDataStore((state) => state.updateRoomUserData);
 
   useEffect(() => {
     const getUserData = async () => {
       const {
         user: { id: currentUserId }
       } = await getCurrentUserData();
-      const roomUsers = await getRoomUsersData(id);
 
-      const adminUser = roomUsers.filter((user) => user.is_admin);
-      const currentUser = roomUsers.filter((user) => !user.is_admin && user.user_id === currentUserId);
-      const otherUsers = roomUsers.filter((user) => !user.is_admin && user.user_id !== currentUserId);
+      const users = await getRoomUsersData(id);
+
+      const adminUser = users.filter((user) => user.is_admin);
+      const currentUser = users.filter((user) => !user.is_admin && user.user_id === currentUserId);
+      const otherUsers = users.filter((user) => !user.is_admin && user.user_id !== currentUserId);
 
       const sortedUsers = [...adminUser, ...currentUser, ...otherUsers];
+
       setRoomUsers(sortedUsers);
     };
     getUserData();
@@ -29,12 +33,10 @@ export const useGetRoomData = (id: string) => {
       .channel('room')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
+        { event: 'UPDATE', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
         async (payload) => {
           const changed = payload.new as RoomUser;
-          setRoomUsers((prev) =>
-            prev.map((user) => (user.id === changed.id ? { ...user, start_location: changed.start_location } : user))
-          );
+          updateRoomUserData(changed);
         }
       )
       .subscribe();
@@ -43,6 +45,4 @@ export const useGetRoomData = (id: string) => {
       supabase.removeChannel(subscription);
     };
   }, [id]);
-
-  return { roomUsers };
 };

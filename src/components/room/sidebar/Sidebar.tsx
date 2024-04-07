@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { RoomUser } from '@/types/roomUser';
-
 import style from './Sidebar.module.css';
 import UserList from './user/UserList';
 
-const Sidebar = ({ roomUsers }: { roomUsers: RoomUser[] }) => {
+const Sidebar = () => {
   return (
     <div className={style.container}>
       <section>
@@ -15,7 +13,7 @@ const Sidebar = ({ roomUsers }: { roomUsers: RoomUser[] }) => {
           <button>공유하기</button>
         </div>
       </section>
-      <UserList roomUsers={roomUsers} />
+      <UserList />
     </div>
   );
 };
