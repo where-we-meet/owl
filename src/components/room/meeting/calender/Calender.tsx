@@ -65,7 +65,7 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
   };
 
   const handleDateUpload = async () => {
-    if (selectedDate.length === 0) {
+    if (!CheckSelectedDates(selectedDate)) {
       return;
     }
 
@@ -115,12 +115,12 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
         <div className={styles.dates}>
           {entireOfMonth.map((week, index) => {
             return (
-              <ul className={styles.day_container} key={index}>
+              <ul key={index} className={styles.day_container}>
                 {week.map((day) => (
                   <li
+                    key={day.toISOString()}
                     onClick={() => handleDateClick(day)}
                     className={styles.days}
-                    key={day.toISOString()}
                     style={{ ...dayStyle(day) }}
                   >
                     {selectedDate.some((date) => isSameDay(date, day)) && (
