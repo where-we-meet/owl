@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { getRoomData, getUsersData, getRoomParticipantsId, getUserMeetingsId } from '@/api/supabaseCSR/supabase';
+import { getRoomData, getUsersData, getRoomParticipantsId, getUserMeetingsId, getMyProfile } from '@/api/supabaseCSR/supabase';
 import { getUserId } from '@/utils/my-owl/getUserId';
 import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
 
@@ -26,6 +26,8 @@ export interface MeetingInfo {
 export const Meeting = () => {
   const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
   const router = useRouter();
+
+
   useEffect(() => {
     const fetchMeetingInfo = async () => {
       const userId = await getUserId();

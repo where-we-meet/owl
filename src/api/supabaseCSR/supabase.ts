@@ -63,6 +63,22 @@ export const getUsersData = async (id: string) => {
   return data;
 };
 
+export const getMyProfile = async (id: string) => {
+  const { data, error } = await supabase
+    .from('rooms')
+    .select(`id,
+      name,
+      created_at,
+      location,
+      verified,
+      users(name, profile_url)
+      `
+    )
+    .eq('id', id)
+  if (error) throw error;
+  return data
+}
+
 //유저 프로필 사진 업데이트 로직
 export const changeUserProfile = async ({ userId, profile_url }: { userId: string; profile_url: string }) => {
   const { data, error } = await supabase.from('users').update({ profile_url }).eq('id', userId);
