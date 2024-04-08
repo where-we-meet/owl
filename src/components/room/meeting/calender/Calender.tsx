@@ -1,13 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { format, isToday, isSunday, isSaturday, subMonths, addMonths, isSameDay } from 'date-fns';
+
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
 import { getUserSchedule, getCurrentUserData } from '@/api/supabaseCSR/supabase';
-import CalculateOfMonth from './CalculateOfMonth';
-
-import { format, isToday, isSunday, isSaturday, subMonths, addMonths, isSameDay } from 'date-fns';
 import { Tables } from '@/types/supabase';
+
+import CalculateOfMonth from './CalculateOfMonth';
+import CheckSelectedDates from './CheckSelectedDates';
 
 type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
 
@@ -32,6 +34,7 @@ const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => 
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const entireOfMonth = CalculateOfMonth(nowDate);
+  const isDatesSelected = CheckSelectedDates(selectedDate);
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
@@ -148,7 +151,7 @@ const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => 
           })}
         </div>
         <button onClick={handleJump}>건너뛰기</button>
-        <button onClick={handleDateUpload} disabled={selectedDate.length === 0}>
+        <button onClick={handleDateUpload} disabled={!isDatesSelected}>
           다음
         </button>
       </div>
