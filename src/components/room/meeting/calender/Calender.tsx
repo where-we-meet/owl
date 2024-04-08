@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { format, subMonths, addMonths, isSameDay } from 'date-fns';
 
 import styles from './Calender.module.css';
+import EntireOfMonth from './EntireOfMonth';
+import SchedulesOfUsers from './SchedulesOfIUsers';
 import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 
@@ -11,7 +13,9 @@ import { useGetCalendar } from '@/hooks/useGetCalendar';
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
 import checkSelectedDates from '@/utils/calendar/checkSelectedDates';
 import dayColors from '@/utils/calendar/dayColors';
+import { Tables } from '@/types/supabase';
 
+export type UserSchedule = Omit<Tables<'room_schedule'>, 'created_at'>;
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => void }) => {
@@ -22,7 +26,6 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
 
   const { userSchedules } = useGetCalendar(id);
 
-  const entireOfMonth = calculateOfMonth(nowDate);
   const isDatesSelected = checkSelectedDates(selectedDate);
 
   const prevMonth = () => {
@@ -100,33 +103,13 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
         </ul>
 
         <div className={styles.dates}>
-          {entireOfMonth.map((week, index) => {
-            return (
-              <ul key={index} className={styles.day_container}>
-                {week.map((day) => (
-                  <li
-                    key={day.toISOString()}
-                    onClick={() => handleDateClick(day)}
-                    className={styles.days}
-                    style={{ ...dayStyle(day) }}
-                  >
-                    {selectedDate.some((date) => isSameDay(date, day)) && (
-                      <span className={styles.selected_date_circle}></span>
-                    )}
-
-                    {userSchedules.map((schedule, index) => {
-                      return (
-                        isSameDay(new Date(String(schedule.start_date)), day) && (
-                          <span key={index} className={styles.selected_date_circle}></span>
-                        )
-                      );
-                    })}
-                    {day.getDate()}
-                  </li>
-                ))}
-              </ul>
-            );
-          })}
+          <EntireOfMonth
+            nowDate={nowDate}
+            handleDateClick={handleDateClick}
+            selectedDate={selectedDate}
+            dayStyle={dayStyle}
+          />
+          <SchedulesOfUsers userSchedules={userSchedules} day={nowDate} />
         </div>
         <button onClick={handleJump}>건너뛰기</button>
         <button onClick={handleDateUpload} disabled={!isDatesSelected}>
