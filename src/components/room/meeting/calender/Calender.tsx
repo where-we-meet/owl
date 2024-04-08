@@ -1,11 +1,11 @@
 'use client';
 
-import {  useState } from 'react';
+import { useState } from 'react';
 import { format, isToday, isSunday, isSaturday, subMonths, addMonths, isSameDay } from 'date-fns';
 
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
-import {  getCurrentUserData } from '@/api/supabaseCSR/supabase';
+import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 import { Tables } from '@/types/supabase';
 
 import calculateOfMonth from './calculateOfMonth';
@@ -14,8 +14,7 @@ import { useGetCalendar } from '@/hooks/useGetCalendar';
 
 export type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
 
-  const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
-
+const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => void }) => {
   const currentUserData = getCurrentUserData();
@@ -25,6 +24,7 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
 
   const { userSchedules } = useGetCalendar(id);
 
+  const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const entireOfMonth = calculateOfMonth(nowDate);
   const isDatesSelected = checkSelectedDates(selectedDate);
 
@@ -65,7 +65,7 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
   };
 
   const handleDateUpload = async () => {
-    if (!CheckSelectedDates(selectedDate)) {
+    if (!checkSelectedDates(selectedDate)) {
       return;
     }
 
