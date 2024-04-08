@@ -13,26 +13,6 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
   const [url, setUrl] = useState('');
   const [isValidUrl, setIsValidUrl] = useState(true);
 
-  //util
-  const byteCalculater = (byte: number) => {
-    const KB = byte / 1024;
-    const MB = KB / 1024;
-    const GB = MB / 1024;
-    const TB = GB / 1024;
-
-    if (TB >= 1) {
-      return `${TB.toFixed(2)} TB`;
-    } else if (GB >= 1) {
-      return `${GB.toFixed(2)} GB`;
-    } else if (MB >= 1) {
-      return `${MB.toFixed(2)} MB`;
-    } else if (KB >= 1) {
-      return `${KB.toFixed(2)} KB`;
-    } else {
-      return `${byte} bytes`;
-    }
-  };
-
   //파일 용량 제한 로직
   const handleFileMaxSize = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
