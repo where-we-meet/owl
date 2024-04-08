@@ -1,18 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { format, isToday, isSunday, isSaturday, subMonths, addMonths, isSameDay } from 'date-fns';
+import { format, subMonths, addMonths, isSameDay } from 'date-fns';
 
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
-import { Tables } from '@/types/supabase';
 
-import calculateOfMonth from './calculateOfMonth';
-import checkSelectedDates from './checkSelectedDates';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
-
-export type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
+import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
+import checkSelectedDates from '@/utils/calendar/checkSelectedDates';
+import dayColors from '@/utils/calendar/dayColors';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -24,7 +22,6 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
 
   const { userSchedules } = useGetCalendar(id);
 
-  const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const entireOfMonth = calculateOfMonth(nowDate);
   const isDatesSelected = checkSelectedDates(selectedDate);
 
@@ -37,17 +34,7 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
   };
 
   const dayStyle = (day: Date) => {
-    const color =
-      format(nowDate, 'M') !== format(day, 'M')
-        ? '#ddd'
-        : isSunday(day)
-        ? 'red'
-        : isSaturday(day)
-        ? 'blue'
-        : isToday(day)
-        ? 'pink'
-        : '#000';
-    return { color };
+    return { color: dayColors(nowDate, day) };
   };
 
   const handleJump = () => {
