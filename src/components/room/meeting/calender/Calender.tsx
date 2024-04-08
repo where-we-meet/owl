@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { format, isToday, isSunday, isSaturday, subMonths, addMonths, isSameDay } from 'date-fns';
 
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
-import { getUserSchedule, getCurrentUserData } from '@/api/supabaseCSR/supabase';
+import {  getCurrentUserData } from '@/api/supabaseCSR/supabase';
 import { Tables } from '@/types/supabase';
 
-import CalculateOfMonth from './CalculateOfMonth';
-import CheckSelectedDates from './CheckSelectedDates';
+import calculateOfMonth from './calculateOfMonth';
+import checkSelectedDates from './checkSelectedDates';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 
 export type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
@@ -25,8 +25,8 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
 
   const { userSchedules } = useGetCalendar(id)
 
-  const entireOfMonth = CalculateOfMonth(nowDate);
-  const isDatesSelected = CheckSelectedDates(selectedDate);
+  const entireOfMonth = calculateOfMonth(nowDate);
+  const isDatesSelected = checkSelectedDates(selectedDate);
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));

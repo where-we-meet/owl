@@ -1,7 +1,7 @@
 import React from 'react';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays } from 'date-fns';
 
-const CalculateOfMonth = (nowDate: Date) => {
+const calculateOfMonth = (nowDate: Date) => {
   const monthStart = startOfMonth(nowDate);
   const monthEnd = endOfMonth(monthStart);
   const startDay = startOfWeek(monthStart);
@@ -22,4 +22,4 @@ const CalculateOfMonth = (nowDate: Date) => {
   return entireOfMonth;
 };
 
-export default CalculateOfMonth;
+export default calculateOfMonth;

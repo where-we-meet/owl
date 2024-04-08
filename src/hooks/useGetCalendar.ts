@@ -16,6 +16,7 @@ export const useGetCalendar = (id : string) => {
     dateOfUser()
   }, [id])
   
+  //아직 해결 안됨
   useEffect(() => {
     const subscription = supabase
       .channel('room')
