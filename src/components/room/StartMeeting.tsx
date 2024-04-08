@@ -1,11 +1,12 @@
 'use client';
 
 import { insertNewRoom, insertRoomUser } from '@/api/room';
-import { User } from '@supabase/supabase-js';
+import { useSession } from '@/hooks/useSession';
 import { useRouter } from 'next/navigation';
 
-const StartMeeting = ({ user }: { user: User | null }) => {
+const StartMeeting = () => {
   const router = useRouter();
+  const { isLoadingUser, currentUser: user } = useSession();
 
   const startNewRoom = async () => {
     if (!user) {
@@ -19,7 +20,11 @@ const StartMeeting = ({ user }: { user: User | null }) => {
     router.push(`/room/${room[0].id}`);
   };
 
-  return <button onClick={startNewRoom}>모임 시작하기</button>;
+  return (
+    <button onClick={startNewRoom} disabled={isLoadingUser}>
+      모임 시작하기
+    </button>
+  );
 };
 
 export default StartMeeting;
