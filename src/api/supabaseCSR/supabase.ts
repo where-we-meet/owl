@@ -71,7 +71,7 @@ export const getMyProfile = async (id: string) => {
       created_at,
       location,
       verified,
-      users(name, profile_url)
+      users(*)
       `
     )
     .eq('id', id)
