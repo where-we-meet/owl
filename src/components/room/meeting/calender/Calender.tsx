@@ -10,29 +10,21 @@ import { Tables } from '@/types/supabase';
 
 import CalculateOfMonth from './CalculateOfMonth';
 import CheckSelectedDates from './CheckSelectedDates';
+import { useGetCalendar } from '@/hooks/useGetCalendar';
 
-type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
+export type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
 
-const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => void }) => {
+  const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
+
+
+const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => void }) => {
   const currentUserData = getCurrentUserData();
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
-  const [userSchedules, setUserSchedules] = useState<UserSchedule[]>([]);
 
-  useEffect(() => {
-    const dateOfusers = async () => {
-      try {
-        const data = await getUserSchedule(id.toString());
-        setUserSchedules(data);
-      } catch (error) {
-        console.error('다른 유저들의 일정을 가져오는 중 오류 발생', error);
-      }
-    };
-    dateOfusers();
-  }, [id]);
+  const { userSchedules } = useGetCalendar(id)
 
-  const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
   const entireOfMonth = CalculateOfMonth(nowDate);
   const isDatesSelected = CheckSelectedDates(selectedDate);
 
@@ -111,7 +103,7 @@ const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => 
         </div>
 
         <ul>
-          {weekDay.map((weekdays) => {
+          {WEEKDAY.map((weekdays) => {
             return (
               <li key={weekdays} className={styles.weekdays}>
                 {weekdays}
@@ -135,14 +127,13 @@ const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => 
                       <span className={styles.selected_date_circle}></span>
                     )}
 
-                    {userSchedules.map((schedule) => {
+                    {userSchedules.map((schedule, index) => {
                       return (
                         isSameDay(new Date(String(schedule.start_date)), day) && (
-                          <span className={styles.selected_date_circle}></span>
+                          <span key={index} className={styles.selected_date_circle}></span>
                         )
                       );
                     })}
-
                     {day.getDate()}
                   </li>
                 ))}
