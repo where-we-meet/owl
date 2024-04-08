@@ -6,7 +6,7 @@ import Place from './place/Place';
 
 type TabList = { [key: string]: ReactElement };
 
-const Meeting = ({ id }: { id: String }) => {
+const Meeting = ({ id }: { id: string }) => {
   const [currentTab, setCurrentTab] = useState('일정');
 
   const changeTab = (tabName: string) => {
