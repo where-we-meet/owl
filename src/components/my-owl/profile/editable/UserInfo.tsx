@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from 'react';
 
 import { ImageUploadModal } from './modal/Modal';
-import { updateUserName } from '@/api/supabaseCSR/supabase';
+import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
 
 import styles from './UserInfo.module.css';
 import Image from 'next/image';
@@ -17,6 +17,7 @@ export interface UserInfoProps {
 const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(name);
+  const [userProfileURL, setUserProfileURL] = useState(profileURL);
   const [toggleModal, setToggleModal] = useState(false);
 
   const handleChangeUserInfo = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +27,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
 
   const handleEditExit = () => {
     setUserName(name);
+    setUserProfileURL(profileURL);
     setEditMode(false);
   };
 
@@ -33,8 +35,11 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
     setEditMode((prev) => !prev);
   };
 
-  const handleNameEditDone = () => {
+  const handleEditDone = () => {
     updateUserName(userId, userName);
+    if (userProfileURL !== null) {
+      changeUserProfile({ userId, profile_url: userProfileURL });
+    }
     setEditMode(false);
   };
 
@@ -44,7 +49,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
 
   return (
     <div className={styles.user_container}>
-      <div className={styles.profile_image} style={{ backgroundImage: `url(${profileURL})` }}>
+      <div className={styles.profile_image} style={{ backgroundImage: `url(${userProfileURL})` }}>
         {editMode ? (
           <Image
             className={styles.edit}
@@ -63,7 +68,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
             <button className={styles.button} onClick={handleEditExit}>
               취소
             </button>
-            <button className={styles.button} onClick={handleNameEditDone}>
+            <button className={styles.button} onClick={handleEditDone}>
               완료
             </button>
           </>
@@ -73,7 +78,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
           </button>
         )}
       </div>
-      {toggleModal && <ImageUploadModal handleToggleModal={handleToggleModal} />}
+      {toggleModal && <ImageUploadModal handleToggleModal={handleToggleModal} setUserProfileURL={setUserProfileURL} />}
     </div>
   );
 };
