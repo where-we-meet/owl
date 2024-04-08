@@ -4,21 +4,9 @@ import { useEffect, useState } from 'react';
 import styles from './Calender.module.css';
 import { createClient } from '@/utils/supabase/client';
 import { getUserSchedule, getCurrentUserData } from '@/api/supabaseCSR/supabase';
+import CalculateOfMonth from './CalculateOfMonth';
 
-import {
-  format,
-  startOfWeek,
-  startOfMonth,
-  endOfMonth,
-  endOfWeek,
-  addDays,
-  isToday,
-  isSunday,
-  isSaturday,
-  subMonths,
-  addMonths,
-  isSameDay
-} from 'date-fns';
+import { format, isToday, isSunday, isSaturday, subMonths, addMonths, isSameDay } from 'date-fns';
 import { Tables } from '@/types/supabase';
 
 type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
@@ -43,23 +31,7 @@ const Calender = ({ id, changeTab }: { id: String; changeTab: (name: string) => 
   }, [id]);
 
   const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
-  const monthStart = startOfMonth(nowDate);
-  const monthEnd = endOfMonth(monthStart);
-  const startDay = startOfWeek(monthStart);
-  const endDay = endOfWeek(monthEnd);
-  const entireOfMonth = [];
-
-  let startWeek = startDay;
-  let entireOfWeek = [];
-
-  while (startWeek <= endDay) {
-    for (let i = 0; i < 7; i++) {
-      entireOfWeek.push(startWeek);
-      startWeek = addDays(startWeek, 1);
-    }
-    entireOfMonth.push(entireOfWeek);
-    entireOfWeek = [];
-  }
+  const entireOfMonth = CalculateOfMonth(nowDate);
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
