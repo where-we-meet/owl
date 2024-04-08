@@ -7,7 +7,10 @@ export const calcHalfwayPoint = (roomUsers: RoomUser[]) => {
   const hasLocationUsers = roomUsers
     .filter((user) => !!user.start_location)
     .map((user) => ({ location: { lat: Number(user.lat), lng: Number(user.lng) } }));
+
   const sortedMarkers = convexHull(hasLocationUsers);
-  const result = calcCenterPoint(sortedMarkers);
-  return result;
+
+  const halfwayPoint = calcCenterPoint(sortedMarkers);
+
+  return halfwayPoint;
 };
