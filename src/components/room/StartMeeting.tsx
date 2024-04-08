@@ -1,6 +1,6 @@
 'use client';
 
-import { createClient } from '@/utils/supabase/client';
+import { insertNewRoom, insertRoomUser } from '@/api/room';
 import { User } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
 
@@ -13,15 +13,8 @@ const StartMeeting = ({ user }: { user: User | null }) => {
       return;
     }
 
-    const supabase = createClient();
-    const { data: room, error } = await supabase
-      .from('rooms')
-      .insert([{ name: '운좋은 올빼미', created_by: user.id }])
-      .select();
-
-    if (error) throw error;
-
-    await supabase.from('userdata_room').insert([{ room_id: room[0].id, user_id: user.id, is_admin: true }]);
+    const room = await insertNewRoom('운좋은 올빼미', user.id);
+    await insertRoomUser(room[0].id, user.id, true);
 
     router.push(`/room/${room[0].id}`);
   };
