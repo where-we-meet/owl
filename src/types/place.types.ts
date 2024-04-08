@@ -19,3 +19,8 @@ export type UserLocationData = {
   lat: string;
   lng: string;
 };
+
+export type Halfway = {
+  lat: number | null;
+  lng: number | null;
+};
