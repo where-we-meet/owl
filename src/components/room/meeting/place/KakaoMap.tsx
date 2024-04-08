@@ -1,21 +1,23 @@
 import Image from 'next/image';
+import { useMemo } from 'react';
+
 import { Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useMapController } from '@/hooks/useMapController';
+import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
+import { useRoomUserDataStore } from '@/store/store';
 
+import UserMarker from './UserMarker';
+import Halfway from './Halfway';
 import RangeController from './RangeController';
 import styles from './KakaoMap.module.css';
-import UserMarker from './UserMarker';
-import { useRoomUserDataStore } from '@/store/store';
-import { useGetHalfway } from '@/hooks/useGetHalfway';
-import Halfway from './Halfway';
 
 const KakaoMap = () => {
   const [loading, error] = useKakaoMap();
   const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag } = useMapController();
 
   const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
-  const { halfwayPoint } = useGetHalfway(roomUsers);
+  const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
@@ -41,9 +43,17 @@ const KakaoMap = () => {
           onDragStart={() => setIsDrag(true)}
           onDragEnd={() => setIsDrag(false)}
         >
-          {roomUsers.map(({ id, lat, lng }) => lat && lng && <UserMarker key={id} id={id} lat={lat} lng={lng} />)}
-          {halfwayPoint && <Halfway location={halfwayPoint} />}
-          <RangeController center={halfwayPoint} />
+          {roomUsers
+            .filter(({ lat, lng }) => lat !== null && lng !== null)
+            .map(({ id, lat, lng }) => (
+              <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} />
+            ))}
+          {halfwayPoint.lat && halfwayPoint.lng && (
+            <>
+              <Halfway location={halfwayPoint} />
+              <RangeController center={halfwayPoint} />
+            </>
+          )}
         </Map>
       </div>
       <div>{userLocationData.address}</div>
