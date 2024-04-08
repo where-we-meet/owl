@@ -30,6 +30,7 @@ export const ImageUploadModal = ({
           )} 이하의 파일을 골라주세요.`
         );
         setFileSizeExceed(true);
+        setFile(null);
       } else {
         setFileSizeExceed(false);
         setFile(file);
