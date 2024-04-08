@@ -17,7 +17,9 @@ const KakaoMap = () => {
   const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag } = useMapController();
 
   const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
+
   const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
+  const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
@@ -48,7 +50,7 @@ const KakaoMap = () => {
             .map(({ id, lat, lng }) => (
               <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} />
             ))}
-          {halfwayPoint.lat && halfwayPoint.lng && (
+          {isHalfwayValid && (
             <>
               <Halfway location={halfwayPoint} />
               <RangeController center={halfwayPoint} />
