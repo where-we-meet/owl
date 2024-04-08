@@ -14,10 +14,10 @@ const StartMeeting = () => {
       return;
     }
 
-    const room = await insertNewRoom('운좋은 올빼미', user.id);
-    await insertRoomUser(room[0].id, user.id, true);
+    const [room] = await insertNewRoom('운좋은 올빼미', user.id);
+    await insertRoomUser(room.id, user.id, true);
 
-    router.push(`/room/${room[0].id}`);
+    router.push(`/room/${room.id}`);
   };
 
   return (
