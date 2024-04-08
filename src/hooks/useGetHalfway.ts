@@ -1,11 +1,13 @@
-import { useRoomUserDataStore } from '@/store/store';
-import type { RoomUser } from '@/types/roomUser';
-import calcCenterPoint from '@/utils/place/calcCenterPoint';
-import convexHull from '@/utils/place/convexHull';
 import { useEffect, useState } from 'react';
 
+import calcCenterPoint from '@/utils/place/calcCenterPoint';
+import convexHull from '@/utils/place/convexHull';
+
+import type { Halfway } from '@/types/place.types';
+import type { RoomUser } from '@/types/roomUser';
+
 export const useGetHalfway = (roomUsers: RoomUser[]) => {
-  const [halfwayPoint, setHalfwayPoint] = useState({ lat: 0, lng: 0 });
+  const [halfwayPoint, setHalfwayPoint] = useState<Halfway>({ lat: null, lng: null });
 
   const hasLocationUsers = roomUsers
     .filter((user) => !!user.start_location)
@@ -18,7 +20,7 @@ export const useGetHalfway = (roomUsers: RoomUser[]) => {
     if (result && numberOfStartLocation >= 2) {
       setHalfwayPoint(result);
     }
-  }, [result?.lat, result?.lng]);
+  }, [result.lat, result.lng]);
 
   return { halfwayPoint };
 };
