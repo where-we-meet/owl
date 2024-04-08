@@ -1,7 +1,6 @@
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useState } from 'react';
-import { changeUserProfile, uploadImage } from '@/api/supabaseCSR/supabase';
+import { uploadImage } from '@/api/supabaseCSR/supabase';
 import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
-import { getUserId } from '@/utils/my-owl/getUserId';
 
 import styles from './Modal.module.css';
 
