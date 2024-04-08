@@ -6,7 +6,7 @@ import { useGetRoomData } from '@/hooks/useGetRoomData';
 import styles from './page.module.css';
 import { useEffect } from 'react';
 import { useRoomUserDataStore } from '@/store/store';
-import { createClient } from '@/utils/supabase/client';
+import { insertRoomUser } from '@/api/room';
 
 const RoomPage = ({ params }: { params: { id: string } }) => {
   const { userId } = useGetRoomData(params.id);
@@ -14,14 +14,12 @@ const RoomPage = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     const joinNewUser = async () => {
-      const supabase = createClient();
-      const checkNewUser = roomUsers.find((user) => user.user_id === userId) ? true : false;
-      if (userId && !checkNewUser) {
-        await supabase.from('userdata_room').insert([{ room_id: params.id, user_id: userId, is_admin: false }]);
+      if (userId && !roomUsers.find((user) => user.user_id === userId)) {
+        await insertRoomUser(params.id, userId, false);
       }
     };
     joinNewUser();
-  }, [userId]);
+  }, [params.id, userId]);
 
   return (
     <main className={styles.main}>
