@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useState } from 'react';
 import { changeUserProfile, uploadImage } from '@/api/supabaseCSR/supabase';
 import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
 import { getUserId } from '@/utils/my-owl/getUserId';
@@ -7,13 +7,18 @@ import styles from './Modal.module.css';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
-export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () => void }) => {
+export const ImageUploadModal = ({
+  handleToggleModal,
+  setUserProfileURL
+}: {
+  handleToggleModal: () => void;
+  setUserProfileURL: Dispatch<SetStateAction<string | null>>;
+}) => {
   const [fileSizeExceed, setFileSizeExceed] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState('');
   const [isValidUrl, setIsValidUrl] = useState(true);
 
-  //파일 용량 제한 로직
   const handleFileMaxSize = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files !== null) {
@@ -35,15 +40,13 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
     }
   };
 
-  //유저 이미지 변경 전체 핸들러
   const handleUploadImage = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (file) {
       const profile_url = await uploadImage(file, setFile);
-      const userId = await getUserId();
       handleToggleModal();
-      if (userId && profile_url) {
-        await changeUserProfile({ userId, profile_url });
+      if (profile_url) {
+        setUserProfileURL(profile_url);
       } else {
         alert(`문제가 발생하였습니다`);
       }
@@ -77,10 +80,7 @@ export const ImageUploadModal = ({ handleToggleModal }: { handleToggleModal: () 
       alert('유효하지 않은 URL 형식입니다. URL 파일의 형식을 확인해주세요.');
       setUrl('');
     }
-    const userId = await getUserId();
-    if (userId) changeUserProfile({ userId, profile_url: url });
-    else alert('유저의 신원 확인이 불가능합니다.');
-    setUrl('');
+    setUserProfileURL(url);
     handleToggleModal();
   };
 
