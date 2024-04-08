@@ -4,7 +4,7 @@ const UserMarker = ({ id, lat, lng }: { id: string; lat: string; lng: string }) 
   return (
     <MapMarker
       key={id}
-      position={{ lat: +lat, lng: +lng }}
+      position={{ lat: Number(lat), lng: Number(lng) }}
       image={{
         src: '/pin.svg',
         size: {
