@@ -13,47 +13,52 @@ export const ImageUploadModal = ({
   handleToggleModal: () => void;
   setUserProfileURL: Dispatch<SetStateAction<string | null>>;
 }) => {
-  const [fileSizeExceed, setFileSizeExceed] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState('');
-  const [isValidUrl, setIsValidUrl] = useState(true);
 
-  const handleFileMaxSize = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /*
+   * File
+   */
+  const isValidFileSize = (file: File) => {
+    const size = file.size;
+    return size <= MAX_FILE_SIZE_BYTE;
+  };
+
+  const fileChangeValidation = (file: File) => {
+    return isValidFileSize(file);
+  };
+
+  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files !== null) {
-      const size = files[0].size;
       const file = files[0];
-      if (size > MAX_FILE_SIZE_BYTE) {
+      if (fileChangeValidation(file)) setFile(file);
+      else {
         alert(
-          `선택하신 파일의 용량은 ${byteCalculator(size)}입니다. ${byteCalculator(
+          `선택하신 파일의 용량은 ${byteCalculator(file.size)}입니다. ${byteCalculator(
             MAX_FILE_SIZE_BYTE
           )} 이하의 파일을 골라주세요.`
         );
-        setFileSizeExceed(true);
         setFile(null);
-      } else {
-        setFileSizeExceed(false);
-        setFile(file);
       }
-    } else {
-      alert('no data');
-    }
+    } else setFile(null);
   };
 
   const handleUploadImage = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (file) {
+    if (file !== null) {
       const profile_url = await uploadImage(file, setFile);
       handleToggleModal();
-      if (profile_url) {
-        setUserProfileURL(profile_url);
-      } else {
-        alert(`문제가 발생하였습니다`);
-      }
+      profile_url ? setUserProfileURL(profile_url) : alert(`문제가 발생하였습니다`);
+    } else {
+      alert(`파일을 선택해주세요.`);
     }
   };
 
-  const isValidImageUrl = async (url: string) => {
+  /*
+   * URL
+   */
+  const isValidImageUrl = (url: string) => {
     // TODO : HTTP 요청을 보내서 응답의 Content-Type 확인하는 로직 넣기 (현재 로직은 불완전함)
     const imageExtensions = ['jpg', 'jpeg', 'png'];
     let extension = url.split('.').pop();
@@ -75,21 +80,21 @@ export const ImageUploadModal = ({
 
   const handleUploadURL = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setIsValidUrl(await isValidImageUrl(url));
-    if (!isValidUrl) {
+    if (isValidImageUrl(url)) {
+      setUserProfileURL(url);
+      handleToggleModal();
+    } else {
       alert('유효하지 않은 URL 형식입니다. URL 파일의 형식을 확인해주세요.');
       setUrl('');
     }
-    setUserProfileURL(url);
-    handleToggleModal();
   };
 
   return (
     <div className={styles.background} onClick={handleToggleModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <form>
-          <input type="file" accept="image/jpeg,image/png,image/jpg" onChange={handleFileMaxSize} />
-          <button disabled={fileSizeExceed} onClick={handleUploadImage}>
+          <input type="file" accept="image/jpeg,image/png,image/jpg" onChange={handleChangeFile} />
+          <button disabled={file === null} onClick={handleUploadImage}>
             사진 업로드하기
           </button>
         </form>
