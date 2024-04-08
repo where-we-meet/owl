@@ -1,11 +1,11 @@
 import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
-import { useCurrentUser } from '@/store/userStore';
+import { useCurrentUserStore } from '@/store/userStore';
 import { useEffect, useState } from 'react';
 
 export const useSession = () => {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
-  const currentUser = useCurrentUser((state) => state.currentUser);
-  const setCurrentUser = useCurrentUser((state) => state.setCurrentUser);
+  const currentUser = useCurrentUserStore((state) => state.currentUser);
+  const setCurrentUser = useCurrentUserStore((state) => state.setCurrentUser);
 
   useEffect(() => {
     const getSession = async () => {

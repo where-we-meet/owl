@@ -6,7 +6,7 @@ type UserStore = {
   setCurrentUser: (user: User | null) => void;
 };
 
-export const useCurrentUser = create<UserStore>((set) => ({
+export const useCurrentUserStore = create<UserStore>((set) => ({
   currentUser: null,
   setCurrentUser: (currentUser) => set({ currentUser })
 }));
