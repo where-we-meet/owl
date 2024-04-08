@@ -1,4 +1,3 @@
-import React from 'react';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays } from 'date-fns';
 
 const calculateOfMonth = (nowDate: Date) => {

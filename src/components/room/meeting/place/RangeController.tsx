@@ -2,10 +2,10 @@ import { ChangeEvent, Fragment, useState } from 'react';
 import { Circle } from 'react-kakao-maps-sdk';
 import styles from './RangeController.module.css';
 
-const radiusRanges = [300, 1000, 2000, 4000];
+const RADIUS_RANGES = [300, 1000, 2000, 4000];
 
 const RangeController = ({ center }: { center: { lat: number; lng: number } }) => {
-  const [radius, setRadius] = useState(radiusRanges[0]);
+  const [radius, setRadius] = useState(RADIUS_RANGES[0]);
 
   const handleChangeRange = (e: ChangeEvent<HTMLInputElement>) => {
     setRadius(+e.currentTarget.value);
@@ -29,7 +29,7 @@ const RangeController = ({ center }: { center: { lat: number; lng: number } }) =
       />
       <div className={styles.range_controller}>
         <form className={styles.range_wrap}>
-          {radiusRanges.map((value) => (
+          {RADIUS_RANGES.map((value) => (
             <label key={value} htmlFor={`radius-${value}`} data-radius={value}>
               <input
                 id={`radius-${value}`}
