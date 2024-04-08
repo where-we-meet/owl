@@ -1,5 +1,3 @@
-import { CenterData } from '@/types/place.types';
-
 export default function calcCenterPoint(points: { location: { lat: number; lng: number } }[]) {
   let x = 0;
   let y = 0;
