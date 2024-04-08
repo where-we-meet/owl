@@ -1,6 +1,6 @@
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays } from 'date-fns';
 
-const calculateOfMonth = (nowDate: Date) => {
+export const calculateOfMonth = (nowDate: Date) => {
   const monthStart = startOfMonth(nowDate);
   const monthEnd = endOfMonth(monthStart);
   const startDay = startOfWeek(monthStart);
