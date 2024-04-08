@@ -6,26 +6,26 @@ import { useEffect, useState } from "react"
 
 export const useGetCalendar = (id : string) => {
   const [userSchedules, setUserSchedules] = useState<UserSchedule[]>([]);
-  const supabase = createClient()
+  const supabase = createClient();
   useEffect(() => {
     const dateOfUser = async () => {
 
-      const data = await getUserSchedule(id.toString())
+      const data = await getUserSchedule(id.toString());
       setUserSchedules(data);
     }
-    dateOfUser()
+    dateOfUser();
   }, [id])
   
   //아직 해결 안됨
   useEffect(() => {
     const subscription = supabase
       .channel('room')
-      .on('postgres_changes', {event: '*', schema:'public', table:'room_schedule', filter:`room_id=eq.${id}` }, (payload) => {
-        console.log('1234',payload.new)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${id}` }, (payload) => {
+        console.log('1234', payload.new);
       })
-      .subscribe()
+      .subscribe();
     return () => {
-      supabase.removeChannel(subscription)
+      supabase.removeChannel(subscription);
     }
   },[id])
 
