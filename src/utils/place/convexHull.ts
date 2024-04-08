@@ -39,5 +39,6 @@ export default function convexHull(points: { location: { lat: number; lng: numbe
 
   upperHull.pop();
   lowerHull.pop();
+
   return upperHull.concat(lowerHull);
 }
