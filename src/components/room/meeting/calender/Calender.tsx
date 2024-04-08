@@ -14,7 +14,7 @@ import { useGetCalendar } from '@/hooks/useGetCalendar';
 
 export type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
 
-  const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
+  const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 
 const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => void }) => {
@@ -23,7 +23,7 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
 
-  const { userSchedules } = useGetCalendar(id)
+  const { userSchedules } = useGetCalendar(id);
 
   const entireOfMonth = calculateOfMonth(nowDate);
   const isDatesSelected = checkSelectedDates(selectedDate);
@@ -103,10 +103,10 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
         </div>
 
         <ul>
-          {WEEKDAY.map((weekdays) => {
+          {WEEKDAYS.map((weekday) => {
             return (
-              <li key={weekdays} className={styles.weekdays}>
-                {weekdays}
+              <li key={weekday} className={styles.weekday}>
+                {weekday}
               </li>
             );
           })}
