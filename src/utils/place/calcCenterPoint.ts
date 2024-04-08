@@ -3,7 +3,7 @@ export default function calcCenterPoint(points: { location: { lat: number; lng: 
   let y = 0;
   let s = 0;
 
-  if (points === undefined) return;
+  if (points === undefined) return { lat: null, lng: null };
 
   if (points.length === 1) {
     const lat = points[0].location.lat;
@@ -23,13 +23,17 @@ export default function calcCenterPoint(points: { location: { lat: number; lng: 
     x +=
       (points[i].location.lat + points[j].location.lat) *
       (points[i].location.lat * points[j].location.lng - points[j].location.lat * points[i].location.lng);
+
     y +=
       (points[i].location.lng + points[j].location.lng) *
       (points[i].location.lat * points[j].location.lng - points[j].location.lat * points[i].location.lng);
+
     s += points[i].location.lat * points[j].location.lng - points[j].location.lat * points[i].location.lng;
   }
+
   s /= 2;
   x = x / (6 * s);
   y = y / (6 * s);
+
   return { lat: x, lng: y };
 }
