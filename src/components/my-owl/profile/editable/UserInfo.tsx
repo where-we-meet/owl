@@ -16,11 +16,19 @@ export interface UserInfoProps {
 
 const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
   const [editMode, setEditMode] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
   const [userName, setUserName] = useState(name);
   const [userProfileURL, setUserProfileURL] = useState(profileURL);
-  const [toggleModal, setToggleModal] = useState(false);
 
-  const handleChangeUserInfo = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleToggleEditMode = () => {
+    setEditMode((prev) => !prev);
+  };
+
+  const handleToggleModal = () => {
+    setToggleModal((prev) => !prev);
+  };
+
+  const handleChangeUserName = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value;
     setUserName(name);
   };
@@ -31,20 +39,12 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
     setEditMode(false);
   };
 
-  const handleToggleEditMode = () => {
-    setEditMode((prev) => !prev);
-  };
-
   const handleEditDone = () => {
     updateUserName(userId, userName);
     if (userProfileURL !== null) {
       changeUserProfile({ userId, profile_url: userProfileURL });
     }
     setEditMode(false);
-  };
-
-  const handleToggleModal = () => {
-    setToggleModal((prev) => !prev);
   };
 
   return (
@@ -61,7 +61,7 @@ const UserInfo = ({ userId, name, profileURL }: UserInfoProps) => {
           />
         ) : null}
       </div>
-      <input className={styles.user_name} onChange={handleChangeUserInfo} value={userName} disabled={!editMode} />
+      <input className={styles.user_name} onChange={handleChangeUserName} value={userName} disabled={!editMode} />
       <div className={styles.button_container}>
         {editMode ? (
           <>
