@@ -1,11 +1,13 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { ChangeEvent, Fragment, useEffect, useState } from 'react';
 import { Circle } from 'react-kakao-maps-sdk';
 import styles from './RangeController.module.css';
+import { useHalfwayDataStore } from '@/store/store';
 
 const RADIUS_RANGES = [300, 1000, 2000, 4000];
 
 const RangeController = ({ center }: { center: { lat: number; lng: number } }) => {
   const [radius, setRadius] = useState(RADIUS_RANGES[0]);
+  const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
   const handleChangeRange = (e: ChangeEvent<HTMLInputElement>) => {
     setRadius(+e.currentTarget.value);
@@ -14,6 +16,10 @@ const RangeController = ({ center }: { center: { lat: number; lng: number } }) =
   const resetRange = () => {
     setRadius(0);
   };
+
+  useEffect(() => {
+    updateHalfwayData({ range: radius });
+  }, [radius]);
 
   return (
     <>

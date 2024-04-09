@@ -1,11 +1,8 @@
 import Image from 'next/image';
-import { useMemo } from 'react';
 
-import { Map } from 'react-kakao-maps-sdk';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useMapController } from '@/hooks/useMapController';
-import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
-import { useRoomUserDataStore } from '@/store/store';
 
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
@@ -14,11 +11,18 @@ import styles from './KakaoMap.module.css';
 
 const KakaoMap = () => {
   const [loading, error] = useKakaoMap();
-  const { userLocationData, handleChangeCenter, isGpsLoading, isDrag, setIsDrag } = useMapController();
+  const {
+    location,
+    address,
+    handleChangeCenter,
+    isGpsLoading,
+    isDrag,
+    setIsDrag,
+    halfwayPoint,
+    roomUsers,
+    searchCategory
+  } = useMapController();
 
-  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
-
-  const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
   if (loading) return <div>loading...</div>;
@@ -39,7 +43,7 @@ const KakaoMap = () => {
           />
         )}
         <Map
-          center={userLocationData.location}
+          center={location}
           className={styles.map}
           onCenterChanged={(map) => handleChangeCenter(map)}
           onDragStart={() => setIsDrag(true)}
@@ -50,6 +54,9 @@ const KakaoMap = () => {
             .map(({ id, lat, lng }) => (
               <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} />
             ))}
+          {searchCategory?.map(({ x, y }, i) => (
+            <MapMarker key={i} position={{ lat: +y, lng: +x }} />
+          ))}
           {isHalfwayValid && (
             <>
               <Halfway location={halfwayPoint} />
@@ -58,7 +65,7 @@ const KakaoMap = () => {
           )}
         </Map>
       </div>
-      <div>{userLocationData.address}</div>
+      <div>{address}</div>
     </div>
   );
 };

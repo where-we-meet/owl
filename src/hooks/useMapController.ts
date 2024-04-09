@@ -1,18 +1,22 @@
-import { useGetRoadAddress } from '@/hooks/useGetPlace';
-import { useCallback, useEffect, useState } from 'react';
-import { useSearchDataStore } from '@/store/store';
+import { useGetRoadAddress, useGetSearchCategory } from '@/hooks/useGetPlace';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useHalfwayDataStore, useRoomUserDataStore, useSearchDataStore } from '@/store/store';
 import _ from 'lodash';
+import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
 
 export const useMapController = () => {
   const [isGpsLoading, setIsGpsLoading] = useState(true);
   const [errorMassage, setErrorMassage] = useState('');
   const [isDrag, setIsDrag] = useState(false);
 
-  const userLocationData = useSearchDataStore((state) => state);
-  const setLocation = useSearchDataStore((state) => state.setLocation);
-  const setAddress = useSearchDataStore((state) => state.setAddress);
+  const { location, address, searchOption, setLocation, setAddress } = useSearchDataStore((state) => state);
+  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
+  const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
-  const { data, isPending } = useGetRoadAddress(userLocationData.location, isDrag);
+  const { data: searchAddress, isPending: isAddressPending } = useGetRoadAddress(location, isDrag);
+  const { data: searchCategory, isPending: isCategoryPending } = useGetSearchCategory(searchOption);
+
+  const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
 
   const setCenter = (map: kakao.maps.Map) => {
     const latlng = map.getCenter();
@@ -45,11 +49,28 @@ export const useMapController = () => {
   }, []);
 
   useEffect(() => {
-    if (data) {
-      const address = data.road_address?.address_name || data.address?.address_name;
+    if (searchAddress) {
+      const address = searchAddress.road_address?.address_name || searchAddress.address?.address_name;
       setAddress(address);
     }
-  }, [data]);
+  }, [searchAddress]);
 
-  return { userLocationData, setLocation, handleChangeCenter, isGpsLoading, isDrag, setIsDrag };
+  useEffect(() => {
+    if (halfwayPoint) {
+      updateHalfwayData({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
+    }
+  }, [halfwayPoint]);
+
+  return {
+    location,
+    address,
+    setLocation,
+    handleChangeCenter,
+    isGpsLoading,
+    isDrag,
+    setIsDrag,
+    halfwayPoint,
+    roomUsers,
+    searchCategory
+  };
 };
