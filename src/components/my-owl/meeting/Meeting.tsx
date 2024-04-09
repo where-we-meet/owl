@@ -41,10 +41,13 @@ export const Meeting = () => {
     };
 
     fetchMeetingInfo();
+
   }, []);
+
   const handleClickRoom = (roomId: string | null) => {
     router.push(`/room/${roomId}`);
   };
+  
   return (
     <div className={styles.meeting_container}>
       {meetingInfo.map((meeting, index) => (
