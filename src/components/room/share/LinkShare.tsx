@@ -26,6 +26,7 @@ const LinkShare = () => {
         <div className={styles.modal}>
           <input type="text" defaultValue={window.origin}></input>
           <button onClick={handleCopy}>복사</button>
+          <a href={`mailto:?subject=${window.origin}`}>메일로 공유</a>
         </div>
       )}
       <button onClick={toggleModal}>Share</button>
