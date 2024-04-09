@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <>
       <p>Hello {user?.email}</p>
-      <StartMeeting user={user} />
+      <StartMeeting />
     </>
   );
 }
