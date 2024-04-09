@@ -2,16 +2,25 @@ import React from 'react';
 import { isSameDay } from 'date-fns';
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
 import styles from './Calender.module.css';
+import dayColors from '@/utils/calendar/dayColors';
+import SchedulesOfUsers from './SchedulesOfIUsers';
+import type { Tables } from '@/types/supabase';
 
-interface Props {
+export type UserSchedule = Tables<'room_schedule'>;
+
+type Props = {
   nowDate: Date;
-  handleDateClick: (date: Date) => void;
-  dayStyle: (day: Date) => React.CSSProperties;
   selectedDate: Date[];
-}
+  userSchedules: UserSchedule[];
+  handleDateClick: (date: Date) => void;
+};
 
-const EntireOfMonth: React.FC<Props> = ({ nowDate, handleDateClick, dayStyle, selectedDate }) => {
+const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, handleDateClick }) => {
   const entireOfMonth = calculateOfMonth(nowDate);
+
+  const dayStyle = (day: Date) => {
+    return { color: dayColors(nowDate, day) };
+  };
 
   return (
     <div className={styles.dates}>
@@ -27,6 +36,7 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, handleDateClick, dayStyle, se
               {selectedDate.some((date) => isSameDay(date, day)) && (
                 <span className={styles.selected_date_circle}></span>
               )}
+              <SchedulesOfUsers userSchedules={userSchedules} day={day} />
               {day.getDate()}
             </li>
           ))}
