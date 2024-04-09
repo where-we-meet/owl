@@ -20,7 +20,7 @@ const KakaoMap = () => {
     setIsDrag,
     halfwayPoint,
     roomUsers,
-    searchCategory
+    searchCategory = []
   } = useMapController();
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
@@ -54,7 +54,7 @@ const KakaoMap = () => {
             .map(({ id, lat, lng }) => (
               <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} />
             ))}
-          {searchCategory?.map(({ x, y }, i) => (
+          {searchCategory.map(({ x, y }, i) => (
             <MapMarker key={i} position={{ lat: +y, lng: +x }} />
           ))}
           {isHalfwayValid && (
