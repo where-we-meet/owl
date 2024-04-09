@@ -13,15 +13,6 @@ export const getCurrentUserData = async () => {
   return data;
 };
 
-// supabase에서 roomId를 통해 room에 관련된 모든 Data 반환
-export const getRoomData = async (id: string) => {
-  const { data, error } = await supabase
-    .from('rooms')
-    .select('id, created_at, created_by, location, name, verified')
-    .eq('id', id);
-  if (error) throw error;
-  return data;
-};
 
 // supabase에서 roomId를 통해 해당 room 일정과 관련된 모든 Data 반환
 export const getUserSchedule = async (id: string) => {
@@ -57,11 +48,7 @@ export const getRoomUsersData = async (id: string) => {
   return data;
 };
 
-export const getUsersData = async (id: string) => {
-  const { data, error } = await supabase.from('users').select('*').eq('id', id);
-  if (error) throw error;
-  return data;
-};
+
 
 export const getMyParticipatingRoomsData = async (id: string[]) => {
   const { data, error } = await supabase
@@ -119,12 +106,6 @@ export const updateUserName = async (userId: string, newName: string) => {
   if (error) throw error;
 };
 
-// room에 참여하고 있는 유저의 Id Data 반환
-export const getRoomParticipantsId = async (roomId: string) => {
-  const { data, error } = await supabase.from('userdata_room').select('user_id').eq('room_id', roomId);
-  if (error) throw error;
-  return data;
-};
 
 export const getUserMeetingsId = async (userId: string) => {
   if (userId !== null) {

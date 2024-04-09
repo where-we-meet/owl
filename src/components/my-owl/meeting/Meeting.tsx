@@ -3,13 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import {
-  getRoomData,
-  getUsersData,
-  getRoomParticipantsId,
-  getUserMeetingsId,
-  getMyParticipatingRoomsData
-} from '@/api/supabaseCSR/supabase';
+import { getUserMeetingsId, getMyParticipatingRoomsData } from '@/api/supabaseCSR/supabase';
 import { getUserId } from '@/utils/my-owl/getUserId';
 import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
 
@@ -44,7 +38,6 @@ export const Meeting = () => {
       const fetchedData = await getMyParticipatingRoomsData(roomIds);
       const sortedData = sortMeetingInfo(fetchedData);
       setMeetingInfo(sortedData);
-      console.log('데이터의 상태', sortedData);
     };
 
     fetchMeetingInfo();
