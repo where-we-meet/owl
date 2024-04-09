@@ -1,22 +1,29 @@
 import React from 'react';
 import { isSameDay } from 'date-fns';
 import styles from './Calender.module.css';
-import { UserSchedule } from './Calender';
+import { UserSchedule } from './EntireOfMonth';
 
-interface Props {
+type Props = {
   userSchedules: UserSchedule[];
   day: Date;
-}
+};
 
 const SchedulesOfUsers: React.FC<Props> = ({ userSchedules, day }) => {
   return (
     <>
-      {userSchedules.map(
-        (schedule) =>
+      {userSchedules.map((schedule, index) => {
+        const styleOfCircles: React.CSSProperties = {
+          position: 'absolute',
+          // transform: `translateX(${index * 1.8}px)`,
+          backgroundColor: `hsl(140, 50, ${0.5 + index * 0.08}%)`
+        };
+
+        return (
           isSameDay(new Date(String(schedule.start_date)), day) && (
-            <span key={schedule.id} className={styles.selected_date_circle}></span>
+            <span key={index} className={styles.selected_date_circle} style={{ ...styleOfCircles }}></span>
           )
-      )}
+        );
+      })}
     </>
   );
 };
