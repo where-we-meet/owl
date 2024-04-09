@@ -15,7 +15,7 @@ import checkSelectedDates from '@/utils/calendar/checkSelectedDates';
 import dayColors from '@/utils/calendar/dayColors';
 import { Tables } from '@/types/supabase';
 
-export type UserSchedule = Omit<Tables<'room_schedule'>, 'created_at'>;
+export type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => void }) => {
@@ -119,9 +119,19 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
                     )}
 
                     {userSchedules.map((schedule, index) => {
+                      const styleOfCircles: React.CSSProperties = {
+                        position: 'absolute',
+                        transform: `translateX(${index * 1.2}px)`,
+                        backgroundColor: `hsl(140, 50, ${0.5 + index * 0.08}%)`
+                      };
+
                       return (
                         isSameDay(new Date(String(schedule.start_date)), day) && (
-                          <span key={index} className={styles.selected_date_circle}></span>
+                          <span
+                            key={index}
+                            className={styles.selected_date_circle}
+                            style={{ ...styleOfCircles }}
+                          ></span>
                         )
                       );
                     })}
