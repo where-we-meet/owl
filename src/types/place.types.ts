@@ -24,3 +24,10 @@ export type Halfway = {
   lat: number | null;
   lng: number | null;
 };
+
+export type SearchOptionData = {
+  query: string;
+  x: string;
+  y: string;
+  radius: number | null;
+} | null;
