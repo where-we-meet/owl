@@ -26,6 +26,7 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
 
   const { userSchedules } = useGetCalendar(id);
 
+  const entireOfMonth = calculateOfMonth(nowDate);
   const isDatesSelected = checkSelectedDates(selectedDate);
 
   const prevMonth = () => {
@@ -103,13 +104,33 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
         </ul>
 
         <div className={styles.dates}>
-          <EntireOfMonth
-            nowDate={nowDate}
-            handleDateClick={handleDateClick}
-            selectedDate={selectedDate}
-            dayStyle={dayStyle}
-          />
-          <SchedulesOfUsers userSchedules={userSchedules} day={nowDate} />
+          {entireOfMonth.map((week, index) => {
+            return (
+              <ul key={index} className={styles.day_container}>
+                {week.map((day) => (
+                  <li
+                    key={day.toISOString()}
+                    onClick={() => handleDateClick(day)}
+                    className={styles.days}
+                    style={{ ...dayStyle(day) }}
+                  >
+                    {selectedDate.some((date) => isSameDay(date, day)) && (
+                      <span className={styles.selected_date_circle}></span>
+                    )}
+
+                    {userSchedules.map((schedule, index) => {
+                      return (
+                        isSameDay(new Date(String(schedule.start_date)), day) && (
+                          <span key={index} className={styles.selected_date_circle}></span>
+                        )
+                      );
+                    })}
+                    {day.getDate()}
+                  </li>
+                ))}
+              </ul>
+            );
+          })}
         </div>
         <button onClick={handleJump}>건너뛰기</button>
         <button onClick={handleDateUpload} disabled={!isDatesSelected}>

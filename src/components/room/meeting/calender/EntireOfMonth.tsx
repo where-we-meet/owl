@@ -1,5 +1,5 @@
 import React from 'react';
-import { format, isSameDay } from 'date-fns';
+import { isSameDay } from 'date-fns';
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
 import styles from './Calender.module.css';
 
@@ -12,6 +12,7 @@ interface Props {
 
 const EntireOfMonth: React.FC<Props> = ({ nowDate, handleDateClick, dayStyle, selectedDate }) => {
   const entireOfMonth = calculateOfMonth(nowDate);
+
   return (
     <div className={styles.dates}>
       {entireOfMonth.map((week, index) => (
