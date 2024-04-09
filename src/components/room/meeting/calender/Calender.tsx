@@ -19,8 +19,6 @@ export type UserSchedule = Omit<Tables<'room_schedule'>, 'id' | 'created_at'>;
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => void }) => {
-  const currentUserData = getCurrentUserData();
-
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
 
@@ -59,6 +57,8 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
     if (!checkSelectedDates(selectedDate)) {
       return;
     }
+
+    const currentUserData = getCurrentUserData();
 
     const supabase = createClient();
     const roomId: string = id.toString();
@@ -121,7 +121,7 @@ const Calender = ({ id, changeTab }: { id: string; changeTab: (name: string) => 
                     {userSchedules.map((schedule, index) => {
                       const styleOfCircles: React.CSSProperties = {
                         position: 'absolute',
-                        transform: `translateX(${index * 1.2}px)`,
+                        transform: `translateX(${index * 1.8}px)`,
                         backgroundColor: `hsl(140, 50, ${0.5 + index * 0.08}%)`
                       };
 
