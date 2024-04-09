@@ -1,3 +1,4 @@
+import { SearchOptionData } from '@/types/place.types';
 import axios from 'axios';
 
 const placeApi = axios.create({
@@ -16,11 +17,12 @@ export const getAddress = async (center: { lat: number; lng: number }) => {
   return data.documents[0];
 };
 
-export const getSearchPlace = async (searchKeyword: string) => {
+export const getSearchPlace = async (searchKeyword: string, searchOption: SearchOptionData) => {
   const { data } = await placeApi.get('/search/keyword', {
     params: {
-      query: searchKeyword
+      query: searchKeyword,
+      ...searchOption
     }
   });
-  return data;
+  return data.documents;
 };
