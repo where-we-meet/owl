@@ -3,7 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { getRoomData, getUsersData, getRoomParticipantsId, getUserMeetingsId, getMyProfile } from '@/api/supabaseCSR/supabase';
+import {
+  getRoomData,
+  getUsersData,
+  getRoomParticipantsId,
+  getUserMeetingsId,
+  getMyParticipatingRoomsData
+} from '@/api/supabaseCSR/supabase';
 import { getUserId } from '@/utils/my-owl/getUserId';
 import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
 
@@ -27,33 +33,14 @@ export const Meeting = () => {
   const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
   const router = useRouter();
 
-
   useEffect(() => {
     const fetchMeetingInfo = async () => {
       const userId = await getUserId();
-      const meetingIds = await getUserMeetingsId(userId);
-      const meetingInfoPromises = meetingIds.map(async (meetingId: { room_id: string }) => {
-        const roomId = meetingId.room_id;
-        const roomInfo = await getRoomData(roomId);
-        const participantsIds = await getRoomParticipantsId(roomId);
-        const participantsInfoPromises = participantsIds.map(async (participantId: { user_id: string }) => {
-          const userInfo = await getUsersData(participantId.user_id);
-          return userInfo[0];
-        });
-        const participantsInfo = await Promise.all(participantsInfoPromises);
-        return {
-          id: roomId,
-          name: roomInfo[0].name,
-          location: roomInfo[0].location,
-          participants: participantsInfo,
-          created_at: roomInfo[0].created_at,
-          verified: roomInfo[0].verified
-        };
-      });
-      const fetchedMeetingInfo = await Promise.all(meetingInfoPromises);
+      const roomData = await getUserMeetingsId(userId);
+      const roomIds = roomData.map((item) => item.room_id);
+      const fetchedData = await getMyParticipatingRoomsData(roomIds);
+      console.log('데이터의 상태', fetchedData);
 
-      const sortedMeetingInfo = sortMeetingInfo(fetchedMeetingInfo as MeetingInfo[]);
-      setMeetingInfo(sortedMeetingInfo);
     };
 
     fetchMeetingInfo();
