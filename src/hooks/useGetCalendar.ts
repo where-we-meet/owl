@@ -30,7 +30,6 @@ export const useGetCalendar = (id: string) => {
               schedule.id === updatedSchedule.id ? { ...schedule, start_date: updatedSchedule.start_date } : schedule
             )
           );
-          console.log('dsdsdasd', payload);
         }
       )
       .subscribe();
