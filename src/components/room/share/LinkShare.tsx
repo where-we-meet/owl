@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import styles from './LinkShare.module.css';
+import KakaoTalkShare from './KakaoShare';
 
 const LinkShare = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,8 +9,6 @@ const LinkShare = () => {
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-
-  const handleShare = () => {};
 
   const handleCopy = async () => {
     try {
@@ -23,10 +22,13 @@ const LinkShare = () => {
   return (
     <div className={styles.share}>
       {isOpen && (
-        <div className={styles.modal}>
-          <input type="text" defaultValue={window.origin}></input>
-          <button onClick={handleCopy}>복사</button>
-          <a href={`mailto:?subject=${window.origin}`}>메일로 공유</a>
+        <div className={styles.modal_background}>
+          <section className={styles.modal}>
+            <input type="text" defaultValue={window.origin}></input>
+            <button onClick={handleCopy}>복사</button>
+            <a href={`mailto:?subject=${window.origin}`}>메일로 공유</a>
+            <KakaoTalkShare />
+          </section>
         </div>
       )}
       <button onClick={toggleModal}>Share</button>
