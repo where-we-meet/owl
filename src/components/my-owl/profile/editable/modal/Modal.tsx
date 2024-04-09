@@ -59,7 +59,6 @@ export const ImageUploadModal = ({
    * URL
    */
   const isValidImageUrl = (url: string) => {
-    // TODO : HTTP 요청을 보내서 응답의 Content-Type 확인하는 로직 넣기 (현재 로직은 불완전함)
     const imageExtensions = ['jpg', 'jpeg', 'png'];
     let extension = url.split('.').pop();
     if (extension) {
