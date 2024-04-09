@@ -15,19 +15,22 @@ import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
 
 import styles from './Meeting.module.css';
 
-export interface UserInfo {
-  name: string;
-  profile_url: string;
-}
+export type UserInfo = {
+  user_id: string;
+  users: {
+    profile_url: string | null;
+  } | null;
+};
 
-export interface MeetingInfo {
-  id: string | null;
+export type MeetingInfo = {
+  id: string;
   name: string | null;
+  confirmed_date: string | null;
+  created_at: string;
   location: string | null;
-  participants: UserInfo[];
-  created_at: string | null;
-  verified: boolean;
-}
+  verified: boolean | null;
+  userdata_room: UserInfo[];
+};
 
 export const Meeting = () => {
   const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
@@ -40,7 +43,7 @@ export const Meeting = () => {
       const roomIds = roomData.map((item) => item.room_id);
       const fetchedData = await getMyParticipatingRoomsData(roomIds);
       console.log('데이터의 상태', fetchedData);
-
+      setMeetingInfo(fetchedData);
     };
 
     fetchMeetingInfo();
