@@ -3,11 +3,11 @@ import { Inter } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Providers from './providers';
 import './globals.css';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { getSession } from '@/api/auth';
 import { createClient } from '@/utils/supabase/server';
-import { User } from '@supabase/supabase-js';
 import getQueryClient from '@/utils/getQueryClient';
+import type { User } from '@supabase/supabase-js';
 
 const inter = Inter({ subsets: ['latin'] });
 
