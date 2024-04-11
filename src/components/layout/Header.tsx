@@ -5,11 +5,8 @@ import styles from './Header.module.css';
 import Link from 'next/link';
 import { MeetingButton } from '../auth/MeetingButton';
 
-import { getUserProfileData } from '@/api/supabaseSSR/supabase';
-
 const Header = async () => {
   const supabase = createClient();
-  const { userInfo, authSNS } = await getUserProfileData();
 
   const {
     data: { user }
@@ -23,7 +20,7 @@ const Header = async () => {
         {user ? (
           <>
             <Link href="/my-owl">마이페이지</Link>
-            {userInfo && authSNS && <UserProfile userInfo={userInfo} authSNS={authSNS} />}
+            <UserProfile />
             <Logout />
           </>
         ) : (
