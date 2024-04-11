@@ -5,11 +5,11 @@ import { format, subMonths, addMonths, isSameDay } from 'date-fns';
 
 import styles from './Calender.module.css';
 import EntireOfMonth from './EntireOfMonth';
+import checkSelectedDates from './checkSelectedDates';
 
 import { useGetCalendar } from '@/hooks/useGetCalendar';
-import checkSelectedDates from './checkSelectedDates';
-import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 import { createClient } from '@/utils/supabase/client';
+import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
