@@ -3,9 +3,14 @@
 import { Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@nextui-org/react';
 import { PiUserSquareDuotone } from 'react-icons/pi';
 
-const UserProfile = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export type UserInfoProps = {
+  userId: string;
+  name: string;
+  profileURL: string | null;
+} | null;
 
+const UserProfile = ({ userInfo, authSNS }: { userInfo: UserInfoProps; authSNS: Array<string> }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const handleOpen = () => {
     onOpen();
   };
