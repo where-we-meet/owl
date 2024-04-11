@@ -1,17 +1,9 @@
-import StartMeeting from '@/components/room/StartMeeting';
-import { createClient } from '@/utils/supabase/server';
+import Link from 'next/link';
 
-export default async function Home() {
-  const supabase = await createClient();
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
+export default function Home() {
   return (
     <>
-      <p>Hello {user?.email}</p>
-      <StartMeeting />
+      <Link href="/start">모임 시작하기</Link>
     </>
   );
 }
