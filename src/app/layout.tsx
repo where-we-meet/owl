@@ -7,6 +7,7 @@ import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query
 import { getSession } from '@/api/auth';
 import { createClient } from '@/utils/supabase/server';
 import { User } from '@supabase/supabase-js';
+import getQueryClient from '@/utils/getQueryClient';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const supabase = createClient();
-  const queryClient = new QueryClient();
+  const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery<User | null>({
     queryKey: ['auth'],
