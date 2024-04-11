@@ -1,24 +1,27 @@
-import React from 'react';
-import Header from '@/components/layout/Header';
+import React, { useEffect } from 'react';
+import styles from '@/app/room/[id]/(setting)/layout.module.css';
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <ol>
-        <li>
-          <h3>Step 1</h3>
-          <p>Some desc text</p>
-        </li>
-        <li>
-          <h3>Step 2</h3>
-          <p>Some desc text</p>
-        </li>
-        <li>
-          <h3>Step 3</h3>
-          <p>Some desc text</p>
-        </li>
-      </ol>
-      <div>{children}</div>
+      <div className={styles.room_container}>
+        <h1 className={styles.room_name}>호기심 많은 올빼미</h1>
+        <ol className={styles.step_container}>
+          <li className={styles.step_item}>
+            <h2 className={styles.step_title}>1</h2>
+            <p>일정</p>
+          </li>
+          <li className={styles.step_item}>
+            <h2 className={styles.step_title}>2</h2>
+            <p>장소</p>
+          </li>
+          <li className={styles.step_item}>
+            <h3 className={styles.step_title}>3</h3>
+            <p>확정</p>
+          </li>
+        </ol>
+        <div>{children}</div>
+      </div>
     </>
   );
 }
