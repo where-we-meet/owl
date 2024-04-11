@@ -8,7 +8,7 @@ import { MeetingButton } from '../auth/MeetingButton';
 import { getUserProfileData } from '@/api/supabaseSSR/supabase';
 
 const Header = async () => {
-  const supabase = await createClient();
+  const supabase = createClient();
   const { userInfo, authSNS } = await getUserProfileData();
 
   const {
