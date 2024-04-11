@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 import Link from 'next/link';
 
 const Header = async () => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const {
     data: { user }
