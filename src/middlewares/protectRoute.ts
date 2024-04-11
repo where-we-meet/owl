@@ -9,7 +9,7 @@ export function protectRoute(middleware: CustomMiddleware) {
     const { data, error } = await supabase.auth.getUser();
 
     const pathname = request.nextUrl.pathname;
-    const protectedPath = ['/room', '/my-owl'];
+    const protectedPath = ['/start', '/room', '/my-owl'];
 
     if (protectedPath.some((path) => pathname.startsWith(path))) {
       if (error || !data?.user) {
