@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import Logout from '../auth/LogoutButton';
+import UserProfile from '../auth/UserProfileButton';
 import styles from './Header.module.css';
 import Link from 'next/link';
 import { MeetingButton } from '../auth/MeetingButton';
@@ -19,6 +20,7 @@ const Header = async () => {
         {user ? (
           <>
             <Link href="/my-owl">마이페이지</Link>
+            <UserProfile />
             <Logout />
           </>
         ) : (
