@@ -13,11 +13,7 @@ const Header = async () => {
 
   return (
     <header className={styles.header}>
-      {user ? (
-          <MeetingButton />
-      ) : (
-        <></>
-      )}
+      {user ? <MeetingButton /> : null}
       <Link href="/">owl-link</Link>
       <div className={styles.menu}>
         {user ? (

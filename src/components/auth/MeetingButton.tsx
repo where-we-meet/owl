@@ -13,10 +13,10 @@ export const MeetingButton = () => {
 
   return (
     <div>
-      <button className='border-transparent' onClick={(e) => onChangeSideBarStatus(e)}>
+      <button className="border-transparent" onClick={(e) => onChangeSideBarStatus(e)}>
         <GiHamburgerMenu />
       </button>
-      {showSideBar ? <Meeting /> : <></>}
+      {showSideBar ? <Meeting /> : null}
     </div>
   );
 };
