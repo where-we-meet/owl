@@ -23,7 +23,7 @@ const Header = async () => {
         {user ? (
           <>
             <Link href="/my-owl">마이페이지</Link>
-            <UserProfile userInfo={userInfo} authSNS={authSNS} />
+            {userInfo && authSNS && <UserProfile userInfo={userInfo} authSNS={authSNS} />}
             <Logout />
           </>
         ) : (
