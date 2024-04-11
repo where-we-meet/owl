@@ -14,7 +14,6 @@ const SchedulesOfUsers: React.FC<Props> = ({ userSchedules, day }) => {
       {userSchedules.map((schedule, index) => {
         const styleOfCircles: React.CSSProperties = {
           position: 'absolute',
-          // transform: `translateX(${index * 1.8}px)`,
           backgroundColor: `hsl(140, 50, ${0.5 + index * 0.08}%)`
         };
 
