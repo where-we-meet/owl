@@ -1,12 +1,14 @@
 'use client';
 
 import { insertNewRoom, insertRoomUser } from '@/api/room';
+import { useQueryUser } from '@/hooks/useQueryUser';
 import { useRouter } from 'next/navigation';
-import type { User } from '@supabase/supabase-js';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-const StartMeeting = ({ user }: { user: User | null }) => {
+const StartMeeting = () => {
   const router = useRouter();
+  const { data: user } = useQueryUser();
+
   const [startDate, setStartDate] = useState(new Date().toDateString());
 
   const changeDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -15,14 +17,10 @@ const StartMeeting = ({ user }: { user: User | null }) => {
 
   const startNewRoom = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!user) return;
+
     const endDate = e.currentTarget.end.value;
-
-    console.log(startDate, endDate);
-
-    if (!user) {
-      router.push('/login');
-      return;
-    }
 
     const [room] = await insertNewRoom({
       name: '운좋은 올빼미',
