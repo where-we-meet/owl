@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import Logout from '../auth/LogoutButton';
 import styles from './Header.module.css';
 import Link from 'next/link';
+import { MeetingButton } from '../auth/MeetingButton';
 
 const Header = async () => {
   const supabase = createClient();
@@ -12,6 +13,11 @@ const Header = async () => {
 
   return (
     <header className={styles.header}>
+      {user ? (
+          <MeetingButton />
+      ) : (
+        <></>
+      )}
       <Link href="/">owl-link</Link>
       <div className={styles.menu}>
         {user ? (
