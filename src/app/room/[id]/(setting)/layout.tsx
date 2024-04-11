@@ -30,7 +30,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             <p>확정</p>
           </li>
         </ol>
-        <div>{children}</div>
+        <div className={styles.calendar_container}>{children}</div>
       </div>
     </>
   );

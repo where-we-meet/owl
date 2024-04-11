@@ -1,3 +1,9 @@
+.calendar_container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 .weekday {
   display: inline-block;
   width: 70px;
@@ -19,6 +25,7 @@
 .days {
   width: 70px;
   padding: 30px;
+  position: relative;
 }
 
 .selected_date_circle {
@@ -27,4 +34,14 @@
   background-color: #35017621;
   border-radius: 50%;
   position: absolute;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.button_container {
+  display: flex;
+}
+
+.next_button {
 }
