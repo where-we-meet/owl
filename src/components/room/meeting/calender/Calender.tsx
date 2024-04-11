@@ -10,15 +10,15 @@ import checkSelectedDates from './checkSelectedDates';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
+import { useParams } from 'next/navigation';
+import { useGetRoomData } from '@/hooks/useGetRoomData';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-type Props = {
-  id: string;
-  changeTab: (name: string) => void;
-};
+const Calender = () => {
+  const { id }: { id: string } = useParams();
+  const { userId } = useGetRoomData(id);
 
-const Calender: React.FC<Props> = ({ id, changeTab }) => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
 
@@ -30,10 +30,6 @@ const Calender: React.FC<Props> = ({ id, changeTab }) => {
 
   const afterMonth = () => {
     setNowDate(addMonths(nowDate, 1));
-  };
-
-  const handleSkip = () => {
-    changeTab('장소');
   };
 
   const handleDateClick = (date: Date) => {
@@ -63,8 +59,6 @@ const Calender: React.FC<Props> = ({ id, changeTab }) => {
     const supabase = createClient();
     const { error } = await supabase.from('room_schedule').insert(selectedDates);
     if (error) throw error;
-
-    changeTab('장소');
   };
 
   return (
@@ -98,8 +92,6 @@ const Calender: React.FC<Props> = ({ id, changeTab }) => {
             handleDateClick={handleDateClick}
           />
         </div>
-
-        <button onClick={handleSkip}>건너뛰기</button>
         <button onClick={handleDateUpload} disabled={!checkSelectedDates(selectedDate)}>
           다음
         </button>
