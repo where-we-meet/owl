@@ -1,13 +1,14 @@
 'use client';
 
-import { Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@nextui-org/react';
+import { Button, Image, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@nextui-org/react';
 import { PiUserSquareDuotone } from 'react-icons/pi';
+import { GrCaretNext } from 'react-icons/gr';
 
 export type UserInfoProps = {
   userId: string;
   name: string;
   profileURL: string | null;
-} | null;
+};
 
 const UserProfile = ({ userInfo, authSNS }: { userInfo: UserInfoProps; authSNS: Array<string> }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,23 +27,27 @@ const UserProfile = ({ userInfo, authSNS }: { userInfo: UserInfoProps; authSNS: 
           <>
             <ModalHeader className="flex flex-col gap-1">계정 정보</ModalHeader>
             <ModalBody>
-              <p>프로필사진</p>
+              <Image width={100} alt="profile_image" src={`${userInfo.profileURL}`} />
               <div>
                 <p>닉네임</p>
                 <div>
-                  <p>유저닉네임</p>
-                  <p>유저 프로필 수정 이동 버튼</p>
+                  <p>{userInfo.name}</p>
+                  <Button isIconOnly>
+                    <GrCaretNext />
+                  </Button>
                 </div>
               </div>
               <div>
                 <p>로그인정보</p>
                 <div>
-                  <p>로그인 소셜 이름</p>
-                  <p>로그인 소셜 아이콘</p>
+                  <p>{authSNS} 로그인</p>
+                  {authSNS.map((SNS, index) => (
+                    <img key={index} src={`/images/${SNS}.svg`} alt={SNS} width={34} height={31} />
+                  ))}
                 </div>
               </div>
               <div>
-                <p>로그아웃버튼</p>
+                <Button>로그아웃</Button>
               </div>
             </ModalBody>
           </>
