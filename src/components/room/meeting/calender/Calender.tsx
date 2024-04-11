@@ -11,13 +11,12 @@ import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 import { useParams } from 'next/navigation';
-import { useGetRoomData } from '@/hooks/useGetRoomData';
+import { Button } from '@nextui-org/react';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = () => {
   const { id }: { id: string } = useParams();
-  const { userId } = useGetRoomData(id);
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date[]>([]);
@@ -63,9 +62,7 @@ const Calender = () => {
 
   return (
     <>
-      <div>Calender</div>
-
-      <div>
+      <div className={styles.calendar_container}>
         <div>
           <button onClick={prevMonth}>◀</button>
           <span>
@@ -92,9 +89,16 @@ const Calender = () => {
             handleDateClick={handleDateClick}
           />
         </div>
-        <button onClick={handleDateUpload} disabled={!checkSelectedDates(selectedDate)}>
-          다음
-        </button>
+        <div>
+          <Button
+            size="sm"
+            className={styles.next_button}
+            onClick={handleDateUpload}
+            disabled={!checkSelectedDates(selectedDate)}
+          >
+            다음
+          </Button>
+        </div>
       </div>
     </>
   );
