@@ -15,7 +15,7 @@ const RoomPage = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const joinNewUser = async () => {
       if (userId && !roomUsers.find((user) => user.user_id === userId)) {
-        await insertRoomUser(params.id, userId, false);
+        await insertRoomUser({ room_id: params.id, user_id: userId, is_admin: false });
       }
     };
     joinNewUser();
