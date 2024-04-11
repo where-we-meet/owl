@@ -8,12 +8,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 function Providers({ children }: React.PropsWithChildren) {
   const queryClient = new QueryClient();
   return (
-    <NextUIProvider>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </NextUIProvider>
+    <QueryClientProvider client={queryClient}>
+      <NextUIProvider>{children}</NextUIProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 export default Providers;
