@@ -4,24 +4,40 @@ import { Button, Image, Modal, ModalContent, ModalHeader, ModalBody, useDisclosu
 import { PiUserSquareDuotone } from 'react-icons/pi';
 import { GrCaretNext } from 'react-icons/gr';
 import { IoClose, IoChevronBack } from 'react-icons/io5';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
 import { ImageUploadModal } from '../my-owl/profile/editable/modal/Modal';
+import { useQueryUser } from '@/hooks/useQueryUser';
+import { getUserProfileData } from '@/api/profile';
 
-export type UserInfoProps = {
-  userId: string;
-  name: string;
-  profileURL: string | null;
+export type UserInfo = {
+  authSNS: Array<string>;
+  userInfo: {
+    userId: string;
+    name: string;
+    profileURL: string | null;
+  };
 };
 
-const UserProfile = ({ userInfo, authSNS }: { userInfo: UserInfoProps; authSNS: Array<string> }) => {
+const UserProfile = () => {
+  const [data, setData] = useState<UserInfo | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editMode, setEditMode] = useState(false);
   const MAX_NAME_LENGTH = 16;
+  const { data: user } = useQueryUser();
 
-  /*
-   * edit mode에서 쓰는 state
-   */
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserProfileData(user);
+      setData(data);
+    };
+    fetchData();
+  }, []);
+
+  if (!data) return null;
+
+  const { authSNS, userInfo } = data;
+
   const [userName, setUserName] = useState(userInfo.name);
   const [userProfileURL, setUserProfileURL] = useState(userInfo.profileURL);
   const [toggleModal, setToggleModal] = useState(false);
@@ -46,17 +62,18 @@ const UserProfile = ({ userInfo, authSNS }: { userInfo: UserInfoProps; authSNS: 
       setEditMode(false);
     }
   };
-  ///////////////////
 
   const handleOpen = () => {
     onOpen();
   };
+
   const handleClose = () => {
     setUserName(userInfo.name);
     setUserProfileURL(userInfo.profileURL);
     setEditMode(false);
     onClose();
   };
+
   const handleEditMode = () => {
     setEditMode((prev) => !prev);
   };
@@ -66,6 +83,7 @@ const UserProfile = ({ userInfo, authSNS }: { userInfo: UserInfoProps; authSNS: 
     setUserProfileURL(userInfo.profileURL);
     setEditMode(false);
   };
+
   return (
     <>
       <div className="flex gap-4 items-center">
