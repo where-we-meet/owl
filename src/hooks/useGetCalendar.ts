@@ -5,14 +5,16 @@ import { useEffect, useState } from 'react';
 
 type UserSchedule = Tables<'room_schedule'>;
 
-export const useGetCalendar = (id: string) => {
+export const useGetCalendar = (id: string | null) => {
   const [userSchedules, setUserSchedules] = useState<UserSchedule[]>([]);
   const supabase = createClient();
 
   useEffect(() => {
     const dateOfUser = async () => {
-      const data = await getUserSchedule(id.toString());
-      setUserSchedules(data);
+      if (id) {
+        const data = await getUserSchedule(id);
+        setUserSchedules(data);
+      }
     };
     dateOfUser();
   }, [id]);
