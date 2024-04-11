@@ -1,5 +1,7 @@
-import React from 'react';
+import Calender from '@/components/room/meeting/calender/Calender';
 
-export default function Calendar() {
-  return <div>Calendar</div>;
-}
+const PickCalendar = () => {
+  return <Calender />;
+};
+
+export default PickCalendar;
