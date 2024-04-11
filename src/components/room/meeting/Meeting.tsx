@@ -14,7 +14,7 @@ const Meeting = ({ id }: { id: string }) => {
   };
 
   const tabList: TabList = {
-    일정: <Calender id={id} changeTab={changeTab} />,
+    일정: <Calender />,
     장소: <Place />
   };
 
