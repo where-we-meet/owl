@@ -1,25 +1,15 @@
 'use client';
 
-import { createClient } from '@/utils/supabase/client';
 import KakaoSymbol from './KakaoSymbol';
 import GoogleLogo from './GoogleLogo';
 import styles from './LoginButton.module.css';
+import { createClient } from '@/utils/supabase/client';
 
 const LoginButton = () => {
-  const supabase = createClient();
-
-  const signInWithGoogle = async () => {
+  const logInWithOAuth = async (provider: 'google' | 'kakao') => {
+    const supabase = createClient();
     await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${location.origin}/auth/callback`
-      }
-    });
-  };
-
-  const signInWithKakao = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'kakao',
+      provider,
       options: {
         redirectTo: `${location.origin}/auth/callback`
       }
@@ -28,11 +18,11 @@ const LoginButton = () => {
 
   return (
     <form className={styles.form}>
-      <button className={styles.kakao} onClick={signInWithKakao} role="button">
+      <button className={styles.kakao} onClick={() => logInWithOAuth('kakao')} role="button">
         <KakaoSymbol />
         <span>카카오 로그인</span>
       </button>
-      <button className={styles.google} onClick={signInWithGoogle} role="button">
+      <button className={styles.google} onClick={() => logInWithOAuth('google')} role="button">
         <GoogleLogo />
         <span>구글 로그인</span>
       </button>
