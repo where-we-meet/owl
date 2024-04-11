@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
+import { Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@nextui-org/react';
 import { PiUserSquareDuotone } from 'react-icons/pi';
 
 const UserProfile = () => {
@@ -19,31 +19,27 @@ const UserProfile = () => {
       <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
         <ModalContent>
           <>
-            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1">계정 정보</ModalHeader>
             <ModalBody>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-                venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-                venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-              </p>
-              <p>
-                Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor adipisicing. Mollit
-                dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris
-                do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                eiusmod et. Culpa deserunt nostrud ad veniam.
-              </p>
+              <p>프로필사진</p>
+              <div>
+                <p>닉네임</p>
+                <div>
+                  <p>유저닉네임</p>
+                  <p>유저 프로필 수정 이동 버튼</p>
+                </div>
+              </div>
+              <div>
+                <p>로그인정보</p>
+                <div>
+                  <p>로그인 소셜 이름</p>
+                  <p>로그인 소셜 아이콘</p>
+                </div>
+              </div>
+              <div>
+                <p>로그아웃버튼</p>
+              </div>
             </ModalBody>
-            <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                Close
-              </Button>
-              <Button color="primary" onPress={onClose}>
-                Action
-              </Button>
-            </ModalFooter>
           </>
         </ModalContent>
       </Modal>
