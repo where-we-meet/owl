@@ -1,22 +1,24 @@
 'use client';
-import { MouseEvent, useState } from 'react';
 import { Meeting } from '../my-owl/meeting/Meeting';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, useDisclosure } from '@nextui-org/react';
 
 export const MeetingButton = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
-
-  const onChangeSidebarStatus = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setShowSidebar(!showSidebar);
-  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <div>
-      <button className="border-transparent" onClick={(e) => onChangeSidebarStatus(e)}>
+      <Button onClick={onOpen} isIconOnly className="border-transparent">
         <GiHamburgerMenu />
-      </button>
-      {showSidebar ? <Meeting /> : null}
+      </Button>
+      <Modal backdrop="blur" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
+        <ModalContent>
+          <ModalBody>
+            <Meeting />
+          </ModalBody>
+          <ModalFooter />
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
