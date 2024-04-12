@@ -2,9 +2,15 @@
 import { Meeting } from '../my-owl/meeting/Meeting';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, useDisclosure } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
+import { MouseEvent } from 'react';
 
-export const MeetingButton = () => {
+export const MeetingModalButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleMeetingRedirect = (e: MouseEvent<HTMLDivElement>) => {
+    onClose();
+  };
 
   return (
     <div>
@@ -14,7 +20,9 @@ export const MeetingButton = () => {
       <Modal backdrop="blur" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
         <ModalContent>
           <ModalBody>
-            <Meeting />
+            <div onClick={(e) => handleMeetingRedirect(e)}>
+              <Meeting />
+            </div>
           </ModalBody>
           <ModalFooter />
         </ModalContent>
