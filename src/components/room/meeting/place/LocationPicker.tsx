@@ -2,6 +2,7 @@ import { useParams } from 'next/navigation';
 import { getCurrentUserData, updateStartLocation } from '@/api/supabaseCSR/supabase';
 import { useSearchDataStore } from '@/store/store';
 import { objectValidate } from '@/utils/objectValidate';
+import { Button } from '@nextui-org/react';
 
 const LocationPicker = () => {
   const { id: roomId }: { id: string } = useParams();
@@ -32,7 +33,7 @@ const LocationPicker = () => {
     }
   };
 
-  return <button onClick={handleSubmitLocation}>내 위치 확정</button>;
+  return <Button onClick={handleSubmitLocation}>다음</Button>;
 };
 
 export default LocationPicker;
