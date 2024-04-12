@@ -21,7 +21,7 @@ export const useGetCalendar = (id: string | null) => {
 
   useEffect(() => {
     const subscription = supabase
-      .channel('room')
+      .channel('schedule')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${id}` },
