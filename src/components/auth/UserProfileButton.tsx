@@ -25,7 +25,7 @@ const UserProfile = () => {
   const [userProfileURL, setUserProfileURL] = useState<string | null>('');
   const [toggleModal, setToggleModal] = useState(false);
 
-  const { data: user } = useQueryUser();
+  const user = useQueryUser();
   const { data, isLoading } = useQuery({
     queryKey: ['profile'],
     queryFn: () => getUserProfileData(user.id)
