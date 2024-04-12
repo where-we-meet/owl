@@ -1,13 +1,13 @@
 'use client';
 
-import { Button, Image, ModalHeader, ModalBody } from '@nextui-org/react';
-import { IoChevronBack } from 'react-icons/io5';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
-import { ImageUploadModal } from '../my-owl/profile/modal/Modal';
-import { useQueryUser } from '@/hooks/useQueryUser';
-import { getUserProfileData } from '@/api/profile';
 import { useQuery } from '@tanstack/react-query';
+import { Button, Image, ModalHeader, ModalBody } from '@nextui-org/react';
+import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
+import { getUserProfileData } from '@/api/profile';
+import { useQueryUser } from '@/hooks/useQueryUser';
+import { ImageUploadModal } from '../my-owl/profile/modal/Modal';
+import { IoChevronBack } from 'react-icons/io5';
 
 const MAX_NAME_LENGTH = 16;
 
@@ -21,13 +21,6 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
     queryKey: ['profile'],
     queryFn: () => getUserProfileData(user.id)
   });
-
-  useEffect(() => {
-    if (data) {
-      setUserName(data.name);
-      setUserProfileURL(data.profile_url);
-    }
-  }, [data]);
 
   const handleToggleModal = () => {
     setToggleModal((prev) => !prev);
@@ -52,13 +45,16 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
     }
   };
 
-  const handleEditExit = () => {
-    toggleEditMode();
-  };
+  useEffect(() => {
+    if (data) {
+      setUserName(data.name);
+      setUserProfileURL(data.profile_url);
+    }
+  }, [data]);
 
   return (
     <>
-      <Button isIconOnly onPress={handleEditExit}>
+      <Button isIconOnly onPress={toggleEditMode}>
         <IoChevronBack />
       </Button>
       <ModalHeader className="flex flex-col gap-1">프로필 수정</ModalHeader>
