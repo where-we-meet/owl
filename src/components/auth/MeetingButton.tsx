@@ -4,19 +4,19 @@ import { Meeting } from '../my-owl/meeting/Meeting';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 export const MeetingButton = () => {
-  const [showSideBar, setShowSideBar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
-  const onChangeSideBarStatus = (e: MouseEvent<HTMLButtonElement>) => {
+  const onChangeSidebarStatus = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setShowSideBar(!showSideBar);
+    setShowSidebar(!showSidebar);
   };
 
   return (
     <div>
-      <button className="border-transparent" onClick={(e) => onChangeSideBarStatus(e)}>
+      <button className="border-transparent" onClick={(e) => onChangeSidebarStatus(e)}>
         <GiHamburgerMenu />
       </button>
-      {showSideBar ? <Meeting /> : null}
+      {showSidebar ? <Meeting /> : null}
     </div>
   );
 };
