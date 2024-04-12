@@ -2,7 +2,6 @@
 import { Meeting } from '../my-owl/meeting/Meeting';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, useDisclosure } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
 
 export const MeetingModalButton = () => {
