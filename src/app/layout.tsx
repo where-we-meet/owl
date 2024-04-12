@@ -21,12 +21,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = createClient();
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery<User | null>({
     queryKey: ['auth'],
-    queryFn: () => getSession(supabase)
+    queryFn: getSession,
+    gcTime: Infinity
   });
 
   return (
