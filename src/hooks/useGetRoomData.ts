@@ -1,63 +1,75 @@
-import { getCurrentUserData, getRoomUsersData } from '@/api/supabaseCSR/supabase';
-import { useRoomUserDataStore } from '@/store/placeStore';
-import { createClient } from '@/utils/supabase/client';
+import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
 import { useEffect, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { RoomUser } from '@/types/roomUser';
 
-import type { RoomUser } from '@/types/roomUser';
-
-export const useGetRoomData = (id: string) => {
+export const useGetRoomData = (roomId: string, userId: string) => {
   const supabase = createClient();
-  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
-  const setRoomUsers = useRoomUserDataStore((state) => state.setRoomUsers);
-  const addRoomUserData = useRoomUserDataStore((state) => state.addRoomUserData);
-  const updateRoomUserData = useRoomUserDataStore((state) => state.updateRoomUserData);
-  const [userId, setUserId] = useState<string | null>(null);
-
-  const roomUsersLength = roomUsers.length;
+  const queryClient = useQueryClient();
+  const { data = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
+  const [roomUsers, setRoomUsers] = useState(data);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getUserData = async () => {
-      const {
-        user: { id: currentUserId }
-      } = await getCurrentUserData();
-
-      const users = await getRoomUsersData(id);
-
-      const adminUser = users.filter((user) => user.is_admin);
-      const currentUser = users.filter((user) => !user.is_admin && user.user_id === currentUserId);
-      const otherUsers = users.filter((user) => !user.is_admin && user.user_id !== currentUserId);
+      const adminUser = data.filter((user) => user.is_admin);
+      const currentUser = data.filter((user) => !user.is_admin && user.user_id === userId);
+      const otherUsers = data.filter((user) => !user.is_admin && user.user_id !== userId);
 
       const sortedUsers = [...adminUser, ...currentUser, ...otherUsers];
 
       setRoomUsers(sortedUsers);
-      setUserId(currentUserId);
+      setIsLoading(false);
     };
     getUserData();
-  }, [roomUsersLength]);
+  }, [data]);
 
   useEffect(() => {
     const subscription = supabase
       .channel('room')
       .on(
         'postgres_changes',
-        { event: 'UPDATE', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
+        { event: 'UPDATE', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${roomId}` },
         (payload) => {
-          updateRoomUserData(payload.new as RoomUser);
+          const updated = payload.new as RoomUser;
+          const updatedRoomUsers = roomUsers.map((user) =>
+            user.user_id === updated.user_id ? { ...user, start_location: updated.start_location } : user
+          );
+          queryClient.setQueryData(['roomUsers'], updatedRoomUsers);
         }
       )
       .on(
         'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${id}` },
+        { event: 'INSERT', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${roomId}` },
         (payload) => {
-          addRoomUserData(payload.new as RoomUser);
+          console.log('insert');
+          const updated = payload.new as RoomUser;
+          queryClient.setQueryData(['roomUsers'], [...roomUsers, updated]);
         }
       )
-      .subscribe();
+      .subscribe((status, err) => {
+        if (status === 'SUBSCRIBED') {
+          console.log('연결됨!');
+        }
+
+        if (status === 'CHANNEL_ERROR') {
+          console.log(`에러 : ${err?.message}`);
+        }
+
+        if (status === 'TIMED_OUT') {
+          console.log('시간 초과');
+        }
+
+        if (status === 'CLOSED') {
+          console.log('연결 끊김');
+        }
+      });
 
     return () => {
       supabase.removeChannel(subscription);
     };
-  }, [id]);
+  }, [supabase, roomUsers]);
 
-  return { userId };
+  return { roomUsers, isLoading };
 };
