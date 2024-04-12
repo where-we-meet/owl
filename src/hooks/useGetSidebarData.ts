@@ -22,7 +22,7 @@ export type MeetingInfo = {
   userdata_room: UserInfo[];
 };
 
-export const useGetSidebarData = () => {
+export const useGetModalData = () => {
 const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
 
   useEffect(() => {

@@ -2,21 +2,20 @@
 
 import { useRouter } from 'next/navigation';
 import styles from './Meeting.module.css';
-import { useGetSidebarData } from '@/hooks/useGetSidebarData';
+import { useGetModalData } from '@/hooks/useGetSidebarData';
 import { useEffect, useState } from 'react';
 import { Skeleton } from '@nextui-org/react';
 
 export const Meeting = () => {
   const router = useRouter();
-  const sidebarData = useGetSidebarData();
+  const ModalData = useGetModalData();
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log('sidebar Data', sidebarData);
 
   useEffect(() => {
-    if (sidebarData) {
-      setIsLoaded(true)
+    if (ModalData) {
+      setIsLoaded(true);
     }
-  },[sidebarData])
+  }, [ModalData]);
 
   const handleClickRoom = (roomId: string | null) => {
     router.push(`/room/${roomId}`);
@@ -24,7 +23,7 @@ export const Meeting = () => {
 
   return (
     <div className={styles.meeting_container}>
-      {sidebarData.map((meeting, index) => (
+      {ModalData.map((meeting, index) => (
         <div key={index} className={styles.rooms_box} onClick={() => handleClickRoom(meeting.id)}>
           <Skeleton isLoaded={isLoaded} className="rounded-lg">
             <div className={styles.room_box}>
