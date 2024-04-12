@@ -1,31 +1,27 @@
+'use-client';
+
 import Image from 'next/image';
-import { useKakaoMap } from '@/hooks/useKakaoMap';
-import { useMapController } from '@/hooks/useMapController';
+
 import { Map } from 'react-kakao-maps-sdk';
+
+import { useKakaoMap } from '@/hooks/useKakaoMap';
+import { useSettingMap } from '@/hooks/useSettingMap';
+
+import { Spinner } from '@nextui-org/react';
 import styles from './KakaoMap.module.css';
 
 const SettingMap = () => {
   const [loading, error] = useKakaoMap();
-  const {
-    location,
-    address,
-    handleChangeCenter,
-    isGpsLoading,
-    isDrag,
-    setIsDrag,
-    halfwayPoint,
-    roomUsers,
-    searchCategory = []
-  } = useMapController();
+  const { location, address, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } = useSettingMap();
 
-  if (loading) return <div>loading...</div>;
+  if (loading) return <Spinner label="Loading..." color="primary" />;
   if (error) return <div>error</div>;
 
   return (
     <>
       <div className={styles.map_container}>
         {isGpsLoading ? (
-          <div className={`${styles.center_pin}`}>loading...</div>
+          <Spinner className={styles.center_pin} color="primary" />
         ) : (
           <Image
             src={'/pin.svg'}
