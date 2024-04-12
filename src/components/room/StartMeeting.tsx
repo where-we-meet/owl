@@ -7,7 +7,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 const StartMeeting = () => {
   const router = useRouter();
-  const { data: user } = useQueryUser();
+  const user = useQueryUser();
 
   const [startDate, setStartDate] = useState(new Date().toDateString());
 
