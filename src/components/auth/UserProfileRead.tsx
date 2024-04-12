@@ -1,24 +1,16 @@
 'use client';
 
-import { Button, Image, ModalHeader, ModalBody, useDisclosure } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
+import { Button, Image, ModalHeader, ModalBody } from '@nextui-org/react';
+import { getUserProfileData } from '@/api/profile';
+import { useQueryUser } from '@/hooks/useQueryUser';
 import { GrCaretNext } from 'react-icons/gr';
 import { IoClose } from 'react-icons/io5';
-import { useEffect, useState } from 'react';
-import { useQueryUser } from '@/hooks/useQueryUser';
-import { getUserProfileData } from '@/api/profile';
-import { useQuery } from '@tanstack/react-query';
 
 export type UserProfileData = { name: string; profile_url: string | null };
 
-const UserProfileRead = ({ toggleEditMode }: { toggleEditMode: () => void }) => {
-  const { onClose } = useDisclosure();
-  const [userProfileURL, setUserProfileURL] = useState<string | null>('');
-
+const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () => void; handleClose: () => void }) => {
   const { data: user } = useQueryUser();
-
-  /**
-   * 실험실
-   */
   //state for recent profile data (from supabase DB)
   const [data, setData] = useState<UserProfileData>({
     name: '',
@@ -37,11 +29,6 @@ const UserProfileRead = ({ toggleEditMode }: { toggleEditMode: () => void }) => 
     };
     fetchData();
   });
-
-  const handleClose = () => {
-    toggleEditMode();
-    onClose();
-  };
 
   return (
     <>
