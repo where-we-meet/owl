@@ -25,10 +25,22 @@
 .days {
   width: 70px;
   padding: 30px;
+  height: 70px;
   position: relative;
 }
 
 .selected_date_circle {
+  width: 35px;
+  height: 35px;
+  background-color: #016e9c5a;
+  border-radius: 50%;
+  position: absolute;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.selected_date_circle_of_users {
   width: 35px;
   height: 35px;
   background-color: #35017621;
@@ -41,7 +53,4 @@
 
 .button_container {
   display: flex;
-}
-
-.next_button {
 }
