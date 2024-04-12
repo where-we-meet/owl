@@ -6,7 +6,7 @@ import { GrCaretNext } from 'react-icons/gr';
 import { IoClose, IoChevronBack } from 'react-icons/io5';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
-import { ImageUploadModal } from '../my-owl/profile/editable/modal/Modal';
+import { ImageUploadModal } from '../my-owl/profile/modal/Modal';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
 import { useQuery } from '@tanstack/react-query';
