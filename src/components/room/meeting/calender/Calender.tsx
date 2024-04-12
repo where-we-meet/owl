@@ -10,10 +10,11 @@ import checkSelectedDates from './checkSelectedDates';
 import { useCalendarStore } from '@/store/calendarStore';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 
-import { createClient } from '@/utils/supabase/client';
-import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
+// import { createClient } from '@/utils/supabase/client';
+// import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 import { useParams } from 'next/navigation';
 import { Button } from '@nextui-org/react';
+import Link from 'next/link';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -47,24 +48,18 @@ const Calender = () => {
     }
   };
 
-  const handleDateUpload = async () => {
+  console.log(selectedDate);
+
+  const handleDateUpload = (date: Date) => {
     if (!checkSelectedDates(selectedDate)) return;
 
-    const currentUserData = await getCurrentUserData();
-
-    const selectedDates = selectedDate.map((date) => {
-      return {
-        room_id: id,
-        created_by: currentUserData.user.id,
-        start_date: date.toDateString(),
-        end_date: date.toDateString()
-      };
-    });
-
-    const supabase = createClient();
-    const { error } = await supabase.from('room_schedule').insert(selectedDates);
-    if (error) throw error;
+    const newDateList = [...selectedDate, date];
+    setSelectedDate(newDateList);
   };
+
+  // const handleMoveToPlace = () => {
+  //   return <Link href={`/room/${id}/pick-calendar`} />;
+  // };
 
   return (
     <>
@@ -99,10 +94,10 @@ const Calender = () => {
           <Button
             size="sm"
             className={styles.next_button}
-            onClick={handleDateUpload}
+            onClick={() => handleDateUpload}
             disabled={!checkSelectedDates(selectedDate)}
           >
-            다음
+            <Link href={`/room/${id}/pick-place`}>다음</Link>
           </Button>
         </div>
       </div>
