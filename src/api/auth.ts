@@ -6,6 +6,6 @@ export const getSession = async (supabase: SupabaseClient) => {
     error
   } = await supabase.auth.getUser();
 
-  if (error) throw error;
+  if (!user || error) throw error;
   return user;
 };
