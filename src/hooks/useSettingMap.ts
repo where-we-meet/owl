@@ -1,15 +1,17 @@
-import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
-import { myGeolocation } from '@/utils/place/myGeolocation';
+import { useGpsStatusStore, useRoomUserDataStore, useSearchDataStore } from '@/store/placeStore';
 import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useGetRoadAddress } from './useGetPlace';
+import { useQueryUser } from './useQueryUser';
 
 export const useSettingMap = () => {
   const [isDrag, setIsDrag] = useState(false);
 
   const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
-  const isGpsLoading = useGpsStatusStore((state) => state.isGpsLoading);
+  const { isGpsLoading, setIsGpsLoading } = useGpsStatusStore((state) => state);
+  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
 
+  const { id: userId } = useQueryUser();
   const { data: searchAddress, isPending: isAddressPending } = useGetRoadAddress(location, isDrag);
 
   const setCenter = (map: kakao.maps.Map) => {
@@ -18,6 +20,16 @@ export const useSettingMap = () => {
   };
 
   const handleChangeCenter = useCallback(_.debounce(setCenter, 1000), []);
+
+  const roomUser = roomUsers.find((user) => user.user_id === userId);
+
+  useEffect(() => {
+    const location = { lat: Number(roomUser?.lat), lng: Number(roomUser?.lng) };
+    if (location.lat && location.lng) {
+      setLocation(location);
+      setIsGpsLoading(false);
+    }
+  }, [roomUser]);
 
   useEffect(() => {
     if (searchAddress) {
