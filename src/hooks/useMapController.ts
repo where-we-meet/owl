@@ -1,6 +1,6 @@
 import { useGetRoadAddress, useGetSearchCategory } from '@/hooks/useGetPlace';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useHalfwayDataStore, useRoomUserDataStore, useSearchDataStore } from '@/store/store';
+import { useHalfwayDataStore, useRoomUserDataStore, useSearchDataStore } from '@/store/placeStore';
 import _ from 'lodash';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
 

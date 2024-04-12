@@ -1,5 +1,5 @@
 'use client';
-import { useRoomUserDataStore } from '@/store/store';
+import { useRoomUserDataStore } from '@/store/placeStore';
 
 const UserList = () => {
   const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
