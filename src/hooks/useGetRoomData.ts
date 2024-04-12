@@ -1,5 +1,5 @@
 import { getCurrentUserData, getRoomUsersData } from '@/api/supabaseCSR/supabase';
-import { useRoomUserDataStore } from '@/store/store';
+import { useRoomUserDataStore } from '@/store/placeStore';
 import { createClient } from '@/utils/supabase/client';
 import { useEffect, useState } from 'react';
 

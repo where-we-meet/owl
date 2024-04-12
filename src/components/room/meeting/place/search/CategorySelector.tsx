@@ -1,4 +1,4 @@
-import { useHalfwayDataStore, useSearchDataStore } from '@/store/store';
+import { useHalfwayDataStore, useSearchDataStore } from '@/store/placeStore';
 import { MouseEvent } from 'react';
 
 const SEARCH_CATEGORY = ['맛집', '카페', '음식점', '문화시설', '관광명소', '지하철역', '숙박'];

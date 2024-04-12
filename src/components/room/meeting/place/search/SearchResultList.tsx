@@ -3,7 +3,7 @@ import styles from './SearchResultList.module.css';
 import { useGetSearchPlace } from '@/hooks/useGetPlace';
 import { changeToViewPoint } from '@/utils/place/changeToViewPoint';
 import { Place } from '@/types/place.types';
-import { useSearchDataStore } from '@/store/store';
+import { useSearchDataStore } from '@/store/placeStore';
 
 const SearchResultList = ({
   placeList,

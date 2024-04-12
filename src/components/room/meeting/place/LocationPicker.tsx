@@ -1,6 +1,6 @@
 import { useParams } from 'next/navigation';
 import { getCurrentUserData, updateStartLocation } from '@/api/supabaseCSR/supabase';
-import { useSearchDataStore } from '@/store/store';
+import { useSearchDataStore } from '@/store/placeStore';
 import { objectValidate } from '@/utils/objectValidate';
 import { Button } from '@nextui-org/react';
 

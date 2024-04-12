@@ -1,7 +1,7 @@
 import { ChangeEvent, Fragment, useEffect, useState } from 'react';
 import { Circle } from 'react-kakao-maps-sdk';
 import styles from './RangeController.module.css';
-import { useHalfwayDataStore } from '@/store/store';
+import { useHalfwayDataStore } from '@/store/placeStore';
 
 const RADIUS_RANGES = [300, 1000, 2000, 4000];
 

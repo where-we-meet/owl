@@ -5,7 +5,7 @@ import Sidebar from '@/components/room/sidebar/Sidebar';
 import { useGetRoomData } from '@/hooks/useGetRoomData';
 import styles from './page.module.css';
 import { useEffect } from 'react';
-import { useRoomUserDataStore } from '@/store/store';
+import { useRoomUserDataStore } from '@/store/placeStore';
 import { insertRoomUser } from '@/api/room';
 
 const RoomPage = ({ params }: { params: { id: string } }) => {
