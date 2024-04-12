@@ -10,7 +10,8 @@ import { IoClose } from 'react-icons/io5';
 export type UserProfileData = { name: string; profile_url: string | null };
 
 const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () => void; handleClose: () => void }) => {
-  const { data: user } = useQueryUser();
+  const user = useQueryUser();
+
   //state for recent profile data (from supabase DB)
   const [data, setData] = useState<UserProfileData>({
     name: '',
@@ -28,7 +29,7 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
       }
     };
     fetchData();
-  });
+  }, []);
 
   return (
     <>
