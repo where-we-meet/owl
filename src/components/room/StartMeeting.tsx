@@ -5,6 +5,8 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import styles from './StartMeeting.module.css';
+import { Button } from '@nextui-org/react';
 
 const StartMeeting = () => {
   const router = useRouter();
@@ -35,13 +37,19 @@ const StartMeeting = () => {
   };
 
   return (
-    <form onSubmit={startNewRoom}>
-      <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-        <input type="date" name="start" min={startDate} value={startDate} onChange={changeDate} />
-        <input type="date" name="end" min={startDate} />
-      </div>
-      <button>모임 시작하기</button>
-    </form>
+    <main className={styles.main}>
+      <form onSubmit={startNewRoom}>
+        <div className={styles.date}>
+          <input type="date" min={startDate} name="start" value={startDate} onChange={changeDate} />
+          <input type="date" min={startDate} name="end" />
+        </div>
+        <div className={styles.start_button}>
+          <Button type="submit" color="primary">
+            모임 시작하기
+          </Button>
+        </div>
+      </form>
+    </main>
   );
 };
 
