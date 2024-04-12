@@ -10,8 +10,6 @@ import checkSelectedDates from './checkSelectedDates';
 import { useCalendarStore } from '@/store/calendarStore';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 
-// import { createClient } from '@/utils/supabase/client';
-// import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 import { useParams } from 'next/navigation';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
@@ -48,18 +46,12 @@ const Calender = () => {
     }
   };
 
-  console.log(selectedDate);
-
   const handleDateUpload = (date: Date) => {
     if (!checkSelectedDates(selectedDate)) return;
 
     const newDateList = [...selectedDate, date];
     setSelectedDate(newDateList);
   };
-
-  // const handleMoveToPlace = () => {
-  //   return <Link href={`/room/${id}/pick-calendar`} />;
-  // };
 
   return (
     <>
