@@ -5,7 +5,6 @@ import Providers from './providers';
 import './globals.css';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { getSession } from '@/api/auth';
-import { createClient } from '@/utils/supabase/server';
 import getQueryClient from '@/utils/getQueryClient';
 import type { User } from '@supabase/supabase-js';
 
