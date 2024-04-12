@@ -24,8 +24,7 @@ export default async function RootLayout({
 
   await queryClient.prefetchQuery<User | null>({
     queryKey: ['auth'],
-    queryFn: getSession,
-    gcTime: Infinity
+    queryFn: getSession
   });
 
   return (
