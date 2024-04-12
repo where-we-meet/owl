@@ -109,22 +109,6 @@ export const getUserMeetingsId = async (userId: string) => {
   return [];
 };
 
-type Schedule = Tables<'room_schedule'>;
-
-export const getRealtimeScheduleData = (id: string) => {
-  const subscription = supabase
-    .channel('schedule')
-    .on(
-      'postgres_changes',
-      { event: '*', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${id}` },
-      async (payload) => {
-        console.log('날짜 적용 됨', payload);
-      }
-    )
-    .subscribe();
-  return subscription;
-};
-
 // Insert rows
 
 export const updateStartLocation = async (payload: UserLocationData) => {
