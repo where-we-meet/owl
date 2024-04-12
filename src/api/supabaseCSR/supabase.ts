@@ -96,7 +96,7 @@ export const uploadImage = async (file: File, setFile: Dispatch<SetStateAction<F
 
 // supabase useres table에서 user Name 변경
 export const updateUserName = async (userId: string, newName: string) => {
-  const { data, error } = await supabase.from('users').update({ name: newName }).eq('id', userId);
+  const { error } = await supabase.from('users').update({ name: newName }).eq('id', userId);
   if (error) throw error;
 };
 
