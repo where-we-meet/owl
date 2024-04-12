@@ -1,6 +1,8 @@
-import { SearchOptionData } from '@/types/place.types';
-import type { RoomUser } from '@/types/roomUser';
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+
+import type { SearchOptionData } from '@/types/place.types';
+import type { RoomUser } from '@/types/roomUser';
 
 type SearchData = {
   location: {
@@ -33,18 +35,33 @@ type RoomUserData = {
   updateRoomUserData: (payload: RoomUser) => void;
 };
 
-export const useSearchDataStore = create<SearchData>((set) => ({
-  location: {
-    lat: 33.450701,
-    lng: 126.570667
-  },
-  address: '',
-  addressName: '',
-  searchOption: null,
-  setLocation: (location) => set({ location }),
-  setAddress: (address) => set({ address }),
-  setSearchOption: (payload: SearchOptionData) => set({ searchOption: payload })
-}));
+type GpsStatus = {
+  isGpsLoading: boolean;
+  errorMessage: string | null;
+  setIsGpsLoading: (payload: boolean) => void;
+  setErrorMessage: (payload: string) => void;
+};
+
+export const useSearchDataStore = create(
+  persist<SearchData>(
+    (set) => ({
+      location: {
+        lat: 33.450701,
+        lng: 126.570667
+      },
+      address: '',
+      addressName: '',
+      searchOption: null,
+      setLocation: (location) => set({ location }),
+      setAddress: (address) => set({ address }),
+      setSearchOption: (payload: SearchOptionData) => set({ searchOption: payload })
+    }),
+    {
+      name: 'setting-location-storage',
+      storage: createJSONStorage(() => sessionStorage)
+    }
+  )
+);
 
 export const useRoomUserDataStore = create<RoomUserData>((set) => ({
   roomUsers: [],
@@ -72,4 +89,11 @@ export const useHalfwayDataStore = create<HalfwayData>((set) => ({
     verified: false
   },
   updateHalfwayData: (payload) => set((state) => ({ halfwayData: { ...state.halfwayData, ...payload } }))
+}));
+
+export const useGpsStatusStore = create<GpsStatus>((set) => ({
+  isGpsLoading: true,
+  errorMessage: null,
+  setIsGpsLoading: (payload) => set({ isGpsLoading: payload }),
+  setErrorMessage: (payload) => set({ errorMessage: payload })
 }));
