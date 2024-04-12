@@ -1,8 +1,27 @@
 'use client';
-import { useRoomUserDataStore } from '@/store/placeStore';
+import { insertRoomUser } from '@/api/room';
+import { useGetRoomData } from '@/hooks/useGetRoomData';
+import { useQueryUser } from '@/hooks/useQueryUser';
+import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 const UserList = () => {
-  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
+  const user = useQueryUser();
+  const { id: roomId }: { id: string } = useParams();
+  const { roomUsers, isLoading } = useGetRoomData(roomId, user.id);
+
+  useEffect(() => {
+    const joinNewUser = async () => {
+      const isNewUser = !roomUsers.some((user) => user.user_id === user.id);
+      if (isNewUser) return;
+      await insertRoomUser({ room_id: roomId, user_id: user.id, is_admin: false });
+    };
+
+    if (!isLoading && roomUsers.length > 0) {
+      joinNewUser();
+    }
+  }, [roomUsers]);
+
   return (
     <section>
       <ul>
