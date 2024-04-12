@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: white;
+  width: 100%;
+  height: 100%;
+}
+
+.section {
+  display: flex;
+  border: transparent;
+  background-color: #8a2be2;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+
+.section:hover {
+  background-color: #6d25b1;
+}
+
+.start {
+  font-size: 3rem;
+  color: white;
+}
