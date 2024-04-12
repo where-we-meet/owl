@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '@/app/room/[id]/(setting)/layout.module.css';
 import Link from 'next/link';
 
-const FirstStep = ({ id }: { id: string | string[] }) => {
+const SecondtStep = ({ id }: { id: string | string[] }) => {
   return (
     <>
       <ol className={styles.step_container}>
@@ -12,8 +12,8 @@ const FirstStep = ({ id }: { id: string | string[] }) => {
           </Link>
           <p>일정</p>
         </li>
-        <li className={styles.first_step_item}>
-          <Link href={`/room/${id}/pick-place`} className={styles.first_step_title}>
+        <li className={styles.step_item}>
+          <Link href={`/room/${id}/pick-place`} className={styles.step_title}>
             2
           </Link>
           <p>장소</p>
@@ -27,4 +27,4 @@ const FirstStep = ({ id }: { id: string | string[] }) => {
   );
 };
 
-export default FirstStep;
+export default SecondtStep;

@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from '@/app/room/[id]/(setting)/layout.module.css';
-import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import FirstStep from './FirstStep';
+import SecondtStep from './SecondStep';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -22,13 +22,12 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     }
   }, [pathname, id]);
 
-  console.log(currentStep);
-
   return (
     <>
       <div className={styles.room_container}>
         <h1 className={styles.room_name}>호기심 많은 올빼미</h1>
         {currentStep === 1 && <FirstStep id={id} />}
+        {currentStep === 2 && <SecondtStep id={id} />}
         <div className={styles.calendar_container}>{children}</div>
       </div>
     </>
