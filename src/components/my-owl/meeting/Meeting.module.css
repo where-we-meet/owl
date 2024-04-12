@@ -3,14 +3,18 @@
   background-color: gray;
 
   height: 80vh;
-  width: 70vw;
+  width: 95%;
 
   overflow-y: scroll;
 }
 
+.meeting_container :hover {
+  background-color: rgb(158, 158, 158);
+}
+
 .rooms_box {
   padding: 10px;
-
+  min-width: 90%;
   display: flex;
   flex-direction: column;
 }
