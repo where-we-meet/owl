@@ -1,15 +1,11 @@
 .meeting_container {
   margin: 20px;
-  background-color: gray;
-
+  border-radius: 10px;
   height: 80vh;
   width: 95%;
+  background-color: rgb(82, 82, 82);
 
   overflow-y: scroll;
-}
-
-.meeting_container :hover {
-  background-color: rgb(158, 158, 158);
 }
 
 .rooms_box {
@@ -28,12 +24,28 @@
   justify-content: space-between;
   align-items: center;
 
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+}
+
+.room_box:hover {
+  background-color: rgb(240, 240, 240);
 }
 
 .room_box_left {
   text-align: left;
   line-height: 25px;
+  line-height: 1.5;
+}
+
+.meeting_name {
+  font-size: 1.3rem;
+}
+.meeting_date {
+  font-size: 1.1rem;
+}
+
+.meeting_location {
+  font-size: 1.1rem;
 }
 
 .room_box_right {
@@ -55,6 +67,7 @@
 .participant_profile {
   width: 20px;
   height: 20px;
+  border-radius: 50%;
 
   background-size: cover;
   background-position: center;

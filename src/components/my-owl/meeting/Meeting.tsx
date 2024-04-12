@@ -28,9 +28,9 @@ export const Meeting = () => {
           <Skeleton isLoaded={isLoaded} className="rounded-lg">
             <div className={styles.room_box}>
               <div className={styles.room_box_left}>
-                <h3>{meeting.name}</h3>
-                <p>날짜 : {meeting.confirmed_date}</p>
-                <p>위치 : {meeting.location}</p>
+                <h3 className={styles.meeting_name}>{meeting.name}</h3>
+                <p className={styles.meeting_date}>날짜 : {meeting.confirmed_date}</p>
+                <p className={styles.meeting_location}>위치 : {meeting.location}</p>
               </div>
               <div className={styles.room_box_right}>
                 <div className={styles.participants_container}>
