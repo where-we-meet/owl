@@ -64,24 +64,28 @@ const Calender = () => {
           <button onClick={afterMonth}>▶</button>
         </div>
 
-        <ul>
-          {WEEKDAYS.map((weekday) => {
-            return (
-              <li key={weekday} className={styles.weekday}>
-                {weekday}
-              </li>
-            );
-          })}
-        </ul>
+        <div className={styles.scehdule_container}>
+          <ul className={styles.weekday_container}>
+            {WEEKDAYS.map((weekday) => {
+              return (
+                <li key={weekday} className={styles.weekday}>
+                  {weekday}
+                </li>
+              );
+            })}
+          </ul>
 
-        <div className={styles.dates}>
-          <EntireOfMonth
-            nowDate={nowDate}
-            selectedDate={selectedDate}
-            userSchedules={userSchedules}
-            handleDateClick={handleDateClick}
-          />
+          <div className={styles.dates}>
+            <EntireOfMonth
+              nowDate={nowDate}
+              selectedDate={selectedDate}
+              userSchedules={userSchedules}
+              handleDateClick={handleDateClick}
+              id={id}
+            />
+          </div>
         </div>
+
         <div>
           <Button
             size="sm"
