@@ -33,8 +33,10 @@ export default async function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <Providers>
-          <Header />
-          <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <Header />
+            {children}
+          </HydrationBoundary>
         </Providers>
       </body>
     </html>
