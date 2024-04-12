@@ -118,3 +118,11 @@ export const updateStartLocation = async (payload: UserLocationData) => {
     .eq('room_id', payload.room_id)
     .eq('user_id', payload.user_id);
 };
+
+// 모임 시작하기 페이지에서 설정한 일정 선택 범위 가져오는 로직
+export const getRangeOfSchedule = async (id: string) => {
+  const { data, error } = await supabase.from('rooms').select('start_date, end_date').eq('id', id);
+
+  if (error) throw error;
+  return data;
+};
