@@ -63,22 +63,30 @@ export const useSearchDataStore = create(
   )
 );
 
-export const useRoomUserDataStore = create<RoomUserData>((set) => ({
-  roomUsers: [],
-  setRoomUsers: (roomUsers) => set({ roomUsers }),
-  addRoomUserData: (payload) =>
-    set((state) => ({
-      roomUsers: [...state.roomUsers, payload]
-    })),
-  updateRoomUserData: (payload) =>
-    set((state) => ({
-      roomUsers: state.roomUsers.map((user) =>
-        user.id === payload.id
-          ? { ...user, start_location: payload.start_location, lat: payload.lat, lng: payload.lng }
-          : user
-      )
-    }))
-}));
+export const useRoomUserDataStore = create(
+  persist<RoomUserData>(
+    (set, get) => ({
+      roomUsers: [],
+      setRoomUsers: (roomUsers) => set({ roomUsers }),
+      addRoomUserData: (payload) =>
+        set(() => ({
+          roomUsers: [...get().roomUsers, payload]
+        })),
+      updateRoomUserData: (payload) =>
+        set(() => ({
+          roomUsers: get().roomUsers.map((user) =>
+            user.id === payload.id
+              ? { ...user, start_location: payload.start_location, lat: payload.lat, lng: payload.lng }
+              : user
+          )
+        }))
+    }),
+    {
+      name: 'room-userdata-storage',
+      storage: createJSONStorage(() => sessionStorage)
+    }
+  )
+);
 
 export const useHalfwayDataStore = create<HalfwayData>((set) => ({
   halfwayData: {
