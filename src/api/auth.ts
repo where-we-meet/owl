@@ -1,6 +1,7 @@
-import { SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@/utils/supabase/server';
 
-export const getSession = async (supabase: SupabaseClient) => {
+export const getSession = async () => {
+  const supabase = createClient();
   const {
     data: { user },
     error
