@@ -19,7 +19,6 @@ const Header = async () => {
       <div className={styles.menu}>
         {user ? (
           <>
-            <Link href="/my-owl">마이페이지</Link>
             <UserProfile />
             <Logout />
           </>
