@@ -2,6 +2,7 @@
 
 import { insertNewRoom, insertRoomUser } from '@/api/room';
 import { useQueryUser } from '@/hooks/useQueryUser';
+import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
@@ -9,7 +10,7 @@ const StartMeeting = () => {
   const router = useRouter();
   const user = useQueryUser();
 
-  const [startDate, setStartDate] = useState(new Date().toDateString());
+  const [startDate, setStartDate] = useState(getCurrentFormattedDate());
 
   const changeDate = (e: ChangeEvent<HTMLInputElement>) => {
     setStartDate(e.target.value);
@@ -36,8 +37,8 @@ const StartMeeting = () => {
   return (
     <form onSubmit={startNewRoom}>
       <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-        <input type="date" name="start" value={startDate} onChange={changeDate} />
-        <input type="date" min={startDate} name="end" />
+        <input type="date" name="start" min={startDate} value={startDate} onChange={changeDate} />
+        <input type="date" name="end" min={startDate} />
       </div>
       <button>모임 시작하기</button>
     </form>
