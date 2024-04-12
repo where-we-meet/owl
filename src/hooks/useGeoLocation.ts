@@ -1,10 +1,14 @@
-import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
+import { useGpsStatusStore, useRoomUserDataStore, useSearchDataStore } from '@/store/placeStore';
 import { myGeolocation } from '@/utils/place/myGeolocation';
 import { useEffect } from 'react';
+import { useQueryUser } from './useQueryUser';
 
 export const useGeoLocation = () => {
-  const { location, setLocation } = useSearchDataStore((state) => state);
+  const setLocation = useSearchDataStore((state) => state.setLocation);
   const { setIsGpsLoading, setErrorMessage } = useGpsStatusStore((state) => state);
+  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
+
+  const { id } = useQueryUser();
 
   const handleSetGeolocation = async () => {
     setIsGpsLoading(true);
@@ -18,11 +22,13 @@ export const useGeoLocation = () => {
     }
   };
 
+  const roomUser = roomUsers.find((user) => user.user_id === id);
+
   useEffect(() => {
-    if (!location) {
-      handleSetGeolocation();
-    } else {
+    if (roomUser?.start_location) {
       setIsGpsLoading(false);
+    } else {
+      handleSetGeolocation();
     }
   }, []);
 
