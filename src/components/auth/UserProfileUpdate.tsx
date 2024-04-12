@@ -9,15 +9,9 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
 import { useQuery } from '@tanstack/react-query';
 
-export type UserInfo = {
-  name: string;
-  profile_url: string | null;
-};
-
 const MAX_NAME_LENGTH = 16;
 
-const UserProfileUpdate = () => {
-  const [editMode, setEditMode] = useState(false);
+const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) => {
   const [userName, setUserName] = useState('');
   const [userProfileURL, setUserProfileURL] = useState<string | null>('');
   const [toggleModal, setToggleModal] = useState(false);
@@ -54,12 +48,12 @@ const UserProfileUpdate = () => {
       if (userProfileURL !== null) {
         await changeUserProfile({ userId: user.id, profile_url: userProfileURL });
       }
-      setEditMode(false);
+      toggleEditMode();
     }
   };
 
   const handleEditExit = () => {
-    setEditMode((prev) => !prev);
+    toggleEditMode();
   };
 
   return (

@@ -8,14 +8,8 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
 import { useQuery } from '@tanstack/react-query';
 
-export type UserInfo = {
-  name: string;
-  profile_url: string | null;
-};
-
-const UserProfileRead = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [editMode, setEditMode] = useState(false);
+const UserProfileRead = ({ toggleEditMode }: { toggleEditMode: () => void }) => {
+  const { onClose } = useDisclosure();
   const [userName, setUserName] = useState('');
   const [userProfileURL, setUserProfileURL] = useState<string | null>('');
 
@@ -33,12 +27,8 @@ const UserProfileRead = () => {
   }, [data]);
 
   const handleClose = () => {
-    setEditMode(false);
+    toggleEditMode();
     onClose();
-  };
-
-  const handleEditMode = () => {
-    setEditMode((prev) => !prev);
   };
 
   return (
@@ -53,7 +43,7 @@ const UserProfileRead = () => {
           <p>닉네임</p>
           <div>
             <p>{data?.name}</p>
-            <Button onPress={handleEditMode}>
+            <Button onPress={toggleEditMode}>
               <GrCaretNext />
             </Button>
           </div>
