@@ -13,6 +13,7 @@
   font-size: 2rem;
   padding-bottom: 1.5rem;
 }
+
 .step_container {
   display: flex;
   flex-wrap: wrap;
@@ -25,14 +26,14 @@
   text-align: center;
 }
 
-.step_item::before {
-  content: '';
+.step_item_span {
   position: relative;
   z-index: 1;
   display: block;
   width: 2rem;
   height: 2rem;
-  background-color: black;
+  background-color: white;
+  border: 1.2px solid black;
   border-radius: 50%;
   margin: 1rem auto 0;
 }
@@ -51,17 +52,23 @@
   left: 50%;
   background-color: black;
 }
+
 .step_title {
   font-weight: bold;
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
-  color: white;
+  color: black;
   position: relative;
-  top: -27px;
+  top: -20px;
   z-index: 1;
 }
+
 .calendar_container {
   width: 70%;
   margin: auto;
   padding: 1.5rem 0.5rem;
+}
+
+.active-step {
+  background-color: black;
 }
