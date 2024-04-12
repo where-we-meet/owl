@@ -3,7 +3,7 @@ import Logout from '../auth/LogoutButton';
 import UserProfile from '../auth/UserProfileButton';
 import styles from './Header.module.css';
 import Link from 'next/link';
-import { MeetingButton } from '../auth/MeetingButton';
+import { MeetingModalButton } from '../auth/MeetingModalButton';
 
 const Header = async () => {
   const supabase = createClient();
@@ -14,7 +14,7 @@ const Header = async () => {
 
   return (
     <header className={styles.header}>
-      {user ? <MeetingButton /> : null}
+      {user ? <MeetingModalButton /> : null}
       <Link href="/">owl-link</Link>
       <div className={styles.menu}>
         {user ? (
