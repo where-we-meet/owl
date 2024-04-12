@@ -5,6 +5,8 @@ import styles from './SearchBar.module.css';
 
 import SearchResultList from './SearchResultList';
 import { useGetSearchPlace } from '@/hooks/useGetPlace';
+import { Input } from '@nextui-org/react';
+import GeolocationButton from '../GeolocationButton';
 
 const SearchBar = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -30,13 +32,14 @@ const SearchBar = () => {
   return (
     <div className={styles.container}>
       <form className={styles.search_bar}>
-        <input
+        <Input
           id="searchBar"
           placeholder="출발 위치 검색하기"
           onChange={handleSearchInput}
           onFocus={handleInputFocus}
           onBlur={handleInputFocus}
           autoComplete="off"
+          startContent={<GeolocationButton />}
         />
       </form>
       {activatePlaceList && <SearchResultList placeList={placeList} setListViewState={setListViewState} />}
