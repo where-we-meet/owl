@@ -9,6 +9,7 @@ export const useGeoLocation = () => {
   const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
 
   const { id } = useQueryUser();
+  const user = roomUsers.find((user) => user.user_id === id);
 
   const handleSetGeolocation = async () => {
     setIsGpsLoading(true);
@@ -22,15 +23,15 @@ export const useGeoLocation = () => {
     }
   };
 
-  const roomUser = roomUsers.find((user) => user.user_id === id);
-
   useEffect(() => {
-    if (roomUser?.start_location) {
-      setIsGpsLoading(false);
-    } else {
+    if (user && user.start_location === '') {
+      console.log('if', user, user.start_location);
       handleSetGeolocation();
+    } else {
+      console.log('else', user, user?.start_location);
+      setIsGpsLoading(false);
     }
-  }, []);
+  }, [user?.start_location]);
 
   return { handleSetGeolocation };
 };
