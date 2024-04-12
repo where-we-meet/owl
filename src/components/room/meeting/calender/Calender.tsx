@@ -7,7 +7,9 @@ import styles from './Calender.module.css';
 import EntireOfMonth from './EntireOfMonth';
 import checkSelectedDates from './checkSelectedDates';
 
+import { useCalendarStore } from '@/store/calendarStore';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
+
 import { createClient } from '@/utils/supabase/client';
 import { getCurrentUserData } from '@/api/supabaseCSR/supabase';
 import { useParams } from 'next/navigation';
@@ -19,7 +21,7 @@ const Calender = () => {
   const { id }: { id: string } = useParams();
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
-  const [selectedDate, setSelectedDate] = useState<Date[]>([]);
+  const { selectedDate, setSelectedDate } = useCalendarStore();
 
   const { userSchedules } = useGetCalendar(id);
 
@@ -28,16 +30,20 @@ const Calender = () => {
   };
 
   const afterMonth = () => {
-    setNowDate(addMonths(nowDate, 1));
+    setNowDate((prev) => {
+      return addMonths(prev, 1);
+    });
   };
 
   const handleDateClick = (date: Date) => {
     const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
 
     if (isAlreadySelected) {
-      setSelectedDate((prev) => prev.filter((selected) => !isSameDay(selected, date)));
+      const filteredDate = selectedDate.filter((item) => !isSameDay(item, date));
+      setSelectedDate(filteredDate);
     } else {
-      setSelectedDate((prev) => [...prev, date]);
+      const newDateList = [...selectedDate, date];
+      setSelectedDate(newDateList);
     }
   };
 
