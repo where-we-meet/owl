@@ -30,7 +30,7 @@ export const ImageUploadModal = ({
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
-    if (files !== null) {
+    if (files !== null && files !== undefined) {
       const file = files[0];
       if (fileChangeValidation(file)) setFile(file);
       else {
