@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import styles from './page.module.css';
-import { Button } from '@nextui-org/react';
+import { Button, Link } from '@nextui-org/react';
 
 export default function Home() {
   return (
