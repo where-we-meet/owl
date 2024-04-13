@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button, Image, ModalHeader, ModalBody } from '@nextui-org/react';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { GrCaretNext } from 'react-icons/gr';
+import { GrFormNext } from 'react-icons/gr';
 import { IoClose } from 'react-icons/io5';
 
 import styles from './UserProfileRead.module.css';
@@ -48,7 +48,7 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
           <div className={styles.user_edit_container}>
             <p>{data.name}</p>
             <Button onPress={toggleEditMode} className={styles.edit_button}>
-              <GrCaretNext />
+              <GrFormNext style={{ scale: '1.7' }} />
             </Button>
           </div>
         </div>
