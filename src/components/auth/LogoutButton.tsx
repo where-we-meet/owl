@@ -1,7 +1,7 @@
 const Logout = () => {
   return (
     <form action="/auth/signout" method="post">
-      <button type="submit">Sign out</button>
+      <button type="submit">로그아웃</button>
     </form>
   );
 };

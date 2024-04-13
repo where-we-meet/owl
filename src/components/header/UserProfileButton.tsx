@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Modal, ModalContent, useDisclosure } from '@nextui-org/react';
+import { Modal, ModalContent, useDisclosure } from '@nextui-org/react';
 import { useState } from 'react';
 import UserProfileUpdate from './UserProfileUpdate';
 import UserProfileRead from './UserProfileRead';
@@ -11,10 +11,6 @@ import styles from './UserProfileButton.module.css';
 const UserProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editMode, setEditMode] = useState(false);
-
-  const handleOpen = () => {
-    onOpen();
-  };
 
   const handleClose = () => {
     setEditMode(false);
@@ -28,9 +24,7 @@ const UserProfile = () => {
   return (
     <>
       <div className="flex gap-4 items-center">
-        <Button isIconOnly onPress={handleOpen} aria-label="User Profile Setting">
-          <PiUserSquareDuotone />
-        </Button>
+        <PiUserSquareDuotone onClick={onOpen} size="1.5rem" aria-label="User Profile Setting" />
       </div>
 
       <Modal className={styles.modal} backdrop="blur" isOpen={isOpen} onClose={handleClose} hideCloseButton>

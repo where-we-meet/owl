@@ -1,7 +1,7 @@
 'use client';
 import { Meeting } from '../my-owl/meeting/Meeting';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, useDisclosure } from '@nextui-org/react';
+import { HiRectangleStack } from 'react-icons/hi2';
+import { Modal, ModalBody, ModalContent, useDisclosure } from '@nextui-org/react';
 import { MouseEvent } from 'react';
 import styles from './MeetingModalButton.module.css';
 
@@ -14,17 +14,14 @@ export const MeetingModalButton = () => {
 
   return (
     <div>
-      <Button onClick={onOpen} isIconOnly className="border-transparent">
-        <GiHamburgerMenu />
-      </Button>
-      <Modal backdrop="blur" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
+      <HiRectangleStack onClick={onOpen} size="1.4rem" />
+      <Modal backdrop="opaque" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
         <ModalContent>
           <ModalBody className={styles.modalbody}>
             <div onClick={(e) => handleMeetingRedirect(e)}>
               <Meeting />
             </div>
           </ModalBody>
-          {/* <ModalFooter /> */}
         </ModalContent>
       </Modal>
     </div>
