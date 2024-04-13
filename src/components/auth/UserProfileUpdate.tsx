@@ -79,10 +79,11 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
             </span>
             <input type="text" onChange={handleChangeUserName} value={userName} />
           </div>
+          <Button className={styles.save_button} onPress={handleEditDone}>
+            저장
+          </Button>
         </div>
-        <div>
-          <Button onPress={handleEditDone}>저장</Button>
-        </div>
+
         {toggleModal && (
           <ImageUploadModal handleToggleModal={handleToggleModal} setUserProfileURL={setUserProfileURL} />
         )}
