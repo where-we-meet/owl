@@ -1,9 +1,9 @@
 'use client';
 
 import { getMyParticipatingRoomsData, getUserMeetingsId } from '@/api/supabaseCSR/supabase';
-import { getUserId } from '@/utils/my-owl/getUserId';
 import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
 import { useEffect, useState } from 'react';
+import { useQueryUser } from './useQueryUser';
 
 export type UserInfo = {
   user_id: string;
@@ -23,11 +23,11 @@ export type MeetingInfo = {
 };
 
 export const useGetModalData = () => {
-const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
+  const { id: userId } = useQueryUser();
+  const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
 
   useEffect(() => {
     const fetchMeetingInfo = async () => {
-      const userId = await getUserId();
       const roomData = await getUserMeetingsId(userId);
       const roomIds = roomData.map((item) => item.room_id);
       const fetchedData = await getMyParticipatingRoomsData(roomIds);
@@ -39,5 +39,5 @@ const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
     fetchMeetingInfo();
   }, []);
 
-  return meetingInfo
+  return meetingInfo;
 };
