@@ -8,7 +8,7 @@ import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useSettingMap } from '@/hooks/useSettingMap';
 
 import { Spinner } from '@nextui-org/react';
-import styles from './KakaoMap.module.css';
+import styles from './ResultMap.module.css';
 
 const SettingMap = () => {
   const [loading, error] = useKakaoMap();
