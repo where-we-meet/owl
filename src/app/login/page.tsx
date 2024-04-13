@@ -7,9 +7,6 @@ export default function LoginPage() {
   return (
     <main className={styles.main}>
       <section className={styles.hero}>
-        <h1 className={styles.logo}>
-          <Link href="/">OWL-LiNK</Link>
-        </h1>
         <LoginButton />
       </section>
 

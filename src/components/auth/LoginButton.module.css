@@ -7,8 +7,8 @@
 .kakao {
   display: flex;
   align-items: center;
-  width: 438px;
-  height: 66px;
+  width: 360px;
+  height: 54px;
   outline: none;
   border: none;
   background: #fee500;
@@ -28,8 +28,8 @@
 .google {
   display: flex;
   align-items: center;
-  width: 438px;
-  height: 66px;
+  width: 360px;
+  height: 54px;
   outline: none;
   border: none;
   background: white;
