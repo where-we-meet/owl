@@ -9,6 +9,7 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { ImageUploadModal } from '../my-owl/profile/modal/Modal';
 import { IoChevronBack } from 'react-icons/io5';
 
+import styles from './UserProfileUpdate.module.css';
 const MAX_NAME_LENGTH = 16;
 
 const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) => {
@@ -57,16 +58,18 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
       <Button isIconOnly onPress={toggleEditMode}>
         <IoChevronBack />
       </Button>
-      <ModalHeader className="flex flex-col gap-1">프로필 수정</ModalHeader>
-      <ModalBody>
+      <ModalHeader className="flex flex-col gap-1 text-center">
+        <h1 className={styles.header_title}>프로필 수정</h1>
+      </ModalHeader>
+      <ModalBody className={styles.modal_body}>
         <div>
-          <Image width={100} alt="profile_image" src={`${userProfileURL}`} />
+          <Image className={styles.profile} alt="profile_image" src={`${userProfileURL}`} />
           <Button isIconOnly onPress={handleToggleModal}>
             <Image src="/images/edit_mode.svg" alt="edit mode" width={24} height={21} />
           </Button>
         </div>
         <div>
-          <div>
+          <div className={styles.name_container}>
             <span>
               <p>닉네임을 입력해주세요</p>
               <p>

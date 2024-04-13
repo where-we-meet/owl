@@ -7,7 +7,7 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { GrCaretNext } from 'react-icons/gr';
 import { IoClose } from 'react-icons/io5';
 
-import styles from './UserProfileButton.module.css';
+import styles from './UserProfileRead.module.css';
 
 export type UserProfileData = { name: string; profile_url: string | null };
 
