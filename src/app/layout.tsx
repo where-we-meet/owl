@@ -32,8 +32,10 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers>
           <HydrationBoundary state={dehydrate(queryClient)}>
-            <Header />
-            {children}
+            <div className="container">
+              <Header />
+              {children}
+            </div>
           </HydrationBoundary>
         </Providers>
       </body>
