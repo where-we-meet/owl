@@ -11,7 +11,7 @@ const LoginButton = () => {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${location.origin}/auth/callback`
+        redirectTo: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/auth/callback`
       }
     });
   };
