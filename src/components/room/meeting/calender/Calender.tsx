@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { format, subMonths, addMonths, isSameDay } from 'date-fns';
+import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
 
 import styles from './Calender.module.css';
 import EntireOfMonth from './EntireOfMonth';
@@ -13,6 +13,8 @@ import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { useParams } from 'next/navigation';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { getRangeOfSchedule } from '@/api/supabaseCSR/supabase';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -23,6 +25,12 @@ const Calender = () => {
   const { selectedDate, setSelectedDate } = useCalendarStore();
 
   const { userSchedules } = useGetCalendar(id);
+
+  const { data } = useQuery({
+    queryKey: ['range', id],
+    queryFn: () => getRangeOfSchedule(id),
+    select: (data) => data[0]
+  });
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
@@ -36,6 +44,12 @@ const Calender = () => {
 
   const handleDateClick = (date: Date) => {
     const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
+
+    if (!data?.start_date || !data?.end_date) return;
+
+    if (!isWithinInterval(date, { start: new Date(data.start_date), end: new Date(data.end_date) })) {
+      return;
+    }
 
     if (isAlreadySelected) {
       const filteredDate = selectedDate.filter((item) => !isSameDay(item, date));
