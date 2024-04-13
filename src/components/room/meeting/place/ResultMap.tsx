@@ -7,7 +7,7 @@ import Halfway from './Halfway';
 import RangeController from './RangeController';
 import styles from './KakaoMap.module.css';
 
-const KakaoMap = () => {
+const ResultMap = () => {
   const [loading, error] = useKakaoMap();
   const { location, address, halfwayPoint, roomUsers, searchCategory = [] } = useMapController();
 
@@ -41,4 +41,4 @@ const KakaoMap = () => {
   );
 };
 
-export default KakaoMap;
+export default ResultMap;
