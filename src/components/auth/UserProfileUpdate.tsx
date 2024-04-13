@@ -8,6 +8,7 @@ import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { ImageUploadModal } from '../my-owl/profile/modal/Modal';
 import { IoChevronBack } from 'react-icons/io5';
+import { AiFillPlusCircle } from 'react-icons/ai';
 
 import styles from './UserProfileUpdate.module.css';
 const MAX_NAME_LENGTH = 16;
@@ -62,10 +63,10 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
         <h1 className={styles.header_title}>프로필 수정</h1>
       </ModalHeader>
       <ModalBody className={styles.modal_body}>
-        <div>
+        <div className={styles.profile_container}>
           <Image className={styles.profile} alt="profile_image" src={`${userProfileURL}`} />
-          <Button isIconOnly onPress={handleToggleModal}>
-            <Image src="/images/edit_mode.svg" alt="edit mode" width={24} height={21} />
+          <Button className={styles.profile_edit_button} isIconOnly onPress={handleToggleModal}>
+            <AiFillPlusCircle className={styles.edit_icon} />
           </Button>
         </div>
         <div>
