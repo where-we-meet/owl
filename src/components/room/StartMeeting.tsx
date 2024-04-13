@@ -6,7 +6,7 @@ import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import styles from './StartMeeting.module.css';
-import { Button } from '@nextui-org/react';
+import { Button, Input } from '@nextui-org/react';
 
 const StartMeeting = () => {
   const router = useRouter();
@@ -37,19 +37,21 @@ const StartMeeting = () => {
   };
 
   return (
-    <main className={styles.main}>
-      <form onSubmit={startNewRoom}>
-        <div className={styles.date}>
-          <input type="date" min={startDate} name="start" value={startDate} onChange={changeDate} />
-          <input type="date" min={startDate} name="end" />
-        </div>
-        <div className={styles.start_button}>
-          <Button type="submit" color="primary">
-            모임 시작하기
-          </Button>
-        </div>
-      </form>
-    </main>
+    <form onSubmit={startNewRoom}>
+      <div className={styles.date}>
+        <label>
+          시작일
+          <Input type="date" min={startDate} name="start" value={startDate} onChange={changeDate} required />
+        </label>
+        <label>
+          종료일
+          <Input type="date" min={startDate} name="end" required />
+        </label>
+      </div>
+      <div className={styles.start_button}>
+        <Button type="submit">모임 시작하기</Button>
+      </div>
+    </form>
   );
 };
 
