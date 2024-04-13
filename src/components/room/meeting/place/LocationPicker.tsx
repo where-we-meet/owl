@@ -33,7 +33,7 @@ const LocationPicker = () => {
     }
   };
 
-  return <Button onClick={handleSubmitLocation}>다음</Button>;
+  return <Button onClick={handleSubmitLocation}>확정</Button>;
 };
 
 export default LocationPicker;
