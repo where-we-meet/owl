@@ -6,6 +6,8 @@ import UserProfileUpdate from './UserProfileUpdate';
 import UserProfileRead from './UserProfileRead';
 import { PiUserSquareDuotone } from 'react-icons/pi';
 
+import styles from './UserProfileButton.module.css';
+
 const UserProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editMode, setEditMode] = useState(false);
@@ -31,8 +33,8 @@ const UserProfile = () => {
         </Button>
       </div>
 
-      <Modal backdrop="blur" isOpen={isOpen} onClose={handleClose} hideCloseButton>
-        <ModalContent>
+      <Modal className={styles.modal} backdrop="blur" isOpen={isOpen} onClose={handleClose} hideCloseButton>
+        <ModalContent className={styles.modal_container}>
           {editMode ? (
             <UserProfileUpdate toggleEditMode={toggleEditMode} />
           ) : (
