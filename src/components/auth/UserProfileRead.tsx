@@ -54,9 +54,16 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
         </div>
         <div className={styles.login_info_container}>
           <p>로그인정보</p>
-          <div>
+          <div className={styles.sns_image_container}>
             {user.app_metadata.providers.map((SNS: string, index: number) => (
-              <img key={index} src={`/images/${SNS}.svg`} alt={SNS} width={34} height={31} />
+              <Image
+                className={styles.sns_image}
+                key={index}
+                src={`/images/${SNS}.svg`}
+                alt={SNS}
+                width={34}
+                height={31}
+              />
             ))}
           </div>
         </div>
