@@ -1,9 +1,12 @@
-import React from 'react';
-import { isSameDay } from 'date-fns';
+import React, { useState, useEffect } from 'react';
+import { isSameDay, isWithinInterval } from 'date-fns';
+
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
+import SchedulesOfUsers from './SchedulesOfIUsers';
+
 import styles from './Calender.module.css';
 import dayColors from '@/utils/calendar/dayColors';
-import SchedulesOfUsers from './SchedulesOfIUsers';
+
 import type { Tables } from '@/types/supabase';
 
 export type UserSchedule = Tables<'room_schedule'>;
@@ -13,9 +16,10 @@ type Props = {
   selectedDate: Date[];
   userSchedules: UserSchedule[];
   handleDateClick: (date: Date) => void;
+  id: string;
 };
 
-const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, handleDateClick }) => {
+const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, handleDateClick, id }) => {
   const entireOfMonth = calculateOfMonth(nowDate);
 
   const dayStyle = (day: Date) => {
@@ -29,7 +33,9 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, 
           {week.map((day) => (
             <li
               key={day.toISOString()}
-              onClick={() => handleDateClick(day)}
+              onClick={() => {
+                handleDateClick(day);
+              }}
               className={styles.days}
               style={dayStyle(day)}
             >
