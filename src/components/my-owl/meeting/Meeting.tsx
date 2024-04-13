@@ -1,10 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import styles from './Meeting.module.css';
 import { useGetModalData } from '@/hooks/useGetSidebarData';
 import { useEffect, useState } from 'react';
 import { Skeleton } from '@nextui-org/react';
+import styles from './Meeting.module.css';
 
 export const Meeting = () => {
   const router = useRouter();
@@ -22,9 +22,9 @@ export const Meeting = () => {
   };
 
   return (
-    <div>
+    <div className={styles.rooms_box}>
       {ModalData.map((meeting, index) => (
-        <div key={index} className={styles.rooms_box} onClick={() => handleClickRoom(meeting.id)}>
+        <div key={index} onClick={() => handleClickRoom(meeting.id)}>
           <Skeleton isLoaded={isLoaded} className="rounded-lg">
             <div className={styles.room_box}>
               <div className={styles.room_box_left}>
