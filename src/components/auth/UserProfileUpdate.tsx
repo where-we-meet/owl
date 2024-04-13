@@ -72,12 +72,12 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
         <div>
           <div className={styles.name_container}>
             <span className={styles.edit_name_description}>
-              <p>닉네임을 입력해주세요</p>
+              <label htmlFor="name">닉네임을 입력해주세요</label>
               <p>
                 <span className={styles.current_name_length}>{userName.length}</span>/{MAX_NAME_LENGTH}
               </p>
             </span>
-            <input type="text" onChange={handleChangeUserName} value={userName} />
+            <input id="name" type="text" onChange={handleChangeUserName} value={userName} autoFocus />
           </div>
           <Button className={styles.save_button} onPress={handleEditDone}>
             저장

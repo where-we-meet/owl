@@ -56,6 +56,11 @@
   padding-left: 10px;
 }
 
+.name_container > input:focus {
+  color: black;
+  outline: none;
+}
+
 .profile_edit_button {
   position: absolute;
   right: 3px;
