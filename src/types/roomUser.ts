@@ -12,3 +12,10 @@ export type RoomUser = {
     name: string;
   } | null;
 };
+
+export type UpsertUserSchedule = {
+  room_id: string;
+  created_by: string;
+  start_date: string;
+  end_date: string;
+};
