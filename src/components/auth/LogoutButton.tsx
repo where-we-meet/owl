@@ -1,27 +1,7 @@
-import { createClient } from '@/utils/supabase/server';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-
-const Logout = async () => {
-  const signOut = async () => {
-    'use server';
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      redirect('/error');
-    }
-
-    revalidatePath('/', 'layout');
-    redirect('/');
-  };
-
+const Logout = () => {
   return (
-    <form>
-      <button formAction={signOut} role="button">
-        로그아웃
-      </button>
+    <form action="/auth/signout" method="post">
+      <button type="submit">Sign out</button>
     </form>
   );
 };
