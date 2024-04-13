@@ -1,5 +1,4 @@
 import { Button } from '@nextui-org/react';
-import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 declare global {
