@@ -1,8 +1,8 @@
+import { Dispatch, SetStateAction } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { getFileName } from '@/utils/my-owl/profile/modal/getFileName';
-import { Dispatch, SetStateAction } from 'react';
-import { Tables } from '@/types/supabase';
-import { UserLocationData } from '@/types/place.types';
+import type { UserLocationData } from '@/types/place.types';
+import type { UpsertUserSchedule } from '@/types/roomUser';
 
 const supabase = createClient();
 
@@ -16,13 +16,6 @@ export const getCurrentUserData = async () => {
 // supabase에서 roomId를 통해 해당 room 일정과 관련된 모든 Data 반환
 export const getUserSchedule = async (id: string) => {
   const { data, error } = await supabase.from('room_schedule').select('*').eq('room_id', id);
-  if (error) throw error;
-  return data;
-};
-
-export const updateSchedule = async (id: string, dateList: []) => {
-  const { data, error } = await supabase.from('room_schedule').upsert({ id: id, date_list: dateList }).select();
-
   if (error) throw error;
   return data;
 };
@@ -117,6 +110,10 @@ export const updateStartLocation = async (payload: UserLocationData) => {
     .update(payload)
     .eq('room_id', payload.room_id)
     .eq('user_id', payload.user_id);
+};
+
+export const upsertSchedule = async (payload: UpsertUserSchedule[]) => {
+  const { data, error } = await supabase.from('room_schedule').upsert(payload);
 };
 
 // 모임 시작하기 페이지에서 설정한 일정 선택 범위 가져오는 로직

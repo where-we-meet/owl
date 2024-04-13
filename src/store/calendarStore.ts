@@ -2,14 +2,15 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 interface CalendarState {
-  selectedDate: Date[];
-  setSelectedDate: (selectedDate: Date[]) => void;
+  selectedDates: Date[];
+  setSelectedDates: (selectedDates: Date[]) => void;
 }
+
 export const useCalendarStore = create(
   persist<CalendarState>(
     (set) => ({
-      selectedDate: [],
-      setSelectedDate: (selectedDate) => set({ selectedDate })
+      selectedDates: [],
+      setSelectedDates: (selectedDates) => set({ selectedDates })
     }),
     {
       name: 'setting-calendar-storage',

@@ -22,7 +22,7 @@ const Calender = () => {
   const { id }: { id: string } = useParams();
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
-  const { selectedDate, setSelectedDate } = useCalendarStore();
+  const { selectedDates, setSelectedDates } = useCalendarStore();
 
   const { userSchedules } = useGetCalendar(id);
 
@@ -43,7 +43,7 @@ const Calender = () => {
   };
 
   const handleDateClick = (date: Date) => {
-    const isAlreadySelected = selectedDate.some((selected) => isSameDay(selected, date));
+    const isAlreadySelected = selectedDates.some((selected) => isSameDay(selected, date));
 
     if (!data?.start_date || !data?.end_date) return;
 
@@ -52,30 +52,30 @@ const Calender = () => {
     }
 
     if (isAlreadySelected) {
-      const filteredDate = selectedDate.filter((item) => !isSameDay(item, date));
-      setSelectedDate(filteredDate);
+      const filteredDate = selectedDates.filter((item) => !isSameDay(item, date));
+      setSelectedDates(filteredDate);
     } else {
-      const newDateList = [...selectedDate, date];
-      setSelectedDate(newDateList);
+      const newDateList = [...selectedDates, date];
+      setSelectedDates(newDateList);
     }
   };
 
   const handleDateUpload = (date: Date) => {
-    if (!checkSelectedDates(selectedDate)) return;
+    if (!checkSelectedDates(selectedDates)) return;
 
-    const newDateList = [...selectedDate, date];
-    setSelectedDate(newDateList);
+    const newDateList = [...selectedDates, date];
+    setSelectedDates(newDateList);
   };
 
   return (
     <>
       <div className={styles.calendar_container}>
         <div>
-          <span onClick={prevMonth}>◀</span>
-          <strong>
+          <button onClick={prevMonth}>◀</button>
+          <span>
             {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
-          </strong>
-          <span onClick={afterMonth}>▶</span>
+          </span>
+          <button onClick={afterMonth}>▶</button>
         </div>
 
         <div className={styles.scehdule_container}>
@@ -92,7 +92,7 @@ const Calender = () => {
           <div className={styles.dates}>
             <EntireOfMonth
               nowDate={nowDate}
-              selectedDate={selectedDate}
+              selectedDate={selectedDates}
               userSchedules={userSchedules}
               handleDateClick={handleDateClick}
               id={id}
@@ -101,7 +101,12 @@ const Calender = () => {
         </div>
 
         <div>
-          <Button onClick={() => handleDateUpload} disabled={!checkSelectedDates(selectedDate)}>
+          <Button
+            size="sm"
+            className={styles.next_button}
+            onClick={() => handleDateUpload}
+            disabled={!checkSelectedDates(selectedDates)}
+          >
             <Link href={`/room/${id}/pick-place`}>다음</Link>
           </Button>
         </div>

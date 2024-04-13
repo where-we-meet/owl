@@ -27,7 +27,13 @@ export const insertRoomUser = async ({
   user_id: string;
   is_admin: boolean;
 }) => {
-  const { data, error } = await supabase.from('userdata_room').insert([{ room_id, user_id, is_admin }]);
-  if (error) throw error;
+  const { data, error: insertUserError } = await supabase
+    .from('userdata_room')
+    .insert([{ room_id, user_id, is_admin }]);
+  const { error: insertScheduleError } = await supabase
+    .from('room_schedule')
+    .insert([{ room_id, created_by: user_id }]);
+  if (insertUserError) throw insertUserError;
+  if (insertScheduleError) throw insertScheduleError;
   return data;
 };
