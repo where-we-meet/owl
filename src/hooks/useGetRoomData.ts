@@ -1,5 +1,5 @@
 import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { RoomUser } from '@/types/roomUser';
@@ -8,22 +8,11 @@ export const useGetRoomData = (roomId: string, userId: string) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
   const { data = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
-  const [roomUsers, setRoomUsers] = useState(data);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      const adminUser = data.filter((user) => user.is_admin);
-      const currentUser = data.filter((user) => !user.is_admin && user.user_id === userId);
-      const otherUsers = data.filter((user) => !user.is_admin && user.user_id !== userId);
-
-      const sortedUsers = [...adminUser, ...currentUser, ...otherUsers];
-
-      setRoomUsers(sortedUsers);
-      setIsLoading(false);
-    };
-    getUserData();
-  }, [data]);
+  const adminUser = data.filter((user) => user.is_admin);
+  const currentUser = data.filter((user) => !user.is_admin && user.user_id === userId);
+  const otherUsers = data.filter((user) => !user.is_admin && user.user_id !== userId);
+  const roomUsers = [...adminUser, ...currentUser, ...otherUsers];
 
   useEffect(() => {
     const subscription = supabase
@@ -42,10 +31,8 @@ export const useGetRoomData = (roomId: string, userId: string) => {
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${roomId}` },
-        (payload) => {
-          console.log('insert');
-          const updated = payload.new as RoomUser;
-          queryClient.setQueryData(['roomUsers'], [...roomUsers, updated]);
+        (_payload) => {
+          queryClient.refetchQueries({ queryKey: ['roomUsers'] });
         }
       )
       .subscribe((status, err) => {
@@ -54,7 +41,7 @@ export const useGetRoomData = (roomId: string, userId: string) => {
         }
 
         if (status === 'CHANNEL_ERROR') {
-          console.log(`에러 : ${err?.message}`);
+          console.error(`에러 : ${err?.message}`);
         }
 
         if (status === 'TIMED_OUT') {
@@ -71,5 +58,5 @@ export const useGetRoomData = (roomId: string, userId: string) => {
     };
   }, [supabase, roomUsers]);
 
-  return { roomUsers, isLoading };
+  return { roomUsers };
 };
