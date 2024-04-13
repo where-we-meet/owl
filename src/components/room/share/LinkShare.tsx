@@ -15,17 +15,16 @@ import {
 const LinkShare = () => {
   const { id: roomId } = useParams();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const shareLink = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${roomId}`;
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(window.origin);
+      await navigator.clipboard.writeText(shareLink);
       alert('복사 성공!');
     } catch (error) {
       alert('복사 실패!');
     }
   };
-
-  const shareLink = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${roomId}`;
 
   return (
     <>
@@ -38,7 +37,7 @@ const LinkShare = () => {
                 <Input type="text" defaultValue={shareLink} disabled />
                 <button onClick={handleCopy}>복사</button>
                 <div>
-                  <a href={`mailto:?subject=${window.origin}`}>메일로 공유</a>
+                  <a href={`mailto:?subject=${shareLink}`}>메일로 공유</a>
                   <KakaoTalkShare link={shareLink} />
                 </div>
               </ModalBody>
