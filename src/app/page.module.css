@@ -87,7 +87,7 @@
   margin-top: 40px;
   max-width: 900px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 50px;
   justify-content: space-around;
 }
@@ -120,8 +120,8 @@
   flex-grow: 1;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
   .use_cases {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
