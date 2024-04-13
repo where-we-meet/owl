@@ -3,6 +3,7 @@ import { Meeting } from '../my-owl/meeting/Meeting';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, useDisclosure } from '@nextui-org/react';
 import { MouseEvent } from 'react';
+import styles from './MeetingModalButton.module.css';
 
 export const MeetingModalButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -18,12 +19,12 @@ export const MeetingModalButton = () => {
       </Button>
       <Modal backdrop="blur" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
         <ModalContent>
-          <ModalBody>
+          <ModalBody className={styles.modalbody}>
             <div onClick={(e) => handleMeetingRedirect(e)}>
               <Meeting />
             </div>
           </ModalBody>
-          <ModalFooter />
+          {/* <ModalFooter /> */}
         </ModalContent>
       </Modal>
     </div>
