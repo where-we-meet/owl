@@ -71,10 +71,10 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
         </div>
         <div>
           <div className={styles.name_container}>
-            <span>
+            <span className={styles.edit_name_description}>
               <p>닉네임을 입력해주세요</p>
               <p>
-                {userName.length}/{MAX_NAME_LENGTH}
+                <span className={styles.current_name_length}>{userName.length}</span>/{MAX_NAME_LENGTH}
               </p>
             </span>
             <input type="text" onChange={handleChangeUserName} value={userName} />

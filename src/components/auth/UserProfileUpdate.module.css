@@ -32,24 +32,23 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border-bottom: 1px solid black;
+
   margin-top: 60px;
 }
 
-.name_container > p {
+.edit_name_description {
+  display: flex;
+  justify-content: space-between;
+
   color: gray;
 }
 
-.user_edit_container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 10px;
+.current_name_length {
+  color: black;
 }
 
-.user_edit_container > p {
-  font-size: 1.1rem;
+.name_container > input {
+  background-color: white;
 }
 
 .profile_edit_button {
