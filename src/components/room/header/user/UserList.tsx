@@ -4,6 +4,8 @@ import { useGetRoomData } from '@/hooks/useGetRoomData';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
+import styles from './UserList.module.css';
+import { Avatar, Tooltip } from '@nextui-org/react';
 
 const UserList = () => {
   const { id: userId } = useQueryUser();
@@ -23,16 +25,14 @@ const UserList = () => {
   }, [roomUsers.length]);
 
   return (
-    <ul>
+    <ul className={styles.user_list}>
       {roomUsers.map((user) => {
         return (
           user.users && (
             <li key={user.id}>
-              <figure>
-                <div>{user.users.name}</div>
-                <img src={`${user.users.profile_url}`} alt="기본이미지" width={100} height={70} />
-              </figure>
-              <p>{user.start_location}</p>
+              <Tooltip showArrow={true} content={user.start_location} placement="bottom">
+                <Avatar isBordered src={`${user.users.profile_url}`} showFallback name={user.users.name} />
+              </Tooltip>
             </li>
           )
         );
