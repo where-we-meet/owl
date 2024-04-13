@@ -9,3 +9,119 @@
 .start {
   color: white;
 }
+
+.header {
+  width: 100%;
+  flex-grow: 2;
+}
+
+.image_background {
+  background-image: url(../../public/images/main_landing_bg.png);
+  background-size: cover;
+  background-position-y: 25%;
+  height: 45%;
+}
+
+.background_color {
+  background-color: rgba(0, 0, 0, 0.671);
+  background-size: cover;
+  height: 45%;
+}
+
+.copy_container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding: 1rem;
+}
+
+.head_copy {
+  margin-top: 4rem;
+  color: white;
+  font-weight: 600;
+  font-size: clamp(1rem, 2.5vw, 3rem);
+  line-height: 1.2;
+}
+
+.middle_copy {
+  margin-top: 2rem;
+  color: white;
+  line-height: 1.5;
+  font-size: clamp(0.5rem, 2.5vw, 1.2rem);
+}
+
+.button {
+  position: relative;
+  width: 20%;
+  margin-top: 2rem !important;
+  margin: auto;
+  font-size: clamp(0.5rem, 2vw, 1.2rem);
+}
+
+.section {
+  width: 100%;
+  text-align: center;
+
+  margin: 40px 0px;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  flex-grow: 1;
+}
+
+/**/
+.section > h3 {
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  min-width: 315px;
+  padding: 10px;
+}
+
+.use_cases {
+  width: 100%;
+  margin-top: 40px;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 50px;
+  justify-content: space-around;
+}
+
+.use_cases > span {
+  gap: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px;
+}
+
+.use_case {
+  font-size: 1rem;
+}
+.footer {
+  width: 100%;
+
+  background-color: rgb(12, 2, 21);
+  color: white;
+
+  padding: 10px;
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: space-between;
+
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 400px) {
+  .use_cases {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
