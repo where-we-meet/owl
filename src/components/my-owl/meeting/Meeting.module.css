@@ -1,13 +1,3 @@
-.meeting_container {
-  margin: 20px;
-  border-radius: 10px;
-  height: 80vh;
-  width: 95%;
-  background-color: rgb(82, 82, 82);
-
-  overflow-y: scroll;
-}
-
 .rooms_box {
   padding: 10px;
   min-width: 90%;
@@ -24,11 +14,11 @@
   justify-content: space-between;
   align-items: center;
 
-  background-color: rgb(255, 255, 255);
+  background-color: #fafbfc;
 }
 
 .room_box:hover {
-  background-color: rgb(240, 240, 240);
+  background-color: #f6f8fa;
 }
 
 .room_box_left {

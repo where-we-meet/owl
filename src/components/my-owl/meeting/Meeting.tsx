@@ -22,7 +22,7 @@ export const Meeting = () => {
   };
 
   return (
-    <div className={styles.meeting_container}>
+    <div>
       {ModalData.map((meeting, index) => (
         <div key={index} className={styles.rooms_box} onClick={() => handleClickRoom(meeting.id)}>
           <Skeleton isLoaded={isLoaded} className="rounded-lg">
