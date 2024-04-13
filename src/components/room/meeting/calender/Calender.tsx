@@ -71,11 +71,11 @@ const Calender = () => {
     <>
       <div className={styles.calendar_container}>
         <div>
-          <button onClick={prevMonth}>◀</button>
-          <span>
+          <span onClick={prevMonth}>◀</span>
+          <strong>
             {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
-          </span>
-          <button onClick={afterMonth}>▶</button>
+          </strong>
+          <span onClick={afterMonth}>▶</span>
         </div>
 
         <div className={styles.scehdule_container}>
@@ -101,12 +101,7 @@ const Calender = () => {
         </div>
 
         <div>
-          <Button
-            size="sm"
-            className={styles.next_button}
-            onClick={() => handleDateUpload}
-            disabled={!checkSelectedDates(selectedDate)}
-          >
+          <Button onClick={() => handleDateUpload} disabled={!checkSelectedDates(selectedDate)}>
             <Link href={`/room/${id}/pick-place`}>다음</Link>
           </Button>
         </div>
