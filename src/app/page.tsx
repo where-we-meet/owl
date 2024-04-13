@@ -1,14 +1,13 @@
 import Link from 'next/link';
 import styles from './page.module.css';
+import { Button } from '@nextui-org/react';
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <section className={styles.section}>
-        <Link className={styles.start} href="/start">
-          모임 시작하기
-        </Link>
-      </section>
+      <Button href="/start" as={Link} variant="flat" size="lg">
+        모임 시작하기
+      </Button>
     </main>
   );
 }
