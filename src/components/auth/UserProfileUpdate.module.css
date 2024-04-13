@@ -1,13 +1,3 @@
-.modal {
-  max-width: 100%;
-  height: 98%;
-
-  margin: 0px;
-
-  position: absolute;
-  bottom: 0px;
-}
-
 .header_title {
   font-size: 26px;
 }
@@ -17,13 +7,15 @@
   align-items: center;
   padding-top: 60px;
 }
-
+.profile_container {
+  display: flex;
+  position: relative;
+}
 .profile {
   width: 130px;
   height: 130px;
 
   margin: 10px;
-  margin-bottom: 60px;
   border-radius: 50%;
 
   object-fit: cover;
@@ -31,6 +23,7 @@
 
   display: flex;
   justify-content: center;
+  z-index: 0;
 }
 
 .name_container {
@@ -40,6 +33,7 @@
   flex-direction: column;
   gap: 10px;
   border-bottom: 1px solid black;
+  margin-top: 60px;
 }
 
 .name_container > p {
@@ -58,30 +52,15 @@
   font-size: 1.1rem;
 }
 
-.edit_button {
-  background-color: transparent;
-  height: fit-content;
-  padding: 0px;
+.profile_edit_button {
+  position: absolute;
+  right: 3px;
+  bottom: 4px;
+  background-color: white;
+  scale: 0.8;
+  border-radius: 25px;
 }
 
-.login_info_container {
-  text-align: left;
-  min-width: 30rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  border-bottom: 1px solid black;
-}
-
-.login_info_container > p {
-  color: gray;
-}
-
-.sns_image_container {
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.sns_image {
-  border-radius: 10px;
+.edit_icon {
+  scale: 3.9;
 }
