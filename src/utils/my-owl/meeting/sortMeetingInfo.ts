@@ -1,4 +1,4 @@
-import { MeetingInfo } from '@/components/my-owl/meeting/Meeting';
+import { MeetingInfo } from '@/hooks/useGetSidebarData';
 
 export const sortMeetingInfo = (meetingInfo: MeetingInfo[]): MeetingInfo[] => {
   return meetingInfo.sort((a, b) => {
