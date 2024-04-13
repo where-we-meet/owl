@@ -25,11 +25,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className={styles.room_container}>
-        <h1 className={styles.room_name}>호기심 많은 올빼미</h1>
         {currentStep === 1 && <FirstStep id={id} />}
         {currentStep === 2 && <SecondtStep id={id} />}
-        <div className={styles.calendar_container}>{children}</div>
       </div>
+      <div className={styles.calendar_container}>{children}</div>
     </>
   );
 };
