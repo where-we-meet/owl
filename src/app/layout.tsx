@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Header from '@/components/layout/Header';
+
 import Providers from './providers';
 import './globals.css';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { getSession } from '@/api/auth';
 import getQueryClient from '@/utils/getQueryClient';
 import type { User } from '@supabase/supabase-js';
+import Header from '@/components/header/Header';
+import { getSession } from '@/api/auth/getSession';
 
 const inter = Inter({ subsets: ['latin'] });
 
