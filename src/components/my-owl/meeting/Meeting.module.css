@@ -1,0 +1,64 @@
+.rooms_box {
+  padding: 10px;
+  min-width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.room_box {
+  padding: 20px;
+  border-radius: 10px;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fafbfc;
+}
+
+.room_box:hover {
+  background-color: #f6f8fa;
+}
+
+.room_box_left {
+  text-align: left;
+  line-height: 25px;
+  line-height: 1.5;
+}
+
+.meeting_name {
+  font-size: 1.3rem;
+}
+.meeting_date {
+  font-size: 1.1rem;
+}
+
+.meeting_location {
+  font-size: 1.1rem;
+}
+
+.room_box_right {
+  text-align: right;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.participants_container {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.participant_profile {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  background-size: cover;
+  background-position: center;
+}

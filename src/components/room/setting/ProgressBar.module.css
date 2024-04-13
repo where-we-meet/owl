@@ -1,0 +1,31 @@
+.steps {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #8a2be2;
+  color: white;
+}
+
+.progressWrapper {
+  position: absolute;
+  top: 35%;
+  left: 0;
+  z-index: -1;
+}

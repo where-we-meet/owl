@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kakao {
+  display: flex;
+  align-items: center;
+  width: 360px;
+  height: 54px;
+  outline: none;
+  border: none;
+  background: #fee500;
+  color: #000000 85%;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+}
+
+.kakao > span {
+  flex: 1;
+  color: #000000 85%;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Roboto;
+}
+
+.google {
+  display: flex;
+  align-items: center;
+  width: 360px;
+  height: 54px;
+  outline: none;
+  border: none;
+  background: white;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+}
+
+.google > span {
+  flex: 1;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Roboto;
+}

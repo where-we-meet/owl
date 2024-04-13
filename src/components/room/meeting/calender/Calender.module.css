@@ -1,0 +1,68 @@
+.calendar_container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.scehdule_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+.weekday_container {
+  display: flex;
+}
+
+.weekday {
+  display: flex;
+  width: 70px;
+  padding: 30px;
+  flex-wrap: nowrap;
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+}
+
+.day_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.days {
+  width: 70px;
+  padding: 30px;
+  height: 70px;
+  position: relative;
+}
+
+.selected_date_circle {
+  width: 35px;
+  height: 35px;
+  background-color: #016e9c5a;
+  border-radius: 50%;
+  position: absolute;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.selected_date_circle_of_users {
+  width: 35px;
+  height: 35px;
+  background-color: #35017621;
+  border-radius: 50%;
+  position: absolute;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.button_container {
+  display: flex;
+}
