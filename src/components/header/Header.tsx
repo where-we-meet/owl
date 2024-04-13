@@ -14,7 +14,7 @@ const Header = async () => {
 
   return (
     <header className={styles.header}>
-      <Link href="http://localhost:3000/">owl-link</Link>
+      <Link href="/">owl-link</Link>
       <div className={styles.menu}>
         {user ? (
           <>
