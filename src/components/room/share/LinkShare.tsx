@@ -1,4 +1,5 @@
 'use client';
+import { useParams } from 'next/navigation';
 import KakaoTalkShare from './KakaoShare';
 import {
   Button,
@@ -12,6 +13,7 @@ import {
 } from '@nextui-org/react';
 
 const LinkShare = () => {
+  const { id: roomId } = useParams();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleCopy = async () => {
@@ -23,6 +25,8 @@ const LinkShare = () => {
     }
   };
 
+  const shareLink = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${roomId}`;
+
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="transparent">
@@ -31,11 +35,11 @@ const LinkShare = () => {
             <>
               <ModalHeader className="flex flex-col gap-1">공유하기</ModalHeader>
               <ModalBody>
-                <Input type="text" defaultValue={window.origin} disabled />
+                <Input type="text" defaultValue={shareLink} disabled />
                 <button onClick={handleCopy}>복사</button>
                 <div>
                   <a href={`mailto:?subject=${window.origin}`}>메일로 공유</a>
-                  <KakaoTalkShare />
+                  <KakaoTalkShare link={shareLink} />
                 </div>
               </ModalBody>
               <ModalFooter>

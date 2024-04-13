@@ -1,3 +1,4 @@
+import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 declare global {
@@ -6,7 +7,7 @@ declare global {
   }
 }
 
-function KakaoTalkShare() {
+function KakaoTalkShare({ link }: { link: string }) {
   useEffect(() => {
     const kakaoScript = document.createElement('script');
     kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
@@ -26,8 +27,8 @@ function KakaoTalkShare() {
         objectType: 'text',
         text: `모임 링크 바로가기`,
         link: {
-          mobileWebUrl: `${window.origin}`,
-          webUrl: `${window.origin}`
+          mobileWebUrl: link,
+          webUrl: link
         }
       });
     }
