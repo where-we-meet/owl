@@ -1,3 +1,4 @@
+import { getCallbackURL } from '@/utils/getCallbackURL';
 import { createClient } from '@/utils/supabase/server';
 
 export const getSession = async () => {
@@ -9,4 +10,14 @@ export const getSession = async () => {
 
   if (!user || error) throw error;
   return user;
+};
+
+export const logInWithOAuth = async (provider: 'google' | 'kakao') => {
+  const supabase = createClient();
+  await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: getCallbackURL()
+    }
+  });
 };
