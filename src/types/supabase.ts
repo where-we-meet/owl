@@ -9,41 +9,41 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      room_schedule: {
+      room_detail: {
         Row: {
           created_at: string
-          created_by: string | null
+          created_by: string
           end_date: string | null
           id: string
           room_id: string | null
-          start_date: string | null
+          start_date: string
         }
         Insert: {
           created_at?: string
-          created_by?: string | null
+          created_by?: string
           end_date?: string | null
           id?: string
           room_id?: string | null
-          start_date?: string | null
+          start_date: string
         }
         Update: {
           created_at?: string
-          created_by?: string | null
+          created_by?: string
           end_date?: string | null
           id?: string
           room_id?: string | null
-          start_date?: string | null
+          start_date?: string
         }
         Relationships: [
           {
-            foreignKeyName: "public_room_schedule_created_by_fkey"
+            foreignKeyName: "public_room_detail_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "public_room_schedule_room_id_fkey"
+            foreignKeyName: "public_room_detail_room_id_fkey"
             columns: ["room_id"]
             isOneToOne: false
             referencedRelation: "rooms"
@@ -53,48 +53,33 @@ export type Database = {
       }
       rooms: {
         Row: {
-          confirmed_date: string | null
           created_at: string
-          created_by: string | null
-          end_date: string | null
+          created_by_user: string
           id: string
-          lat: string | null
-          lng: string | null
           location: string | null
           name: string | null
-          start_date: string | null
-          verified: boolean
+          verified: boolean | null
         }
         Insert: {
-          confirmed_date?: string | null
-          created_at?: string
-          created_by?: string | null
-          end_date?: string | null
-          id?: string
-          lat?: string | null
-          lng?: string | null
+          created_at: string
+          created_by_user: string
+          id: string
           location?: string | null
           name?: string | null
-          start_date?: string | null
-          verified?: boolean
+          verified?: boolean | null
         }
         Update: {
-          confirmed_date?: string | null
           created_at?: string
-          created_by?: string | null
-          end_date?: string | null
+          created_by_user?: string
           id?: string
-          lat?: string | null
-          lng?: string | null
           location?: string | null
           name?: string | null
-          start_date?: string | null
-          verified?: boolean
+          verified?: boolean | null
         }
         Relationships: [
           {
-            foreignKeyName: "public_rooms_created_by_fkey"
-            columns: ["created_by"]
+            foreignKeyName: "public_rooms_created_by_user_fkey"
+            columns: ["created_by_user"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -106,8 +91,6 @@ export type Database = {
           created_at: string
           id: string
           is_admin: boolean
-          lat: string | null
-          lng: string | null
           room_id: string
           start_location: string | null
           user_id: string
@@ -116,8 +99,6 @@ export type Database = {
           created_at?: string
           id?: string
           is_admin?: boolean
-          lat?: string | null
-          lng?: string | null
           room_id: string
           start_location?: string | null
           user_id: string
@@ -126,8 +107,6 @@ export type Database = {
           created_at?: string
           id?: string
           is_admin?: boolean
-          lat?: string | null
-          lng?: string | null
           room_id?: string
           start_location?: string | null
           user_id?: string
@@ -152,19 +131,25 @@ export type Database = {
       users: {
         Row: {
           created_at: string
+          google_auth_key: string | null
           id: string
+          kakao_auth_key: string | null
           name: string
           profile_url: string | null
         }
         Insert: {
           created_at?: string
+          google_auth_key?: string | null
           id?: string
+          kakao_auth_key?: string | null
           name: string
           profile_url?: string | null
         }
         Update: {
           created_at?: string
+          google_auth_key?: string | null
           id?: string
+          kakao_auth_key?: string | null
           name?: string
           profile_url?: string | null
         }
