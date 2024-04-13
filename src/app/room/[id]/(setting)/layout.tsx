@@ -6,7 +6,7 @@ import { useParams, usePathname } from 'next/navigation';
 import FirstStep from './FirstStep';
 import SecondtStep from './SecondStep';
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const { id } = useParams();
 
@@ -33,4 +33,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;
