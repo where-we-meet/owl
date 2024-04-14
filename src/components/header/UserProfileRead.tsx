@@ -68,7 +68,7 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
             ))}
           </div>
         </div>
-        <div>
+        <div className={styles.logout_button}>
           <Logout />
         </div>
       </ModalBody>
