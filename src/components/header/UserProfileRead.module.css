@@ -1,29 +1,20 @@
-.modal {
-  max-width: 100%;
-  height: 98%;
-
-  margin: 0px;
-
-  position: absolute;
-  bottom: 0px;
-}
-
 .header_title {
-  font-size: 26px;
+  font-size: 1.6rem;
+  min-width: 11.5rem;
 }
 
 .modal_body {
   overflow: hidden;
   align-items: center;
-  padding-top: 60px;
+  padding-top: 3.75rem;
 }
 
 .profile {
-  width: 130px;
-  height: 130px;
+  max-width: 8.125rem;
+  min-height: 8.125rem;
 
-  margin: 10px;
-  margin-bottom: 60px;
+  margin: 0.625rem;
+  margin-bottom: 3.75rem;
   border-radius: 50%;
 
   object-fit: cover;
@@ -36,10 +27,12 @@
 .name_container {
   text-align: left;
   min-width: 30rem;
+
   display: flex;
+
   flex-direction: column;
-  gap: 10px;
-  border-bottom: 1.5px solid rgb(155, 155, 155);
+  gap: 0.625rem;
+  border-bottom: 0.09375rem solid rgb(155, 155, 155);
 }
 
 .name_container > p {
@@ -51,7 +44,7 @@
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 .user_edit_container > p {
@@ -61,16 +54,17 @@
 .edit_button {
   background-color: transparent;
   height: fit-content;
-  padding: 0px;
+  padding: 0rem;
 }
 
 .login_info_container {
+  margin-top: 0.625rem;
   text-align: left;
   min-width: 30rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border-bottom: 1.5px solid rgb(155, 155, 155);
+  border-bottom: 0.09375rem solid rgb(155, 155, 155);
 }
 
 .login_info_container > p {
@@ -78,12 +72,12 @@
 }
 
 .sns_image_container {
-  border-radius: 10px;
-  margin-bottom: 10px;
+  border-radius: 0.625rem;
+  margin-bottom: 0.625rem;
 }
 
 .sns_image {
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 .logout_button {
@@ -95,4 +89,40 @@
 .logout_button:hover {
   color: black;
   border-bottom: 1.5px solid black;
+}
+
+@media only screen and (min-width: 0px) {
+  .header_title {
+    color: red;
+  }
+  .name_container {
+    min-width: 15rem;
+  }
+  .login_info_container {
+    min-width: 15rem;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .header_title {
+    color: blue;
+  }
+  .name_container {
+    min-width: 25rem;
+  }
+  .login_info_container {
+    min-width: 25rem;
+  }
+}
+
+@media only screen and (min-width: 650px) {
+  .header_title {
+    color: cadetblue;
+  }
+  .name_container {
+    min-width: 35rem;
+  }
+  .login_info_container {
+    min-width: 35rem;
+  }
 }

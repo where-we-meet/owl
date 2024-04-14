@@ -44,28 +44,30 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
       </ModalHeader>
       <ModalBody className={styles.modal_body}>
         <Image className={styles.profile} alt="profile_image" src={`${data.profile_url}`} />
-        <div className={styles.name_container}>
-          <p>닉네임</p>
-          <div className={styles.user_edit_container}>
-            <p>{data.name}</p>
-            <Button onPress={toggleEditMode} className={styles.edit_button}>
-              <GrFormNext style={{ scale: '1.7' }} />
-            </Button>
+        <div>
+          <div className={styles.name_container}>
+            <p>닉네임</p>
+            <div className={styles.user_edit_container}>
+              <p>{data.name}</p>
+              <Button onPress={toggleEditMode} className={styles.edit_button}>
+                <GrFormNext style={{ scale: '1.7' }} />
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className={styles.login_info_container}>
-          <p>로그인정보</p>
-          <div className={styles.sns_image_container}>
-            {user.app_metadata.providers.map((SNS: string, index: number) => (
-              <Image
-                className={styles.sns_image}
-                key={index}
-                src={`/images/${SNS}.svg`}
-                alt={SNS}
-                width={34}
-                height={31}
-              />
-            ))}
+          <div className={styles.login_info_container}>
+            <p>로그인정보</p>
+            <div className={styles.sns_image_container}>
+              {user.app_metadata.providers.map((SNS: string, index: number) => (
+                <Image
+                  className={styles.sns_image}
+                  key={index}
+                  src={`/images/${SNS}.svg`}
+                  alt={SNS}
+                  width={34}
+                  height={31}
+                />
+              ))}
+            </div>
           </div>
         </div>
         <div className={styles.logout_button}>
