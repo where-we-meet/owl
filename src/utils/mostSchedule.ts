@@ -19,5 +19,5 @@ export const mostSchedule = (userSchedules: any) => {
     }
   });
 
-  return maxDates;
+  return { maxDates, maxLength };
 };
