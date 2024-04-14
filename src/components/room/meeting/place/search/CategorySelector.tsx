@@ -17,24 +17,29 @@ const SEARCH_CATEGORY = [
 ];
 
 const CategorySelector = () => {
+  const searchOption = useSearchDataStore((state) => state.searchOption);
   const setSearchOption = useSearchDataStore((state) => state.setSearchOption);
   const { lat, lng } = useHalfwayDataStore((state) => state);
   const range = useRangeStore((state) => state.range);
 
-  const handleCategorySearch = (event: MouseEvent<HTMLUListElement>) => {
-    const selectCategory = (event.target as HTMLLIElement).id;
+  const handleSearch = (category: string) => {
     const newSearchOption = {
-      query: selectCategory,
+      query: category,
       x: '' + lng,
       y: '' + lat,
       radius: range
     };
     setSearchOption(newSearchOption);
   };
+
   return (
-    <ul className={styles.category} onClick={handleCategorySearch}>
+    <ul className={styles.category}>
       {SEARCH_CATEGORY.map((item) => (
-        <li key={item.name} id={item.name}>
+        <li
+          key={item.name}
+          className={searchOption && searchOption.query === item.name ? `${styles.selected}` : ''}
+          onClick={() => handleSearch(item.name)}
+        >
           {item.icon}
           <span>{item.name}</span>
         </li>
