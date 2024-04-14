@@ -1,38 +1,22 @@
-import { ChangeEvent, Fragment, useEffect, useState } from 'react';
-import { Circle } from 'react-kakao-maps-sdk';
+import { ChangeEvent } from 'react';
 import styles from './RangeController.module.css';
-import { useHalfwayDataStore } from '@/store/placeStore';
+import { useRangeStore } from '@/store/placeStore';
 
 const RADIUS_RANGES = [300, 1000, 2000, 4000];
 
-const RangeController = ({ center }: { center: { lat: number; lng: number } }) => {
-  const [radius, setRadius] = useState(RADIUS_RANGES[0]);
-  const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
+const RangeController = () => {
+  const { range, setRange } = useRangeStore((state) => state);
 
   const handleChangeRange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRadius(+e.currentTarget.value);
+    setRange(+e.currentTarget.value);
   };
 
   const resetRange = () => {
-    setRadius(0);
+    setRange(0);
   };
-
-  useEffect(() => {
-    updateHalfwayData({ range: radius });
-  }, [radius]);
 
   return (
     <>
-      <Circle
-        center={center}
-        radius={radius}
-        strokeWeight={3}
-        strokeColor={'#000000'}
-        strokeOpacity={0.1}
-        strokeStyle={'solid'}
-        fillColor={'#00a0e9'}
-        fillOpacity={0.05}
-      />
       <div className={styles.range_controller}>
         <form className={styles.range_wrap}>
           {RADIUS_RANGES.map((value) => (
@@ -42,7 +26,7 @@ const RangeController = ({ center }: { center: { lat: number; lng: number } }) =
                 name="radius"
                 type="radio"
                 value={value}
-                checked={radius === value}
+                checked={range === value}
                 onChange={handleChangeRange}
                 required
               />
