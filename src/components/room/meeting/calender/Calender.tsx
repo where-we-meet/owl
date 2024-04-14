@@ -5,14 +5,11 @@ import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-
 
 import styles from './Calender.module.css';
 import EntireOfMonth from './EntireOfMonth';
-import checkSelectedDates from './checkSelectedDates';
 
 import { useCalendarStore } from '@/store/calendarStore';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 
 import { useParams } from 'next/navigation';
-import { Button } from '@nextui-org/react';
-import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { getRangeOfSchedule } from '@/api/supabaseCSR/supabase';
 
@@ -46,8 +43,9 @@ const Calender = () => {
     const isAlreadySelected = selectedDates.some((selected) => isSameDay(selected, date));
 
     if (!data?.start_date || !data?.end_date) return;
-
-    if (!isWithinInterval(date, { start: new Date(data.start_date), end: new Date(data.end_date) })) {
+    const startDate = new Date(data.start_date);
+    const endDate = new Date(data.end_date);
+    if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
       return;
     }
 
@@ -58,13 +56,6 @@ const Calender = () => {
       const newDateList = [...selectedDates, date];
       setSelectedDates(newDateList);
     }
-  };
-
-  const handleDateUpload = (date: Date) => {
-    if (!checkSelectedDates(selectedDates)) return;
-
-    const newDateList = [...selectedDates, date];
-    setSelectedDates(newDateList);
   };
 
   return (
@@ -98,17 +89,6 @@ const Calender = () => {
               id={id}
             />
           </div>
-        </div>
-
-        <div>
-          <Button
-            size="sm"
-            className={styles.next_button}
-            onClick={() => handleDateUpload}
-            disabled={!checkSelectedDates(selectedDates)}
-          >
-            <Link href={`/room/${id}/pick-place`}>다음</Link>
-          </Button>
         </div>
       </div>
     </>
