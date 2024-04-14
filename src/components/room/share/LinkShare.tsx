@@ -4,6 +4,7 @@ import KakaoTalkShare from './KakaoShare';
 import {
   Button,
   Input,
+  Link,
   Modal,
   ModalBody,
   ModalContent,
@@ -11,11 +12,12 @@ import {
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react';
+import { FaShareAlt } from 'react-icons/fa';
 
 const LinkShare = () => {
   const { id: roomId } = useParams();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const shareLink = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${roomId}`;
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const shareLink = `${process.env.NEXT_PUBLIC_SITE_URL}/${roomId}`;
 
   const handleCopy = async () => {
     try {
@@ -24,31 +26,29 @@ const LinkShare = () => {
     } catch (error) {
       alert('복사 실패!');
     }
+    onClose();
   };
 
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="transparent">
         <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">공유하기</ModalHeader>
-              <ModalBody>
-                <Input type="text" defaultValue={shareLink} disabled />
-                <button onClick={handleCopy}>복사</button>
-                <div>
-                  <a href={`mailto:?subject=${shareLink}`}>메일로 공유</a>
-                  <KakaoTalkShare link={shareLink} />
-                </div>
-              </ModalBody>
-              <ModalFooter>
-                <Button onPress={onClose}>Action</Button>
-              </ModalFooter>
-            </>
-          )}
+          <ModalHeader className="flex flex-col gap-1">공유하기</ModalHeader>
+          <ModalBody>
+            <Input type="text" defaultValue={shareLink} disabled />
+          </ModalBody>
+          <ModalFooter>
+            <Button as={Link} href={`mailto:?subject=${shareLink}`}>
+              메일로 공유
+            </Button>
+            <KakaoTalkShare link={shareLink} />
+            <Button onPress={handleCopy}>복사</Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
-      <Button onPress={onOpen}>공유하기</Button>
+      <Button isIconOnly onPress={onOpen}>
+        <FaShareAlt />
+      </Button>
     </>
   );
 };
