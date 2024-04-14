@@ -7,8 +7,8 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { useCalendarStore } from '@/store/calendarStore';
 import { useSearchDataStore } from '@/store/placeStore';
 import { sortDate } from '@/utils/sortDate';
-import { Button } from '@nextui-org/react';
-import { createClient } from '@/utils/supabase/client';
+import { Button, Card, CardBody, Listbox, ListboxItem } from '@nextui-org/react';
+import styles from './page.module.css';
 
 const SettingConfirmPage = () => {
   const { mutate, isSuccess } = useMutateUserData();
@@ -58,13 +58,20 @@ const SettingConfirmPage = () => {
 
   return (
     <>
-      {sortedDates.map((date, index) => (
-        <div key={index}>{new Date(date).toLocaleDateString()}</div>
-      ))}
-      <div>{address}</div>
-
-      <Button onClick={handlePrevStep}>이전</Button>
-      <Button onClick={handleSubmit}>저장</Button>
+      <div className={styles.box}>
+        <ul>
+          {sortedDates.length > 0 ? (
+            sortedDates.map((date, index) => <li key={index}>{new Date(date).toLocaleDateString()}</li>)
+          ) : (
+            <li>선택한 일정이 없습니다</li>
+          )}
+        </ul>
+      </div>
+      <div className={styles.box}>{address}</div>
+      <div className={styles.footer}>
+        <Button onClick={handlePrevStep}>이전</Button>
+        <Button onClick={handleSubmit}>저장</Button>
+      </div>
     </>
   );
 };
