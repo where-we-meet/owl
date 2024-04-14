@@ -1,8 +1,5 @@
 .range_controller {
-  position: absolute;
   width: 100%;
-  left: 0;
-  z-index: 1000;
 }
 
 .range_wrap {
@@ -13,6 +10,7 @@
   width: 100%;
   height: 50px;
   user-select: none;
+  margin-bottom: 1.5rem;
 }
 
 .range_wrap::before {
@@ -45,7 +43,6 @@
   content: attr(data-radius);
   position: absolute;
   left: 50%;
-  padding-top: 10px;
   transform: translate(-50%, 45px);
   font-size: 14px;
   letter-spacing: 0.4px;

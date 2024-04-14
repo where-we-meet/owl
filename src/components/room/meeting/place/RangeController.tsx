@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import styles from './RangeController.module.css';
 import { useRangeStore } from '@/store/placeStore';
 
-const RADIUS_RANGES = [300, 1000, 2000, 4000];
+const RADIUS_RANGES = [200, 700, 2000, 4000];
 
 const RangeController = () => {
   const { range, setRange } = useRangeStore((state) => state);
