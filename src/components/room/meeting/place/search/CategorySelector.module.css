@@ -1,11 +1,28 @@
 .category {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 0.5rem;
+  right: 0.5rem;
   z-index: 10;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .category {
+    flex-direction: row;
+    left: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .category > li {
+    justify-content: center;
+    height: 2rem;
+  }
+  .category > li > span {
+    display: none;
+  }
 }
 
 .category > li {
