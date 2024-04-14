@@ -20,9 +20,11 @@ const ResultMap = () => {
 
   return (
     <>
-      <div className={styles.map_container}>
-        <Link href={`/room/${roomId}/pick-place`}>내 장소 변경하기</Link>
+      <div className={styles.box}>
         <div className={styles.address}>{address}</div>
+        <Link href={`/room/${roomId}/pick-place`}>내 장소 변경하기</Link>
+      </div>
+      <div className={styles.map_container}>
         {isHalfwayValid && (
           <>
             <Map center={halfwayPoint} className={styles.map}>
