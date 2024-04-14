@@ -12,7 +12,6 @@
   align-items: center;
   width: 3rem;
   height: 3rem;
-  padding: 0.5rem;
   border-radius: 50%;
   background-color: #f0f0f0;
   cursor: pointer;
@@ -25,7 +24,8 @@
 
 .progressWrapper {
   position: absolute;
-  top: 35%;
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
   z-index: -1;
 }
