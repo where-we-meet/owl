@@ -50,7 +50,7 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
             <div className={styles.user_edit_container}>
               <p>{data.name}</p>
               <Button onPress={toggleEditMode} className={styles.edit_button}>
-                <GrFormNext style={{ scale: '1.7' }} />
+                <GrFormNext className={styles.next_icon} />
               </Button>
             </div>
           </div>

@@ -57,9 +57,16 @@
 .edit_button {
   background-color: transparent;
   height: fit-content;
+  display: inline-block;
+  right: 0rem;
   padding: 0rem;
+  display: flex;
+  justify-content: right;
 }
 
+.next_icon {
+  scale: 1.7;
+}
 .login_info_container {
   margin-top: 0.625rem;
   text-align: left;
