@@ -8,7 +8,7 @@ const UserList = ({ roomUsers }: { roomUsers: RoomUser[] }) => {
       {roomUsers.map((user) => {
         return (
           user.users && (
-            <Tooltip key={user.id} showArrow={true} content={user.start_location} placement="bottom-start">
+            <Tooltip key={user.id} showArrow={false} content={user.start_location} placement="bottom-end">
               <Avatar isBordered src={`${user.users.profile_url}`} showFallback name={user.users.name} />
             </Tooltip>
           )
