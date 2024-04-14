@@ -8,6 +8,7 @@ import { GrFormNext } from 'react-icons/gr';
 import { IoClose } from 'react-icons/io5';
 
 import styles from './UserProfileRead.module.css';
+import Logout from '../auth/LogoutButton';
 
 export type UserProfileData = { name: string; profile_url: string | null };
 
@@ -68,7 +69,7 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
           </div>
         </div>
         <div>
-          <Button>로그아웃</Button>
+          <Logout />
         </div>
       </ModalBody>
     </>
