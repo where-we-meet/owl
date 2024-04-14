@@ -7,6 +7,8 @@ import Halfway from './Halfway';
 import styles from './ResultMap.module.css';
 import { useParams } from 'next/navigation';
 import { Link } from '@nextui-org/react';
+import CategorySelector from './search/CategorySelector';
+import RangeController from './RangeController';
 
 const ResultMap = () => {
   const [loading, error] = useKakaoMap();
@@ -20,10 +22,6 @@ const ResultMap = () => {
 
   return (
     <>
-      <div className={styles.box}>
-        <div className={styles.address}>{address}</div>
-        <Link href={`/room/${roomId}/pick-place`}>내 장소 변경하기</Link>
-      </div>
       <div className={styles.map_container}>
         {isHalfwayValid && (
           <>
@@ -52,6 +50,14 @@ const ResultMap = () => {
             </Map>
           </>
         )}
+        <CategorySelector />
+      </div>
+      <div className={styles.box}>
+        <div className={styles.address}>
+          <p>{address}</p>
+          <Link href={`/room/${roomId}/pick-place`}>내 장소 변경하기</Link>
+        </div>
+        <RangeController />
       </div>
     </>
   );
