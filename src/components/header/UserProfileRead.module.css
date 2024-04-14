@@ -85,6 +85,8 @@
 .sns_image_container {
   border-radius: 0.625rem;
   margin-bottom: 0.625rem;
+  display: flex;
+  gap: 0.4rem;
 }
 
 .sns_image {
