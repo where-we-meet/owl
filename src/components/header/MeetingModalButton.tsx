@@ -15,7 +15,7 @@ export const MeetingModalButton = () => {
   return (
     <div className={styles.meeting_modal_btn} title="참가 중인 모임 보기">
       <HiRectangleStack onClick={onOpen} size="1.4rem" />
-      <Modal backdrop="opaque" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
+      <Modal className={styles.modal} backdrop="opaque" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
         <ModalContent>
           <ModalBody className={styles.modalbody}>
             <div onClick={(e) => handleMeetingRedirect(e)}>

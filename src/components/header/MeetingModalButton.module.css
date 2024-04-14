@@ -1,3 +1,17 @@
+.modal {
+  width: 90%;
+  height: 100%;
+
+  margin: 0;
+  border-radius: 0;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .modalbody {
   padding: 2rem 0.7rem;
 }
