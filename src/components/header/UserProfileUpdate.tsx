@@ -56,7 +56,7 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
 
   return (
     <>
-      <Button isIconOnly onPress={toggleEditMode}>
+      <Button className={styles.back_btn} isIconOnly onPress={toggleEditMode}>
         <IoChevronBack />
       </Button>
       <ModalHeader className="flex flex-col gap-1 text-center">

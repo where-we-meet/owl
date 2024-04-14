@@ -1,6 +1,15 @@
+.close_btn {
+  scale: 0.5;
+  position: absolute;
+  background-color: transparent;
+  right: 10px;
+  top: 13px;
+}
+
 .header_title {
   font-size: 1.6rem;
   min-width: 11.5rem;
+  margin: 0.3225rem;
 }
 
 .modal_body {

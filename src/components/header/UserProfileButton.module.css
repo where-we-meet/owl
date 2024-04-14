@@ -3,5 +3,18 @@
   min-height: 90%;
 
   align-self: center;
+  align-items: center;
+  justify-content: center;
   background-color: rgb(238, 238, 238);
+  display: flex;
+}
+
+.modal > button {
+  scale: 0.5;
+  position: absolute;
+  background-color: transparent;
+}
+
+.modal > button > * {
+  scale: 3.3;
 }
