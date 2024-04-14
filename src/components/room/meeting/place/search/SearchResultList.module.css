@@ -1,4 +1,5 @@
 .places_container {
+  position: absolute;
   top: 45px;
   max-width: 350px;
   max-height: 500px;
