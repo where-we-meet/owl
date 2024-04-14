@@ -8,6 +8,7 @@ import { useCalendarStore } from '@/store/calendarStore';
 import { useSearchDataStore } from '@/store/placeStore';
 import { sortDate } from '@/utils/sortDate';
 import { Button } from '@nextui-org/react';
+import { createClient } from '@/utils/supabase/client';
 
 const SettingConfirmPage = () => {
   const { mutate, isSuccess } = useMutateUserData();
@@ -60,6 +61,7 @@ const SettingConfirmPage = () => {
         <div key={index}>{new Date(date).toLocaleDateString()}</div>
       ))}
       <div>{address}</div>
+
       <Button onClick={handlePrevStep}>이전</Button>
       <Button onClick={handleSubmit}>저장</Button>
     </>
