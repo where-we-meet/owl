@@ -4,6 +4,10 @@ import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
 
 import styles from './Modal.module.css';
 
+import { IoIosClose, IoIosLink } from 'react-icons/io';
+import { MdOutlineUploadFile } from 'react-icons/md';
+import { AiOutlinePicture } from 'react-icons/ai';
+
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
 export const ImageUploadModal = ({
@@ -91,20 +95,46 @@ export const ImageUploadModal = ({
   return (
     <div className={styles.background} onClick={handleToggleModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <form>
-          <input type="file" accept="image/jpeg,image/png,image/jpg" onChange={handleChangeFile} />
-          <button disabled={file === null} onClick={handleUploadImage}>
-            사진 업로드하기
+        <form className={styles.file_form}>
+          <input
+            className={styles.upload_name}
+            value={file === null ? '첨부파일' : file.name}
+            placeholder="첨부파일"
+            disabled
+          />
+          <input
+            id="file"
+            className={styles.file_input}
+            type="file"
+            accept="image/jpeg,image/png,image/jpg"
+            onChange={handleChangeFile}
+          />
+        </form>
+        <div className={styles.upload_file_container}>
+          <label className={styles.file_label} htmlFor="file">
+            <AiOutlinePicture style={{ scale: '1.8' }} />
+            사진 찾기
+          </label>
+        </div>
+        <button className={styles.file_upload_btn} disabled={file === null} onClick={handleUploadImage}>
+          <MdOutlineUploadFile />
+          선택한 사진 업로드하기
+        </button>
+        <div className={styles.dividing_line}>또는</div>
+        <form className={styles.url_form}>
+          <input
+            className={styles.url_input}
+            type="url"
+            placeholder="Paste link to an image..."
+            onChange={handleChangeURL}
+            value={url}
+          />
+          <button className={styles.url_upload_btn} onClick={handleUploadURL}>
+            <IoIosLink />
+            링크 첨부하기
           </button>
         </form>
-        <p>또는</p>
-        <form>
-          <input type="url" placeholder="Paste link to an image..." onChange={handleChangeURL} value={url} />
-          <button onClick={handleUploadURL}>링크 첨부하기</button>
-        </form>
-        <div className={styles.close_btn} onClick={handleToggleModal}>
-          Exit
-        </div>
+        <IoIosClose className={styles.close_btn} onClick={handleToggleModal} />
       </div>
     </div>
   );
