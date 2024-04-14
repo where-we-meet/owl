@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import styles from './RangeController.module.css';
 import { useRangeStore } from '@/store/placeStore';
+import { Button } from '@nextui-org/react';
 
 const RADIUS_RANGES = [200, 700, 2000, 4000];
 
@@ -33,7 +34,7 @@ const RangeController = () => {
             </label>
           ))}
         </form>
-        <button onClick={resetRange}>범위 지우기!</button>
+        <Button onClick={resetRange}>검색범위 초기화!</Button>
       </div>
     </>
   );
