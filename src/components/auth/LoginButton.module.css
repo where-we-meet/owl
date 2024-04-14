@@ -21,7 +21,7 @@
   flex: 1;
   color: #000000 85%;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.1rem;
   font-family: Roboto;
 }
 
@@ -41,6 +41,6 @@
 .google > span {
   flex: 1;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.1rem;
   font-family: Roboto;
 }

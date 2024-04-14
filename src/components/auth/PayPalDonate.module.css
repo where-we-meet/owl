@@ -1,0 +1,24 @@
+.paypal {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 2rem;
+  width: 360px;
+  height: 54px;
+  outline: none;
+  border: none;
+  background: white;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #002987;
+  text-decoration: none;
+}
+
+.paypal > span {
+  flex: 1;
+  font-weight: bold;
+  font-size: 1.1rem;
+  font-family: Roboto;
+  color: #002987;
+  text-align: center;
+}
