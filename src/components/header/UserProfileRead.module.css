@@ -12,14 +12,11 @@
 .profile {
   max-width: 8.125rem;
   min-height: 8.125rem;
-
   margin: 0.625rem;
   margin-bottom: 3.75rem;
   border-radius: 50%;
-
   object-fit: cover;
   position: relative;
-
   display: flex;
   justify-content: center;
 }
@@ -27,9 +24,7 @@
 .name_container {
   text-align: left;
   min-width: 30rem;
-
   display: flex;
-
   flex-direction: column;
   gap: 0.625rem;
   border-bottom: 0.09375rem solid rgb(155, 155, 155);
@@ -43,7 +38,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   margin-bottom: 0.625rem;
 }
 
@@ -91,38 +85,38 @@
   border-bottom: 1.5px solid black;
 }
 
-@media only screen and (min-width: 0px) {
-  .header_title {
-    color: red;
+@media screen and (max-width: 768px) {
+  .modal_body {
+    padding-top: 2rem;
   }
+
   .name_container {
-    min-width: 15rem;
+    min-width: auto;
   }
+
   .login_info_container {
-    min-width: 15rem;
+    min-width: auto;
   }
 }
 
-@media only screen and (min-width: 400px) {
+@media screen and (max-width: 480px) {
   .header_title {
-    color: blue;
+    font-size: 1.5rem;
+    min-width: auto;
   }
-  .name_container {
-    min-width: 25rem;
-  }
-  .login_info_container {
-    min-width: 25rem;
-  }
-}
 
-@media only screen and (min-width: 650px) {
-  .header_title {
-    color: cadetblue;
+  .profile {
+    max-width: 6rem;
+    min-height: 6rem;
+    margin-bottom: 2rem;
   }
-  .name_container {
-    min-width: 35rem;
+
+  .name_container > p,
+  .login_info_container > p {
+    font-size: 0.9rem;
   }
-  .login_info_container {
-    min-width: 35rem;
+
+  .user_edit_container > p {
+    font-size: 1rem;
   }
 }
