@@ -22,7 +22,7 @@ const LinkShare = () => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shareLink);
-      alert('복사 성공!');
+      alert(`\n${shareLink}\n\n복사 성공!`);
     } catch (error) {
       alert('복사 실패!');
     }
@@ -31,11 +31,11 @@ const LinkShare = () => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="transparent">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="transparent" placement="top-center">
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">공유하기</ModalHeader>
           <ModalBody>
-            <Input type="text" defaultValue={shareLink} disabled />
+            <Input type="text" defaultValue={shareLink} isReadOnly />
           </ModalBody>
           <ModalFooter>
             <Button as={Link} href={`mailto:?subject=${shareLink}`}>
@@ -46,7 +46,7 @@ const LinkShare = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Button isIconOnly onPress={onOpen}>
+      <Button isIconOnly onPress={onOpen} variant="light" size="lg">
         <FaShareAlt />
       </Button>
     </>
