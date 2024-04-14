@@ -6,7 +6,7 @@ export const useGetRoadAddress = (location: { lat: number; lng: number }, isDrag
   const { data, isPending } = useQuery({
     queryKey: ['room', location],
     queryFn: async () => await getAddress(location),
-    enabled: !!location && !isDrag
+    enabled: !!location.lat && !!location.lng && !isDrag
   });
   return { data, isPending };
 };
