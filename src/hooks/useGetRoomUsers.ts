@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { RoomUser } from '@/types/roomUser';
 
-export const useGetRoomData = (roomId: string, userId: string) => {
+export const useGetRoomUsers = (roomId: string, userId: string) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
   const { data = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
