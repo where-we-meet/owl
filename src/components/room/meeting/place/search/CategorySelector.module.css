@@ -1,12 +1,27 @@
 .category {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .category > li {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #ddd;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.category > li.selected {
+  background-color: #8a2be2;
+  color: white;
 }
