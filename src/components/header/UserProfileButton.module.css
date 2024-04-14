@@ -27,3 +27,7 @@
   white-space: no-wrap;
   cursor: pointer;
 }
+
+.profile:hover {
+  outline-color: black;
+}
