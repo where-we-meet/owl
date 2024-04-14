@@ -23,7 +23,7 @@ export const useGetRoomUsers = (roomId: string, userId: string) => {
         (payload) => {
           const updated = payload.new as RoomUser;
           const updatedRoomUsers = roomUsers.map((user) =>
-            user.user_id === updated.user_id ? { ...user, start_location: updated.start_location } : user
+            user.user_id === updated.user_id ? { ...user, ...updated } : user
           );
           queryClient.setQueryData(['roomUsers'], updatedRoomUsers);
         }
