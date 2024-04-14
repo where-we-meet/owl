@@ -13,9 +13,14 @@ const StartMeeting = () => {
   const user = useQueryUser();
 
   const [startDate, setStartDate] = useState(getCurrentFormattedDate());
+  const [endDate, setEndDate] = useState(getCurrentFormattedDate());
 
-  const changeDate = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
     setStartDate(e.target.value);
+  };
+
+  const changeEndDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setEndDate(e.target.value);
   };
 
   const startNewRoom = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,14 +43,21 @@ const StartMeeting = () => {
 
   return (
     <form onSubmit={startNewRoom}>
+      <p>모임 참가자가 선택 가능한 날짜 범위를 지정해주세요</p>
       <div className={styles.date}>
         <label>
           시작일
-          <Input type="date" min={startDate} name="start" value={startDate} onChange={changeDate} required />
+          <Input
+            type="date"
+            min={getCurrentFormattedDate()}
+            name="start"
+            value={startDate}
+            onChange={changeStartDate}
+          />
         </label>
         <label>
           종료일
-          <Input type="date" min={startDate} name="end" required />
+          <Input type="date" min={startDate} name="end" value={endDate} onChange={changeEndDate} />
         </label>
       </div>
       <div className={styles.start_button}>
