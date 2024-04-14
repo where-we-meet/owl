@@ -5,40 +5,45 @@ import { useEffect, useState } from 'react';
 
 type UserSchedule = Tables<'room_schedule'>;
 
-export const useGetCalendar = (id: string | null) => {
+export const useGetCalendar = (roomId: string) => {
   const [userSchedules, setUserSchedules] = useState<UserSchedule[]>([]);
   const supabase = createClient();
 
   useEffect(() => {
     const dateOfUser = async () => {
-      if (id) {
-        const data = await getUserSchedule(id);
+      if (roomId) {
+        const data = await getUserSchedule(roomId);
         setUserSchedules(data);
       }
     };
     dateOfUser();
-  }, [id]);
+  }, [roomId]);
 
   useEffect(() => {
     const subscription = supabase
       .channel('schedule')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${id}` },
+        { event: 'INSERT', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${roomId}` },
         (payload) => {
           const updatedSchedule = payload.new as UserSchedule;
-          setUserSchedules((currentSchedules) =>
-            currentSchedules.map((schedule) =>
-              schedule.id === updatedSchedule.id ? { ...schedule, start_date: updatedSchedule.start_date } : schedule
-            )
-          );
+          setUserSchedules((prev) => [...prev, updatedSchedule]);
+        }
+      )
+      .on(
+        'postgres_changes',
+        { event: 'DELETE', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${roomId}` },
+        async (payload) => {
+          const data = await getUserSchedule(roomId);
+          setUserSchedules(data);
         }
       )
       .subscribe();
+
     return () => {
       supabase.removeChannel(subscription);
     };
-  }, [id, userSchedules]);
+  }, [roomId, userSchedules]);
 
   return { userSchedules };
 };
