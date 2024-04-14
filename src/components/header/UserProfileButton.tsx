@@ -38,12 +38,13 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center" title="내 프로필 설정 및 보기">
         <Avatar
           className={styles.profile}
           onClick={onOpen}
           showFallback
           name={user.user_metadata.user_name}
+          isBordered={true}
           src={`${profile}`}
         />
       </div>

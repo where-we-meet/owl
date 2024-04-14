@@ -13,7 +13,7 @@ export const MeetingModalButton = () => {
   };
 
   return (
-    <div>
+    <div className={styles.meeting_modal_btn} title="참가 중인 모임 보기">
       <HiRectangleStack onClick={onOpen} size="1.4rem" />
       <Modal backdrop="opaque" size="3xl" isOpen={isOpen} onOpenChange={onClose}>
         <ModalContent>
