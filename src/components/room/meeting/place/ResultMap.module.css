@@ -1,6 +1,5 @@
 .map_container {
   position: relative;
-  width: 50rem;
   aspect-ratio: 2;
   border-radius: 8px;
   border: 2px solid #ddd;
