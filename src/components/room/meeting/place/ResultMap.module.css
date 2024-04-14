@@ -1,6 +1,9 @@
 .map_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   position: relative;
-  aspect-ratio: 2;
+  aspect-ratio: 1.9;
   border-radius: 12px;
   border: 2px solid #ddd;
   overflow: hidden;
@@ -9,7 +12,7 @@
 .map {
   position: absolute;
   width: 100%;
-  aspect-ratio: 2;
+  aspect-ratio: 1.9;
 }
 
 .center_pin {
@@ -32,7 +35,6 @@
   border: 2px solid #ddd;
   border-radius: 12px;
   padding: 1rem;
-  margin-top: 1rem;
 }
 
 .address {
