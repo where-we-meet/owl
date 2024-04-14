@@ -4,14 +4,14 @@ import { Image, Button, Link } from '@nextui-org/react';
 export default function Home() {
   return (
     <main className={styles.main}>
-      <header className={styles.header}>
+      <section className={styles.hero}>
         <div className={styles.image_background}>
           <div className={styles.background_color}>
             <div className={styles.copy_container}>
               <h1 className={styles.head_copy}>
                 "그래서 우리,
                 <br />
-                언제 어디서 만나는거야?"
+                언제 어디서 만나는 거야?"
               </h1>
               <span>
                 <p className={styles.middle_copy}>
@@ -29,7 +29,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </header>
+      </section>
       <section className={styles.section}>
         <h3>이런 경우에 쓰면 좋아요!</h3>
         <div className={styles.use_cases}>
@@ -66,10 +66,6 @@ export default function Home() {
           </span>
         </div>
       </section>
-      <footer className={styles.footer}>
-        <p>@github project</p>
-        <p>about us</p>
-      </footer>
     </main>
   );
 }
