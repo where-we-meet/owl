@@ -59,6 +59,19 @@ const Calender = () => {
     }
   };
 
+  const handleBlockSelect = (date: Date) => {
+    if (!data?.start_date || !data?.end_date) return {};
+
+    const startDate = new Date(data.start_date);
+    const endDate = new Date(data.end_date);
+
+    if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
+      return { color: '#ccc' };
+    } else {
+      return {};
+    }
+  };
+
   return (
     <>
       <div className={styles.calendar_container}>
@@ -91,6 +104,7 @@ const Calender = () => {
               userSchedules={userSchedules}
               handleDateClick={handleDateClick}
               id={id}
+              handleBlockSelect={handleBlockSelect}
             />
           </div>
         </div>
