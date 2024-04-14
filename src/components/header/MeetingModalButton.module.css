@@ -1,3 +1,11 @@
 .modalbody {
   padding: 2rem 0.7rem;
 }
+
+.meeting_modal_btn {
+  cursor: pointer;
+}
+
+.meeting_modal_btn:hover {
+  color: rgb(130, 130, 130);
+}
