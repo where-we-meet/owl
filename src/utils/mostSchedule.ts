@@ -3,21 +3,22 @@ export const mostSchedule = (userSchedules: any) => {
   const sortResult = Object.entries(result).sort((a, b) => {
     const aLength = a[1] ? a[1].length : 0;
     const bLength = b[1] ? b[1].length : 0;
-    return aLength - bLength;
+    return bLength - aLength;
   });
 
-  let maxLength = 0;
-  let maxDates: string[] = [];
+  // let maxLength = 0;
+  // let maxDates: string[] = [];
 
-  sortResult.forEach(([date, array]) => {
-    const length = Array.isArray(array) ? array.length : 0;
-    if (length > maxLength) {
-      maxLength = length;
-      maxDates = [date];
-    } else if (length === maxLength) {
-      maxDates.push(date);
-    }
-  });
+  // sortResult.forEach(([date, array]) => {
+  //   const length = Array.isArray(array) ? array.length : 0;
+  //   if (length > maxLength) {
+  //     maxLength = length;
+  //     maxDates = [date];
+  //   } else if (length === maxLength) {
+  //     maxDates.push(date);
+  //   }
+  // });
 
-  return { maxDates, maxLength };
+  // return { maxDates, maxLength };
+  return sortResult;
 };
