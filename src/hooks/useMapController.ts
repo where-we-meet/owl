@@ -32,6 +32,7 @@ export const useMapController = () => {
     if (data) {
       const address = data.road_address?.address_name || data.address?.address_name;
       setAddress(address);
+      updateHalfwayData({ location: address });
     }
   }, [data]);
 
