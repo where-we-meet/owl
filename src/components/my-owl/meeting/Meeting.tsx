@@ -3,8 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useGetModalData } from '@/hooks/useGetSidebarData';
 import { useEffect, useState } from 'react';
-import { Skeleton } from '@nextui-org/react';
+import { Avatar, Skeleton } from '@nextui-org/react';
 import styles from './Meeting.module.css';
+
+import { BsCalendarDateFill } from 'react-icons/bs';
+import { TbLocationFilled } from 'react-icons/tb';
+import { FaMapLocationDot } from 'react-icons/fa6';
 
 export const Meeting = () => {
   const router = useRouter();
@@ -32,13 +36,17 @@ export const Meeting = () => {
               <div className={styles.room_box}>
                 <div className={styles.room_box_left}>
                   <h3 className={styles.meeting_name}>{meeting.name}</h3>
-                  <p className={styles.meeting_date}>날짜 : {meeting.confirmed_date}</p>
-                  <p className={styles.meeting_location}>위치 : {meeting.location}</p>
+                  <p className={styles.meeting_date}>
+                    <BsCalendarDateFill /> {meeting.confirmed_date || '확정된 날짜가 없습니다.'}
+                  </p>
+                  <p className={styles.meeting_location}>
+                    <FaMapLocationDot /> {meeting.location || '확정된 위치가 없습니다.'}
+                  </p>
                 </div>
                 <div className={styles.room_box_right}>
                   <div className={styles.participants_container}>
                     {meeting.userdata_room.map((participant, index) => (
-                      <div
+                      <Avatar
                         className={styles.participant_profile}
                         style={{ backgroundImage: `url(${participant.users?.profile_url})` }}
                         key={index}
