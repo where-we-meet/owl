@@ -9,6 +9,7 @@ import { useGetRoomUsers } from '@/hooks/useGetRoomUsers';
 import { useQuery } from '@tanstack/react-query';
 import { getRooomData } from '@/api/supabaseCSR/supabase';
 import styles from './RoomHeader.module.css';
+import Link from 'next/link';
 
 const RoomHeader = () => {
   const router = useRouter();
@@ -36,7 +37,9 @@ const RoomHeader = () => {
     <div className={styles.room_header}>
       <div>
         <div className={styles.left}>
-          <h1 className={styles.room_title}>{room.name}</h1>
+          <h1 className={styles.room_title}>
+            <Link href={`/room/${roomId}`}>{room.name}</Link>
+          </h1>
           <LinkShare />
         </div>
         <UserList roomUsers={roomUsers} />
