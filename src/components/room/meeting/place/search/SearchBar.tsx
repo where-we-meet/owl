@@ -29,7 +29,7 @@ const SearchBar = () => {
 
   return (
     <div className={styles.container}>
-      <form className={styles.search_bar}>
+      <form className={styles.search_bar} onSubmit={(e) => e.preventDefault()}>
         <Input
           id="searchBar"
           placeholder="출발 위치 검색하기"
