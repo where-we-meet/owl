@@ -18,11 +18,12 @@
   justify-content: space-between;
   padding: 1.5rem;
   border-radius: 12px;
-  background-color: #fafbfc;
+  background-color: #f6f8fa;
+  cursor: pointer;
 }
 
 .room_box:hover {
-  background-color: #f6f8fa;
+  background-color: #e6e7ea;
 }
 
 .room_box_left {
@@ -32,14 +33,27 @@
 
 .meeting_name {
   font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
+/*확정되지 않은 경우에만 color:gray 적용하도록 할 것 */
 .meeting_date {
   font-size: 1.1rem;
+  color: gray;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .meeting_location {
   font-size: 1.1rem;
+  color: gray;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .room_box_right {
