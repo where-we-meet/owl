@@ -34,9 +34,11 @@ const RoomHeader = () => {
     <div className={styles.room_header}>
       <div>
         <h1 className={styles.room_title}>{room.name}</h1>
-        <LinkShare />
+        <div className={styles.right}>
+          <LinkShare />
+          <UserList roomUsers={roomUsers} />
+        </div>
       </div>
-      <UserList roomUsers={roomUsers} />
     </div>
   );
 };
