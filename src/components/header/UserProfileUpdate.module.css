@@ -20,8 +20,8 @@
 }
 
 .profile {
-  max-width: 8.125rem;
-  min-height: 8.125rem;
+  width: 8.125rem;
+  height: 8.125rem;
   margin: 0.625rem;
   margin-bottom: 0rem;
   border-radius: 50%;
@@ -86,6 +86,7 @@
   margin-top: 0.625rem;
   color: white;
   font-weight: 500;
+  background-color: black;
 }
 @media screen and (max-width: 768px) {
   .modal_body {

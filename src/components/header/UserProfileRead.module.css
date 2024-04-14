@@ -19,8 +19,8 @@
 }
 
 .profile {
-  max-width: 8.125rem;
-  min-height: 8.125rem;
+  width: 8.125rem;
+  height: 8.125rem;
   margin: 0.625rem;
   margin-bottom: 3.75rem;
   border-radius: 50%;
@@ -120,12 +120,6 @@
   .header_title {
     font-size: 1.5rem;
     min-width: auto;
-  }
-
-  .profile {
-    max-width: 6rem;
-    min-height: 6rem;
-    margin-bottom: 2rem;
   }
 
   .name_container > p,

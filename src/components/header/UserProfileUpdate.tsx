@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Image, ModalHeader, ModalBody } from '@nextui-org/react';
+import { Button, Image, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
 import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
@@ -64,7 +64,7 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
       </ModalHeader>
       <ModalBody className={styles.modal_body}>
         <div className={styles.profile_container}>
-          <Image className={styles.profile} alt="profile_image" src={`${userProfileURL}`} />
+          <Avatar className={styles.profile} showFallback alt="profile_image" src={`${userProfileURL}`} />
           <Button className={styles.profile_edit_button} isIconOnly onPress={handleToggleModal}>
             <AiFillPlusCircle className={styles.edit_icon} />
           </Button>
