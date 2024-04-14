@@ -38,7 +38,7 @@ const StartMeeting = () => {
     });
     await insertRoomUser({ room_id: room.id, user_id: user.id, is_admin: true });
 
-    router.push(`/room/${room.id}`);
+    router.push(`/room/${room.id}/pick-calendar`);
   };
 
   return (
