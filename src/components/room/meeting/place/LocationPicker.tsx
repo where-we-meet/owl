@@ -11,10 +11,9 @@ const LocationPicker = () => {
     location: { lat, lng },
     address
   } = useSearchDataStore((state) => state);
+  const { id: userId } = useQueryUser();
 
   const handleSubmitLocation = async () => {
-    const { id: userId } = useQueryUser();
-
     const userLocationData = {
       room_id: roomId,
       user_id: userId,
