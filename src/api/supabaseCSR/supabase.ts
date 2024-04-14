@@ -6,18 +6,17 @@ import type { UpsertUserSchedule } from '@/types/roomUser';
 
 const supabase = createClient();
 
-//  supabase auth에서 user Data 반환
-export const getCurrentUserData = async () => {
-  const { data, error } = await supabase.auth.getUser();
-  if (error) throw error;
-  return data;
-};
-
 // supabase에서 roomId를 통해 해당 room 일정과 관련된 모든 Data 반환
 export const getUserSchedule = async (id: string) => {
   const { data, error } = await supabase.from('room_schedule').select('*').eq('room_id', id);
   if (error) throw error;
   return data;
+};
+
+export const getRooomData = async (roomId: string) => {
+  const { data, error } = await supabase.from('rooms').select('*').eq('id', roomId);
+  if (error) throw error;
+  return data[0];
 };
 
 export const getRoomUsersData = async (id: string) => {
