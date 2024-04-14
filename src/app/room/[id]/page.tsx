@@ -1,5 +1,13 @@
-const RoomPage = ({ params }: { params: { id: string } }) => {
-  return <>{/* <Meeting id={params.id} /> */}현황페이지</>;
+import ResultPlace from '@/components/room/meeting/ResultPlace';
+import ResultSchedule from '@/components/room/meeting/calender/ResultSchedule';
+
+const RoomPage = () => {
+  return (
+    <>
+      <ResultSchedule />
+      <ResultPlace />
+    </>
+  );
 };
 
 export default RoomPage;
