@@ -1,3 +1,4 @@
+import { Button } from '@nextui-org/react';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -35,11 +36,9 @@ function KakaoTalkShare({ link }: { link: string }) {
   };
 
   return (
-    <>
-      <button title="공유하기" onClick={shareWithKakaoTalk}>
-        카카오톡으로 공유하기
-      </button>
-    </>
+    <Button title="공유하기" onClick={shareWithKakaoTalk}>
+      카카오톡으로 공유하기
+    </Button>
   );
 }
 
