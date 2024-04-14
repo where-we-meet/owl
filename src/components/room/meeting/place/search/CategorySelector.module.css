@@ -1,23 +1,16 @@
 .category {
   position: absolute;
+  display: flex;
+  flex-direction: row;
+  left: 0.5rem;
   bottom: 0.5rem;
   right: 0.5rem;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
 }
 
 @media screen and (max-width: 600px) {
-  .category {
-    flex-direction: row;
-    left: 0.5rem;
-  }
-}
-
-@media screen and (max-width: 500px) {
   .category > li {
-    justify-content: center;
     height: 2rem;
   }
   .category > li > span {
@@ -29,6 +22,7 @@
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.2rem 0.5rem;
   border-radius: 12px;
