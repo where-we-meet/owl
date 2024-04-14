@@ -1,3 +1,11 @@
 .user_list {
   display: flex;
 }
+
+.user_list > li {
+  transition: margin ease 0.4s;
+}
+
+.user_list > li:hover {
+  margin: 0 1rem;
+}
