@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button, Image, ModalHeader, ModalBody } from '@nextui-org/react';
+import { Button, Image, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { GrFormNext } from 'react-icons/gr';
@@ -43,7 +43,7 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
         <h1 className={styles.header_title}>계정 정보</h1>
       </ModalHeader>
       <ModalBody className={styles.modal_body}>
-        <Image className={styles.profile} alt="profile_image" src={`${data.profile_url}`} />
+        <Avatar className={styles.profile} showFallback alt="profile_image" src={`${data.profile_url}`} />
         <div>
           <div className={styles.name_container}>
             <p>닉네임</p>
