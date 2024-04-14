@@ -16,13 +16,16 @@
 
 .image_background {
   background-image: url(../../public/images/main_landing_bg.png);
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  /* background-size: cover;
   background-position-y: 25%;
-  height: 45%;
+  height: 45%; */
 }
 
 .background_color {
-  background-color: rgba(0, 0, 0, 0.671);
+  background-color: rgba(0, 0, 0, 0.729);
   background-size: cover;
   height: 45%;
 }
@@ -33,29 +36,36 @@
   margin: auto;
   text-align: center;
   padding: 7rem 1.5rem;
+  position: relative;
 }
 
 .head_copy {
+  margin-bottom: 1.5rem;
   color: white;
-  font-weight: 600;
-  font-size: clamp(2.5rem, 2.5vw, 3rem);
+  font-weight: bold;
+  font-size: clamp(1.8rem, 8vw, 3.2rem);
   word-break: keep-all;
   line-height: 1.2;
 }
 
 .middle_copy {
-  margin-top: 2rem;
-  color: white;
-  line-height: 1.5;
-  font-size: clamp(0.5rem, 2.5vw, 1.2rem);
+  margin-top: 0.8rem;
+  color: rgb(228, 228, 228);
+  font-weight: 300;
+  line-height: 1.3;
+  font-size: clamp(0.87rem, 3vw, 1.2rem);
 }
 
 .button {
-  position: relative;
-  width: 20%;
-  margin-top: 2rem !important;
+  top: 2.5rem;
+
+  padding: 1rem 3rem;
+  background-color: #121212;
+  color: rgb(220, 220, 220);
+
   margin: auto;
-  font-size: clamp(0.5rem, 2vw, 1.2rem);
+  font-size: clamp(0.8rem, 8vw, 1.2rem);
+  font-weight: 400;
 }
 
 .section {
@@ -69,7 +79,7 @@
 }
 
 .section > h3 {
-  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-size: clamp(1.3rem, 2vw, 2rem);
   min-width: 315px;
   padding: 10px;
 }
