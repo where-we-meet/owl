@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { isSameDay, isWithinInterval } from 'date-fns';
+import React from 'react';
+import { isSameDay } from 'date-fns';
 
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
 import SchedulesOfUsers from './SchedulesOfIUsers';
@@ -17,9 +17,16 @@ type Props = {
   userSchedules: UserSchedule[];
   handleDateClick: (date: Date) => void;
   id: string;
+  handleBlockSelect: (date: Date) => React.CSSProperties;
 };
 
-const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, handleDateClick, id }) => {
+const EntireOfMonth: React.FC<Props> = ({
+  nowDate,
+  selectedDate,
+  userSchedules,
+  handleDateClick,
+  handleBlockSelect
+}) => {
   const entireOfMonth = calculateOfMonth(nowDate);
 
   const dayStyle = (day: Date) => {
@@ -37,7 +44,7 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, 
                 handleDateClick(day);
               }}
               className={styles.days}
-              style={dayStyle(day)}
+              style={(dayStyle(day), { ...handleBlockSelect(day) })}
             >
               {selectedDate.some((date) => isSameDay(date, day)) && (
                 <span className={styles.selected_date_circle}></span>
