@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css');
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.spoka * {
+  font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+}
 
 * {
   box-sizing: border-box;
@@ -10,4 +21,10 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: 'Spoqa Han Sans';
+}
+
+h1,
+h2 {
+  font-family: 'Pretendard-Regular', sans-serif;
 }
