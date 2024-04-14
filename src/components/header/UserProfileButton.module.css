@@ -18,3 +18,12 @@
 .modal > button > * {
   scale: 3.3;
 }
+
+.profile {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 0.5rem;
+  white-space: no-wrap;
+  cursor: pointer;
+}
