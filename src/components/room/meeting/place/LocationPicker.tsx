@@ -1,8 +1,9 @@
 import { useParams } from 'next/navigation';
-import { getCurrentUserData, updateStartLocation } from '@/api/supabaseCSR/supabase';
+import { updateStartLocation } from '@/api/supabaseCSR/supabase';
 import { useSearchDataStore } from '@/store/placeStore';
 import { objectValidate } from '@/utils/objectValidate';
 import { Button } from '@nextui-org/react';
+import { useQueryUser } from '@/hooks/useQueryUser';
 
 const LocationPicker = () => {
   const { id: roomId }: { id: string } = useParams();
@@ -12,9 +13,7 @@ const LocationPicker = () => {
   } = useSearchDataStore((state) => state);
 
   const handleSubmitLocation = async () => {
-    const {
-      user: { id: userId }
-    } = await getCurrentUserData();
+    const { id: userId } = useQueryUser();
 
     const userLocationData = {
       room_id: roomId,
