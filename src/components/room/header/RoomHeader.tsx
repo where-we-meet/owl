@@ -33,11 +33,11 @@ const RoomHeader = () => {
   return (
     <div className={styles.room_header}>
       <div>
-        <h1 className={styles.room_title}>{room.name}</h1>
-        <div className={styles.right}>
+        <div className={styles.left}>
+          <h1 className={styles.room_title}>{room.name}</h1>
           <LinkShare />
-          <UserList roomUsers={roomUsers} />
         </div>
+        <UserList roomUsers={roomUsers} />
       </div>
     </div>
   );

@@ -20,7 +20,8 @@
   font-size: 1.5rem;
 }
 
-.right {
+.left {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
