@@ -5,7 +5,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={styles.setting_container}>
       <ProgressBar />
-      <div className={styles.setting_content}>{children}</div>
+      {children}
     </div>
   );
 };
