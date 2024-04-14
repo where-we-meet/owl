@@ -12,6 +12,7 @@ import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRangeOfSchedule } from '@/api/supabaseCSR/supabase';
+import ResetSchedule from './ResetSchedule';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -61,12 +62,15 @@ const Calender = () => {
   return (
     <>
       <div className={styles.calendar_container}>
-        <div>
-          <button onClick={prevMonth}>◀</button>
-          <span>
-            {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
-          </span>
-          <button onClick={afterMonth}>▶</button>
+        <div className={styles.calendar_header}>
+          <div>
+            <button onClick={prevMonth}>◀</button>
+            <span>
+              {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
+            </span>
+            <button onClick={afterMonth}>▶</button>
+          </div>
+          <ResetSchedule />
         </div>
 
         <div className={styles.scehdule_container}>
