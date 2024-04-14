@@ -1,0 +1,12 @@
+.box {
+  position: relative;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.edit_calendar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
