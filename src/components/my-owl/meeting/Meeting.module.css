@@ -16,8 +16,8 @@
 .room_box {
   display: flex;
   justify-content: space-between;
-  padding: 1.5rem;
-  border-radius: 12px;
+  padding: 1.2rem;
+  border-radius: 0.75rem;
   background-color: #f6f8fa;
   cursor: pointer;
 }
@@ -38,20 +38,21 @@
 }
 
 /*확정되지 않은 경우에만 color:gray 적용하도록 할 것 */
-.meeting_date {
-  font-size: 1.1rem;
-  color: gray;
+.meeting_date,
+.meeting_location {
+  font-size: 1rem;
 
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.meeting_location {
-  font-size: 1.1rem;
-  color: gray;
+.undecided_meeting_date,
+.undecided_meeting_location {
+  font-size: 1rem;
 
   display: flex;
+  color: gray;
   align-items: center;
   gap: 0.5rem;
 }
@@ -59,25 +60,25 @@
 .room_box_right {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 1.875rem;
   text-align: right;
 }
 
 .participants_container {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
-  gap: 5px;
+  gap: 0.3125rem;
   cursor: default;
 }
 
 .participant_profile {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-  font-size: 0.1rem;
+  font-size: 0.00625rem;
 }
 
 .participants_number {

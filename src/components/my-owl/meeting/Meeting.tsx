@@ -35,10 +35,12 @@ export const Meeting = () => {
               <div className={styles.room_box}>
                 <div className={styles.room_box_left}>
                   <h3 className={styles.meeting_name}>{meeting.name}</h3>
-                  <p className={styles.meeting_date}>
+                  <p className={meeting.confirmed_date === null ? styles.undecided_meeting_date : styles.meeting_date}>
                     <BsCalendarDateFill /> {meeting.confirmed_date || '확정된 날짜가 없습니다.'}
                   </p>
-                  <p className={styles.meeting_location}>
+                  <p
+                    className={meeting.location === null ? styles.undecided_meeting_location : styles.meeting_location}
+                  >
                     <FaMapLocationDot /> {meeting.location || '확정된 위치가 없습니다.'}
                   </p>
                 </div>
