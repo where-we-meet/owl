@@ -9,7 +9,7 @@ const UserList = ({ roomUsers }: { roomUsers: RoomUser[] }) => {
         return (
           user.users && (
             <li key={user.id}>
-              <Tooltip showArrow={true} content={user.start_location} placement="bottom">
+              <Tooltip showArrow={true} content={user.start_location} placement="bottom-start">
                 <Avatar isBordered src={`${user.users.profile_url}`} showFallback name={user.users.name} />
               </Tooltip>
             </li>
