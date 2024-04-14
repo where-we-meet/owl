@@ -25,7 +25,7 @@ const UserProfile = () => {
   }, []);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editMode, setEditMode] = useState(false);
-  const [profile, setProfile] = useState<null | string>(null);
+  const [profile, setProfile] = useState<string | null>('');
 
   const handleClose = () => {
     setEditMode(false);
