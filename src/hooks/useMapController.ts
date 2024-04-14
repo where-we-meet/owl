@@ -1,19 +1,26 @@
-import { useGetSearchCategory } from '@/hooks/useGetPlace';
+import { useGetRoadAddress, useGetSearchCategory } from '@/hooks/useGetPlace';
 import { useEffect, useMemo, useState } from 'react';
-import { useHalfwayDataStore, useRoomUserDataStore, useSearchDataStore } from '@/store/placeStore';
+import { useHalfwayDataStore, useRangeStore, useSearchDataStore } from '@/store/placeStore';
 import _ from 'lodash';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
+import { useParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
 
 export const useMapController = () => {
-  const [isDrag, setIsDrag] = useState(false);
+  const { id: roomId }: { id: string } = useParams();
 
-  const { location, address, searchOption, setLocation } = useSearchDataStore((state) => state);
-  const roomUsers = useRoomUserDataStore((state) => state.roomUsers);
+  const [address, setAddress] = useState('');
+
+  const { searchOption } = useSearchDataStore((state) => state);
+  const range = useRangeStore((state) => state.range);
   const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
+  const { data: roomUsers = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
   const { data: searchCategory, isPending: isCategoryPending } = useGetSearchCategory(searchOption);
 
   const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
+  const { data } = useGetRoadAddress(halfwayPoint as { lat: number; lng: number }, false);
 
   useEffect(() => {
     if (halfwayPoint) {
@@ -21,12 +28,16 @@ export const useMapController = () => {
     }
   }, [halfwayPoint]);
 
+  useEffect(() => {
+    if (data) {
+      const address = data.road_address?.address_name || data.address?.address_name;
+      setAddress(address);
+    }
+  }, [data]);
+
   return {
-    location,
+    range,
     address,
-    setLocation,
-    isDrag,
-    setIsDrag,
     halfwayPoint,
     roomUsers,
     searchCategory
