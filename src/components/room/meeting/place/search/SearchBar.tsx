@@ -1,12 +1,10 @@
 import { type ChangeEvent, useState, useCallback } from 'react';
 import _ from 'lodash';
-
-import styles from './SearchBar.module.css';
-
 import SearchResultList from './SearchResultList';
 import { useGetSearchPlace } from '@/hooks/useGetPlace';
-import { Input } from '@nextui-org/react';
 import GeolocationButton from '../GeolocationButton';
+import { Input } from '@nextui-org/react';
+import styles from './SearchBar.module.css';
 
 const SearchBar = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -40,6 +38,9 @@ const SearchBar = () => {
           onBlur={handleInputFocus}
           autoComplete="off"
           startContent={<GeolocationButton />}
+          variant="bordered"
+          size="lg"
+          isClearable
         />
       </form>
       {activatePlaceList && <SearchResultList placeList={placeList} setListViewState={setListViewState} />}
