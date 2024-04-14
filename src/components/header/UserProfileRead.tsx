@@ -36,7 +36,7 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
 
   return (
     <>
-      <Button isIconOnly onPress={handleClose}>
+      <Button className={styles.close_btn} isIconOnly onPress={handleClose}>
         <IoClose />
       </Button>
       <ModalHeader className="flex flex-col gap-1 text-center">
