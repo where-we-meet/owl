@@ -68,6 +68,7 @@
   justify-content: right;
   align-items: center;
   gap: 5px;
+  cursor: default;
 }
 
 .participant_profile {
@@ -76,4 +77,12 @@
   border-radius: 50%;
   background-size: cover;
   background-position: center;
+  font-size: 0.1rem;
+}
+
+.participants_number {
+  font-size: 0.9rem;
+
+  display: flex;
+  justify-content: right;
 }

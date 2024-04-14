@@ -3,11 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useGetModalData } from '@/hooks/useGetSidebarData';
 import { useEffect, useState } from 'react';
-import { Avatar, Skeleton } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Skeleton } from '@nextui-org/react';
 import styles from './Meeting.module.css';
 
 import { BsCalendarDateFill } from 'react-icons/bs';
-import { TbLocationFilled } from 'react-icons/tb';
 import { FaMapLocationDot } from 'react-icons/fa6';
 
 export const Meeting = () => {
@@ -44,16 +43,19 @@ export const Meeting = () => {
                   </p>
                 </div>
                 <div className={styles.room_box_right}>
-                  <div className={styles.participants_container}>
+                  <AvatarGroup className={styles.participants_container} max={3}>
                     {meeting.userdata_room.map((participant, index) => (
                       <Avatar
                         className={styles.participant_profile}
-                        style={{ backgroundImage: `url(${participant.users?.profile_url})` }}
+                        src={`${participant.users?.profile_url}`}
+                        showFallback
+                        name="부엉"
+                        isBordered={true}
                         key={index}
                       />
                     ))}
-                  </div>
-                  <p>{meeting.userdata_room.length}명 참여중</p>
+                  </AvatarGroup>
+                  <p className={styles.participants_number}>{meeting.userdata_room.length}명 참여중</p>
                 </div>
               </div>
             </Skeleton>
