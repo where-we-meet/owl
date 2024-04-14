@@ -50,8 +50,8 @@ const ResultMap = () => {
             </Map>
           </>
         )}
-        <CategorySelector />
       </div>
+      <CategorySelector />
       <div className={styles.box}>
         <div className={styles.address}>
           <p>{address}</p>
