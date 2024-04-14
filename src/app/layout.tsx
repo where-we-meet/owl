@@ -8,6 +8,7 @@ import getQueryClient from '@/utils/getQueryClient';
 import type { User } from '@supabase/supabase-js';
 import Header from '@/components/header/Header';
 import { getSession } from '@/api/auth/getSession';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,6 +37,7 @@ export default async function RootLayout({
             <div className="container">
               <Header />
               {children}
+              <Footer />
             </div>
           </HydrationBoundary>
         </Providers>
