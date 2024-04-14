@@ -6,6 +6,7 @@ import { useCalendarStore } from '@/store/calendarStore';
 import checkSelectedDates from '@/utils/calendar/checkSelectedDates';
 import { Button, Link } from '@nextui-org/react';
 import { useParams } from 'next/navigation';
+import styles from './page.module.css';
 
 const PickCalendar = () => {
   const { id } = useParams();
@@ -13,11 +14,12 @@ const PickCalendar = () => {
 
   return (
     <>
-      <ResetSchedule />
       <Calender />
-      <Button href={`/room/${id}/pick-place`} size="sm" disabled={!checkSelectedDates(selectedDates)} as={Link}>
-        다음
-      </Button>
+      <div className={styles.footer}>
+        <Button href={`/room/${id}/pick-place`} disabled={!checkSelectedDates(selectedDates)} as={Link}>
+          다음
+        </Button>
+      </div>
     </>
   );
 };
