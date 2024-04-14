@@ -47,6 +47,7 @@ const SettingConfirmPage = () => {
     });
 
     mutate({ userLocationData, userSchedules });
+    sessionStorage.clear();
   };
 
   useEffect(() => {
