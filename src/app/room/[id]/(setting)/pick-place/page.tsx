@@ -2,11 +2,10 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-
 import SettingMap from '@/components/room/meeting/place/SettingMap';
 import SearchBar from '@/components/room/meeting/place/search/SearchBar';
-
 import { Button } from '@nextui-org/react';
+import styles from './page.module.css';
 
 const PickPlacePage = () => {
   const { id: roomId } = useParams();
@@ -14,12 +13,12 @@ const PickPlacePage = () => {
     <>
       <SearchBar />
       <SettingMap />
-      <div>
-        <Button>
-          <Link href={`/room/${roomId}/pick-calendar`}>이전</Link>
+      <div className={styles.footer}>
+        <Button as={Link} href={`/room/${roomId}/pick-calendar`}>
+          이전
         </Button>
-        <Button>
-          <Link href={`/room/${roomId}/confirm`}>다음</Link>
+        <Button as={Link} href={`/room/${roomId}/confirm`}>
+          다음
         </Button>
       </div>
     </>
