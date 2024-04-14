@@ -1,10 +1,10 @@
 import { MouseEvent } from 'react';
 import { useHalfwayDataStore, useRangeStore, useSearchDataStore } from '@/store/placeStore';
-
 import { IoCafe, IoRestaurant } from 'react-icons/io5';
 import { FaTrainSubway, FaLandmark } from 'react-icons/fa6';
 import { RiMovie2Line, RiHotelBedFill } from 'react-icons/ri';
 import { BiSolidParking } from 'react-icons/bi';
+import styles from './CategorySelector.module.css';
 
 const SEARCH_CATEGORY = [
   { name: '맛집', icon: <IoRestaurant /> },
@@ -32,7 +32,7 @@ const CategorySelector = () => {
     setSearchOption(newSearchOption);
   };
   return (
-    <ul onClick={handleCategorySearch}>
+    <ul className={styles.category} onClick={handleCategorySearch}>
       {SEARCH_CATEGORY.map((item) => (
         <li key={item.name} id={item.name}>
           {item.icon}
