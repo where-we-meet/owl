@@ -1,7 +1,7 @@
 import ResultPlace from '@/components/room/meeting/ResultPlace';
 import ResultSchedule from '@/components/room/meeting/calender/ResultSchedule';
 import styles from './page.module.css';
-import { Button } from '@nextui-org/react';
+import ConfirmedButton from '@/components/room/ConfirmedButton';
 
 const RoomPage = () => {
   return (
@@ -9,7 +9,7 @@ const RoomPage = () => {
       <ResultSchedule />
       <ResultPlace />
       <div className={styles.footer}>
-        <Button>확정</Button>
+        <ConfirmedButton />
       </div>
     </div>
   );
