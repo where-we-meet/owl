@@ -5,9 +5,12 @@ import { useMapController } from '@/hooks/useMapController';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
 import styles from './ResultMap.module.css';
+import { useParams } from 'next/navigation';
+import { Link } from '@nextui-org/react';
 
 const ResultMap = () => {
   const [loading, error] = useKakaoMap();
+  const { id: roomId } = useParams();
   const { address, halfwayPoint, range, roomUsers, searchCategory = [] } = useMapController();
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
@@ -17,8 +20,9 @@ const ResultMap = () => {
 
   return (
     <>
-      <div>{address}</div>
       <div className={styles.map_container}>
+        <Link href={`/room/${roomId}/pick-place`}>내 장소 변경하기</Link>
+        <div className={styles.address}>{address}</div>
         {isHalfwayValid && (
           <>
             <Map center={halfwayPoint} className={styles.map}>

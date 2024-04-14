@@ -25,3 +25,15 @@
   top: 48%;
   opacity: 0.5;
 }
+
+.address {
+  position: absolute;
+  bottom: 0.5rem;
+  background-color: white;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
+}
