@@ -14,7 +14,7 @@ const ConfirmedButton = () => {
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
   const { userSchedules } = useGetCalendar(roomId);
-  const { maxDates, maxLength } = mostSchedule(userSchedules);
+  const dates = mostSchedule(userSchedules);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { lat, lng, location } = useHalfwayDataStore();
   const { data: room, isPending } = useQuery({
@@ -30,12 +30,15 @@ const ConfirmedButton = () => {
     await updateRoomData(roomId, { lat: String(lat), lng: String(lng), location, verified: true, confirmed_date });
   };
 
-  if (room && room.created_by !== userId) return null;
+  if (!room || isPending) return null;
+  if (room.created_by !== userId) return null;
+
+  console.log(room);
 
   return (
     <>
-      <Button onPress={onOpen} disabled={isPending}>
-        확정
+      <Button onPress={onOpen} isDisabled={room?.verified}>
+        {room?.verified ? '모임 확정 완료' : '확정'}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
@@ -45,10 +48,11 @@ const ConfirmedButton = () => {
               <form onSubmit={handleConfirm}>
                 <ModalBody>
                   <div className={styles.date}>
-                    {maxDates.map((date, i) => (
+                    {dates.map(([date, array], i) => (
                       <label key={i}>
                         <input type="radio" name="date" value={date} />
                         {date}
+                        <span>{array!.length}</span>
                       </label>
                     ))}
                   </div>
