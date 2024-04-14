@@ -18,13 +18,11 @@ type SearchData = {
 };
 
 type HalfwayData = {
-  halfwayData: {
-    lat: number | null;
-    lng: number | null;
-    location: string | null;
-    range: number | null;
-    verified: false;
-  };
+  lat: number | null;
+  lng: number | null;
+  location: string | null;
+  verified: false;
+
   updateHalfwayData: (payload: { [key: string]: string | number | null }) => void;
 };
 
@@ -40,6 +38,11 @@ type GpsStatus = {
   errorMessage: string | null;
   setIsGpsLoading: (payload: boolean) => void;
   setErrorMessage: (payload: string) => void;
+};
+
+type Range = {
+  range: number;
+  setRange: (payload: number) => void;
 };
 
 export const useSearchDataStore = create(
@@ -89,14 +92,17 @@ export const useRoomUserDataStore = create(
 );
 
 export const useHalfwayDataStore = create<HalfwayData>((set) => ({
-  halfwayData: {
-    lat: null,
-    lng: null,
-    location: null,
-    range: null,
-    verified: false
-  },
-  updateHalfwayData: (payload) => set((state) => ({ halfwayData: { ...state.halfwayData, ...payload } }))
+  lat: null,
+  lng: null,
+  location: null,
+  verified: false,
+
+  updateHalfwayData: (payload) => set((state) => ({ ...state, ...payload }))
+}));
+
+export const useRangeStore = create<Range>((set) => ({
+  range: 300,
+  setRange: (payload) => set({ range: payload })
 }));
 
 export const useGpsStatusStore = create<GpsStatus>((set) => ({
