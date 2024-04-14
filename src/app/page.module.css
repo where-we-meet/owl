@@ -79,7 +79,7 @@
 }
 
 .section > h3 {
-  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-size: clamp(1.3rem, 5vw, 2rem);
   min-width: 315px;
   padding: 10px;
 }
