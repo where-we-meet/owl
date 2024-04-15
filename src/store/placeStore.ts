@@ -15,6 +15,7 @@ type SearchData = {
   setLocation: (location: SearchData['location']) => void;
   setAddress: (address: SearchData['address']) => void;
   setSearchOption: (payload: SearchOptionData) => void;
+  updateSearchRange: (payload: number) => void;
 };
 
 type HalfwayData = {
@@ -47,7 +48,7 @@ type Range = {
 
 export const useSearchDataStore = create(
   persist<SearchData>(
-    (set) => ({
+    (set, get) => ({
       location: {
         lat: 33.450701,
         lng: 126.570667
@@ -57,7 +58,8 @@ export const useSearchDataStore = create(
       searchOption: null,
       setLocation: (location) => set({ location }),
       setAddress: (address) => set({ address }),
-      setSearchOption: (payload: SearchOptionData) => set({ searchOption: payload })
+      setSearchOption: (payload) => set({ searchOption: payload }),
+      updateSearchRange: (payload) => set(() => ({ searchOption: { ...get().searchOption, radius: payload } }))
     }),
     {
       name: 'setting-location-storage',
