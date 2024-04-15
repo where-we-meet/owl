@@ -9,15 +9,12 @@ import { Link } from '@nextui-org/react';
 const ResultSchedule = () => {
   const { id: roomId }: { id: string } = useParams();
   const { userSchedules } = useGetCalendar(roomId);
-  const dates = mostSchedule(userSchedules);
+  const { maxDates } = mostSchedule(userSchedules);
 
   return (
     <div className={styles.box}>
-      {dates.map(([date, array], i) => (
-        <li key={i}>
-          {date}
-          <span>{array!.length}</span>
-        </li>
+      {maxDates.map((date, i) => (
+        <li key={i}>{date}</li>
       ))}
       <Link href={`/room/${roomId}/pick-calendar`} className={styles.edit_calendar}>
         내 일정 변경하기
