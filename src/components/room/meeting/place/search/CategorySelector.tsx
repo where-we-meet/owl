@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { useEffect } from 'react';
 import { useHalfwayDataStore, useRangeStore, useSearchDataStore } from '@/store/placeStore';
 import { IoCafe, IoRestaurant } from 'react-icons/io5';
 import { FaTrainSubway, FaLandmark } from 'react-icons/fa6';
@@ -18,7 +18,7 @@ const SEARCH_CATEGORY = [
 
 const CategorySelector = () => {
   const searchOption = useSearchDataStore((state) => state.searchOption);
-  const setSearchOption = useSearchDataStore((state) => state.setSearchOption);
+  const { setSearchOption, updateSearchRange } = useSearchDataStore((state) => state);
   const { lat, lng } = useHalfwayDataStore((state) => state);
   const range = useRangeStore((state) => state.range);
 
@@ -31,6 +31,10 @@ const CategorySelector = () => {
     };
     setSearchOption(newSearchOption);
   };
+
+  useEffect(() => {
+    updateSearchRange(range);
+  }, [range]);
 
   return (
     <ul className={styles.category}>
