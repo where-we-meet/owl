@@ -17,7 +17,7 @@ import { FaShareAlt } from 'react-icons/fa';
 const LinkShare = () => {
   const { id: roomId } = useParams();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-  const shareLink = `${process.env.NEXT_PUBLIC_SITE_URL}/${roomId}`;
+  const shareLink = `${process.env.NEXT_PUBLIC_SITE_URL}/room/${roomId}`;
 
   const handleCopy = async () => {
     try {
