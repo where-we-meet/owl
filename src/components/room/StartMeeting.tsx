@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import styles from './StartMeeting.module.css';
 import { Button, Input } from '@nextui-org/react';
-
+import { MdStart } from 'react-icons/md';
 const StartMeeting = () => {
   const router = useRouter();
   const user = useQueryUser();
@@ -43,7 +43,7 @@ const StartMeeting = () => {
 
   return (
     <form onSubmit={startNewRoom}>
-      <p>모임 참가자가 선택 가능한 날짜 범위를 지정해주세요</p>
+      <h1 className={styles.title}>모임 일정의 범위를 선택해주세요</h1>
       <div className={styles.date}>
         <label>
           시작일
@@ -55,13 +55,17 @@ const StartMeeting = () => {
             onChange={changeStartDate}
           />
         </label>
+        <p>~</p>
         <label>
           종료일
           <Input type="date" min={startDate} name="end" value={endDate} onChange={changeEndDate} />
         </label>
       </div>
       <div className={styles.start_button}>
-        <Button type="submit">모임 시작하기</Button>
+        <Button type="submit">
+          모임 시작하기
+          <MdStart />
+        </Button>
       </div>
     </form>
   );
