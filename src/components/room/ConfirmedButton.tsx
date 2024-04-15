@@ -38,7 +38,7 @@ const ConfirmedButton = () => {
 
   return (
     <>
-      <Button onPress={onOpen} isDisabled={room?.verified}>
+      <Button onPress={onOpen} isDisabled={isFetchDone}>
         {isFetchDone ? '모임 확정 완료' : '확정'}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
