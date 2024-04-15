@@ -36,6 +36,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "kakao.maps.d.ts": "^0.1.39",
-    "typescript": "^5"
+    "typescript": "^5.4.5"
   }
 }
