@@ -26,8 +26,8 @@ export type Halfway = {
 };
 
 export type SearchOptionData = {
-  query: string;
-  x: string;
-  y: string;
+  query?: string | null | undefined;
+  x?: string;
+  y?: string;
   radius: number | null;
 } | null;
