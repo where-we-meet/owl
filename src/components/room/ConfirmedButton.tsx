@@ -14,7 +14,7 @@ const ConfirmedButton = () => {
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
   const { userSchedules } = useGetCalendar(roomId);
-  const dates = mostSchedule(userSchedules);
+  const { maxDates } = mostSchedule(userSchedules);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { lat, lng, location } = useHalfwayDataStore();
   const { data: room, isPending } = useQuery({
@@ -48,11 +48,10 @@ const ConfirmedButton = () => {
               <form onSubmit={handleConfirm}>
                 <ModalBody>
                   <div className={styles.date}>
-                    {dates.map(([date, array], i) => (
+                    {maxDates.map((date, i) => (
                       <label key={i}>
                         <input type="radio" name="date" value={date} />
                         {date}
-                        <span>{array!.length}</span>
                       </label>
                     ))}
                   </div>
