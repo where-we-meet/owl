@@ -5,7 +5,7 @@ import { mostSchedule } from '@/utils/mostSchedule';
 import { useParams } from 'next/navigation';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
 import styles from './ConfirmedButton.module.css';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed, updateRoomData } from '@/api/room';
@@ -22,23 +22,24 @@ const ConfirmedButton = () => {
     queryFn: () => getRoomIsConfirmed(roomId),
     select: (data) => data[0]
   });
+  // emergency
+  const [isFetchDone, setIsFetchDone] = useState(false);
 
   const handleConfirm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!lat || !lng || !location) return;
     const confirmed_date = e.currentTarget.date.value;
     await updateRoomData(roomId, { lat: String(lat), lng: String(lng), location, verified: true, confirmed_date });
+    setIsFetchDone(true);
   };
 
   if (!room || isPending) return null;
   if (room.created_by !== userId) return null;
 
-  console.log(room);
-
   return (
     <>
       <Button onPress={onOpen} isDisabled={room?.verified}>
-        {room?.verified ? '모임 확정 완료' : '확정'}
+        {isFetchDone ? '모임 확정 완료' : '확정'}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
