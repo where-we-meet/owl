@@ -22,9 +22,9 @@ const ConfirmedButton = () => {
     queryFn: () => getRoomIsConfirmed(roomId),
     select: (data) => data[0]
   });
+
   // emergency
   const [isFetchDone, setIsFetchDone] = useState(false);
-
   const handleConfirm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!lat || !lng || !location) return;
@@ -35,7 +35,6 @@ const ConfirmedButton = () => {
 
   if (!room || isPending) return null;
   if (room.created_by !== userId) return null;
-
   return (
     <>
       <Button onPress={onOpen} isDisabled={isFetchDone}>
