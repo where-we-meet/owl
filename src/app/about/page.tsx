@@ -24,7 +24,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.github_link}>
               <Link href="https://github.com/heechul94">
-                <FaGithub size={50} />
+                <FaGithub color="#8a2be2" size={45} />
               </Link>
             </div>
           </div>
@@ -38,7 +38,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.github_link}>
               <Link href="https://github.com/ketchup0211">
-                <FaGithub size={50} />
+                <FaGithub color="#8a2be2" size={45} />
               </Link>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.github_link}>
               <Link href="https://github.com/lauichan">
-                <FaGithub size={50} />
+                <FaGithub color="#8a2be2" size={45} />
               </Link>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.github_link}>
               <Link href="https://github.com/SohyangO">
-                <FaGithub size={50} />
+                <FaGithub color="#8a2be2" size={45} />
               </Link>
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.github_link}>
               <Link href="https://github.com/gidalim">
-                <FaGithub size={50} />
+                <FaGithub color="#8a2be2" size={45} />
               </Link>
             </div>
           </div>
