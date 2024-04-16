@@ -1,0 +1,25 @@
+.card {
+  max-width: 400px;
+}
+
+.card_header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.card_header_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card_body_content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.small_text {
+  font-size: small;
+  color: gray;
+}
