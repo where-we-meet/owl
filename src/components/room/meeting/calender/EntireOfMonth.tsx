@@ -16,7 +16,6 @@ type Props = {
   selectedDate: Date[];
   userSchedules: UserSchedule[];
   handleDateClick: (date: Date) => void;
-  id: string;
   handleBlockSelect: (date: Date) => React.CSSProperties;
 };
 
