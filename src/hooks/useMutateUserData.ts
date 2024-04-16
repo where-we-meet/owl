@@ -11,8 +11,8 @@ type Payload = {
 export const useMutateUserData = () => {
   const { mutate, isSuccess } = useMutation({
     mutationFn: async (payload: Payload) => {
-      const updateLocationResponse = await updateStartLocation(payload.userLocationData);
-      const updateCalendarResponse = await upsertSchedule(payload.userSchedules);
+      await updateStartLocation(payload.userLocationData);
+      await upsertSchedule(payload.userSchedules);
     }
   });
   return { mutate, isSuccess };
