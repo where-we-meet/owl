@@ -45,6 +45,7 @@
   flex-direction: column;
   border: 1px solid black;
   min-width: 250px;
+  padding: 1rem;
 }
 
 .figure {
