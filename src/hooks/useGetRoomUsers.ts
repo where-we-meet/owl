@@ -1,18 +1,13 @@
-import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
 import { useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { RoomUser } from '@/types/roomUser';
+import { useQueryRoomUsers } from './useQueryRoomUsers';
 
 export const useGetRoomUsers = (roomId: string, userId: string) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
-  const { data = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
-
-  const adminUser = data.filter((user) => user.is_admin);
-  const currentUser = data.filter((user) => !user.is_admin && user.user_id === userId);
-  const otherUsers = data.filter((user) => !user.is_admin && user.user_id !== userId);
-  const roomUsers = [...adminUser, ...currentUser, ...otherUsers];
+  const { roomUsers } = useQueryRoomUsers(roomId, userId);
 
   useEffect(() => {
     const subscription = supabase
