@@ -1,23 +1,19 @@
-'use client';
-
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import SettingMap from '@/components/room/meeting/place/SettingMap';
 import SearchBar from '@/components/room/meeting/place/search/SearchBar';
 import { Button } from '@nextui-org/react';
 import styles from './page.module.css';
 
-const PickPlacePage = () => {
-  const { id: roomId } = useParams();
+const PickPlacePage = ({ params }: { params: { id: string } }) => {
   return (
     <>
       <SearchBar />
       <SettingMap />
       <div className={styles.footer}>
-        <Button as={Link} href={`/room/${roomId}/pick-calendar`}>
+        <Button as={Link} href={`/room/${params.id}/pick-calendar`}>
           이전
         </Button>
-        <Button as={Link} href={`/room/${roomId}/confirm`}>
+        <Button as={Link} href={`/room/${params.id}/confirm`}>
           다음
         </Button>
       </div>
