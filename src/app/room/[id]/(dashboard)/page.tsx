@@ -1,16 +1,10 @@
-import ResultPlace from '@/components/room/meeting/ResultPlace';
-import ResultSchedule from '@/components/room/meeting/calender/ResultSchedule';
+import Dashboard from '@/components/room/Dashboard';
 import styles from './page.module.css';
-import ConfirmedButton from '@/components/room/ConfirmedButton';
 
-const RoomPage = () => {
+const RoomPage = ({ params }: { params: { id: string } }) => {
   return (
     <div className={styles.container}>
-      <ResultSchedule />
-      <ResultPlace />
-      <div className={styles.footer}>
-        <ConfirmedButton />
-      </div>
+      <Dashboard roomId={params.id} />
     </div>
   );
 };
