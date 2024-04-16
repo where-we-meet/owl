@@ -1,10 +1,10 @@
 import styles from '@/app/room/[id]/(setting)/layout.module.css';
 import ProgressBar from '@/components/room/setting/ProgressBar';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children, params }: { children: React.ReactNode; params: { id: string } }) => {
   return (
     <div className={styles.setting_container}>
-      <ProgressBar />
+      <ProgressBar basePath={`/room/${params.id}`} />
       {children}
     </div>
   );

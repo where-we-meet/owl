@@ -11,15 +11,14 @@ const steps = [
   { name: '확정', path: 'confirm', value: 100 }
 ];
 
-const ProgressBar = () => {
-  const { id: roomId } = useParams();
+const ProgressBar = ({ basePath }: { basePath: string }) => {
   const path = usePathname();
   const router = useRouter();
 
   const { nowStepIndex } = nowStepInfo(path);
 
   const handleStepClick = (path: string) => {
-    router.push(`/room/${roomId}/${path}`);
+    router.push(`${basePath}/${path}`);
   };
 
   return (
