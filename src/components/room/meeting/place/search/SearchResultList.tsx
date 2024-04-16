@@ -1,6 +1,5 @@
 import React, { type Dispatch, type SetStateAction, type MouseEvent } from 'react';
 import styles from './SearchResultList.module.css';
-import { useGetSearchPlace } from '@/hooks/useGetPlace';
 import { changeToViewPoint } from '@/utils/place/changeToViewPoint';
 import { Place } from '@/types/place.types';
 import { useSearchDataStore } from '@/store/placeStore';

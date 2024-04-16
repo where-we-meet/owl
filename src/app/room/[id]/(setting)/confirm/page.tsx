@@ -7,7 +7,7 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { useCalendarStore } from '@/store/calendarStore';
 import { useSearchDataStore } from '@/store/placeStore';
 import { sortDate } from '@/utils/sortDate';
-import { Button, Card, CardBody, Listbox, ListboxItem } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import styles from './page.module.css';
 
 const SettingConfirmPage = () => {
