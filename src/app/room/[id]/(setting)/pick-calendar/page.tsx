@@ -9,7 +9,7 @@ import { useParams } from 'next/navigation';
 import styles from './page.module.css';
 
 const PickCalendar = () => {
-  const { id } = useParams();
+  const { id }: { id: string } = useParams();
   const selectedDates = useCalendarStore((state) => state.selectedDates);
 
   return (

@@ -7,11 +7,33 @@ import type { UpsertUserSchedule } from '@/types/roomUser';
 const supabase = createClient();
 
 // supabase에서 roomId를 통해 해당 room 일정과 관련된 모든 Data 반환
-export const getUserSchedule = async (id: string) => {
-  const { data, error } = await supabase.from('room_schedule').select('*').eq('room_id', id);
+export const getUserSchedule = async (roomId: string) => {
+  const { data, error } = await supabase.from('room_schedule').select('*').eq('room_id', roomId);
   if (error) throw error;
   return data;
 };
+
+// //supabase에서 roomId와 userId를 통해 내가 선택한 날짜를 반환
+// export const getMySchedule = async (userId: string, roomId: string) => {
+//   const { data, error } = await supabase
+//     .from('room_schedule')
+//     .select('*')
+//     .eq('room_id', roomId)
+//     .eq('created_by', userId);
+//   if (error) throw error;
+//   return data;
+// };
+
+// //supabase에서 roomId와 userId를 통해 내가 아닌 다른 유저들의 날짜를 반환
+// export const getAnotherUsersSchedule = async (userId: string, roomId: string) => {
+//   const { data, error } = await supabase
+//     .from('room_schedule')
+//     .select('*')
+//     .eq('room_id', roomId)
+//     .neq('created_by', userId);
+//   if (error) throw error;
+//   return data;
+// };
 
 export const getRooomData = async (roomId: string) => {
   const { data, error } = await supabase.from('rooms').select('*').eq('id', roomId);
