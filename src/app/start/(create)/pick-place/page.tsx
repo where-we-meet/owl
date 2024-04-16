@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import SettingMap from '@/components/room/meeting/place/SettingMap';
 import SearchBar from '@/components/room/meeting/place/search/SearchBar';
-import { Button } from '@nextui-org/react';
+import { Button, Link } from '@nextui-org/react';
 import styles from './page.module.css';
 
 const PickPlacePage = () => {
