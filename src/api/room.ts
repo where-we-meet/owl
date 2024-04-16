@@ -1,5 +1,5 @@
+import { RoomUser } from '@/types/roomUser';
 import { createClient } from '@/utils/supabase/client';
-import { eq } from 'lodash';
 
 const supabase = createClient();
 
@@ -19,21 +19,11 @@ export const insertNewRoom = async ({
   return data;
 };
 
-export const insertRoomUser = async ({
-  room_id,
-  user_id,
-  is_admin
-}: {
-  room_id: string;
-  user_id: string;
-  is_admin: boolean;
-}) => {
-  const { data, error: insertUserError } = await supabase
-    .from('userdata_room')
-    .insert([{ room_id, user_id, is_admin }]);
-
-  if (insertUserError) throw insertUserError;
-
+export const insertRoomUser = async (
+  userData: Pick<RoomUser, 'room_id' | 'user_id' | 'start_location' | 'is_admin' | 'lat' | 'lng'>
+) => {
+  const { data, error } = await supabase.from('userdata_room').insert([{ ...userData }]);
+  if (error) throw error;
   return data;
 };
 
