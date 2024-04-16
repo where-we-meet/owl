@@ -1,13 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useMutateUserData } from '@/hooks/useMutateUserData';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useCalendarStore } from '@/store/calendarStore';
 import { useSearchDataStore } from '@/store/placeStore';
 import { sortDate } from '@/utils/sortDate';
 import { Button, Link } from '@nextui-org/react';
-import { insertNewRoom, insertRoomUser } from '@/api/room';
+import { insertNewRoom, upsertRoomUser } from '@/api/room';
 import { useCreateRoomStore } from '@/store/createRoomStore';
 import styles from './page.module.css';
 import { upsertSchedule } from '@/api/supabaseCSR/supabase';
@@ -44,7 +43,7 @@ const SettingConfirmPage = () => {
       };
     });
 
-    await insertRoomUser({
+    await upsertRoomUser({
       room_id: room.id,
       user_id: userId,
       start_location: address,
