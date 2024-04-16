@@ -1,3 +1,4 @@
+'use client';
 import { type ChangeEvent, useState, useCallback } from 'react';
 import _ from 'lodash';
 import SearchResultList from './SearchResultList';
