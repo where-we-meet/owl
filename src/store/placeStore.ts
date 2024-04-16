@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 import type { SearchOptionData } from '@/types/place.types';
-import type { RoomUser } from '@/types/roomUser';
 
 type SearchData = {
   location: {
@@ -18,20 +17,9 @@ type SearchData = {
   updateSearchRange: (payload: number) => void;
 };
 
-type HalfwayData = {
-  lat: number | null;
-  lng: number | null;
-  location: string | null;
-  verified: false;
-
-  updateHalfwayData: (payload: { [key: string]: string | number | null }) => void;
-};
-
-type RoomUserData = {
-  roomUsers: RoomUser[];
-  setRoomUsers: (roomUsers: RoomUser[]) => void;
-  addRoomUserData: (payload: RoomUser) => void;
-  updateRoomUserData: (payload: RoomUser) => void;
+type Range = {
+  range: number;
+  setRange: (payload: number) => void;
 };
 
 type GpsStatus = {
@@ -39,11 +27,6 @@ type GpsStatus = {
   errorMessage: string | null;
   setIsGpsLoading: (payload: boolean) => void;
   setErrorMessage: (payload: string) => void;
-};
-
-type Range = {
-  range: number;
-  setRange: (payload: number) => void;
 };
 
 export const useSearchDataStore = create(
@@ -67,40 +50,6 @@ export const useSearchDataStore = create(
     }
   )
 );
-
-export const useRoomUserDataStore = create(
-  persist<RoomUserData>(
-    (set, get) => ({
-      roomUsers: [],
-      setRoomUsers: (roomUsers) => set({ roomUsers }),
-      addRoomUserData: (payload) =>
-        set(() => ({
-          roomUsers: [...get().roomUsers, payload]
-        })),
-      updateRoomUserData: (payload) =>
-        set(() => ({
-          roomUsers: get().roomUsers.map((user) =>
-            user.id === payload.id
-              ? { ...user, start_location: payload.start_location, lat: payload.lat, lng: payload.lng }
-              : user
-          )
-        }))
-    }),
-    {
-      name: 'room-userdata-storage',
-      storage: createJSONStorage(() => sessionStorage)
-    }
-  )
-);
-
-export const useHalfwayDataStore = create<HalfwayData>((set) => ({
-  lat: null,
-  lng: null,
-  location: null,
-  verified: false,
-
-  updateHalfwayData: (payload) => set((state) => ({ ...state, ...payload }))
-}));
 
 export const useRangeStore = create<Range>((set) => ({
   range: 300,

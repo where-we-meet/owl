@@ -1,8 +1,9 @@
-import { useGpsStatusStore, useRoomUserDataStore, useSearchDataStore } from '@/store/placeStore';
+import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useGetRoadAddress } from './useGetPlace';
 import { useQueryUser } from './useQueryUser';
+import { useRoomUserDataStore } from '@/store/roomUserStore';
 
 export const useSettingMap = () => {
   const [isDrag, setIsDrag] = useState(false);

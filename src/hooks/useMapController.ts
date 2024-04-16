@@ -1,11 +1,12 @@
 import { useGetRoadAddress, useGetSearchCategory } from '@/hooks/useGetPlace';
 import { useEffect, useMemo, useState } from 'react';
-import { useHalfwayDataStore, useRangeStore, useSearchDataStore } from '@/store/placeStore';
+import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
 import _ from 'lodash';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
+import { useHalfwayDataStore } from '@/store/halfwayStore';
 
 export const useMapController = () => {
   const { id: roomId }: { id: string } = useParams();

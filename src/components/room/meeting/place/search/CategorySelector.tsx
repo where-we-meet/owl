@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { useHalfwayDataStore, useRangeStore, useSearchDataStore } from '@/store/placeStore';
+import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
+import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { IoCafe, IoRestaurant } from 'react-icons/io5';
 import { FaTrainSubway, FaLandmark } from 'react-icons/fa6';
 import { RiMovie2Line, RiHotelBedFill } from 'react-icons/ri';

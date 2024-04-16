@@ -1,7 +1,8 @@
-import { useGpsStatusStore, useRoomUserDataStore, useSearchDataStore } from '@/store/placeStore';
+import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import { myGeolocation } from '@/utils/place/myGeolocation';
 import { useEffect } from 'react';
 import { useQueryUser } from './useQueryUser';
+import { useRoomUserDataStore } from '@/store/roomUserStore';
 
 export const useGeoLocation = () => {
   const setLocation = useSearchDataStore((state) => state.setLocation);
