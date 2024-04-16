@@ -1,0 +1,10 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+}
