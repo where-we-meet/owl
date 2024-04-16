@@ -1,3 +1,5 @@
+'use client';
+
 import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
