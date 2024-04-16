@@ -9,7 +9,7 @@ const Footer = () => {
         &nbsp;owl-link
       </Link>
       <div>
-        <p>about us</p>
+        <Link href="/about"> about us</Link>
       </div>
     </footer>
   );
