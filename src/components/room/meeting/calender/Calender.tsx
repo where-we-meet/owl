@@ -2,34 +2,22 @@
 
 import React, { useState } from 'react';
 import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
-
-import styles from './Calender.module.css';
-import EntireOfMonth from './EntireOfMonth';
-
+import EntireOfMonth, { UserSchedule } from './EntireOfMonth';
 import { useCalendarStore } from '@/store/calendarStore';
-import { useGetCalendar } from '@/hooks/useGetCalendar';
-
-import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { getRangeOfSchedule } from '@/api/supabaseCSR/supabase';
 import ResetSchedule from './ResetSchedule';
+import styles from './Calender.module.css';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-const Calender = () => {
-  const { id }: { id: string; } = useParams();
-  
-
+const Calender = ({
+  range,
+  schedules
+}: {
+  range: { start_date: string | null; end_date: string | null };
+  schedules: UserSchedule[];
+}) => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const { selectedDates, setSelectedDates } = useCalendarStore();
-
-  const { userSchedules } = useGetCalendar(id);
-
-  const { data } = useQuery({
-    queryKey: ['range', id],
-    queryFn: () => getRangeOfSchedule(id),
-    select: (data) => data[0]
-  });
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
@@ -42,14 +30,16 @@ const Calender = () => {
   };
 
   const handleDateClick = (date: Date) => {
-    const isAlreadySelected = selectedDates.some((selected) => isSameDay(selected, date));
+    if (!range.start_date || !range.end_date) return;
 
-    if (!data?.start_date || !data?.end_date) return;
-    const startDate = new Date(data.start_date);
-    const endDate = new Date(data.end_date);
+    const startDate = new Date(range.start_date);
+    const endDate = new Date(range.end_date);
+
     if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
       return;
     }
+
+    const isAlreadySelected = selectedDates.some((selected) => isSameDay(selected, date));
 
     if (isAlreadySelected) {
       const filteredDate = selectedDates.filter((item) => !isSameDay(item, date));
@@ -61,10 +51,10 @@ const Calender = () => {
   };
 
   const handleBlockSelect = (date: Date) => {
-    if (!data?.start_date || !data?.end_date) return {};
+    if (!range.start_date || !range?.end_date) return {};
 
-    const startDate = new Date(data.start_date);
-    const endDate = new Date(data.end_date);
+    const startDate = new Date(range.start_date);
+    const endDate = new Date(range.end_date);
 
     if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
       return { color: '#ccc' };
@@ -72,6 +62,8 @@ const Calender = () => {
       return {};
     }
   };
+
+  if (!range.start_date || !range.end_date) return <>로딩중</>;
 
   return (
     <>
@@ -102,9 +94,8 @@ const Calender = () => {
             <EntireOfMonth
               nowDate={nowDate}
               selectedDate={selectedDates}
-              userSchedules={userSchedules}
+              userSchedules={schedules}
               handleDateClick={handleDateClick}
-              id={id}
               handleBlockSelect={handleBlockSelect}
             />
           </div>
