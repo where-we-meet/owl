@@ -54,7 +54,7 @@ const SettingConfirmPage = () => {
 
     await upsertSchedule(userSchedules);
 
-    router.push(`/room/${room.id}/pick-calendar`);
+    router.push(`/room/${room.id}`);
   };
 
   return (
