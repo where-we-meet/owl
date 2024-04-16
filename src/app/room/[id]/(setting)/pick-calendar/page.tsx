@@ -1,7 +1,6 @@
 'use client';
 
 import Calender from '@/components/room/meeting/calender/Calender';
-import ResetSchedule from '@/components/room/meeting/calender/ResetSchedule';
 import { useCalendarStore } from '@/store/calendarStore';
 import checkSelectedDates from '@/utils/calendar/checkSelectedDates';
 import { Button, Link } from '@nextui-org/react';
