@@ -11,6 +11,7 @@ export const useMapController = () => {
   const { id: roomId }: { id: string } = useParams();
 
   const [address, setAddress] = useState('');
+  const [clickId, setClickId] = useState('');
 
   const { searchOption } = useSearchDataStore((state) => state);
   const range = useRangeStore((state) => state.range);
@@ -41,6 +42,8 @@ export const useMapController = () => {
     address,
     halfwayPoint,
     roomUsers,
-    searchCategory
+    searchCategory,
+    clickId,
+    setClickId
   };
 };
