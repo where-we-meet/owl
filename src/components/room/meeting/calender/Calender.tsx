@@ -17,7 +17,8 @@ import ResetSchedule from './ResetSchedule';
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = () => {
-  const { id }: { id: string } = useParams();
+  const { id }: { id: string; } = useParams();
+  
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const { selectedDates, setSelectedDates } = useCalendarStore();

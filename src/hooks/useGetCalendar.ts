@@ -3,11 +3,11 @@ import { Tables } from '@/types/supabase';
 import { createClient } from '@/utils/supabase/client';
 import { useEffect, useState } from 'react';
 
-type UserSchedule = Tables<'room_schedule'>;
+export type UserSchedule = Tables<'room_schedule'>;
 
 export const useGetCalendar = (roomId: string) => {
-  const [userSchedules, setUserSchedules] = useState<UserSchedule[]>([]);
   const supabase = createClient();
+  const [userSchedules, setUserSchedules] = useState<UserSchedule[]>([]);
 
   useEffect(() => {
     const dateOfUser = async () => {
