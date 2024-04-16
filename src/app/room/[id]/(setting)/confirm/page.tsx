@@ -1,17 +1,19 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useMutateUserData } from '@/hooks/useMutateUserData';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useCalendarStore } from '@/store/calendarStore';
 import { useSearchDataStore } from '@/store/placeStore';
 import { sortDate } from '@/utils/sortDate';
 import { Button } from '@nextui-org/react';
 import styles from './page.module.css';
+import { upsertRoomUser } from '@/api/room';
+import { upsertSchedule } from '@/api/supabaseCSR/supabase';
 
 const SettingConfirmPage = () => {
-  const { mutate, isSuccess } = useMutateUserData();
+  const router = useRouter();
+  const { id: roomId }: { id: string } = useParams();
+  const { id: userId } = useQueryUser();
 
   const selectedDates = useCalendarStore((state) => state.selectedDates);
   const sortedDates = sortDate(selectedDates);
@@ -20,23 +22,21 @@ const SettingConfirmPage = () => {
     location: { lat, lng },
     address
   } = useSearchDataStore((state) => state);
-  const { id: userId } = useQueryUser();
-
-  const router = useRouter();
-  const { id: roomId }: { id: string } = useParams();
 
   const handlePrevStep = () => {
     router.push(`/room/${roomId}/pick-place`);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const userLocationData = {
       room_id: roomId,
       user_id: userId,
       start_location: address,
+      is_admin: false,
       lat: lat.toString(),
       lng: lng.toString()
     };
+
     const userSchedules = sortedDates.map((date) => {
       return {
         room_id: roomId,
@@ -46,16 +46,15 @@ const SettingConfirmPage = () => {
       };
     });
 
-    mutate({ userLocationData, userSchedules });
+    await upsertRoomUser(userLocationData);
+    await upsertSchedule(userSchedules);
+    router.replace(`/room/${roomId}`);
+
     sessionStorage.removeItem('setting-location-storage');
     sessionStorage.removeItem('setting-calendar-storage');
-  };
 
-  useEffect(() => {
-    if (isSuccess) {
-      router.push(`/room/${roomId}`);
-    }
-  }, [isSuccess]);
+    router.push(`/room/${roomId}`);
+  };
 
   return (
     <>
