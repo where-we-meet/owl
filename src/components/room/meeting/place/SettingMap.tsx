@@ -1,12 +1,9 @@
-'use-client';
+'use client';
 
 import Image from 'next/image';
-
 import { Map } from 'react-kakao-maps-sdk';
-
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useSettingMap } from '@/hooks/useSettingMap';
-
 import { Spinner } from '@nextui-org/react';
 import styles from './ResultMap.module.css';
 
