@@ -19,10 +19,10 @@ export const insertNewRoom = async ({
   return data;
 };
 
-export const insertRoomUser = async (
+export const upsertRoomUser = async (
   userData: Pick<RoomUser, 'room_id' | 'user_id' | 'start_location' | 'is_admin' | 'lat' | 'lng'>
 ) => {
-  const { data, error } = await supabase.from('userdata_room').insert([{ ...userData }]);
+  const { data, error } = await supabase.from('userdata_room').upsert([{ ...userData }]);
   if (error) throw error;
   return data;
 };
