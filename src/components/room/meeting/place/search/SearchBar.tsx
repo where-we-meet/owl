@@ -1,11 +1,12 @@
 'use client';
 import { type ChangeEvent, useState, useCallback } from 'react';
 import _ from 'lodash';
-import SearchResultList from './SearchResultList';
 import { useGetSearchPlace } from '@/hooks/useGetPlace';
-import GeolocationButton from '../GeolocationButton';
+import { useSearchDataStore } from '@/store/placeStore';
 import { Input } from '@nextui-org/react';
+import SearchResultList from './SearchResultList';
 import styles from './SearchBar.module.css';
+import { SearchIcon } from './SearchIcon';
 
 const SearchBar = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -13,6 +14,8 @@ const SearchBar = () => {
     inputFocused: false,
     containerHovered: false
   });
+
+  const address = useSearchDataStore((state) => state.address);
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(event.target.value);
@@ -33,12 +36,12 @@ const SearchBar = () => {
       <form className={styles.search_bar} onSubmit={(e) => e.preventDefault()}>
         <Input
           id="searchBar"
-          placeholder="출발 위치 검색하기"
+          placeholder={address}
           onChange={handleSearchInput}
           onFocus={handleInputFocus}
           onBlur={handleInputFocus}
           autoComplete="off"
-          startContent={<GeolocationButton />}
+          startContent={<SearchIcon />}
           variant="bordered"
           size="lg"
           isClearable
