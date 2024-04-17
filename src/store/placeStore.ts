@@ -52,7 +52,7 @@ export const useSearchDataStore = create(
 );
 
 export const useRangeStore = create<Range>((set) => ({
-  range: 300,
+  range: 200,
   setRange: (payload) => set({ range: payload })
 }));
 
