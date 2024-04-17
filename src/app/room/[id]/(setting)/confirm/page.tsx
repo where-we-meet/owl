@@ -19,7 +19,7 @@ const SettingConfirmPage = () => {
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
 
-  const { mutate: resetUserScheduleDB, isSuccess: resetSuccess } = useDeleteUserSchedule();
+  const { mutateAsync: resetUserScheduleDB, isSuccess: resetSuccess } = useDeleteUserSchedule();
   const selectedDates = useCalendarStore((state) => state.selectedDates);
   const sortedDates = sortDate(selectedDates);
 
@@ -51,11 +51,9 @@ const SettingConfirmPage = () => {
     });
 
     await updateStartLocation(userLocationData);
-    resetUserScheduleDB({ roomId, userId });
-    if (resetSuccess) {
-      await upsertSchedule(userSchedules);
-    }
-    router.replace(`/room/${roomId}`);
+
+    await resetUserScheduleDB({ roomId, userId });
+    await upsertSchedule(userSchedules);
 
     sessionStorage.removeItem('setting-location-storage');
     sessionStorage.removeItem('setting-calendar-storage');
