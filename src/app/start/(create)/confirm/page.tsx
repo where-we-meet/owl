@@ -8,9 +8,9 @@ import { sortDate } from '@/utils/sortDate';
 import { Button, Link } from '@nextui-org/react';
 import { insertNewRoom, upsertRoomUser } from '@/api/room';
 import { useCreateRoomStore } from '@/store/createRoomStore';
-import styles from './page.module.css';
 import { upsertSchedule } from '@/api/supabaseCSR/supabase';
 import roomNameGenerator from '@/utils/roomNameGenerator';
+import styles from './page.module.css';
 
 const SettingConfirmPage = () => {
   const router = useRouter();
@@ -24,7 +24,6 @@ const SettingConfirmPage = () => {
   } = useSearchDataStore((state) => state);
 
   const sortedDates = sortDate(selectedDates);
-
 
   const createNewRoom = async () => {
     if (!startDate || !endDate) return;
