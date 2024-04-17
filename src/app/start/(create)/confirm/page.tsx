@@ -10,6 +10,7 @@ import { insertNewRoom, upsertRoomUser } from '@/api/room';
 import { useCreateRoomStore } from '@/store/createRoomStore';
 import styles from './page.module.css';
 import { upsertSchedule } from '@/api/supabaseCSR/supabase';
+import roomNameGenerator from '@/utils/roomNameGenerator';
 
 const SettingConfirmPage = () => {
   const router = useRouter();
@@ -26,9 +27,9 @@ const SettingConfirmPage = () => {
 
   const createNewRoom = async () => {
     if (!startDate || !endDate) return;
-
+    const roomName = roomNameGenerator();
     const [room] = await insertNewRoom({
-      name: '운좋은 올빼미',
+      name: roomName,
       created_by: userId,
       start_date: startDate,
       end_date: endDate
