@@ -1,42 +1,47 @@
-import React, { type Dispatch, type SetStateAction, type MouseEvent } from 'react';
-import styles from './SearchResultList.module.css';
-import { changeToViewPoint } from '@/utils/place/changeToViewPoint';
+import type { Dispatch, SetStateAction, MouseEvent, TouchEvent, MutableRefObject } from 'react';
 import { Place } from '@/types/place.types';
 import { useSearchDataStore } from '@/store/placeStore';
+import { changeToViewPoint } from '@/utils/place/changeToViewPoint';
+import styles from './SearchResultList.module.css';
 
-const SearchResultList = ({
-  placeList,
-  setListViewState
-}: {
+type Props = {
   placeList: Place[];
-  setListViewState: Dispatch<
-    SetStateAction<{
-      inputFocused: boolean;
-      containerHovered: boolean;
-    }>
-  >;
-}) => {
-  const setLocation = useSearchDataStore((state) => state.setLocation);
+  setListViewState: Dispatch<SetStateAction<boolean>>;
+  inputRef: MutableRefObject<HTMLInputElement | null>;
+};
 
-  const handleListFocus = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    setListViewState((prev) => ({ ...prev, containerHovered: !prev.containerHovered }));
-  };
+const SearchResultList = ({ placeList, setListViewState, inputRef }: Props) => {
+  const setLocation = useSearchDataStore((state) => state.setLocation);
 
   const handleChangeViewPoint = (place: Place) => {
     const point = changeToViewPoint(place);
     setLocation(point);
   };
+
+  const handleClickList = (event: MouseEvent<HTMLLIElement>) => {
+    event.stopPropagation();
+    if (inputRef.current) inputRef.current.blur();
+    setListViewState(false);
+  };
+
+  const handleTouchList = (event: TouchEvent<HTMLLIElement>) => {
+    event.stopPropagation();
+    if (inputRef.current) inputRef.current.blur();
+    setListViewState(false);
+  };
+
   return (
-    <div className={styles.places_container} onMouseEnter={handleListFocus} onMouseLeave={handleListFocus}>
+    <div className={styles.places_container}>
       <ul>
         {placeList?.map((place) => (
           <li
             key={place.id}
-            onClick={() => {
+            onClick={(event) => {
+              handleClickList(event);
               handleChangeViewPoint(place);
             }}
-            onTouchEnd={() => {
+            onTouchEnd={(event) => {
+              handleTouchList(event);
               handleChangeViewPoint(place);
             }}
           >
