@@ -6,6 +6,7 @@
   display: flex;
   gap: 0.5rem;
   list-style: none;
+  flex-direction: column;
 }
 
 .edit_calendar {
