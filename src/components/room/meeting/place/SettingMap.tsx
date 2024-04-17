@@ -6,10 +6,11 @@ import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useSettingMap } from '@/hooks/useSettingMap';
 import { Spinner } from '@nextui-org/react';
 import styles from './ResultMap.module.css';
+import GeolocationButton from './GeolocationButton';
 
 const SettingMap = () => {
   const [loading, error] = useKakaoMap();
-  const { location, address, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } = useSettingMap();
+  const { location, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } = useSettingMap();
 
   if (loading) return <Spinner label="Loading..." color="primary" />;
   if (error) return <div>error</div>;
@@ -20,13 +21,15 @@ const SettingMap = () => {
         {isGpsLoading ? (
           <Spinner className={styles.center_pin} color="primary" />
         ) : (
-          <Image
-            src={'/pin.svg'}
-            className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
-            width={50}
-            height={50}
-            alt="pin"
-          />
+          <div>
+            <Image
+              src={'/pin.svg'}
+              className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
+              width={30}
+              height={30}
+              alt="pin"
+            />
+          </div>
         )}
         <Map
           center={location}
@@ -35,7 +38,7 @@ const SettingMap = () => {
           onDragStart={() => setIsDrag(true)}
           onDragEnd={() => setIsDrag(false)}
         />
-        <div>{address}</div>
+        <GeolocationButton />
       </div>
     </>
   );
