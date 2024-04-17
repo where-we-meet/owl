@@ -1,14 +1,12 @@
 'use client';
 
-import { Avatar, Modal, ModalContent, useDisclosure } from '@nextui-org/react';
+import { Avatar, useDisclosure } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
-import UserProfileUpdate from './UserProfileUpdate';
-import UserProfileRead from './UserProfileRead';
-import { PiUserSquareDuotone } from 'react-icons/pi';
 
 import styles from './UserProfileButton.module.css';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
+import { ProfileModal } from './ProfileModal';
 
 const UserProfile = () => {
   const user = useQueryUser();
@@ -23,17 +21,13 @@ const UserProfile = () => {
     };
     fetchData();
   }, []);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [editMode, setEditMode] = useState(false);
+
   const [profile, setProfile] = useState<string | null>('');
 
-  const handleClose = () => {
-    setEditMode(false);
-    onClose();
-  };
-
-  const toggleEditMode = () => {
-    setEditMode((prev) => !prev);
+  const handleModalOpen = () => {
+    onOpen();
   };
 
   return (
@@ -41,23 +35,14 @@ const UserProfile = () => {
       <div className="flex gap-4 items-center" title="내 프로필 설정 및 보기">
         <Avatar
           className={styles.profile}
-          onClick={onOpen}
+          onClick={handleModalOpen}
           showFallback
           name={user.user_metadata.user_name}
           isBordered={true}
           src={`${profile}`}
         />
       </div>
-
-      <Modal className={styles.modal} backdrop="blur" isOpen={isOpen} onClose={handleClose} hideCloseButton>
-        <ModalContent className={styles.modal_container}>
-          {editMode ? (
-            <UserProfileUpdate toggleEditMode={toggleEditMode} />
-          ) : (
-            <UserProfileRead toggleEditMode={toggleEditMode} handleClose={handleClose} />
-          )}
-        </ModalContent>
-      </Modal>
+      <ProfileModal onClose={onClose} isOpen={isOpen} />
     </>
   );
 };
