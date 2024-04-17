@@ -1,10 +1,15 @@
 import { useGeoLocation } from '@/hooks/useGeoLocation';
-import { Button } from '@nextui-org/react';
+
 import { MdGpsFixed } from 'react-icons/md';
+import styles from './GeolocationButton.module.css';
 
 const GeolocationButton = () => {
   const { handleSetGeolocation } = useGeoLocation();
-  return <MdGpsFixed style={{ cursor: 'pointer' }} onClick={handleSetGeolocation} />;
+  return (
+    <div className={styles.wrapper} onClick={handleSetGeolocation}>
+      <MdGpsFixed size={25} />
+    </div>
+  );
 };
 
 export default GeolocationButton;
