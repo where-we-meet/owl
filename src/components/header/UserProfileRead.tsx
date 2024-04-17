@@ -12,9 +12,16 @@ import Logout from '../auth/LogoutButton';
 
 export type UserProfileData = { name: string; profile_url: string | null };
 
-const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () => void; handleClose: () => void }) => {
+const UserProfileRead = ({
+  toggleEditMode,
+  handleClose,
+  isOpen
+}: {
+  toggleEditMode: () => void;
+  handleClose: () => void;
+  isOpen: boolean;
+}) => {
   const user = useQueryUser();
-
   //state for recent profile data (from supabase DB)
   const [data, setData] = useState<UserProfileData>({
     name: '',
@@ -33,7 +40,14 @@ const UserProfileRead = ({ toggleEditMode, handleClose }: { toggleEditMode: () =
     };
     fetchData();
   }, []);
-
+  useEffect(() => {
+    if (isOpen === true) {
+      window.addEventListener('popstate', handleClose);
+    }
+    if (isOpen === false) {
+      window.removeEventListener('popstate', handleClose);
+    }
+  }, [isOpen]);
   return (
     <>
       <Button className={styles.close_btn} isIconOnly onPress={handleClose}>

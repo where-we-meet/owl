@@ -13,7 +13,15 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import styles from './UserProfileUpdate.module.css';
 const MAX_NAME_LENGTH = 16;
 
-const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) => {
+const UserProfileUpdate = ({
+  toggleEditMode,
+  isOpen,
+  handleClose
+}: {
+  toggleEditMode: () => void;
+  isOpen: boolean;
+  handleClose: () => void;
+}) => {
   const [userName, setUserName] = useState('');
   const [userProfileURL, setUserProfileURL] = useState<string | null>('');
   const [toggleModal, setToggleModal] = useState(false);
@@ -54,6 +62,14 @@ const UserProfileUpdate = ({ toggleEditMode }: { toggleEditMode: () => void }) =
     }
   }, [data]);
 
+  useEffect(() => {
+    if (isOpen === true) {
+      window.addEventListener('popstate', handleClose);
+    }
+    if (isOpen == false) {
+      window.removeEventListener('popstate', handleClose);
+    }
+  }, [isOpen]);
   return (
     <>
       <Button className={styles.back_btn} isIconOnly onPress={toggleEditMode}>

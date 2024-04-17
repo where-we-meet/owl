@@ -1,18 +1,14 @@
 'use client';
 
-import { Avatar, Modal, ModalContent, useDisclosure } from '@nextui-org/react';
+import { Avatar, useDisclosure } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
-import UserProfileUpdate from './UserProfileUpdate';
-import UserProfileRead from './UserProfileRead';
 
 import styles from './UserProfileButton.module.css';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
-import { usePathname, useRouter } from 'next/navigation';
-import path from 'path';
+import { ProfileModal } from './ProfileModal';
 
 const UserProfile = () => {
-  console.log('hi');
   const user = useQueryUser();
   useEffect(() => {
     const fetchData = async () => {
@@ -27,38 +23,10 @@ const UserProfile = () => {
   }, []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [editMode, setEditMode] = useState(false);
-  const [profile, setProfile] = useState<string | null>('');
-  const pathname = usePathname();
-  const router = useRouter();
-  const handleClose = () => {
-    setEditMode(false);
-    history.back();
-    onClose();
-  };
 
-  const toggleEditMode = () => {
-    setEditMode((prev) => !prev);
-  };
-  // window.addEventListener(
-  //   'popstate',
-  //   function (event) {
-  //     //4 or 8번이나 뜸. 왜?
-  //     alert('뒤로가기 버튼이 클릭되었습니다!');
-  //     handleClose();
-  //   },
-  //   { once: true }
-  // );
-  if (!isOpen) {
-    window.onpopstate = () => {
-      alert('뒤로가기 버튼이 클릭되었습니다!');
-      handleClose();
-      router.replace(pathname);
-    };
-  }
+  const [profile, setProfile] = useState<string | null>('');
 
   const handleModalOpen = () => {
-    history.pushState(null, '내 프로필', pathname === '/' ? 'profile' : `${pathname}/profile`);
     onOpen();
   };
 
@@ -74,16 +42,7 @@ const UserProfile = () => {
           src={`${profile}`}
         />
       </div>
-
-      <Modal className={styles.modal} backdrop="blur" isOpen={isOpen} onClose={handleClose} hideCloseButton>
-        <ModalContent className={styles.modal_container}>
-          {editMode ? (
-            <UserProfileUpdate toggleEditMode={toggleEditMode} />
-          ) : (
-            <UserProfileRead toggleEditMode={toggleEditMode} handleClose={handleClose} />
-          )}
-        </ModalContent>
-      </Modal>
+      <ProfileModal onClose={onClose} isOpen={isOpen} />
     </>
   );
 };
