@@ -3,11 +3,14 @@ import { createClient } from '@/utils/supabase/client';
 import { useQueryClient } from '@tanstack/react-query';
 import { RoomUser } from '@/types/roomUser';
 import { useQueryRoomUsers } from './useQueryRoomUsers';
+import { useRoomUserDataStore } from '@/store/roomUserStore';
 
 export const useGetRoomUsers = (roomId: string, userId: string) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
   const { roomUsers } = useQueryRoomUsers(roomId, userId);
+
+  const setRoomUser = useRoomUserDataStore((state) => state.setRoomUser);
 
   useEffect(() => {
     const subscription = supabase
@@ -52,6 +55,11 @@ export const useGetRoomUsers = (roomId: string, userId: string) => {
       supabase.removeChannel(subscription);
     };
   }, [supabase, roomUsers]);
+
+  useEffect(() => {
+    const userInfo = roomUsers.find((user) => user.user_id === userId);
+    if (userInfo) setRoomUser(userInfo);
+  }, [roomUsers]);
 
   return { roomUsers };
 };
