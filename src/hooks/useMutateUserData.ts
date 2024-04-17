@@ -19,10 +19,10 @@ export const useMutateUserData = () => {
 };
 
 export const useDeleteUserSchedule = () => {
-  const { mutate, isSuccess } = useMutation({
+  const { mutateAsync, isSuccess } = useMutation({
     mutationFn: async (payload: { roomId: string; userId: string }) => {
       await deleteSchedule(payload);
     }
   });
-  return { mutate, isSuccess };
+  return { mutateAsync, isSuccess };
 };
