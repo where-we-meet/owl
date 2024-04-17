@@ -1,7 +1,7 @@
-import { CustomGroupBy } from './groupBy';
+import { customGroupBy } from './groupBy';
 
 export const mostSchedule = (userSchedules: any) => {
-  const result = CustomGroupBy(userSchedules, ({ start_date }: { start_date: string }) => start_date || 'not-setting');
+  const result = customGroupBy(userSchedules, ({ start_date }: { start_date: string }) => start_date || 'not-setting');
   const sortResult = Object.entries(result).sort((a, b) => {
     const aLength = a[1] ? a[1].length : 0;
     const bLength = b[1] ? b[1].length : 0;
