@@ -1,20 +1,25 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
+
 import { useQueryUser } from '@/hooks/useQueryUser';
+import { useDeleteUserSchedule } from '@/hooks/useMutateUserData';
+
 import { useCalendarStore } from '@/store/calendarStore';
 import { useSearchDataStore } from '@/store/placeStore';
+
+import { updateStartLocation, upsertSchedule } from '@/api/supabaseCSR/supabase';
 import { sortDate } from '@/utils/sortDate';
+
 import { Button } from '@nextui-org/react';
 import styles from './page.module.css';
-import { upsertRoomUser } from '@/api/room';
-import { upsertSchedule } from '@/api/supabaseCSR/supabase';
 
 const SettingConfirmPage = () => {
   const router = useRouter();
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
 
+  const { mutate: resetUserScheduleDB, isSuccess: resetSuccess } = useDeleteUserSchedule();
   const selectedDates = useCalendarStore((state) => state.selectedDates);
   const sortedDates = sortDate(selectedDates);
 
@@ -32,7 +37,6 @@ const SettingConfirmPage = () => {
       room_id: roomId,
       user_id: userId,
       start_location: address,
-      is_admin: false,
       lat: lat.toString(),
       lng: lng.toString()
     };
@@ -46,8 +50,11 @@ const SettingConfirmPage = () => {
       };
     });
 
-    await upsertRoomUser(userLocationData);
-    await upsertSchedule(userSchedules);
+    await updateStartLocation(userLocationData);
+    resetUserScheduleDB({ roomId, userId });
+    if (resetSuccess) {
+      await upsertSchedule(userSchedules);
+    }
     router.replace(`/room/${roomId}`);
 
     sessionStorage.removeItem('setting-location-storage');
