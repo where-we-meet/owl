@@ -34,7 +34,7 @@ export default function Home() {
         <h3>이런 경우에 쓰면 좋아요!</h3>
         <div className={styles.use_cases}>
           <span className={styles.use_case}>
-            <Image src="images/manage_schedule.png" width={50} />
+            <Image src="images/manage_schedule2.png" width={50} />
             <p>
               모임 일정 관리가
               <br />
@@ -42,7 +42,7 @@ export default function Home() {
             </p>
           </span>
           <span className={styles.use_case}>
-            <Image src="images/appointment.png" width={50} />
+            <Image src="images/appointment2.png" width={50} />
             <p>
               약속을 빠르게
               <br />
@@ -50,7 +50,7 @@ export default function Home() {
             </p>
           </span>
           <span className={styles.use_case}>
-            <Image src="images/spot.png" width={50} />
+            <Image src="images/spot2.png" width={50} />
             <p>
               최적의 만남 장소를
               <br />
@@ -58,7 +58,7 @@ export default function Home() {
             </p>
           </span>
           <span className={styles.use_case}>
-            <Image src="images/my_schedule.png" width={50} />
+            <Image src="images/my_schedule2.png" width={50} />
             <p>
               모임 일정을
               <br />한 눈에 보고 싶을 때

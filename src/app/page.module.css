@@ -25,9 +25,8 @@
 }
 
 .background_color {
-  background-color: rgba(0, 0, 0, 0.729);
+  background-color: rgb(0, 0, 0, 80%);
   background-size: cover;
-  height: 45%;
 }
 
 .copy_container {
@@ -35,7 +34,7 @@
   flex-direction: column;
   margin: auto;
   text-align: center;
-  padding: 7rem 1.5rem;
+  padding: 4.5rem 1.5rem 5.5rem;
   position: relative;
 }
 
@@ -56,16 +55,20 @@
   font-size: clamp(0.87rem, 3vw, 1.2rem);
 }
 
+.half_highlight {
+  background: linear-gradient(to top, #ffffbb 50%, transparent 50%);
+}
+
 .button {
   top: 2.5rem;
 
   padding: 1rem 3rem;
-  background-color: #121212;
-  color: rgb(220, 220, 220);
+  background-color: #e4c1fffc;
+  color: rgb(0, 0, 0);
 
   margin: auto;
   font-size: clamp(0.8rem, 8vw, 1.2rem);
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .section {
@@ -74,7 +77,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 40px 0px;
+  margin: 25px 0px;
   text-align: center;
 }
 
