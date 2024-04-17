@@ -5,6 +5,10 @@ import { Button } from '@nextui-org/react';
 
 const RADIUS_RANGES = [200, 700, 2000, 4000];
 
+const rangeConversion = (value: number) => {
+  return value >= 1000 ? `${value / 1000}km` : `${value}m`;
+};
+
 const RangeController = () => {
   const { range, setRange } = useRangeStore((state) => state);
 
@@ -21,7 +25,7 @@ const RangeController = () => {
       <div className={styles.range_controller}>
         <form className={styles.range_wrap}>
           {RADIUS_RANGES.map((value) => (
-            <label key={value} htmlFor={`radius-${value}`} data-radius={value}>
+            <label key={value} htmlFor={`radius-${value}`} data-radius={`${rangeConversion(value)}`}>
               <input
                 id={`radius-${value}`}
                 name="radius"
