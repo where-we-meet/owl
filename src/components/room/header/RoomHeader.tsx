@@ -21,7 +21,7 @@ const RoomHeader = () => {
       <div>
         <div className={styles.left}>
           <h1 className={styles.room_title}>
-            <Link href={`/room/${roomId}`}>{room ? room.name : '운좋은 올빼미'}</Link>
+            <Link href={`/room/${roomId}`}>{room ? room.name : '올빼미를 불러오는 중'}</Link>
           </h1>
           {room && <LinkShare />}
         </div>
