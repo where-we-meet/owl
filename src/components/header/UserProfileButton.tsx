@@ -8,9 +8,11 @@ import UserProfileRead from './UserProfileRead';
 import styles from './UserProfileButton.module.css';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import path from 'path';
 
 const UserProfile = () => {
+  console.log('hi');
   const user = useQueryUser();
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +30,7 @@ const UserProfile = () => {
   const [editMode, setEditMode] = useState(false);
   const [profile, setProfile] = useState<string | null>('');
   const pathname = usePathname();
-  console.log(pathname);
+  const router = useRouter();
   const handleClose = () => {
     setEditMode(false);
     history.back();
@@ -47,10 +49,14 @@ const UserProfile = () => {
   //   },
   //   { once: true }
   // );
-  window.onpopstate = () => {
-    alert('뒤로가기 버튼이 클릭되었습니다!');
-    handleClose();
-  };
+  if (!isOpen) {
+    window.onpopstate = () => {
+      alert('뒤로가기 버튼이 클릭되었습니다!');
+      handleClose();
+      router.replace(pathname);
+    };
+  }
+
   const handleModalOpen = () => {
     history.pushState(null, '내 프로필', pathname === '/' ? 'profile' : `${pathname}/profile`);
     onOpen();
