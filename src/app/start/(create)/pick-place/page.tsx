@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import SettingMap from '@/components/room/meeting/place/SettingMap';
 import SearchBar from '@/components/room/meeting/place/search/SearchBar';
 import { Button, Link } from '@nextui-org/react';
