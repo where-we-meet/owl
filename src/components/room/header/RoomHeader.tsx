@@ -7,7 +7,6 @@ import { useParams } from 'next/navigation';
 import { useGetRoomUsers } from '@/hooks/useGetRoomUsers';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomData } from '@/api/supabaseCSR/supabase';
-import Link from 'next/link';
 import styles from './RoomHeader.module.css';
 
 const RoomHeader = () => {
@@ -21,7 +20,7 @@ const RoomHeader = () => {
       <div>
         <div className={styles.left}>
           <h1 className={styles.room_title}>
-            <Link href={`/room/${roomId}`}>{room ? room.name : '올빼미를 불러오는 중'}</Link>
+            <p>{room ? room.name : '올빼미를 불러오는 중'}</p>
           </h1>
           {room && <LinkShare />}
         </div>
