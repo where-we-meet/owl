@@ -1,12 +1,11 @@
 'use client';
 
-import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
 import { ChangeEvent, useState } from 'react';
-import { MdStart } from 'react-icons/md';
-import { useCreateRoomStore } from '@/store/createRoomStore';
 import { useRouter } from 'next/navigation';
-import { useCalendarStore } from '@/store/calendarStore';
+import { useCreateRoomStore } from '@/store/createRoomStore';
+import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
 import { Button, Input } from '@nextui-org/react';
+import { MdStart } from 'react-icons/md';
 import styles from './StartMeeting.module.css';
 
 const StartMeeting = () => {
@@ -14,7 +13,6 @@ const StartMeeting = () => {
   const [startDate, setStartDate] = useState(getCurrentFormattedDate());
   const [endDate, setEndDate] = useState(getCurrentFormattedDate());
   const setDateRange = useCreateRoomStore((state) => state.setDateRange);
-  const setSelectedDates = useCalendarStore((state) => state.setSelectedDates);
 
   const changeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
     setStartDate(e.target.value);
@@ -25,7 +23,7 @@ const StartMeeting = () => {
   };
 
   const createRoomOption = () => {
-    setSelectedDates([]);
+    window.sessionStorage.clear();
     setDateRange({ startDate, endDate });
     router.push('/start/pick-calendar');
   };
