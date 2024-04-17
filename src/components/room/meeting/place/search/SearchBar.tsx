@@ -1,19 +1,18 @@
 'use client';
-import { type ChangeEvent, useState, useCallback } from 'react';
+import { type ChangeEvent, useState, useCallback, useRef } from 'react';
 import _ from 'lodash';
 import { useGetSearchPlace } from '@/hooks/useGetPlace';
 import { useSearchDataStore } from '@/store/placeStore';
-import { Input } from '@nextui-org/react';
 import SearchResultList from './SearchResultList';
-import styles from './SearchBar.module.css';
 import { SearchIcon } from './SearchIcon';
+import { Input } from '@nextui-org/react';
+import styles from './SearchBar.module.css';
 
 const SearchBar = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [listViewState, setListViewState] = useState({
-    inputFocused: false,
-    containerHovered: false
-  });
+  const [listViewState, setListViewState] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const address = useSearchDataStore((state) => state.address);
 
@@ -24,12 +23,10 @@ const SearchBar = () => {
   const handleSearchInput = useCallback(_.debounce(handleChangeInput, 600), []);
 
   const handleInputFocus = () => {
-    setListViewState((prev) => ({ ...prev, inputFocused: !prev.inputFocused }));
+    setListViewState(true);
   };
 
   const { data: placeList, isPending } = useGetSearchPlace(searchKeyword);
-
-  const activatePlaceList = (listViewState.inputFocused && searchKeyword !== '') || listViewState.containerHovered;
 
   return (
     <div className={styles.container}>
@@ -39,15 +36,17 @@ const SearchBar = () => {
           placeholder={address}
           onChange={handleSearchInput}
           onFocus={handleInputFocus}
-          onBlur={handleInputFocus}
           autoComplete="off"
           startContent={<SearchIcon />}
           variant="bordered"
           size="lg"
           isClearable
+          ref={inputRef}
         />
       </form>
-      {activatePlaceList && <SearchResultList placeList={placeList} setListViewState={setListViewState} />}
+      {listViewState && (
+        <SearchResultList placeList={placeList} setListViewState={setListViewState} inputRef={inputRef} />
+      )}
     </div>
   );
 };
