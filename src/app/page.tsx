@@ -20,7 +20,7 @@ export default function Home() {
                 </p>
                 <p className={styles.middle_copy}>바쁜 일상 속, 우리들의 소중한 시간과 만남을 위해</p>
                 <p className={styles.middle_copy}>
-                  약속 시간과 장소를 고민하는 시간을 줄여줄 수 있는 <br /> 약속 확정 서비스, owl-link입니다
+                  약속 시간과 장소를 고민하는 시간을 줄여줄 수 있는 <br /> 약속 확정 서비스, owl-link입니다.
                 </p>
               </span>
               <Button href="/start" as={Link} variant="flat" size="lg" className={styles.button}>
