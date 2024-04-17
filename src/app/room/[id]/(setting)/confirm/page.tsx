@@ -8,11 +8,13 @@ import { useDeleteUserSchedule } from '@/hooks/useMutateUserData';
 import { useCalendarStore } from '@/store/calendarStore';
 import { useSearchDataStore } from '@/store/placeStore';
 
-import { updateStartLocation, upsertSchedule } from '@/api/supabaseCSR/supabase';
+import { upsertSchedule } from '@/api/supabaseCSR/supabase';
 import { sortDate } from '@/utils/sortDate';
 
-import { Button } from '@nextui-org/react';
+import { Button, Link } from '@nextui-org/react';
 import styles from './page.module.css';
+import { useQueryRoomUsers } from '@/hooks/useQueryRoomUsers';
+import { upsertRoomUser } from '@/api/room';
 
 const SettingConfirmPage = () => {
   const router = useRouter();
@@ -28,14 +30,11 @@ const SettingConfirmPage = () => {
     address
   } = useSearchDataStore((state) => state);
 
-  const handlePrevStep = () => {
-    router.push(`/room/${roomId}/pick-place`);
-  };
-
   const handleSubmit = async () => {
     const userLocationData = {
       room_id: roomId,
       user_id: userId,
+      is_admin: false,
       start_location: address,
       lat: lat.toString(),
       lng: lng.toString()
@@ -50,8 +49,7 @@ const SettingConfirmPage = () => {
       };
     });
 
-    await updateStartLocation(userLocationData);
-
+    await upsertRoomUser(userLocationData);
     await resetUserScheduleDB({ roomId, userId });
     await upsertSchedule(userSchedules);
 
@@ -74,7 +72,9 @@ const SettingConfirmPage = () => {
       </div>
       <div className={styles.box}>{address}</div>
       <div className={styles.footer}>
-        <Button onClick={handlePrevStep}>이전</Button>
+        <Button as={Link} href={`/room/${roomId}/pick-place`}>
+          이전
+        </Button>
         <Button onClick={handleSubmit}>저장</Button>
       </div>
     </>
