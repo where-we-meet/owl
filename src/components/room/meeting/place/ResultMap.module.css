@@ -17,15 +17,23 @@
 
 .center_pin {
   position: absolute;
-  top: 50%;
+  top: 44%;
   left: 50%;
-  z-index: 10;
-  transform: translate(-50%, -50%);
+  z-index: 11;
+  transform: translate(-50%, -44%);
   transition: top 0.3s ease, opacity 0.3s ease;
 }
 
+.center_address {
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
 .center_pin_drag {
-  top: 48%;
+  top: 42%;
   opacity: 0.5;
 }
 
