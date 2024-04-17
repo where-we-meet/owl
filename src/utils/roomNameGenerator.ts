@@ -1,4 +1,3 @@
-
 const OWL_NAMES = [
   '조용한 올빼미',
   '용맹한 올빼미',
@@ -29,10 +28,11 @@ const OWL_NAMES = [
   '감각적인 올빼미',
   '호기심 많은 올빼미',
   '낙천적인 올빼미',
-  '소란스러운 올빼미'
+  '소란스러운 올빼미',
+  '운좋은 올빼미'
 ];
 
-export default function roomNameGenerator() : string {
+export default function roomNameGenerator(): string {
   const randomName = Math.floor(Math.random() * OWL_NAMES.length);
-  return OWL_NAMES[randomName]
+  return OWL_NAMES[randomName];
 }
