@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
 import EntireOfMonth, { UserSchedule } from './EntireOfMonth';
 import { useCalendarStore } from '@/store/calendarStore';
@@ -18,6 +18,12 @@ const Calender = ({
 }) => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const { selectedDates, setSelectedDates } = useCalendarStore();
+
+  useEffect(() => {
+    if (range.start_date) {
+      setNowDate(new Date(range.start_date));
+    }
+  }, [range.start_date]);
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
