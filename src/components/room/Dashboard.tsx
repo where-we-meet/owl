@@ -2,15 +2,13 @@
 
 import { useQueryRoomUsers } from '@/hooks/useQueryRoomUsers';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { useRouter } from 'next/navigation';
 import ResultSchedule from './meeting/calender/ResultSchedule';
 import ResultPlace from './meeting/ResultPlace';
 import ConfirmedButton from './ConfirmedButton';
-import styles from './Dashboard.module.css';
 import { Button, Link } from '@nextui-org/react';
+import styles from './Dashboard.module.css';
 
 const Dashboard = ({ roomId }: { roomId: string }) => {
-  const router = useRouter();
   const { id: userId } = useQueryUser();
   const { roomUsers, isPending } = useQueryRoomUsers(roomId, userId);
 
