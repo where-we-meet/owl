@@ -28,3 +28,24 @@ h1,
 h2 {
   font-family: 'Pretendard-Regular', sans-serif;
 }
+
+@media sreen and (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media sreen and (max-width: 992px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media sreen and (max-width: 1200px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media sreen and (max-width: 1440px) {
+  html {
+    font-size: 14px;
+  }
+}
