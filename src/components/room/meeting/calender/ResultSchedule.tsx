@@ -3,8 +3,8 @@
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { mostSchedule } from '@/utils/mostSchedule';
 import { useParams } from 'next/navigation';
-import styles from './ResultSchedule.module.css';
 import { Link } from '@nextui-org/react';
+import styles from './ResultSchedule.module.css';
 
 const ResultSchedule = () => {
   const { id: roomId }: { id: string } = useParams();
@@ -13,9 +13,11 @@ const ResultSchedule = () => {
 
   return (
     <div className={styles.box}>
-      {maxDates.map((date, i) => (
-        <li key={i}>{date}</li>
-      ))}
+      <ul>
+        {maxDates.map((date, i) => (
+          <li key={i}>{date}</li>
+        ))}
+      </ul>
       <Link href={`/room/${roomId}/pick-calendar`} className={styles.edit_calendar}>
         내 일정 변경하기
       </Link>

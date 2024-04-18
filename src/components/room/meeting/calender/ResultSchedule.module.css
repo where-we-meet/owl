@@ -1,15 +1,10 @@
 .box {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   border: 2px solid #ddd;
   border-radius: 12px;
   padding: 1rem;
-  display: flex;
   gap: 0.5rem;
   list-style: none;
-}
-
-.edit_calendar {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
 }
