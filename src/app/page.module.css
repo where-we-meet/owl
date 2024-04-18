@@ -19,9 +19,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50%;
-  /* background-size: cover;
-  background-position-y: 25%;
-  height: 45%; */
 }
 
 .background_color {
@@ -55,16 +52,12 @@
   font-size: clamp(0.87rem, 3vw, 1.2rem);
 }
 
-.half_highlight {
-  background: linear-gradient(to top, #ffffbb 50%, transparent 50%);
-}
-
 .button {
   top: 2.5rem;
 
   padding: 1rem 3rem;
-  background-color: #e4c1fffc;
-  color: rgb(0, 0, 0);
+  background-color: #7a1fbffc;
+  color: rgb(241 241 241);
 
   margin: auto;
   font-size: clamp(0.8rem, 8vw, 1.2rem);
