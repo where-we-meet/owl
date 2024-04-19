@@ -1,9 +1,6 @@
 import StartMeeting from '@/components/rending/StartMeetingBtn';
 import styles from './page.module.css';
-import { Image, Button, Link } from '@nextui-org/react';
-import _ from 'lodash';
-import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { Image } from '@nextui-org/react';
 
 export default function Home() {
   return (
