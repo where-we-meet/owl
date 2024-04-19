@@ -2,8 +2,8 @@
 
 import { useQueryRoomUsers } from '@/hooks/useQueryRoomUsers';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import ResultSchedule from './meeting/calender/ResultSchedule';
-import ResultPlace from './meeting/ResultPlace';
+import ResultSchedule from './calender/ResultSchedule';
+import ResultPlace from './place/ResultPlace';
 import ConfirmedButton from './ConfirmedButton';
 import { Button, Link } from '@nextui-org/react';
 import styles from './Dashboard.module.css';
