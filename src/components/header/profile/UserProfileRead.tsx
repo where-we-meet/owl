@@ -41,12 +41,14 @@ const UserProfileRead = ({
     fetchData();
   }, []);
   useEffect(() => {
-    if (isOpen === true) {
+    if (isOpen) {
       window.addEventListener('popstate', handleClose);
-    }
-    if (isOpen === false) {
+    } else {
       window.removeEventListener('popstate', handleClose);
     }
+    return () => {
+      window.removeEventListener('popstate', handleClose);
+    };
   }, [isOpen]);
   return (
     <>

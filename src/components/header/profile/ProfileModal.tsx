@@ -8,7 +8,7 @@ import styles from './ProfileModal.module.css';
 export const ProfileModal = ({ onClose, isOpen }: { onClose: () => void; isOpen: boolean }) => {
   const [editMode, setEditMode] = useState(false);
   const handleClose = () => {
-    if (editMode && !confirm('저장되지 않은 변경 사항이 있습니다. 그래도 나가시겠습니까?')) return;
+    if (editMode && !confirm('변경사항이 저장되지 않을 수 있습니다. 그래도 나가시겠습니까?')) return;
     setEditMode(false);
     onClose();
   };
