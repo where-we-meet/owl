@@ -36,8 +36,8 @@ const ResultMap = () => {
             >
               {roomUsers
                 .filter(({ lat, lng }) => lat !== null && lng !== null)
-                .map(({ id, lat, lng }) => (
-                  <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} />
+                .map(({ id, lat, lng, users }) => (
+                  <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} user={users} />
                 ))}
               {searchCategory.map((info) => (
                 <CategoryMarker key={info.id} info={info} clickId={clickId} setClickId={setClickId} />
