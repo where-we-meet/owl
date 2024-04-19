@@ -30,20 +30,19 @@ const SearchBar = () => {
 
   return (
     <div className={styles.container}>
-      <form className={styles.search_bar} onSubmit={(e) => e.preventDefault()}>
-        <Input
-          id="searchBar"
-          placeholder={address}
-          onChange={handleSearchInput}
-          onFocus={handleInputFocus}
-          autoComplete="off"
-          startContent={<SearchIcon />}
-          variant="bordered"
-          size="lg"
-          isClearable
-          ref={inputRef}
-        />
-      </form>
+      <Input
+        id="searchBar"
+        className={styles.search_input}
+        placeholder={address}
+        onChange={handleSearchInput}
+        onFocus={handleInputFocus}
+        autoComplete="off"
+        startContent={<SearchIcon />}
+        variant="bordered"
+        size="lg"
+        isClearable
+        ref={inputRef}
+      />
       {listViewState && (
         <SearchResultList placeList={placeList} setListViewState={setListViewState} inputRef={inputRef} />
       )}

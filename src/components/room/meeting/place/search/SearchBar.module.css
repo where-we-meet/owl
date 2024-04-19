@@ -1,11 +1,12 @@
 .container {
-  position: relative;
-}
-
-.search_bar {
-  display: flex;
+  position: absolute;
+  top: 5%;
+  width: 100%;
+  z-index: 12;
 }
 
 .search_input {
   width: 100%;
+  border-radius: 12px;
+  background-color: white;
 }
