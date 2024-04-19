@@ -122,7 +122,7 @@ export const uploadImage = async ({
 const _deletePastProfileImage = async ({ userID }: { userID: string }) => {
   const fileURL = await _findCurrentProfileImage({ userID });
   if (fileURL !== null) {
-    const { data, error } = await supabase.storage.from(`images`).remove([`users_profile/${userID}/${fileURL}`]);
+    const { error } = await supabase.storage.from('images').remove([`${fileURL}`]);
     if (error) throw error;
     return true;
   }
