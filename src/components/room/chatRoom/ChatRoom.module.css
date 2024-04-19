@@ -1,0 +1,22 @@
+.constainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
+
+.chatbox_body {
+  flex: 1;
+  height: auto;
+}
+.profiles {
+  display: flex;
+  flex-direction: row;
+  padding: 1.2rem;
+  gap: 2rem;
+}
+
+.input_box {
+  display: flex;
+  width: 100vw;
+  background-color: blueviolet;
+}
