@@ -54,9 +54,6 @@ const UserProfileUpdate = ({
     } else {
       await updateUserName(user.id, userName);
       if (userProfileURL !== '' && userProfileURL !== null) {
-        //기존 프로필 이미지 삭제
-        const fileURL = await findCurrentProfileImage({ userId: user.id });
-        await deleteProfileImage({ userId: user.id, fileURL });
         await changeUserProfile({ userId: user.id, profile_url: userProfileURL });
       }
       toggleEditMode();
