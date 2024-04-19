@@ -1,7 +1,7 @@
 import { Modal, ModalContent } from '@nextui-org/react';
 import UserProfileUpdate from './UserProfileUpdate';
 import UserProfileRead from './UserProfileRead';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from './ProfileModal.module.css';
 
