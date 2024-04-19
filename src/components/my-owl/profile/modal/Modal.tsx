@@ -13,11 +13,11 @@ const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 export const ImageUploadModal = ({
   handleToggleModal,
   setUserProfileURL,
-  userID
+  userId
 }: {
   handleToggleModal: () => void;
   setUserProfileURL: Dispatch<SetStateAction<string | null>>;
-  userID: string;
+  userId: string;
 }) => {
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState('');
@@ -53,7 +53,7 @@ export const ImageUploadModal = ({
   const handleUploadImage = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (file !== null) {
-      const profile_url = await uploadImage({ file, setFile, userID });
+      const profile_url = await uploadImage({ file, setFile, userId });
       handleToggleModal();
       profile_url ? setUserProfileURL(profile_url) : alert(`문제가 발생하였습니다`);
     } else {

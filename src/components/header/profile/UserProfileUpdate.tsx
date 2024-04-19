@@ -55,8 +55,8 @@ const UserProfileUpdate = ({
       await updateUserName(user.id, userName);
       if (userProfileURL !== '' && userProfileURL !== null) {
         //기존 프로필 이미지 삭제
-        const fileURL = await findCurrentProfileImage({ userID: user.id });
-        await deleteProfileImage({ userID: user.id, fileURL });
+        const fileURL = await findCurrentProfileImage({ userId: user.id });
+        await deleteProfileImage({ userId: user.id, fileURL });
         await changeUserProfile({ userId: user.id, profile_url: userProfileURL });
       }
       toggleEditMode();
@@ -115,7 +115,7 @@ const UserProfileUpdate = ({
           <ImageUploadModal
             handleToggleModal={handleToggleModal}
             setUserProfileURL={setUserProfileURL}
-            userID={user.id}
+            userId={user.id}
           />
         )}
       </ModalBody>
