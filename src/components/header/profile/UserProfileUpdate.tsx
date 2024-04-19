@@ -3,7 +3,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
-import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
+import {
+  changeUserProfile,
+  deleteProfileImage,
+  findCurrentProfileImage,
+  updateUserName
+} from '@/api/supabaseCSR/supabase';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { ImageUploadModal } from '../../my-owl/profile/modal/Modal';
@@ -48,7 +53,10 @@ const UserProfileUpdate = ({
       alert('닉네임은 최대 16글자 이하로 지어주세요.');
     } else {
       await updateUserName(user.id, userName);
-      if (userProfileURL !== null) {
+      if (userProfileURL !== '' && userProfileURL !== null) {
+        //기존 프로필 이미지 삭제
+        const fileURL = await findCurrentProfileImage({ userID: user.id });
+        await deleteProfileImage({ userID: user.id, fileURL });
         await changeUserProfile({ userId: user.id, profile_url: userProfileURL });
       }
       toggleEditMode();

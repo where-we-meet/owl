@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/client';
 import { getFileName } from '@/utils/my-owl/profile/modal/getFileName';
 import type { UserLocationData } from '@/types/place.types';
 import type { UpsertUserSchedule } from '@/types/roomUser';
+import { extractFileNameFromURL } from '@/utils/extractFileNameFromURL';
 
 const supabase = createClient();
 
@@ -101,6 +102,7 @@ export const uploadImage = async ({
   setFile: Dispatch<SetStateAction<File | null>>;
   userID: string;
 }) => {
+  const currentFileURL = await findCurrentProfileImage({ userID });
   const file_name = getFileName();
 
   if (file) {
@@ -112,24 +114,24 @@ export const uploadImage = async ({
     } else {
       alert(`이미지를 성공적으로 업로드하였습니다.`);
       //기존 프로필 이미지 삭제
-      await _deletePastProfileImage({ userID });
+      await deleteProfileImage({ userID, fileURL: currentFileURL });
       return `${process.env
         .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${userID}/${file_name}`;
     }
   }
 };
 
-const _deletePastProfileImage = async ({ userID }: { userID: string }) => {
-  const fileURL = await _findCurrentProfileImage({ userID });
+export const deleteProfileImage = async ({ userID, fileURL }: { userID: string; fileURL: string | null }) => {
   if (fileURL !== null) {
-    const { error } = await supabase.storage.from('images').remove([`${fileURL}`]);
+    const fileName = extractFileNameFromURL(fileURL);
+    const { error } = await supabase.storage.from('images').remove([`users_profile/${userID}/${fileName}`]);
     if (error) throw error;
     return true;
   }
   return false;
 };
 
-const _findCurrentProfileImage = async ({ userID }: { userID: string }) => {
+export const findCurrentProfileImage = async ({ userID }: { userID: string }) => {
   const folderPath = `users_profile/${userID}/`;
   const { data: files, error } = await supabase.storage.from('images').list(folderPath);
 
