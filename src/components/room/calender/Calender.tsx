@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
-import { getRangeOfSchedule } from '@/api/supabaseCSR/supabase';
+import { getRangeOfSchedule, updateSelectedDate } from '@/api/supabaseCSR/supabase';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { useGetSchedule } from '@/hooks/useGetSchedule';
@@ -39,6 +39,12 @@ const Calender = () => {
     }
   }, [scheduleRange?.start_date]);
 
+  useEffect(() => {
+    if (mySchedule) {
+      setSelectedDates(mySchedule.map((schedule) => new Date(String(schedule.start_date))));
+    }
+  }, [mySchedule.length]);
+
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
   };
@@ -49,7 +55,7 @@ const Calender = () => {
     });
   };
 
-  const handleDateClick = (date: Date) => {
+  const handleDateClick = async (date: Date) => {
     if (!scheduleRange?.start_date || !scheduleRange?.end_date) return;
 
     const startDate = new Date(scheduleRange.start_date);
@@ -67,6 +73,11 @@ const Calender = () => {
     } else {
       const newDateList = [...selectedDates, date];
       setSelectedDates(newDateList);
+      try {
+        await updateSelectedDate(roomId, userId, date);
+      } catch (error) {
+        if (error) throw error;
+      }
     }
   };
 
@@ -82,11 +93,6 @@ const Calender = () => {
       return {};
     }
   };
-  useEffect(() => {
-    if (mySchedule) {
-      setSelectedDates(mySchedule.map((schedule) => new Date(String(schedule.start_date))));
-    }
-  }, [mySchedule.length]);
 
   if (isPending) return <>로딩중</>;
 

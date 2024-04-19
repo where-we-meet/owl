@@ -148,3 +148,18 @@ export const getRangeOfSchedule = async (id: string) => {
   if (error) throw error;
   return data;
 };
+
+export const updateSelectedDate = async (roomId: string, userId: string, date: Date) => {
+  const { error } = await supabase
+    .from('room_schedule')
+    .insert([
+      {
+        room_id: roomId,
+        created_by: userId,
+        start_date: date.toDateString(),
+        end_date: date.toDateString()
+      }
+    ])
+    .select();
+  if (error) throw error;
+};
