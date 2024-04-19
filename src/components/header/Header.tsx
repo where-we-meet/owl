@@ -3,7 +3,7 @@ import Logout from '../auth/LogoutButton';
 import styles from './Header.module.css';
 import Link from 'next/link';
 import { MeetingModalButton } from './MeetingModalButton';
-import UserProfile from './UserProfileButton';
+import UserProfile from './profile/UserProfileButton';
 
 const Header = async () => {
   const supabase = createClient();
