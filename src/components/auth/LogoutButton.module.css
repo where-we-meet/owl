@@ -1,8 +1,8 @@
 .logout {
-  color: rgb(155, 155, 155);
+  color: rgb(217, 72, 72);
   font-size: 1rem;
 }
 
 .logout:hover {
-  color: black;
+  color: rgb(203, 125, 125);
 }

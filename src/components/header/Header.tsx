@@ -14,14 +14,13 @@ const Header = async () => {
 
   return (
     <header className={styles.header}>
-      {user ? <MeetingModalButton /> : null}
       <Link href="/" title="홈으로 이동">
         owl-link
       </Link>
       <div className={styles.menu}>
         {user ? (
           <>
-            <Logout />
+            <MeetingModalButton />
             <UserProfile />
           </>
         ) : (

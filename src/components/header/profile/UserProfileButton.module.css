@@ -10,3 +10,17 @@
 .profile:hover {
   outline-color: black;
 }
+
+.view_profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user_name {
+  font-size: 1rem;
+}
+.view_profile_text {
+  font-size: 0.78rem;
+  color: rgb(87, 87, 87);
+}
