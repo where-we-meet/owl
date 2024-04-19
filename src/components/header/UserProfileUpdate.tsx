@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Image, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
+import { Button, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
 import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
