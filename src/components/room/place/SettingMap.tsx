@@ -14,7 +14,8 @@ import Halfway from './Halfway';
 
 const SettingMap = () => {
   const [loading, error] = useKakaoMap();
-  const { location, halfwayPoint, roomUsers, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } = useSettingMap();
+  const { location, halfwayPoint, roomUsers, isPinned, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } =
+    useSettingMap();
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
@@ -29,7 +30,7 @@ const SettingMap = () => {
           {isGpsLoading && <Spinner className={styles.center_pin} color="primary" />}
           <Image
             src={'/pin.svg'}
-            className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
+            className={`${styles.center_pin} ${isDrag && styles.center_pin_drag} ${isPinned && styles.center_pin_none}`}
             width={30}
             height={30}
             alt="pin"
@@ -51,7 +52,7 @@ const SettingMap = () => {
           {isHalfwayValid && <Halfway location={halfwayPoint} />}
         </Map>
         <div className={styles.button_wrapper}>
-          <LocationSwitch />
+          <LocationSwitch toggleState={isPinned} />
           <GeolocationButton />
         </div>
       </div>
