@@ -46,7 +46,7 @@ const UserProfile = () => {
           </div>
         </DropdownTrigger>
         <DropdownMenu className={styles.dropdown}>
-          <DropdownItem onClick={handleModalOpen}>
+          <DropdownItem className={styles.first_item}>
             <div className={styles.view_profile_container}>
               <Avatar
                 className={styles.view_profile}
@@ -56,7 +56,9 @@ const UserProfile = () => {
               />
               <div className={styles.view_profile_text_container}>
                 <p className={styles.user_name}>반가워올, {user.user_metadata.user_name}!</p>
-                <p className={styles.view_profile_text}>내 프로필 보기</p>
+                <p className={styles.view_profile_text} onClick={handleModalOpen}>
+                  내 프로필 보기
+                </p>
               </div>
             </div>
           </DropdownItem>

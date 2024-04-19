@@ -2,6 +2,10 @@
   width: 20rem;
 }
 
+.first_item:hover {
+  background-color: white;
+}
+
 .profile {
   border-radius: 50%;
   width: 30px;
@@ -22,6 +26,7 @@
   text-align: center;
   gap: 0.6rem;
   padding: 0.5rem 0 0.2rem 0;
+  cursor: default;
 }
 
 .view_profile {
@@ -49,6 +54,12 @@
   margin: 0.3rem;
   border: 1px solid rgba(122, 32, 190, 0.6);
   border-radius: 25px;
+  cursor: pointer;
+}
+.view_profile_text:hover {
+  color: white;
+  background-color: rgba(122, 32, 190, 0.6);
+  border: 1px solid transparent;
 }
 
 .logout {
