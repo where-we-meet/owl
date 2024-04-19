@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import _ from 'lodash';
+import throttle from 'lodash-es/throttle';
 import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
 import { MdStart } from 'react-icons/md';
 import { insertNewRoom, upsertRoomUser } from '@/api/room';
@@ -47,7 +47,7 @@ const StartMeeting = () => {
       router.push(`/room/${roomId}`);
     }
   };
-  const handleMakeMeeting = useCallback(_.throttle(createRoomOption, 10000), []);
+  const handleMakeMeeting = useCallback(throttle(createRoomOption, 10000), []);
 
   return (
     <form>

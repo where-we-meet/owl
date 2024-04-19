@@ -1,14 +1,14 @@
 'use client';
 import styles from './StartMeetingBtn.module.css';
 import { Button } from '@nextui-org/react';
-import _ from 'lodash';
+import throttle from 'lodash-es/throttle';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 export default function StartMeeting() {
   const router = useRouter();
   const handleStartMeeting = useCallback(
-    _.throttle(() => {
+    throttle(() => {
       router.push('/start');
     }, 10000),
     []

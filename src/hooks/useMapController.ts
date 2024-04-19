@@ -1,7 +1,6 @@
 import { useGetRoadAddress, useGetSearchCategory } from '@/hooks/useGetPlace';
 import { useEffect, useMemo, useState } from 'react';
 import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
-import _ from 'lodash';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
