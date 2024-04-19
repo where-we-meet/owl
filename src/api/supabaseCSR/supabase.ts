@@ -92,18 +92,27 @@ export const changeUserProfile = async ({ userId, profile_url }: { userId: strin
 };
 
 //supabase store 이미지 업로드 로직
-export const uploadImage = async (file: File, setFile: Dispatch<SetStateAction<File | null>>) => {
+export const uploadImage = async ({
+  file,
+  setFile,
+  userID
+}: {
+  file: File;
+  setFile: Dispatch<SetStateAction<File | null>>;
+  userID: string;
+}) => {
   const file_name = getFileName();
 
   if (file) {
-    const { data, error } = await supabase.storage.from('images').upload(`users_profile/${file_name}`, file);
+    const { data, error } = await supabase.storage.from('images').upload(`users_profile/${userID}/${file_name}`, file);
     setFile(null);
 
     if (error) {
       alert(`이미지 업로드에 실패하였습니다.\n 원인 : ${error.message} `);
     } else {
       alert(`이미지를 성공적으로 업로드하였습니다.`);
-      return `${process.env.NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${file_name}`;
+      return `${process.env
+        .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${userID}/${file_name}`;
     }
   }
 };

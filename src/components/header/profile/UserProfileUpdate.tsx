@@ -104,7 +104,11 @@ const UserProfileUpdate = ({
         </div>
 
         {toggleModal && (
-          <ImageUploadModal handleToggleModal={handleToggleModal} setUserProfileURL={setUserProfileURL} />
+          <ImageUploadModal
+            handleToggleModal={handleToggleModal}
+            setUserProfileURL={setUserProfileURL}
+            userID={user.id}
+          />
         )}
       </ModalBody>
     </>
