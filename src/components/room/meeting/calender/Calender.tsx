@@ -1,29 +1,43 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
-import EntireOfMonth, { UserSchedule } from './EntireOfMonth';
+import { getRangeOfSchedule } from '@/api/supabaseCSR/supabase';
+import { useQueryUser } from '@/hooks/useQueryUser';
+import { useGetCalendar } from '@/hooks/useGetCalendar';
+import { useGetSchedule } from '@/hooks/useGetSchedule';
 import { useCalendarStore } from '@/store/calendarStore';
 import ResetSchedule from './ResetSchedule';
+import EntireOfMonth from './EntireOfMonth';
 import styles from './Calender.module.css';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-const Calender = ({
-  range,
-  schedules
-}: {
-  range: { start_date: string | null; end_date: string | null };
-  schedules: UserSchedule[];
-}) => {
+const Calender = () => {
   const [nowDate, setNowDate] = useState<Date>(new Date());
-  const { selectedDates, setSelectedDates } = useCalendarStore();
+
+  const { id: userId }: { id: string } = useQueryUser();
+  const { id: roomId }: { id: string } = useParams();
+
+  const { data: scheduleRange, isPending } = useQuery({
+    queryKey: ['range', roomId],
+    queryFn: () => getRangeOfSchedule(roomId),
+    select: (data) => data[0]
+  });
+
+  const { userSchedules } = useGetCalendar(roomId);
+  const { myData: mySchedule } = useGetSchedule(userId, roomId);
+
+  const selectedDates = useCalendarStore((state) => state.selectedDates);
+  const setSelectedDates = useCalendarStore((state) => state.setSelectedDates);
 
   useEffect(() => {
-    if (range.start_date) {
-      setNowDate(new Date(range.start_date));
+    if (scheduleRange?.start_date) {
+      setNowDate(new Date(scheduleRange.start_date));
     }
-  }, [range.start_date]);
+  }, [scheduleRange?.start_date]);
 
   const prevMonth = () => {
     setNowDate(subMonths(nowDate, 1));
@@ -36,10 +50,10 @@ const Calender = ({
   };
 
   const handleDateClick = (date: Date) => {
-    if (!range.start_date || !range.end_date) return;
+    if (!scheduleRange?.start_date || !scheduleRange?.end_date) return;
 
-    const startDate = new Date(range.start_date);
-    const endDate = new Date(range.end_date);
+    const startDate = new Date(scheduleRange.start_date);
+    const endDate = new Date(scheduleRange.end_date);
 
     if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
       return;
@@ -57,10 +71,10 @@ const Calender = ({
   };
 
   const handleBlockSelect = (date: Date) => {
-    if (!range.start_date || !range?.end_date) return {};
+    if (!scheduleRange?.start_date || !scheduleRange?.end_date) return {};
 
-    const startDate = new Date(range.start_date);
-    const endDate = new Date(range.end_date);
+    const startDate = new Date(scheduleRange.start_date);
+    const endDate = new Date(scheduleRange.end_date);
 
     if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
       return { color: '#ccc' };
@@ -68,8 +82,13 @@ const Calender = ({
       return {};
     }
   };
+  useEffect(() => {
+    if (mySchedule) {
+      setSelectedDates(mySchedule.map((schedule) => new Date(String(schedule.start_date))));
+    }
+  }, [mySchedule.length]);
 
-  if (!range.start_date || !range.end_date) return <>로딩중</>;
+  if (isPending) return <>로딩중</>;
 
   return (
     <>
@@ -100,7 +119,7 @@ const Calender = ({
             <EntireOfMonth
               nowDate={nowDate}
               selectedDate={selectedDates}
-              userSchedules={schedules}
+              userSchedules={userSchedules}
               handleDateClick={handleDateClick}
               handleBlockSelect={handleBlockSelect}
             />
