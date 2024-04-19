@@ -96,12 +96,6 @@
 .logout_button {
   margin-top: 30px;
   color: rgb(155, 155, 155);
-  border-bottom: 1.5px solid rgb(155, 155, 155);
-}
-
-.logout_button:hover {
-  color: black;
-  border-bottom: 1.5px solid black;
 }
 
 @media screen and (max-width: 768px) {
