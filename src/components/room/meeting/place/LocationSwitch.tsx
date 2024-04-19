@@ -1,17 +1,23 @@
+'use client';
+
 import { useParams } from 'next/navigation';
+import { useQueryUser } from '@/hooks/useQueryUser';
 import { updateStartLocation } from '@/api/supabaseCSR/supabase';
 import { useSearchDataStore } from '@/store/placeStore';
 import { objectValidate } from '@/utils/objectValidate';
-import { Button } from '@nextui-org/react';
-import { useQueryUser } from '@/hooks/useQueryUser';
+import { TbPinFilled, TbPin } from 'react-icons/tb';
+import styles from './LocationSwitch.module.css';
+import { useUpdateStartLocation } from '@/hooks/useMutateUserData';
 
-const LocationPicker = () => {
+const LocationSwitch = () => {
   const { id: roomId }: { id: string } = useParams();
+  const { id: userId } = useQueryUser();
   const {
     location: { lat, lng },
     address
   } = useSearchDataStore((state) => state);
-  const { id: userId } = useQueryUser();
+
+  const { mutateAsync, isSuccess } = useUpdateStartLocation();
 
   const handleSubmitLocation = async () => {
     const userLocationData = {
@@ -25,13 +31,17 @@ const LocationPicker = () => {
     const resultCheck = objectValidate(userLocationData);
 
     if (resultCheck) {
-      await updateStartLocation(userLocationData);
+      await mutateAsync(userLocationData);
     } else {
       alert('no');
     }
   };
 
-  return <Button onClick={handleSubmitLocation}>확정</Button>;
+  return (
+    <div className={styles.wrapper} onClick={handleSubmitLocation}>
+      <TbPin size={25} />
+    </div>
+  );
 };
 
-export default LocationPicker;
+export default LocationSwitch;
