@@ -96,17 +96,17 @@ export const changeUserProfile = async ({ userId, profile_url }: { userId: strin
 export const uploadImage = async ({
   file,
   setFile,
-  userID
+  userId
 }: {
   file: File;
   setFile: Dispatch<SetStateAction<File | null>>;
-  userID: string;
+  userId: string;
 }) => {
-  const currentFileURL = await findCurrentProfileImage({ userID });
+  const currentFileURL = await findCurrentProfileImage({ userId });
   const file_name = getFileName();
 
   if (file) {
-    const { data, error } = await supabase.storage.from('images').upload(`users_profile/${userID}/${file_name}`, file);
+    const { data, error } = await supabase.storage.from('images').upload(`users_profile/${userId}/${file_name}`, file);
     setFile(null);
 
     if (error) {
@@ -114,25 +114,25 @@ export const uploadImage = async ({
     } else {
       alert(`이미지를 성공적으로 업로드하였습니다.`);
       //기존 프로필 이미지 삭제
-      await deleteProfileImage({ userID, fileURL: currentFileURL });
+      await deleteProfileImage({ userId, fileURL: currentFileURL });
       return `${process.env
-        .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${userID}/${file_name}`;
+        .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${userId}/${file_name}`;
     }
   }
 };
 
-export const deleteProfileImage = async ({ userID, fileURL }: { userID: string; fileURL: string | null }) => {
+export const deleteProfileImage = async ({ userId, fileURL }: { userId: string; fileURL: string | null }) => {
   if (fileURL !== null) {
     const fileName = extractFileNameFromURL(fileURL);
-    const { error } = await supabase.storage.from('images').remove([`users_profile/${userID}/${fileName}`]);
+    const { error } = await supabase.storage.from('images').remove([`users_profile/${userId}/${fileName}`]);
     if (error) throw error;
     return true;
   }
   return false;
 };
 
-export const findCurrentProfileImage = async ({ userID }: { userID: string }) => {
-  const folderPath = `users_profile/${userID}/`;
+export const findCurrentProfileImage = async ({ userId }: { userId: string }) => {
+  const folderPath = `users_profile/${userId}/`;
   const { data: files, error } = await supabase.storage.from('images').list(folderPath);
 
   if (error) throw error;
