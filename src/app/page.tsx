@@ -27,9 +27,6 @@ export default function Home() {
                   약속 시간과 장소를 고민하는 시간을 줄여줄 수 있는 <br /> 약속 확정 서비스, owl-link입니다.
                 </p>
               </span>
-              <Button href="/start" as={Link} variant="flat" size="lg" className={styles.button}>
-                모임 시작하기
-              </Button>
               <StartMeeting />
             </div>
           </div>
