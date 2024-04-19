@@ -9,8 +9,7 @@ import { IoClose } from 'react-icons/io5';
 
 import styles from './UserProfileRead.module.css';
 import Logout from '../../auth/LogoutButton';
-
-export type UserProfileData = { name: string; profile_url: string | null };
+import { UserProfileData } from './UserProfileButton';
 
 const UserProfileRead = ({
   toggleEditMode,
