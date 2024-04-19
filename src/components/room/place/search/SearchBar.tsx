@@ -1,6 +1,6 @@
 'use client';
 import { type ChangeEvent, useState, useCallback, useRef } from 'react';
-import _ from 'lodash';
+import debounce from 'lodash-es/debounce';
 import { useGetSearchPlace } from '@/hooks/useGetPlace';
 import { useSearchDataStore } from '@/store/placeStore';
 import SearchResultList from './SearchResultList';
@@ -20,7 +20,7 @@ const SearchBar = () => {
     setSearchKeyword(event.target.value);
   };
 
-  const handleSearchInput = useCallback(_.debounce(handleChangeInput, 600), []);
+  const handleSearchInput = useCallback(debounce(handleChangeInput, 600), []);
 
   const handleInputFocus = () => {
     setListViewState(true);
