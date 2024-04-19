@@ -6,7 +6,7 @@ import { Button, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
 import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { ImageUploadModal } from '../my-owl/profile/modal/Modal';
+import { ImageUploadModal } from '../../my-owl/profile/modal/Modal';
 import { IoChevronBack } from 'react-icons/io5';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
