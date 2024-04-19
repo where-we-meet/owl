@@ -1,3 +1,7 @@
+.dropdown {
+  width: 20rem;
+}
+
 .profile {
   border-radius: 50%;
   width: 30px;
@@ -11,16 +15,45 @@
   outline-color: black;
 }
 
-.view_profile {
+.view_profile_container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  text-align: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0 0.2rem 0;
+}
+
+.view_profile {
+  width: 5rem;
+  height: 5rem;
+}
+.view_profile_text_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .user_name {
-  font-size: 1rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
 }
+
 .view_profile_text {
-  font-size: 0.78rem;
-  color: rgb(87, 87, 87);
+  font-size: 0.8rem;
+  width: 110%;
+  color: #7a20be;
+  padding: 0.4rem 0.2rem;
+  margin: 0.3rem;
+  border: 1px solid rgba(122, 32, 190, 0.6);
+  border-radius: 25px;
+}
+
+.logout {
+  padding: 0.7rem 0.2rem;
+}
+.logout * {
+  text-align: center;
 }
