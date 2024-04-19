@@ -1,8 +1,7 @@
 'use client';
 
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import throttle from 'lodash-es/throttle';
 import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
 import { MdStart } from 'react-icons/md';
 import { insertNewRoom, upsertRoomUser } from '@/api/room';
@@ -15,6 +14,7 @@ const StartMeeting = () => {
   const router = useRouter();
   const { id: userId } = useQueryUser();
 
+  const [isFetching, setIsFetching] = useState(false);
   const [startDate, setStartDate] = useState(getCurrentFormattedDate());
   const [endDate, setEndDate] = useState(getCurrentFormattedDate());
 
@@ -27,6 +27,7 @@ const StartMeeting = () => {
   };
 
   const createRoomOption = async () => {
+    setIsFetching(true);
     const [newRoom] = await insertNewRoom({
       name: roomNameGenerator(),
       created_by: userId,
@@ -34,20 +35,20 @@ const StartMeeting = () => {
       end_date: endDate
     });
 
-    if (newRoom) {
-      const roomId = newRoom.id;
-      await upsertRoomUser({
-        room_id: roomId,
-        user_id: userId,
-        start_location: null,
-        is_admin: true,
-        lat: null,
-        lng: null
-      });
-      router.push(`/room/${roomId}`);
+    if (!newRoom) {
+      setIsFetching(false);
     }
+
+    await upsertRoomUser({
+      room_id: newRoom.id,
+      user_id: userId,
+      start_location: null,
+      is_admin: true,
+      lat: null,
+      lng: null
+    });
+    router.replace(`/room/${newRoom.id}`);
   };
-  const handleMakeMeeting = useCallback(throttle(createRoomOption, 10000), []);
 
   return (
     <form>
@@ -70,7 +71,7 @@ const StartMeeting = () => {
         </label>
       </div>
       <div className={styles.start_button}>
-        <Button onPress={handleMakeMeeting}>
+        <Button onPress={createRoomOption} isLoading={isFetching}>
           모임 시작하기
           <MdStart />
         </Button>
