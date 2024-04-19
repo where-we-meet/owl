@@ -1,5 +1,9 @@
+import StartMeeting from '@/components/rending/StartMeetingBtn';
 import styles from './page.module.css';
 import { Image, Button, Link } from '@nextui-org/react';
+import _ from 'lodash';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 export default function Home() {
   return (
@@ -26,6 +30,7 @@ export default function Home() {
               <Button href="/start" as={Link} variant="flat" size="lg" className={styles.button}>
                 모임 시작하기
               </Button>
+              <StartMeeting />
             </div>
           </div>
         </div>
