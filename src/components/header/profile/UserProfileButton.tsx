@@ -1,12 +1,13 @@
 'use client';
 
-import { Avatar, useDisclosure } from '@nextui-org/react';
+import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 
 import styles from './UserProfileButton.module.css';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
 import { ProfileModal } from './ProfileModal';
+import Logout from '@/components/auth/LogoutButton';
 
 const UserProfile = () => {
   const user = useQueryUser();
@@ -32,16 +33,34 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="flex gap-4 items-center" title="내 프로필 설정 및 보기">
-        <Avatar
-          className={styles.profile}
-          onClick={handleModalOpen}
-          showFallback
-          name={user.user_metadata.user_name}
-          isBordered={true}
-          src={`${profile}`}
-        />
-      </div>
+      <Dropdown>
+        <DropdownTrigger>
+          <div className="flex gap-4 items-center" title="내 프로필 설정 및 보기">
+            <Avatar
+              className={styles.profile}
+              showFallback
+              name={user.user_metadata.user_name}
+              isBordered={true}
+              src={`${profile}`}
+            />
+          </div>
+        </DropdownTrigger>
+        <DropdownMenu>
+          <DropdownItem onClick={handleModalOpen}>
+            <div className={styles.view_profile}>
+              <Avatar showFallback name={user.user_metadata.user_name} src={`${profile}`} />
+              <div>
+                <p className={styles.user_name}>{user.user_metadata.user_name}</p>
+                <p className={styles.view_profile_text}>내 프로필 보기</p>
+              </div>
+            </div>
+          </DropdownItem>
+          <DropdownItem>
+            <Logout />
+          </DropdownItem>
+        </DropdownMenu>
+        <ProfileModal onClose={onClose} isOpen={isOpen} />
+      </Dropdown>
       <ProfileModal onClose={onClose} isOpen={isOpen} />
     </>
   );
