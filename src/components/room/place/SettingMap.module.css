@@ -36,6 +36,10 @@
   opacity: 0.5;
 }
 
+.center_pin_none {
+  display: none;
+}
+
 .box {
   display: flex;
   flex-direction: column;
