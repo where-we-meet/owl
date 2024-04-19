@@ -111,15 +111,22 @@ export const uploadImage = async ({
       alert(`이미지 업로드에 실패하였습니다.\n 원인 : ${error.message} `);
     } else {
       alert(`이미지를 성공적으로 업로드하였습니다.`);
+      //기존 프로필 이미지 삭제
+      await _deletePastProfileImage({ userID });
       return `${process.env
         .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${userID}/${file_name}`;
     }
   }
 };
 
-const _deleteProfileImage = async ({ userID }: { userID: string }) => {
-  const { data, error } = await supabase.storage.from(`images/${userID}`).remove(['*']);
-  if (error) throw error;
+const _deletePastProfileImage = async ({ userID }: { userID: string }) => {
+  const fileURL = await _findCurrentProfileImage({ userID });
+  if (fileURL !== null) {
+    const { data, error } = await supabase.storage.from(`images`).remove([`users_profile/${userID}/${fileURL}`]);
+    if (error) throw error;
+    return true;
+  }
+  return false;
 };
 
 const _findCurrentProfileImage = async ({ userID }: { userID: string }) => {
