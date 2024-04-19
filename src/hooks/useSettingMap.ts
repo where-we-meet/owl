@@ -24,6 +24,8 @@ export const useSettingMap = () => {
 
   const roomUser = useRoomUserDataStore((state) => state.roomUser);
 
+  const isPinned = !!roomUser?.start_location;
+
   const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
 
   const setCenter = (map: kakao.maps.Map) => {
@@ -56,8 +58,10 @@ export const useSettingMap = () => {
     handleChangeCenter,
     isDrag,
     setIsDrag,
+    isPinned,
     isGpsLoading,
     halfwayPoint,
-    roomUsers
+    roomUsers,
+    roomUser
   };
 };
