@@ -1,4 +1,4 @@
-import Calender from '../meeting/calender/Calender';
+import Calender from '../calender/Calender';
 import UserList from './user/UserList';
 
 const Sidebar = () => {
