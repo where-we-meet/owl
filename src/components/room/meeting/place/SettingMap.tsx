@@ -41,6 +41,7 @@ const SettingMap = () => {
           onCenterChanged={(map) => handleChangeCenter(map)}
           onDragStart={() => setIsDrag(true)}
           onDragEnd={() => setIsDrag(false)}
+          minLevel={11}
         >
           {roomUsers
             .filter(({ lat, lng }) => lat !== null && lng !== null)
