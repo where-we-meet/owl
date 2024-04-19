@@ -1,7 +1,7 @@
 'use client';
 
 import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
-import _ from 'lodash';
+import debounce from 'lodash-es/debounce';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useGetRoadAddress } from './useGetPlace';
 import { useRoomUserDataStore } from '@/store/roomUserStore';
@@ -33,7 +33,7 @@ export const useSettingMap = () => {
     setLocation({ lat: latlng.getLat(), lng: latlng.getLng() });
   };
 
-  const handleChangeCenter = useCallback(_.debounce(setCenter, 1000), []);
+  const handleChangeCenter = useCallback(debounce(setCenter, 1000), []);
 
   useEffect(() => {
     if (roomUser && roomUser.lat && roomUser.lng) setLocation({ lat: +roomUser.lat, lng: +roomUser.lng });
