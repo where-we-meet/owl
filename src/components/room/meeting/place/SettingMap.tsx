@@ -5,12 +5,18 @@ import { Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useSettingMap } from '@/hooks/useSettingMap';
 import { Spinner } from '@nextui-org/react';
-import styles from './ResultMap.module.css';
 import GeolocationButton from './GeolocationButton';
+import LocationSwitch from './LocationSwitch';
+import SearchBar from './search/SearchBar';
+import styles from './SettingMap.module.css';
+import UserMarker from './UserMarker';
+import Halfway from './Halfway';
 
 const SettingMap = () => {
   const [loading, error] = useKakaoMap();
-  const { location, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } = useSettingMap();
+  const { location, halfwayPoint, roomUsers, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } = useSettingMap();
+
+  const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
   if (loading) return <Spinner label="Loading..." color="primary" />;
   if (error) return <div>error</div>;
@@ -18,27 +24,35 @@ const SettingMap = () => {
   return (
     <>
       <div className={styles.map_container}>
-        {isGpsLoading ? (
-          <Spinner className={styles.center_pin} color="primary" />
-        ) : (
-          <div>
-            <Image
-              src={'/pin.svg'}
-              className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
-              width={30}
-              height={30}
-              alt="pin"
-            />
-          </div>
-        )}
+        <SearchBar />
+        <div>
+          {isGpsLoading && <Spinner className={styles.center_pin} color="primary" />}
+          <Image
+            src={'/pin.svg'}
+            className={`${styles.center_pin} ${isDrag && styles.center_pin_drag}`}
+            width={30}
+            height={30}
+            alt="pin"
+          />
+        </div>
         <Map
           center={location}
           className={styles.map}
           onCenterChanged={(map) => handleChangeCenter(map)}
           onDragStart={() => setIsDrag(true)}
           onDragEnd={() => setIsDrag(false)}
-        />
-        <GeolocationButton />
+        >
+          {roomUsers
+            .filter(({ lat, lng }) => lat !== null && lng !== null)
+            .map(({ id, lat, lng, users }) => (
+              <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} user={users} />
+            ))}
+          {isHalfwayValid && <Halfway location={halfwayPoint} />}
+        </Map>
+        <div className={styles.button_wrapper}>
+          <LocationSwitch />
+          <GeolocationButton />
+        </div>
       </div>
     </>
   );
