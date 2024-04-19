@@ -16,8 +16,8 @@ export type UserLocationData = {
   room_id: string;
   user_id: string;
   start_location: string;
-  lat: string;
-  lng: string;
+  lat: string | null;
+  lng: string | null;
 };
 
 export type Halfway = {
