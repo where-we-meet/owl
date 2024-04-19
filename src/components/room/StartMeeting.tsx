@@ -2,17 +2,20 @@
 
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCreateRoomStore } from '@/store/createRoomStore';
 import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
-import { Button, Input } from '@nextui-org/react';
 import { MdStart } from 'react-icons/md';
+import { insertNewRoom, upsertRoomUser } from '@/api/room';
+import { useQueryUser } from '@/hooks/useQueryUser';
+import roomNameGenerator from '@/utils/roomNameGenerator';
+import { Button, Input } from '@nextui-org/react';
 import styles from './StartMeeting.module.css';
 
 const StartMeeting = () => {
   const router = useRouter();
+  const { id: userId } = useQueryUser();
+
   const [startDate, setStartDate] = useState(getCurrentFormattedDate());
   const [endDate, setEndDate] = useState(getCurrentFormattedDate());
-  const setDateRange = useCreateRoomStore((state) => state.setDateRange);
 
   const changeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
     setStartDate(e.target.value);
@@ -22,10 +25,26 @@ const StartMeeting = () => {
     setEndDate(e.target.value);
   };
 
-  const createRoomOption = () => {
-    window.sessionStorage.clear();
-    setDateRange({ startDate, endDate });
-    router.push('/start/pick-calendar');
+  const createRoomOption = async () => {
+    const [newRoom] = await insertNewRoom({
+      name: roomNameGenerator(),
+      created_by: userId,
+      start_date: startDate,
+      end_date: endDate
+    });
+
+    if (newRoom) {
+      const roomId = newRoom.id;
+      await upsertRoomUser({
+        room_id: roomId,
+        user_id: userId,
+        start_location: null,
+        is_admin: true,
+        lat: null,
+        lng: null
+      });
+      router.push(`/room/${roomId}`);
+    }
   };
 
   return (
