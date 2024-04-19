@@ -34,7 +34,7 @@ export const ImageUploadModal = ({
     return isValidFileSize(file);
   };
 
-  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files !== null && files !== undefined) {
       const file = files[0];
