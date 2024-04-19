@@ -2,18 +2,29 @@
 
 import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import _ from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useGetRoadAddress } from './useGetPlace';
 import { useRoomUserDataStore } from '@/store/roomUserStore';
+import { useHalfwayDataStore } from '@/store/halfwayStore';
+import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
 
 export const useSettingMap = () => {
+  const { id: roomId }: { id: string } = useParams();
   const [isDrag, setIsDrag] = useState(false);
 
   const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
-  const roomUser = useRoomUserDataStore((state) => state.roomUser);
   const { isGpsLoading, setIsGpsLoading } = useGpsStatusStore((state) => state);
-
   const { data: searchAddress, isPending: isAddressPending } = useGetRoadAddress(location, isDrag);
+  const { data: roomUsers = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
+
+  const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
+
+  const roomUser = useRoomUserDataStore((state) => state.roomUser);
+
+  const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
 
   const setCenter = (map: kakao.maps.Map) => {
     const latlng = map.getCenter();
@@ -33,12 +44,20 @@ export const useSettingMap = () => {
     }
   }, [searchAddress]);
 
+  useEffect(() => {
+    if (halfwayPoint) {
+      updateHalfwayData({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
+    }
+  }, [halfwayPoint]);
+
   return {
     location,
     address,
     handleChangeCenter,
     isDrag,
     setIsDrag,
-    isGpsLoading
+    isGpsLoading,
+    halfwayPoint,
+    roomUsers
   };
 };
