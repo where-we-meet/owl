@@ -9,13 +9,21 @@ import { getUserProfileData } from '@/api/profile';
 import { ProfileModal } from './ProfileModal';
 import Logout from '@/components/auth/LogoutButton';
 
+export type UserProfileData = { name: string; profile_url: string | null };
 const UserProfile = () => {
   const user = useQueryUser();
+  //state for recent profile data (from supabase DB)
+  const [data, setData] = useState<UserProfileData>({
+    name: '',
+    profile_url: ''
+  });
+
+  // useEffect for take recent data
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getUserProfileData(user.id);
-        setProfile(data.profile_url);
+        setData({ name: data.name, profile_url: data.profile_url });
       } catch (error) {
         console.error('Error fetching user profile data:', error);
       }
@@ -24,8 +32,6 @@ const UserProfile = () => {
   }, []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [profile, setProfile] = useState<string | null>('');
 
   const handleModalOpen = () => {
     onOpen();
@@ -41,7 +47,7 @@ const UserProfile = () => {
               showFallback
               name={user.user_metadata.user_name}
               isBordered={true}
-              src={`${profile}`}
+              src={`${data.profile_url}`}
             />
           </div>
         </DropdownTrigger>
@@ -52,10 +58,10 @@ const UserProfile = () => {
                 className={styles.view_profile}
                 showFallback
                 name={user.user_metadata.user_name}
-                src={`${profile}`}
+                src={`${data.profile_url}`}
               />
               <div className={styles.view_profile_text_container}>
-                <p className={styles.user_name}>반가워올, {user.user_metadata.user_name}!</p>
+                <p className={styles.user_name}>반가워올, {data.name}!</p>
                 <p className={styles.view_profile_text} onClick={handleModalOpen}>
                   내 프로필 보기
                 </p>
