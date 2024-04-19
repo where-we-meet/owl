@@ -28,7 +28,6 @@ export const useGeoLocation = () => {
   useEffect(() => {
     if (roomUser) {
       if (roomUser.start_location !== '') {
-        console.log(roomUser);
         setIsGpsLoading(false);
       } else {
         handleSetGeolocation();
