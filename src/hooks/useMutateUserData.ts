@@ -18,6 +18,15 @@ export const useMutateUserData = () => {
   return { mutate, isSuccess };
 };
 
+export const useUpdateStartLocation = () => {
+  const { mutateAsync, isSuccess } = useMutation({
+    mutationFn: async (payload: UserLocationData) => {
+      await updateStartLocation(payload);
+    }
+  });
+  return { mutateAsync, isSuccess };
+};
+
 export const useDeleteUserSchedule = () => {
   const { mutateAsync, isSuccess } = useMutation({
     mutationFn: async (payload: { roomId: string; userId: string }) => {
