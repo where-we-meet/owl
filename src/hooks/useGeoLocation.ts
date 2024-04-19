@@ -26,12 +26,12 @@ export const useGeoLocation = () => {
   };
 
   useEffect(() => {
-    if (roomUser && roomUser.start_location === '') {
+    if (roomUser?.start_location !== '') {
       setIsGpsLoading(false);
     } else {
       handleSetGeolocation();
     }
-  }, [roomUser?.start_location]);
+  }, []);
 
   return { handleSetGeolocation };
 };
