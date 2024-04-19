@@ -117,6 +117,22 @@ export const uploadImage = async ({
   }
 };
 
+const _deleteProfileImage = async ({ userID }: { userID: string }) => {
+  const { data, error } = await supabase.storage.from(`images/${userID}`).remove(['*']);
+  if (error) throw error;
+};
+
+const _findCurrentProfileImage = async ({ userID }: { userID: string }) => {
+  const folderPath = `users_profile/${userID}/`;
+  const { data: files, error } = await supabase.storage.from('images').list(folderPath);
+
+  if (error) throw error;
+  if (files && files.length > 0) {
+    const profilePicUrl = supabase.storage.from('images').getPublicUrl(files[0].name);
+    return profilePicUrl.data.publicUrl;
+  }
+  return null;
+};
 // supabase useres table에서 user Name 변경
 export const updateUserName = async (userId: string, newName: string) => {
   const { error } = await supabase.from('users').update({ name: newName }).eq('id', userId);
