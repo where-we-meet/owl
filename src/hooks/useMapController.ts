@@ -17,7 +17,10 @@ export const useMapController = () => {
   const range = useRangeStore((state) => state.range);
   const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
-  const { data: roomUsers = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
+  const { data: roomUsers = [] } = useQuery({
+    queryKey: ['room-users', roomId],
+    queryFn: () => getRoomUsersData(roomId)
+  });
   const { data: searchCategory, isPending: isCategoryPending } = useQuerySearchCategory(searchOption);
 
   const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);

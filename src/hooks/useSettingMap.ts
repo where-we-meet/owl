@@ -18,7 +18,10 @@ export const useSettingMap = () => {
   const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
   const isGpsLoading = useGpsStatusStore((state) => state.isGpsLoading);
   const { data: searchAddress, isPending: isAddressPending } = useQueryAddress(location, isDrag);
-  const { data: roomUsers = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
+  const { data: roomUsers = [] } = useQuery({
+    queryKey: ['room-users', roomId],
+    queryFn: () => getRoomUsersData(roomId)
+  });
 
   const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
