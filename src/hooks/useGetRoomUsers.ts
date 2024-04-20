@@ -23,14 +23,14 @@ export const useGetRoomUsers = (roomId: string, userId: string) => {
           const updatedRoomUsers = roomUsers.map((user) =>
             user.user_id === updated.user_id ? { ...user, ...updated } : user
           );
-          queryClient.setQueryData(['roomUsers'], updatedRoomUsers);
+          queryClient.setQueryData(['room-users', roomId], updatedRoomUsers);
         }
       )
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${roomId}` },
         (_payload) => {
-          queryClient.refetchQueries({ queryKey: ['roomUsers'] });
+          queryClient.refetchQueries({ queryKey: ['room-users', roomId] });
         }
       )
       .subscribe((status, err) => {
