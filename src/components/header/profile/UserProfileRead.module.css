@@ -15,7 +15,7 @@
 .modal_body {
   overflow: hidden;
   align-items: center;
-  padding-top: 3.75rem;
+  padding-top: 2rem;
 }
 
 .profile {
@@ -66,6 +66,7 @@
 
 .next_icon {
   scale: 1.7;
+  color: #7a20be;
 }
 
 .login_info_container {
@@ -98,11 +99,13 @@
   color: rgb(155, 155, 155);
 }
 
-@media screen and (max-width: 768px) {
-  .modal_body {
-    padding-top: 2rem;
-  }
+.info_container {
+  display: flex;
+  flex-direction: column;
+  min-width: 15rem;
+}
 
+@media screen and (max-width: 768px) {
   .name_container {
     min-width: auto;
   }
@@ -122,7 +125,6 @@
   .login_info_container > p {
     font-size: 0.9rem;
   }
-
   .user_edit_container > p {
     font-size: 1rem;
   }
