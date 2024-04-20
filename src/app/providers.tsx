@@ -6,7 +6,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function Providers({ children }: React.PropsWithChildren) {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { gcTime: Infinity } } });
+  const queryClient = new QueryClient({ defaultOptions: { queries: { gcTime: 86_400_000 } } });
   return (
     <QueryClientProvider client={queryClient}>
       <NextUIProvider>{children}</NextUIProvider>
