@@ -34,7 +34,6 @@ const ConfirmedButton = () => {
     e.preventDefault();
     if (!lat || !lng) return;
     const confirmed_date = e.currentTarget.date.value;
-
     const roomUsersData: { roomId: string; updated: RoomUserDate } = {
       roomId: roomId,
       updated: {
