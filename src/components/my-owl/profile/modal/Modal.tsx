@@ -133,7 +133,14 @@ export const ImageUploadModal = ({
               <AiOutlinePicture style={{ scale: '1.8' }} />내 폴더에서 사진 찾기
             </label>
           ) : (
-            preview && <img src={preview as string} className={styles.preview_image} alt="profile-preview" />
+            preview && (
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <img src={preview as string} className={styles.preview_image} alt="profile-preview" />
+                <label className={styles.change_file_label} htmlFor="file">
+                  다른 사진 찾기
+                </label>
+              </div>
+            )
           )}
         </div>
         <button className={styles.file_upload_btn} disabled={file === null} onClick={handleUploadImage}>

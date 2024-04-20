@@ -50,7 +50,7 @@
 .upload_file_container {
   height: 100%;
   border-radius: 5px;
-  padding: 2rem;
+  padding: 1rem;
 
   text-align: center;
   text-decoration: underline;
@@ -162,4 +162,12 @@
 .preview_image {
   max-width: 10rem;
   max-height: 10rem;
+  object-fit: contain;
+}
+
+.change_file_label {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-top: 0.8rem;
+  cursor: pointer;
 }
