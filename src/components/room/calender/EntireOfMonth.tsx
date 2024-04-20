@@ -16,21 +16,11 @@ type Props = {
   selectedDate: Date[];
   userSchedules: UserSchedule[];
   handleDateClick: (date: Date) => void;
-  handleBlockSelect: (date: Date) => React.CSSProperties;
+  checkInRange: (date: Date) => boolean;
 };
 
-const EntireOfMonth: React.FC<Props> = ({
-  nowDate,
-  selectedDate,
-  userSchedules,
-  handleDateClick,
-  handleBlockSelect
-}) => {
+const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, handleDateClick, checkInRange }) => {
   const entireOfMonth = calculateOfMonth(nowDate);
-
-  const dayStyle = (day: Date) => {
-    return { color: dayColors(nowDate, day) };
-  };
 
   return (
     <div className={styles.dates}>
@@ -39,17 +29,14 @@ const EntireOfMonth: React.FC<Props> = ({
           {week.map((day) => (
             <li
               key={day.toISOString()}
-              onClick={() => {
-                handleDateClick(day);
-              }}
-              className={styles.days}
-              style={(dayStyle(day), { ...handleBlockSelect(day) })}
+              className={`${styles.days}  ${!checkInRange(day) ? styles.disabled : ''}`}
+              onClick={() => handleDateClick(day)}
             >
               {selectedDate.some((date) => isSameDay(date, day)) && (
                 <span className={styles.selected_date_circle}></span>
               )}
               <SchedulesOfUsers userSchedules={userSchedules} day={day} />
-              {day.getDate()}
+              <span className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</span>
             </li>
           ))}
         </ul>
