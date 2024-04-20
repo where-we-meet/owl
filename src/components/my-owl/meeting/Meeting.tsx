@@ -37,7 +37,7 @@ export const Meeting = () => {
                 <div className={styles.room_box_left}>
                   <div className={styles.meeting_main_info}>
                     <h3 className={styles.meeting_name}>{meeting.name}</h3>
-                    {!meeting.verified ? <RiVerifiedBadgeFill className={styles.verified_icon} /> : null}
+                    {meeting.verified ? <RiVerifiedBadgeFill className={styles.verified_icon} /> : null}
                   </div>
                   <p className={meeting.confirmed_date === null ? styles.undecided_meeting_date : styles.meeting_date}>
                     <BsCalendarDateFill /> {meeting.confirmed_date || '확정된 날짜가 없습니다.'}
