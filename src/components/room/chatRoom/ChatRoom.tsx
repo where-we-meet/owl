@@ -18,7 +18,7 @@ export const ChatRoom = () => {
                     <h3 className={styles.name}>이름</h3>
                     <h3 className={styles.date_time}>{new Date().toDateString()}</h3>
                   </div>
-                  <p>asdasdasdasdasdasdasdasdasd</p>
+                  <p className={styles.chat_log}>asdasdasdasdasdasdasdasdasd</p>
                 </div>
               </figure>
             </div>
@@ -26,7 +26,7 @@ export const ChatRoom = () => {
         })}
       </section>
       <div>
-        <textarea className={styles.input_box} />
+        <textarea placeholder="send message" autoFocus={true} className={styles.input_box} />
       </div>
     </main>
   );
