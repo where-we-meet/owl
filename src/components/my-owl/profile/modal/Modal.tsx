@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 import { uploadImage } from '@/api/supabaseCSR/supabase';
 import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
 
@@ -7,6 +7,7 @@ import styles from './Modal.module.css';
 import { IoIosClose, IoIosLink } from 'react-icons/io';
 import { MdOutlineUploadFile } from 'react-icons/md';
 import { AiOutlinePicture } from 'react-icons/ai';
+import Image from 'next/image';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
@@ -20,6 +21,7 @@ export const ImageUploadModal = ({
   userId: string;
 }) => {
   const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>('');
   const [url, setUrl] = useState('');
 
   /*
@@ -38,6 +40,7 @@ export const ImageUploadModal = ({
     const { files } = e.target;
     if (files !== null && files !== undefined) {
       const file = files[0];
+
       if (fileChangeValidation(file)) setFile(file);
       else {
         alert(
@@ -94,6 +97,17 @@ export const ImageUploadModal = ({
     }
   };
 
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPreview(null);
+    }
+  }, [file]);
   return (
     <div className={styles.background} onClick={handleToggleModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -113,10 +127,14 @@ export const ImageUploadModal = ({
           />
         </form>
         <div className={styles.upload_file_container}>
-          <label className={styles.file_label} htmlFor="file">
-            <AiOutlinePicture style={{ scale: '1.8' }} />
-            사진 찾기
-          </label>
+          {file === null ? (
+            <label className={styles.file_label} htmlFor="file">
+              <AiOutlinePicture style={{ scale: '1.8' }} />
+              사진 찾기
+            </label>
+          ) : (
+            preview && <img src={preview as string} className={styles.preview_image} alt="profile-preview" />
+          )}
         </div>
         <button className={styles.file_upload_btn} disabled={file === null} onClick={handleUploadImage}>
           <MdOutlineUploadFile />

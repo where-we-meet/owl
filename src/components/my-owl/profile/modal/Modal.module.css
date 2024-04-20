@@ -158,3 +158,8 @@
   background-color: rgba(122, 32, 190, 0.6);
   color: #ffffff;
 }
+
+.preview_image {
+  max-width: 11rem;
+  max-height: 11rem;
+}
