@@ -1,19 +1,12 @@
 'use client';
-
-// import UserList from './user/UserList';
-// import { useQueryUser } from '@/hooks/useQueryUser';
-// import { useGetRoomUsers } from '@/hooks/useGetRoomUsers';
-
 import LinkShare from '../share/LinkShare';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomData } from '@/api/supabaseCSR/supabase';
 import styles from './RoomHeader.module.css';
+import ConfirmedButton from '../ConfirmedButton';
 
 const RoomHeader = () => {
-  // const { id: userId } = useQueryUser();
-  // const { roomUsers } = useGetRoomUsers(roomId, userId);
-
   const { id: roomId }: { id: string } = useParams();
   const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
 
@@ -26,7 +19,7 @@ const RoomHeader = () => {
           </h1>
           {room && <LinkShare />}
         </div>
-        {/* <UserList roomUsers={roomUsers} /> */}
+        <ConfirmedButton />
       </div>
     </div>
   );
