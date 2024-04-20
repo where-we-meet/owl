@@ -78,14 +78,25 @@ const UserProfileUpdate = ({
     }
   }, [data]);
 
+  const handleUnload = async (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    await deleteProfileImage({ userId: user.id, fileURL: uploadedProfileURL });
+    setUploadedProfileURL('');
+
+    return '';
+  };
+
   useEffect(() => {
     if (isOpen) {
       window.addEventListener('popstate', handleClose);
+      window.addEventListener('beforeunload', handleUnload);
     } else {
       window.removeEventListener('popstate', handleClose);
+      window.removeEventListener('beforeunload', handleUnload);
     }
     return () => {
       window.removeEventListener('popstate', handleClose);
+      window.removeEventListener('beforeunload', handleUnload);
     };
   }, [isOpen]);
 
