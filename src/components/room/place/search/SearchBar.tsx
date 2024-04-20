@@ -1,7 +1,7 @@
 'use client';
 import { type ChangeEvent, useState, useCallback, useRef } from 'react';
 import debounce from 'lodash-es/debounce';
-import { useGetSearchPlace } from '@/hooks/useGetPlace';
+import { useQuerySearchPlace } from '@/hooks/useQueryPlace';
 import { useSearchDataStore } from '@/store/placeStore';
 import SearchResultList from './SearchResultList';
 import { SearchIcon } from './SearchIcon';
@@ -26,7 +26,7 @@ const SearchBar = () => {
     setListViewState(true);
   };
 
-  const { data: placeList, isPending } = useGetSearchPlace(searchKeyword);
+  const { data: placeList, isPending } = useQuerySearchPlace(searchKeyword);
 
   return (
     <div className={styles.container}>
