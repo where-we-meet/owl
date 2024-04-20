@@ -28,7 +28,7 @@ const UserProfileUpdate = ({
   const [userName, setUserName] = useState('');
   const [userProfileURL, setUserProfileURL] = useState<string | null>('');
   const [toggleModal, setToggleModal] = useState(false);
-  const { setUploadedProfileURL, currentProfileURL } = useRoomUserDataStore();
+  const { setUploadedProfileURL, setCurrentProfileURL, currentProfileURL, uploadedProfileURL } = useRoomUserDataStore();
 
   const user = useQueryUser();
   const { data, isLoading } = useQuery({
@@ -62,10 +62,19 @@ const UserProfileUpdate = ({
     }
   };
 
+  const handleEditExit = async () => {
+    // 업로드 된 이미지 삭제
+    await deleteProfileImage({ userId: user.id, fileURL: uploadedProfileURL });
+    setUploadedProfileURL('');
+    toggleEditMode();
+  };
+
   useEffect(() => {
     if (data) {
       setUserName(data.name);
       setUserProfileURL(data.profile_url);
+      setUploadedProfileURL('');
+      setCurrentProfileURL(data.profile_url);
     }
   }, [data]);
 
@@ -82,7 +91,7 @@ const UserProfileUpdate = ({
 
   return (
     <>
-      <Button className={styles.back_btn} isIconOnly onPress={toggleEditMode}>
+      <Button className={styles.back_btn} isIconOnly onPress={handleEditExit}>
         <IoChevronBack />
       </Button>
       <ModalHeader className="flex flex-col gap-1 text-center">
