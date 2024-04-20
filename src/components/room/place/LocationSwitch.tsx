@@ -52,8 +52,8 @@ const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
   };
 
   return (
-    <div className={styles.wrapper} onClick={handleSubmitLocation}>
-      {toggleState ? <TbPinFilled size={25} /> : <TbPin size={25} />}
+    <div className={`${styles.wrapper} ${toggleState && styles.selected}`} onClick={handleSubmitLocation}>
+      <TbPinFilled size={25} color="white" />
     </div>
   );
 };
