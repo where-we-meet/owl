@@ -1,6 +1,7 @@
+import { UserSchedule } from '@/hooks/useSubscribeCalendar';
 import { customGroupBy } from './groupBy';
 
-export const mostSchedule = (userSchedules: any) => {
+export const mostSchedule = (userSchedules: UserSchedule[]) => {
   const result = customGroupBy(userSchedules, ({ start_date }: { start_date: string }) => start_date || 'not-setting');
   const sortResult = Object.entries(result).sort((a, b) => {
     const aLength = a[1] ? a[1].length : 0;
