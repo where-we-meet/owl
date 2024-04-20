@@ -19,13 +19,13 @@ export const MeetingModalButton = () => {
       <Modal
         className={styles.modal}
         backdrop="opaque"
-        size="3xl"
+        size="full"
         isOpen={isOpen}
         onOpenChange={onClose}
         motionProps={{
           variants: {
             enter: {
-              x: 0,
+              y: 0,
               opacity: 1,
               transition: {
                 duration: 0.3,
@@ -33,7 +33,7 @@ export const MeetingModalButton = () => {
               }
             },
             exit: {
-              x: -100,
+              y: 200,
               opacity: 0,
               transition: {
                 duration: 0.2,
