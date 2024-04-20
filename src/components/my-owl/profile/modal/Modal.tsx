@@ -129,8 +129,7 @@ export const ImageUploadModal = ({
         <div className={styles.upload_file_container}>
           {file === null ? (
             <label className={styles.file_label} htmlFor="file">
-              <AiOutlinePicture style={{ scale: '1.8' }} />
-              사진 찾기
+              <AiOutlinePicture style={{ scale: '1.8' }} />내 폴더에서 사진 찾기
             </label>
           ) : (
             preview && <img src={preview as string} className={styles.preview_image} alt="profile-preview" />
