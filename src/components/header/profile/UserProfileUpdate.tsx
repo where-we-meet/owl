@@ -12,6 +12,7 @@ import { ImageUploadModal } from '../../my-owl/profile/modal/Modal';
 import { IoChevronBack } from 'react-icons/io5';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import styles from './UserProfileUpdate.module.css';
+import { useRoomUserDataStore } from '@/store/userProfileStore';
 
 const MAX_NAME_LENGTH = 8;
 
@@ -27,6 +28,7 @@ const UserProfileUpdate = ({
   const [userName, setUserName] = useState('');
   const [userProfileURL, setUserProfileURL] = useState<string | null>('');
   const [toggleModal, setToggleModal] = useState(false);
+  const { setUploadedProfileURL, currentProfileURL } = useRoomUserDataStore();
 
   const user = useQueryUser();
   const { data, isLoading } = useQuery({
@@ -52,9 +54,10 @@ const UserProfileUpdate = ({
       await updateUserName(user.id, userName);
       if (userProfileURL !== '' && userProfileURL !== null) {
         // 기존 프로필 삭제
-        await deleteProfileImage({ userId: user.id, fileURL: user.user_metadata.profile_url });
+        await deleteProfileImage({ userId: user.id, fileURL: currentProfileURL });
         await changeUserProfile({ userId: user.id, profile_url: userProfileURL });
       }
+
       toggleEditMode();
     }
   };

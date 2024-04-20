@@ -4,18 +4,29 @@ import UserProfileRead from './UserProfileRead';
 import { useState } from 'react';
 
 import styles from './ProfileModal.module.css';
+import { useRoomUserDataStore } from '@/store/userProfileStore';
+import { deleteProfileImage } from '@/api/supabaseCSR/supabase';
+import { useQueryUser } from '@/hooks/useQueryUser';
 
 export const ProfileModal = ({ onClose, isOpen }: { onClose: () => void; isOpen: boolean }) => {
   const [editMode, setEditMode] = useState(false);
-  const handleClose = () => {
-    if (editMode && !confirm('변경사항이 저장되지 않을 수 있습니다. 그래도 나가시겠습니까?')) return;
-    // 업로드했던 프로필 사진 삭제
+  const user = useQueryUser();
+  const { uploadedProfileURL, setUploadedProfileURL } = useRoomUserDataStore();
+  const handleClose = async () => {
+    if (editMode) {
+      const isAgree = confirm('변경사항이 저장되지 않을 수 있습니다. 그래도 나가시겠습니까?');
+      if (isAgree) {
+        // 업로드하고 저장하지 않은 프로필이 있다면 삭제
+        await deleteProfileImage({ userId: user.id, fileURL: uploadedProfileURL });
+        setUploadedProfileURL('');
+      } else return;
+    }
 
     setEditMode(false);
     onClose();
   };
 
-  const toggleEditMode = () => {
+  const toggleEditMode = async () => {
     setEditMode((prev) => !prev);
   };
 
