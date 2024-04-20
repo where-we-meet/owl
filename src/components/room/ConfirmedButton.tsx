@@ -55,7 +55,7 @@ const ConfirmedButton = () => {
 
   return (
     <>
-      <Button onPress={onOpen} isDisabled={isFetchDone}>
+      <Button size="sm" style={{ backgroundColor: 'black', color: 'white' }} onPress={onOpen} isDisabled={isFetchDone}>
         {isFetchDone ? '모임 확정 완료' : '확정'}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
