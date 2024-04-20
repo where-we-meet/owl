@@ -59,7 +59,7 @@ const UserProfileRead = ({
       </ModalHeader>
       <ModalBody className={styles.modal_body}>
         <Avatar className={styles.profile} showFallback alt="profile_image" src={`${data.profile_url}`} />
-        <div>
+        <div className={styles.info_container}>
           <div className={styles.name_container}>
             <p>닉네임</p>
             <div className={styles.user_edit_container}>
