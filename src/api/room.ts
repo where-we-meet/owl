@@ -1,3 +1,4 @@
+import { RoomUserDate } from '@/hooks/useMutateUserData';
 import { RoomUser } from '@/types/roomUser';
 import { createClient } from '@/utils/supabase/client';
 
@@ -33,11 +34,8 @@ export const getRoomIsConfirmed = async (roomId: string) => {
   return data;
 };
 
-export const updateRoomData = async (
-  roomId: string,
-  updated: { lat: string; lng: string; location: string; verified: boolean; confirmed_date: string }
-) => {
-  const { data, error } = await supabase.from('rooms').update(updated).eq('id', roomId).select();
+export const updateRoomData = async (payload: { roomId: string; updated: RoomUserDate }) => {
+  const { data, error } = await supabase.from('rooms').update(payload.updated).eq('id', payload.roomId).select();
   if (error) throw error;
   return data;
 };

@@ -10,6 +10,7 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDi
 import { useQuerySchedule } from '@/hooks/useQuerySchedule';
 import styles from './ConfirmedButton.module.css';
 import { useRouter } from 'next/navigation';
+import { RoomUserDate, useRoomUserData } from '@/hooks/useMutateUserData';
 
 const ConfirmedButton = () => {
   const router = useRouter();
@@ -26,12 +27,27 @@ const ConfirmedButton = () => {
     select: (data) => data[0]
   });
 
+  const { mutateAsync, isSuccess } = useRoomUserData();
   const [isFetchDone, setIsFetchDone] = useState(false);
+
   const handleConfirm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!lat || !lng || !location) return;
+    if (!lat || !lng) return;
     const confirmed_date = e.currentTarget.date.value;
-    await updateRoomData(roomId, { lat: String(lat), lng: String(lng), location, verified: true, confirmed_date });
+    console.log('lat>>', confirmed_date);
+
+    const roomUsersData: { roomId: string; updated: RoomUserDate } = {
+      roomId: roomId,
+      updated: {
+        lat: String(lat),
+        lng: String(lng),
+        location,
+        verified: true,
+        confirmed_date
+      }
+    };
+
+    await mutateAsync(roomUsersData);
     setIsFetchDone(true);
     router.push(`/room/${roomId}/confirm`);
   };
