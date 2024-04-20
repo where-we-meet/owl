@@ -1,5 +1,4 @@
 'use client';
-import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { mostSchedule } from '@/utils/mostSchedule';
 import { useParams } from 'next/navigation';
 import { FormEvent, useState } from 'react';
@@ -8,22 +7,23 @@ import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed, updateRoomData } from '@/api/room';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
+import { useQuerySchedule } from '@/hooks/useQuerySchedule';
 import styles from './ConfirmedButton.module.css';
 
 const ConfirmedButton = () => {
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
-  const { userSchedules } = useGetCalendar(roomId);
+  const { data: userSchedules } = useQuerySchedule({ roomId, userId });
   const { maxDates } = mostSchedule(userSchedules);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { lat, lng, location } = useHalfwayDataStore();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const { data: room, isPending } = useQuery({
     queryKey: ['room', 'confirmed', 'createdBy'],
     queryFn: () => getRoomIsConfirmed(roomId),
     select: (data) => data[0]
   });
 
-  // emergency
   const [isFetchDone, setIsFetchDone] = useState(false);
   const handleConfirm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
