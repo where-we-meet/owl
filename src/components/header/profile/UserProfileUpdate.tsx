@@ -16,7 +16,7 @@ import { IoChevronBack } from 'react-icons/io5';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
 import styles from './UserProfileUpdate.module.css';
-const MAX_NAME_LENGTH = 16;
+const MAX_NAME_LENGTH = 8;
 
 const UserProfileUpdate = ({
   toggleEditMode,
@@ -49,8 +49,8 @@ const UserProfileUpdate = ({
   const handleEditDone = async () => {
     if (userName.length < 1) {
       alert('닉네임은 최소 1글자 이상으로 지어주세요.');
-    } else if (userName.length > 16) {
-      alert('닉네임은 최대 16글자 이하로 지어주세요.');
+    } else if (userName.length > MAX_NAME_LENGTH) {
+      alert(`닉네임은 최대 ${MAX_NAME_LENGTH}글자 이하로 지어주세요.`);
     } else {
       await updateUserName(user.id, userName);
       if (userProfileURL !== '' && userProfileURL !== null) {
@@ -101,7 +101,14 @@ const UserProfileUpdate = ({
                 <span className={styles.current_name_length}>{userName.length}</span>/{MAX_NAME_LENGTH}
               </p>
             </span>
-            <input id="name" type="text" onChange={handleChangeUserName} value={userName} autoFocus />
+            <input
+              id="name"
+              type="text"
+              onChange={handleChangeUserName}
+              value={userName}
+              autoFocus
+              autoComplete="off"
+            />
           </div>
           <Button className={styles.save_button} onPress={handleEditDone}>
             저장
