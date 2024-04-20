@@ -1,12 +1,14 @@
 'use client';
 
-import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { mostSchedule } from '@/utils/mostSchedule';
 import { Link } from '@nextui-org/react';
+import { useQuerySchedule } from '@/hooks/useQuerySchedule';
+import { useQueryUser } from '@/hooks/useQueryUser';
 import styles from './ResultSchedule.module.css';
 
 const ResultSchedule = ({ roomId }: { roomId: string }) => {
-  const { userSchedules } = useGetCalendar(roomId);
+  const { id: userId } = useQueryUser();
+  const { userSchedules } = useQuerySchedule({ roomId, userId });
   const { maxDates } = mostSchedule(userSchedules);
 
   return (
