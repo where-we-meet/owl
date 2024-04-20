@@ -1,4 +1,4 @@
-import { useGetRoadAddress, useGetSearchCategory } from '@/hooks/useGetPlace';
+import { useQueryAddress, useQuerySearchCategory } from '@/hooks/useQueryPlace';
 import { useEffect, useMemo, useState } from 'react';
 import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
@@ -18,10 +18,10 @@ export const useMapController = () => {
   const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
   const { data: roomUsers = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
-  const { data: searchCategory, isPending: isCategoryPending } = useGetSearchCategory(searchOption);
+  const { data: searchCategory, isPending: isCategoryPending } = useQuerySearchCategory(searchOption);
 
   const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
-  const { data } = useGetRoadAddress(halfwayPoint as { lat: number; lng: number }, false);
+  const { data } = useQueryAddress(halfwayPoint as { lat: number; lng: number }, false);
 
   useEffect(() => {
     if (halfwayPoint) {

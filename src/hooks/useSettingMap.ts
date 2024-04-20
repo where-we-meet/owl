@@ -3,7 +3,7 @@
 import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import debounce from 'lodash-es/debounce';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useGetRoadAddress } from './useGetPlace';
+import { useQueryAddress } from './useQueryPlace';
 import { useRoomUserDataStore } from '@/store/roomUserStore';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
@@ -17,7 +17,7 @@ export const useSettingMap = () => {
 
   const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
   const isGpsLoading = useGpsStatusStore((state) => state.isGpsLoading);
-  const { data: searchAddress, isPending: isAddressPending } = useGetRoadAddress(location, isDrag);
+  const { data: searchAddress, isPending: isAddressPending } = useQueryAddress(location, isDrag);
   const { data: roomUsers = [] } = useQuery({ queryKey: ['roomUsers'], queryFn: () => getRoomUsersData(roomId) });
 
   const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
