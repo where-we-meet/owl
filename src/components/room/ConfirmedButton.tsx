@@ -9,8 +9,10 @@ import { getRoomIsConfirmed, updateRoomData } from '@/api/room';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
 import styles from './ConfirmedButton.module.css';
+import { useRouter } from 'next/navigation';
 
 const ConfirmedButton = () => {
+  const router = useRouter();
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
   const { userSchedules } = useGetCalendar(roomId);
@@ -31,10 +33,12 @@ const ConfirmedButton = () => {
     const confirmed_date = e.currentTarget.date.value;
     await updateRoomData(roomId, { lat: String(lat), lng: String(lng), location, verified: true, confirmed_date });
     setIsFetchDone(true);
+    router.push(`/room/${roomId}/confirm`);
   };
 
   if (!room || isPending) return null;
   if (room.created_by !== userId) return null;
+
   return (
     <>
       <Button onPress={onOpen} isDisabled={isFetchDone}>
