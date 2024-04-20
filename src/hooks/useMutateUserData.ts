@@ -1,7 +1,7 @@
-import { upsertSchedule, updateStartLocation, deleteSchedule } from '@/api/supabaseCSR/supabase';
+import { upsertSchedule, updateStartLocation, deleteMySchedules } from '@/api/supabaseCSR/supabase';
 import { UserLocationData } from '@/types/place.types';
 import { UpsertUserSchedule } from '@/types/roomUser';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type Payload = {
   userLocationData: UserLocationData;
@@ -27,10 +27,14 @@ export const useUpdateStartLocation = () => {
   return { mutateAsync, isSuccess };
 };
 
-export const useDeleteUserSchedule = () => {
+export const useDeleteUserSchedule = (roomId: string) => {
+  const queryClient = useQueryClient();
   const { mutateAsync, isSuccess } = useMutation({
     mutationFn: async (payload: { roomId: string; userId: string }) => {
-      await deleteSchedule(payload);
+      await deleteMySchedules(payload);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['room-user-schedules', roomId] });
     }
   });
   return { mutateAsync, isSuccess };
