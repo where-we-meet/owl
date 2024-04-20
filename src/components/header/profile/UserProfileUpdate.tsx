@@ -1,21 +1,18 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
-import {
-  changeUserProfile,
-  deleteProfileImage,
-  findCurrentProfileImage,
-  updateUserName
-} from '@/api/supabaseCSR/supabase';
+import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { ImageUploadModal } from '../../my-owl/profile/modal/Modal';
+
 import { IoChevronBack } from 'react-icons/io5';
 import { AiFillPlusCircle } from 'react-icons/ai';
-
 import styles from './UserProfileUpdate.module.css';
+
 const MAX_NAME_LENGTH = 8;
 
 const UserProfileUpdate = ({
