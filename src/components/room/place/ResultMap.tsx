@@ -1,4 +1,4 @@
-import { useParams } from 'next/navigation';
+'use client';
 
 import { Circle, Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
@@ -13,9 +13,9 @@ import CategoryMarker from './search/CategoryMarker';
 import { Link } from '@nextui-org/react';
 import styles from './ResultMap.module.css';
 
-const ResultMap = () => {
+const ResultMap = ({ roomId }: { roomId: string }) => {
   const [loading, error] = useKakaoMap();
-  const { id: roomId } = useParams();
+
   const { address, halfwayPoint, range, clickId, setClickId, roomUsers, searchCategory = [] } = useMapController();
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
