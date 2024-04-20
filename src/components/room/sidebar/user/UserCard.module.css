@@ -1,0 +1,39 @@
+.usercard_container {
+  display: flex;
+  margin: 0.5rem;
+  padding: 0.1rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(151deg, #ffb6f7 0%, #ac87ff 90%);
+  border-image-slice: 1;
+  background-clip: content-box, border-box;
+  background-origin: border-box;
+}
+
+.mycard_container {
+  display: flex;
+  margin: 0.5rem;
+  padding: 0.1rem;
+  border: 1px solid;
+  border-radius: 1rem;
+}
+
+.avatar_container {
+  margin: 1rem;
+}
+
+.userdata_container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.4rem;
+}
+.username {
+  width: 70%;
+  border-bottom: 1px solid;
+  padding: 0.3rem 0.5rem 0.3rem 0rem;
+  font-weight: 600;
+}
+.user_address {
+  padding: 0.3rem 0.5rem 0.3rem 0rem;
+  font-size: 0.7rem;
+}
