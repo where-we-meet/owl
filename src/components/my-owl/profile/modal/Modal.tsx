@@ -1,4 +1,5 @@
-import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react';
+import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { uploadImage } from '@/api/supabaseCSR/supabase';
 import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
 
