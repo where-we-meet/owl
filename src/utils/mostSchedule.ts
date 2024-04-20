@@ -1,5 +1,5 @@
-import { UserSchedule } from '@/hooks/useSubscribeCalendar';
 import { customGroupBy } from './groupBy';
+import type { UserSchedule } from '@/hooks/useSubscribeCalendar';
 
 export const mostSchedule = (userSchedules: UserSchedule[]) => {
   const result = customGroupBy(userSchedules, ({ start_date }: { start_date: string }) => start_date || 'not-setting');
