@@ -106,6 +106,7 @@ const UserProfileUpdate = ({
               type="text"
               onChange={handleChangeUserName}
               value={userName}
+              maxLength={MAX_NAME_LENGTH}
               autoFocus
               autoComplete="off"
             />
