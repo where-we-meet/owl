@@ -1,26 +1,26 @@
 import { format, isSunday, isSaturday, isToday } from 'date-fns';
 
 const dayColors = (nowDate: Date, day: Date) => {
-  let color: string;
+  let style: string;
 
   switch (true) {
     case format(nowDate, 'M') !== format(day, 'M'):
-      color = '#ddd';
+      style = 'none';
       break;
     case isSunday(day):
-      color = 'red';
+      style = 'sunday';
       break;
     case isSaturday(day):
-      color = 'blue';
+      style = 'saturday';
       break;
     case isToday(day):
-      color = 'pink';
+      style = 'today';
       break;
     default:
-      color = '#000';
+      style = 'weekday';
   }
 
-  return color;
+  return style;
 };
 
 export default dayColors;
