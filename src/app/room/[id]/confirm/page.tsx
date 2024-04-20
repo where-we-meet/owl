@@ -1,10 +1,12 @@
-import Dashboard from '@/components/room/Dashboard';
+import ResultMap from '@/components/room/place/ResultMap';
+import ResultSchedule from '@/components/room/calender/ResultSchedule';
 import styles from './page.module.css';
 
 const RoomPage = ({ params }: { params: { id: string } }) => {
   return (
     <div className={styles.container}>
-      <Dashboard roomId={params.id} />
+      <ResultMap roomId={params.id} />
+      <ResultSchedule roomId={params.id} />
     </div>
   );
 };

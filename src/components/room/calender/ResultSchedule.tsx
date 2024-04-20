@@ -6,8 +6,7 @@ import { useParams } from 'next/navigation';
 import { Link } from '@nextui-org/react';
 import styles from './ResultSchedule.module.css';
 
-const ResultSchedule = () => {
-  const { id: roomId }: { id: string } = useParams();
+const ResultSchedule = ({ roomId }: { roomId: string }) => {
   const { userSchedules } = useGetCalendar(roomId);
   const { maxDates } = mostSchedule(userSchedules);
 
