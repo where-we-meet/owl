@@ -1,6 +1,6 @@
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { Avatar } from '@nextui-org/avatar';
-import styles from './userCard.module.css';
+import styles from './UserCard.module.css';
 
 type User = {
   created_at: string;
