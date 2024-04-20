@@ -183,10 +183,10 @@ export const getRangeOfSchedule = async (id: string) => {
   return data;
 };
 
-export const updateSelectedDate = async (roomId: string, userId: string, date: Date) => {
+export const upsertSelectedDate = async ({ roomId, userId, date }: { roomId: string; userId: string; date: Date }) => {
   const { error } = await supabase
     .from('room_schedule')
-    .insert([
+    .upsert([
       {
         room_id: roomId,
         created_by: userId,
@@ -195,5 +195,16 @@ export const updateSelectedDate = async (roomId: string, userId: string, date: D
       }
     ])
     .select();
+  if (error) throw error;
+};
+
+export const deleteSelectedDate = async ({ roomId, userId, date }: { roomId: string; userId: string; date: Date }) => {
+  const { error } = await supabase
+    .from('room_schedule')
+    .delete()
+    .eq('room_id', roomId)
+    .eq('created_by', userId)
+    .eq('start_date', date.toDateString());
+
   if (error) throw error;
 };
