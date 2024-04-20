@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useQuery } from '@tanstack/react-query';
-import { getRoomIsConfirmed, updateRoomData } from '@/api/room';
+import { getRoomIsConfirmed } from '@/api/room';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
 import { useQuerySchedule } from '@/hooks/useQuerySchedule';
@@ -34,7 +34,6 @@ const ConfirmedButton = () => {
     e.preventDefault();
     if (!lat || !lng) return;
     const confirmed_date = e.currentTarget.date.value;
-    console.log('lat>>', confirmed_date);
 
     const roomUsersData: { roomId: string; updated: RoomUserDate } = {
       roomId: roomId,
