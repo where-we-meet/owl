@@ -1,14 +1,14 @@
 import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
-import { uploadImage } from '@/api/supabaseCSR/supabase';
+import { deleteProfileImage, uploadImage } from '@/api/supabaseCSR/supabase';
 import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
+import { useRoomUserDataStore } from '@/store/userProfileStore';
 
 import styles from './Modal.module.css';
 
 import { IoIosClose, IoIosLink } from 'react-icons/io';
 import { MdOutlineUploadFile } from 'react-icons/md';
 import { AiOutlinePicture } from 'react-icons/ai';
-import Image from 'next/image';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
@@ -24,6 +24,8 @@ export const ImageUploadModal = ({
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>('');
   const [url, setUrl] = useState('');
+
+  const { uploadedProfileURL, setUploadedProfileURL } = useRoomUserDataStore();
 
   /*
    * File
@@ -41,7 +43,6 @@ export const ImageUploadModal = ({
     const { files } = e.target;
     if (files !== null && files !== undefined) {
       const file = files[0];
-
       if (fileChangeValidation(file)) setFile(file);
       else {
         alert(
@@ -57,9 +58,16 @@ export const ImageUploadModal = ({
   const handleUploadImage = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (file !== null) {
+      // 이전에 업로드하고 저장하지 않은 프로필이 있다면 삭제
+      await deleteProfileImage({ userId, fileURL: uploadedProfileURL });
       const profile_url = await uploadImage({ file, setFile, userId });
       handleToggleModal();
-      profile_url ? setUserProfileURL(profile_url) : alert(`문제가 발생하였습니다`);
+      if (profile_url) {
+        setUserProfileURL(profile_url);
+        setUploadedProfileURL(profile_url);
+      } else {
+        alert(`문제가 발생하였습니다`);
+      }
     } else {
       alert(`파일을 선택해주세요.`);
     }
@@ -90,7 +98,10 @@ export const ImageUploadModal = ({
   const handleUploadURL = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (isValidImageUrl(url)) {
+      // 이전에 업로드하고 저장하지 않은 프로필이 있다면 삭제
+      await deleteProfileImage({ userId, fileURL: uploadedProfileURL });
       setUserProfileURL(url);
+      setUploadedProfileURL(url);
       handleToggleModal();
     } else {
       alert('유효하지 않은 URL 형식입니다. URL 파일의 형식을 확인해주세요.');

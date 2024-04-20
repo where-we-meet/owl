@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
-type userProfileData = {
+type UserProfileData = {
   currentProfileURL: string | null;
   uploadedProfileURL: string;
-  setCurrentProfileURL: (profileURL: string) => void;
+  setCurrentProfileURL: (profileURL: string | null) => void;
   setUploadedProfileURL: (profileURL: string) => void;
 };
 
-export const useRoomUserDataStore = create((set) => ({
+export const useRoomUserDataStore = create<UserProfileData>((set) => ({
   currentProfileURL: '',
   uploadedProfileURL: '',
-  setCurrentProfileURL: (profileURL: string) => set({ currentProfileURL: profileURL }),
+  setCurrentProfileURL: (profileURL: string | null) => set({ currentProfileURL: profileURL }),
   setUploadedProfileURL: (profileURL: string) => set({ uploadedProfileURL: profileURL })
 }));

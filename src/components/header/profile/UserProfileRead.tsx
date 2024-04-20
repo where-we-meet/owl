@@ -10,6 +10,7 @@ import { IoClose } from 'react-icons/io5';
 import styles from './UserProfileRead.module.css';
 import Logout from '../../auth/LogoutButton';
 import { UserProfileData } from './UserProfileButton';
+import { useRoomUserDataStore } from '@/store/userProfileStore';
 
 const UserProfileRead = ({
   toggleEditMode,
@@ -21,6 +22,7 @@ const UserProfileRead = ({
   isOpen: boolean;
 }) => {
   const user = useQueryUser();
+  const { setCurrentProfileURL } = useRoomUserDataStore();
   //state for recent profile data (from supabase DB)
   const [data, setData] = useState<UserProfileData>({
     name: '',
@@ -33,6 +35,7 @@ const UserProfileRead = ({
       try {
         const data = await getUserProfileData(user.id);
         setData({ name: data.name, profile_url: data.profile_url });
+        setCurrentProfileURL(data.profile_url);
       } catch (error) {
         console.error('Error fetching user profile data:', error);
       }
