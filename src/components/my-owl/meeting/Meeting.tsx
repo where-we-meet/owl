@@ -8,6 +8,7 @@ import styles from './Meeting.module.css';
 
 import { BsCalendarDateFill } from 'react-icons/bs';
 import { FaMapLocationDot } from 'react-icons/fa6';
+import { RiVerifiedBadgeFill } from 'react-icons/ri';
 
 export const Meeting = () => {
   const router = useRouter();
@@ -34,7 +35,10 @@ export const Meeting = () => {
             <Skeleton isLoaded={isLoaded} className="rounded-lg">
               <div className={styles.room_box}>
                 <div className={styles.room_box_left}>
-                  <h3 className={styles.meeting_name}>{meeting.name}</h3>
+                  <div className={styles.meeting_main_info}>
+                    <h3 className={styles.meeting_name}>{meeting.name}</h3>
+                    {!meeting.verified ? <RiVerifiedBadgeFill className={styles.verified_icon} /> : null}
+                  </div>
                   <p className={meeting.confirmed_date === null ? styles.undecided_meeting_date : styles.meeting_date}>
                     <BsCalendarDateFill /> {meeting.confirmed_date || '확정된 날짜가 없습니다.'}
                   </p>
