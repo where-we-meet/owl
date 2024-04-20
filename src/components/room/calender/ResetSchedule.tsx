@@ -8,7 +8,7 @@ const ResetSchedule = () => {
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
 
-  const { mutateAsync, isSuccess } = useDeleteUserSchedule();
+  const { mutateAsync, isSuccess } = useDeleteUserSchedule(roomId);
 
   const handleResetSchedule = () => {
     mutateAsync({ roomId, userId });
