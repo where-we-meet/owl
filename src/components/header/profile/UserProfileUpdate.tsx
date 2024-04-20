@@ -4,7 +4,7 @@ import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
-import { changeUserProfile, updateUserName } from '@/api/supabaseCSR/supabase';
+import { changeUserProfile, deleteProfileImage, updateUserName } from '@/api/supabaseCSR/supabase';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { ImageUploadModal } from '../../my-owl/profile/modal/Modal';
@@ -51,6 +51,8 @@ const UserProfileUpdate = ({
     } else {
       await updateUserName(user.id, userName);
       if (userProfileURL !== '' && userProfileURL !== null) {
+        // 기존 프로필 삭제
+        await deleteProfileImage({ userId: user.id, fileURL: user.user_metadata.profile_url });
         await changeUserProfile({ userId: user.id, profile_url: userProfileURL });
       }
       toggleEditMode();

@@ -102,7 +102,6 @@ export const uploadImage = async ({
   setFile: Dispatch<SetStateAction<File | null>>;
   userId: string;
 }) => {
-  const currentFileURL = await findCurrentProfileImage({ userId });
   const file_name = getFileName();
 
   if (file) {
@@ -113,35 +112,40 @@ export const uploadImage = async ({
       alert(`이미지 업로드에 실패하였습니다.\n 원인 : ${error.message} `);
     } else {
       alert(`이미지를 성공적으로 업로드하였습니다.`);
-      //기존 프로필 이미지 삭제
-      await deleteProfileImage({ userId, fileURL: currentFileURL });
       return `${process.env
         .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/images/users_profile/${userId}/${file_name}`;
     }
   }
 };
 
-export const deleteProfileImage = async ({ userId, fileURL }: { userId: string; fileURL: string | null }) => {
-  if (fileURL !== null) {
+export const deleteProfileImage = async ({
+  userId,
+  fileURL
+}: {
+  userId: string;
+  fileURL: string | null | undefined;
+}) => {
+  if (fileURL !== null && fileURL !== undefined) {
     const fileName = extractFileNameFromURL(fileURL);
     const { error } = await supabase.storage.from('images').remove([`users_profile/${userId}/${fileName}`]);
-    if (error) throw error;
+    if (error) return false;
     return true;
   }
   return false;
 };
 
-export const findCurrentProfileImage = async ({ userId }: { userId: string }) => {
+export const findCurrentUploadedProfileImage = async ({ userId }: { userId: string }) => {
   const folderPath = `users_profile/${userId}/`;
   const { data: files, error } = await supabase.storage.from('images').list(folderPath);
 
   if (error) throw error;
   if (files && files.length > 0) {
-    const profilePicUrl = supabase.storage.from('images').getPublicUrl(files[0].name);
+    const profilePicUrl = supabase.storage.from('images').getPublicUrl(files[files.length - 1].name);
     return profilePicUrl.data.publicUrl;
   }
   return null;
 };
+
 // supabase useres table에서 user Name 변경
 export const updateUserName = async (userId: string, newName: string) => {
   const { error } = await supabase.from('users').update({ name: newName }).eq('id', userId);
