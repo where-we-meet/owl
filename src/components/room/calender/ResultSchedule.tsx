@@ -2,7 +2,6 @@
 
 import { useGetCalendar } from '@/hooks/useGetCalendar';
 import { mostSchedule } from '@/utils/mostSchedule';
-import { useParams } from 'next/navigation';
 import { Link } from '@nextui-org/react';
 import styles from './ResultSchedule.module.css';
 
