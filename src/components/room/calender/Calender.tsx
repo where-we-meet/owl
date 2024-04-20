@@ -2,36 +2,25 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
-import { getRangeOfSchedule, updateSelectedDate } from '@/api/supabaseCSR/supabase';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { useGetCalendar } from '@/hooks/useGetCalendar';
-import { useGetSchedule } from '@/hooks/useGetSchedule';
-import { useCalendarStore } from '@/store/calendarStore';
 import ResetSchedule from './ResetSchedule';
 import EntireOfMonth from './EntireOfMonth';
 import styles from './Calender.module.css';
 
+import { useSubscribeCalendar } from '@/hooks/useSubscribeCalendar';
+import { useMutateSchedule } from '@/hooks/useMutateSchedule';
+
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = () => {
-  const [nowDate, setNowDate] = useState<Date>(new Date());
-
   const { id: userId }: { id: string } = useQueryUser();
   const { id: roomId }: { id: string } = useParams();
 
-  const { data: scheduleRange, isPending } = useQuery({
-    queryKey: ['range', roomId],
-    queryFn: () => getRangeOfSchedule(roomId),
-    select: (data) => data[0]
-  });
-
-  const { userSchedules } = useGetCalendar(roomId);
-  const { myData: mySchedule } = useGetSchedule(userId, roomId);
-
-  const selectedDates = useCalendarStore((state) => state.selectedDates);
-  const setSelectedDates = useCalendarStore((state) => state.setSelectedDates);
+  const [nowDate, setNowDate] = useState<Date>(new Date());
+  const { userSchedules, mySchedules, scheduleRange } = useSubscribeCalendar(roomId, userId);
+  const { insertSchedule, deleteSchedule } = useMutateSchedule(roomId);
+  const selectedDates = mySchedules.map((schedule) => new Date(schedule.start_date as string));
 
   useEffect(() => {
     if (scheduleRange?.start_date) {
@@ -39,62 +28,39 @@ const Calender = () => {
     }
   }, [scheduleRange?.start_date]);
 
-  useEffect(() => {
-    if (mySchedule) {
-      setSelectedDates(mySchedule.map((schedule) => new Date(String(schedule.start_date))));
-    }
-  }, [mySchedule.length]);
-
   const prevMonth = () => {
-    setNowDate(subMonths(nowDate, 1));
+    setNowDate((prev) => subMonths(prev, 1));
   };
 
   const afterMonth = () => {
-    setNowDate((prev) => {
-      return addMonths(prev, 1);
-    });
+    setNowDate((prev) => addMonths(prev, 1));
   };
 
-  const handleDateClick = async (date: Date) => {
-    if (!scheduleRange?.start_date || !scheduleRange?.end_date) return;
+  const checkInRange = (date: Date): boolean => {
+    if (!scheduleRange?.start_date || !scheduleRange?.end_date) return true;
 
     const startDate = new Date(scheduleRange.start_date);
     const endDate = new Date(scheduleRange.end_date);
 
     if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
-      return;
+      return false;
+    } else {
+      return true;
     }
+  };
+
+  const handleDateClick = async (date: Date) => {
+    if (!checkInRange(date)) return;
 
     const isAlreadySelected = selectedDates.some((selected) => isSameDay(selected, date));
 
     if (isAlreadySelected) {
-      const filteredDate = selectedDates.filter((item) => !isSameDay(item, date));
-      setSelectedDates(filteredDate);
-    } else {
-      const newDateList = [...selectedDates, date];
-      setSelectedDates(newDateList);
-      try {
-        await updateSelectedDate(roomId, userId, date);
-      } catch (error) {
-        if (error) throw error;
-      }
+      deleteSchedule.mutate({ roomId, userId, date });
+      return;
     }
+
+    insertSchedule.mutate({ roomId, userId, date });
   };
-
-  const handleBlockSelect = (date: Date) => {
-    if (!scheduleRange?.start_date || !scheduleRange?.end_date) return {};
-
-    const startDate = new Date(scheduleRange.start_date);
-    const endDate = new Date(scheduleRange.end_date);
-
-    if (!isWithinInterval(date, { start: startDate.setDate(startDate.getDate() - 1), end: endDate })) {
-      return { color: '#ccc' };
-    } else {
-      return {};
-    }
-  };
-
-  if (isPending) return <>로딩중</>;
 
   return (
     <>
@@ -127,7 +93,7 @@ const Calender = () => {
               selectedDate={selectedDates}
               userSchedules={userSchedules}
               handleDateClick={handleDateClick}
-              handleBlockSelect={handleBlockSelect}
+              checkInRange={checkInRange}
             />
           </div>
         </div>
