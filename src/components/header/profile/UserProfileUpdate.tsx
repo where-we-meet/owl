@@ -80,9 +80,6 @@ const UserProfileUpdate = ({
 
   const handleUnload = async (e: BeforeUnloadEvent) => {
     e.preventDefault();
-    await deleteProfileImage({ userId: user.id, fileURL: uploadedProfileURL });
-    setUploadedProfileURL('');
-
     return '';
   };
 
@@ -92,11 +89,11 @@ const UserProfileUpdate = ({
       window.addEventListener('beforeunload', handleUnload);
     } else {
       window.removeEventListener('popstate', handleClose);
-      window.removeEventListener('beforeunload', handleUnload);
+      window.addEventListener('beforeunload', handleUnload);
     }
     return () => {
       window.removeEventListener('popstate', handleClose);
-      window.removeEventListener('beforeunload', handleUnload);
+      window.addEventListener('beforeunload', handleUnload);
     };
   }, [isOpen]);
 
