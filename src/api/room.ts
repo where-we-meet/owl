@@ -1,4 +1,4 @@
-import { RoomUserDate } from '@/hooks/useMutateUserData';
+import type { RoomUserDate } from '@/hooks/useMutateUserData';
 import { RoomUser } from '@/types/roomUser';
 import { createClient } from '@/utils/supabase/client';
 
