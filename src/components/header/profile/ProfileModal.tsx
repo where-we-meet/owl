@@ -9,6 +9,8 @@ export const ProfileModal = ({ onClose, isOpen }: { onClose: () => void; isOpen:
   const [editMode, setEditMode] = useState(false);
   const handleClose = () => {
     if (editMode && !confirm('변경사항이 저장되지 않을 수 있습니다. 그래도 나가시겠습니까?')) return;
+    // 업로드했던 프로필 사진 삭제
+
     setEditMode(false);
     onClose();
   };
