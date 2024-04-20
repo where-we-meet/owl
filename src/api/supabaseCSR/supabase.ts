@@ -171,7 +171,7 @@ export const upsertSchedule = async (payload: UpsertUserSchedule[]) => {
   const { data, error } = await supabase.from('room_schedule').upsert(payload);
 };
 
-export const deleteSchedule = async (payload: { roomId: string; userId: string }) => {
+export const deleteMySchedules = async (payload: { roomId: string; userId: string }) => {
   await supabase.from('room_schedule').delete().eq('room_id', payload.roomId).eq('created_by', payload.userId);
 };
 
