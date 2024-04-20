@@ -22,7 +22,7 @@ const UserProfileRead = ({
   isOpen: boolean;
 }) => {
   const user = useQueryUser();
-  const { setCurrentProfileURL } = useRoomUserDataStore();
+  const { setCurrentProfileURL, setUploadedProfileURL } = useRoomUserDataStore();
   //state for recent profile data (from supabase DB)
   const [data, setData] = useState<UserProfileData>({
     name: '',
@@ -36,6 +36,7 @@ const UserProfileRead = ({
         const data = await getUserProfileData(user.id);
         setData({ name: data.name, profile_url: data.profile_url });
         setCurrentProfileURL(data.profile_url);
+        setUploadedProfileURL('');
       } catch (error) {
         console.error('Error fetching user profile data:', error);
       }
