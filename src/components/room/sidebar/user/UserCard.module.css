@@ -1,6 +1,5 @@
 .usercard_container {
   display: flex;
-  margin: 0.5rem;
   padding: 0.1rem;
   border: 1px solid transparent;
   border-radius: 1rem;
@@ -12,7 +11,6 @@
 
 .mycard_container {
   display: flex;
-  margin: 0.5rem;
   padding: 0.1rem;
   border: 1px solid;
   border-radius: 1rem;
@@ -27,12 +25,14 @@
   flex-direction: column;
   margin-right: 0.4rem;
 }
+
 .username {
   width: 70%;
   border-bottom: 1px solid;
   padding: 0.3rem 0.5rem 0.3rem 0rem;
-  font-weight: 600;
+  font-weight: bold;
 }
+
 .user_address {
   padding: 0.3rem 0.5rem 0.3rem 0rem;
   font-size: 0.7rem;
