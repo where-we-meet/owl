@@ -36,6 +36,12 @@ export const getUserSchedule = async (roomId: string) => {
 //   return data;
 // };
 
+export const getMessageData = async (userId: string) => {
+  const { data, error } = await supabase.from('message').select('*, users(*)');
+  if (error) throw error;
+  return data;
+};
+
 export const getRoomData = async (roomId: string) => {
   const { data, error } = await supabase.from('rooms').select('*').eq('id', roomId);
   if (error) throw error;
