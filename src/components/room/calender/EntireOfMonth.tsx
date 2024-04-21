@@ -9,6 +9,7 @@ import dayColors from '@/utils/calendar/dayColors';
 
 import type { Tables } from '@/types/supabase';
 import SchedulesOfMe from './SchedulesOfMe';
+import { Schedules } from './Schedules';
 
 export type UserSchedule = Tables<'room_schedule'>;
 
@@ -35,10 +36,7 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, 
               onClick={() => handleDateClick(day)}
             >
               <span className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</span>
-              {/*내가 선택한 날짜를 나타내는 UI */}
-              <SchedulesOfMe selectedDate={selectedDate} day={day} />
-              {/*다른 사람들이 선택한 날짜를 나타내는 UI */}
-              <SchedulesOfUsers userSchedules={userSchedules} day={day} />
+              <Schedules userSchedules={userSchedules} selectedDate={selectedDate} day={day} />
             </li>
           ))}
         </ul>
