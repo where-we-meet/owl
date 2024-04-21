@@ -1,8 +1,6 @@
 .room_header {
   display: flex;
   flex-direction: column;
-  margin: 0.75em;
-  margin-bottom: 1rem;
   padding: 0.8rem;
   background-color: #4e4e4e;
   color: white;
