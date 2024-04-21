@@ -1,12 +1,7 @@
 .places_container {
-  position: absolute;
-  max-width: 410px;
   max-height: 500px;
   width: 100%;
-  margin-left: 1rem;
-  border-radius: 0px 0px 25px 25px;
-  background-color: rgb(255 255 255);
-  box-shadow: 2px 5px 5px darkgray;
+  background-color: inherit;
   overflow: hidden;
   overflow-y: overlay;
   cursor: pointer;
