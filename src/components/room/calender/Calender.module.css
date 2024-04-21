@@ -9,27 +9,31 @@
 .calendar_header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.calendar_header > div {
-  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
 }
 
-.calendar_header > div > span {
+.calendar_month_container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 3rem;
+}
+
+.calendar_month_controller {
+  background-color: transparent;
+}
+.calendar_month {
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-.scehdule_container {
+.calendar_body {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   width: 100%;
-  border: 2px solid #ddd;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -37,6 +41,16 @@
 .weekday_container {
   display: flex;
   width: 100%;
+}
+
+.weekday_container > li:first-child {
+  /*일요일*/
+  color: red;
+}
+
+.weekday_container > li:last-child {
+  /*토요일*/
+  color: blue;
 }
 
 .weekday {
