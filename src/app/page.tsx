@@ -1,8 +1,7 @@
 import StartMeeting from '@/components/rending/StartMeetingBtn';
 import styles from './page.module.css';
 import { Image } from '@nextui-org/react';
-import Header from '@/components/header/Header';
-import Footer from '@/components/Footer';
+import { Article } from '@/components/rending/Article';
 
 export default function Home() {
   return (
@@ -28,40 +27,21 @@ export default function Home() {
         </div>
       </section>
       <section className={styles.section}>
-        <h3>이런 경우에 쓰면 좋아요!</h3>
-        <div className={styles.use_cases}>
-          <span className={styles.use_case}>
-            <Image src="images/manage_schedule2.png" width={50} />
-            <p>
-              모임 일정 관리가
-              <br />
-              필요할 때
-            </p>
-          </span>
-          <span className={styles.use_case}>
-            <Image src="images/appointment2.png" width={50} />
-            <p>
-              약속을 빠르게
-              <br />
-              정하고 싶을 때
-            </p>
-          </span>
-          <span className={styles.use_case}>
-            <Image src="images/spot2.png" width={50} />
-            <p>
-              최적의 만남 장소를
-              <br />
-              찾고 싶을 때
-            </p>
-          </span>
-          <span className={styles.use_case}>
-            <Image src="images/my_schedule2.png" width={50} />
-            <p>
-              모임 일정을
-              <br />한 눈에 보고 싶을 때
-            </p>
-          </span>
-        </div>
+        <Article
+          image_url="images/manage_schedule2.png"
+          subtitle="미팅을 위한 공간 만들기"
+          contents={`OWL-LiNK는 터치 몇 번으로 모임 일정을\n잡기 위한 방 개설을 손쉽게 할 수 있습니다.`}
+        />
+        <Article
+          image_url="images/manage_schedule2.png"
+          subtitle="신속한 일정과 위치 전달 UI"
+          contents={`시시각각 변하는 개인의 일정과 장소를 일일이 조사, 보고하느라 번거롭지는 않으신가요?\nOWL-LiNK는 합리적이고 직관적인 UI를 통해, 누구에게나 편한 정보 교환 커뮤니케이션을 제공합니다.`}
+        />
+        <Article
+          image_url="images/manage_schedule2.png"
+          subtitle="서로의 출발 위치를 고려하여 최적의 모임 장소 제공"
+          contents={`OWL-LiNK는 모임에 참가한 유저들의 위치에 기반하여 최적의 모임 장소를 선정합니다.`}
+        />
       </section>
     </main>
   );
