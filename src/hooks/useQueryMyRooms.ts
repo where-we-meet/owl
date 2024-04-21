@@ -2,8 +2,8 @@
 
 import { getMyParticipatingRoomsData, getUserMeetingsId } from '@/api/supabaseCSR/supabase';
 import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
-import { useEffect, useState } from 'react';
 import { useQueryUser } from './useQueryUser';
+import { useQuery } from '@tanstack/react-query';
 
 export type UserInfo = {
   user_id: string;
@@ -22,22 +22,17 @@ export type MeetingInfo = {
   userdata_room: UserInfo[];
 };
 
-export const useGetModalData = () => {
+export const useQueryMyRooms = () => {
   const { id: userId } = useQueryUser();
-  const [meetingInfo, setMeetingInfo] = useState<MeetingInfo[]>([]);
 
-  useEffect(() => {
-    const fetchMeetingInfo = async () => {
-      const roomData = await getUserMeetingsId(userId);
-      const roomIds = roomData.map((item) => item.room_id);
-      const fetchedData = await getMyParticipatingRoomsData(roomIds);
-      const sortedData = sortMeetingInfo(fetchedData);
+  const fetchMeetingInfo = async () => {
+    const roomData = await getUserMeetingsId(userId);
+    const roomIds = roomData.map((item) => item.room_id);
+    return await getMyParticipatingRoomsData(roomIds);
+  };
 
-      setMeetingInfo(sortedData);
-    };
+  const { data = [], isPending } = useQuery({ queryKey: ['myRooms', userId], queryFn: fetchMeetingInfo });
+  const myRooms = sortMeetingInfo(data);
 
-    fetchMeetingInfo();
-  }, []);
-
-  return meetingInfo;
+  return { myRooms, isPending };
 };
