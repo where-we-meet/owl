@@ -1,6 +1,6 @@
 .constainer {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: black;
 }
 
@@ -40,9 +40,4 @@
 
 .chat_log {
   color: rgb(196, 196, 196);
-}
-
-.input_box {
-  display: flex;
-  width: 100vw;
 }
