@@ -9,30 +9,62 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      room_schedule: {
+      message: {
         Row: {
           created_at: string
-          created_by: string | null
-          end_date: string | null
           id: string
-          room_id: string | null
-          start_date: string | null
+          is_edit: boolean | null
+          send_by: string
+          text: string | null
         }
         Insert: {
           created_at?: string
-          created_by?: string | null
-          end_date?: string | null
           id?: string
-          room_id?: string | null
-          start_date?: string | null
+          is_edit?: boolean | null
+          send_by?: string
+          text?: string | null
         }
         Update: {
           created_at?: string
-          created_by?: string | null
+          id?: string
+          is_edit?: boolean | null
+          send_by?: string
+          text?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_message_send_by_fkey"
+            columns: ["send_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      room_schedule: {
+        Row: {
+          created_at: string
+          created_by: string
+          end_date: string | null
+          id: string
+          room_id: string
+          start_date: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
           end_date?: string | null
           id?: string
-          room_id?: string | null
-          start_date?: string | null
+          room_id: string
+          start_date: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          end_date?: string | null
+          id?: string
+          room_id?: string
+          start_date?: string
         }
         Relationships: [
           {
