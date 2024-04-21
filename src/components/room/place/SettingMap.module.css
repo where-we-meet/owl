@@ -60,11 +60,3 @@
   display: flex;
   justify-content: space-between;
 }
-
-.button_wrapper {
-  position: absolute;
-  bottom: 5%;
-  right: 5%;
-
-  display: flex;
-}
