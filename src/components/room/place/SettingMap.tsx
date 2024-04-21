@@ -8,9 +8,9 @@ import { Spinner } from '@nextui-org/react';
 import GeolocationButton from './GeolocationButton';
 import LocationSwitch from './LocationSwitch';
 import SearchBar from './search/SearchBar';
-import styles from './SettingMap.module.css';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
+import styles from './SettingMap.module.css';
 
 const SettingMap = () => {
   const [loading, error] = useKakaoMap();
