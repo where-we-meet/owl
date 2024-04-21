@@ -2,13 +2,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import Providers from './providers';
-import './globals.css';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import getQueryClient from '@/utils/getQueryClient';
 import type { User } from '@supabase/supabase-js';
-import Header from '@/components/header/Header';
 import { getSession } from '@/api/auth/getSession';
-import Footer from '@/components/Footer';
+import { createClient } from '@/utils/supabase/server';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,11 +21,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createClient();
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery<User | null>({
     queryKey: ['auth'],
-    queryFn: getSession
+    queryFn: () => getSession(supabase)
   });
 
   return (
@@ -34,11 +34,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers>
           <HydrationBoundary state={dehydrate(queryClient)}>
-            <div className="container">
-              <Header />
-              {children}
-              <Footer />
-            </div>
+            <div className="container">{children}</div>
           </HydrationBoundary>
         </Providers>
       </body>
