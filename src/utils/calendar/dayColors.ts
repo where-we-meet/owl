@@ -1,4 +1,4 @@
-import { format, isSunday, isSaturday, isToday } from 'date-fns';
+import { format, isSunday, isSaturday, isToday, isSameDay } from 'date-fns';
 
 const dayColors = (nowDate: Date, day: Date) => {
   let style: string;
@@ -13,7 +13,7 @@ const dayColors = (nowDate: Date, day: Date) => {
     case isSaturday(day):
       style = 'saturday';
       break;
-    case isToday(day):
+    case isSameDay(nowDate, day):
       style = 'today';
       break;
     default:

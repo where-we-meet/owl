@@ -35,3 +35,23 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.weekday {
+  color: black;
+}
+
+.today {
+  color: pink;
+}
+
+.sunday {
+  color: red;
+}
+
+.saturday {
+  color: blue;
+}
+
+.none {
+  color: #ccc;
+}
