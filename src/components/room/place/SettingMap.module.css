@@ -4,6 +4,19 @@
   height: 100%;
 }
 
+.searchBar_container {
+  position: absolute;
+
+  top: 5%;
+  left: 5%;
+
+  width: 35%;
+  min-width: 250px;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
 .map {
   position: absolute;
   width: 100%;
