@@ -31,6 +31,7 @@ export const useGetRoomUsers = (roomId: string, userId: string) => {
         { event: 'INSERT', schema: 'public', table: 'userdata_room', filter: `room_id=eq.${roomId}` },
         (_payload) => {
           queryClient.refetchQueries({ queryKey: ['room-users', roomId] });
+          queryClient.refetchQueries({ queryKey: ['myRooms', userId] });
         }
       )
       .subscribe((status, err) => {
