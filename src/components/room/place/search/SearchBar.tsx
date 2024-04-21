@@ -4,6 +4,7 @@ import debounce from 'lodash-es/debounce';
 import { useQuerySearchPlace } from '@/hooks/useQueryPlace';
 import SearchResultList from './SearchResultList';
 import { SearchIcon } from './SearchIcon';
+import { AiOutlineClose } from 'react-icons/ai';
 import styles from './SearchBar.module.css';
 
 const SearchBar = () => {
@@ -14,6 +15,13 @@ const SearchBar = () => {
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(event.target.value);
+  };
+
+  const handleClearInput = () => {
+    setSearchKeyword('');
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
   };
 
   const handleSearchInput = useCallback(debounce(handleChangeInput, 600), []);
@@ -35,7 +43,7 @@ const SearchBar = () => {
           onFocus={handleInputFocus}
           ref={inputRef}
         />
-        <SearchIcon />
+        {searchKeyword ? <AiOutlineClose onClick={handleClearInput} /> : <SearchIcon />}
       </div>
       {listViewState && (
         <SearchResultList placeList={placeList} setListViewState={setListViewState} inputRef={inputRef} />
