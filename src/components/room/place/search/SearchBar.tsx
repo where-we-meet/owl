@@ -4,8 +4,6 @@ import debounce from 'lodash-es/debounce';
 import { useQuerySearchPlace } from '@/hooks/useQueryPlace';
 import { useSearchDataStore } from '@/store/placeStore';
 import SearchResultList from './SearchResultList';
-import { SearchIcon } from './SearchIcon';
-import { Input } from '@nextui-org/react';
 import styles from './SearchBar.module.css';
 
 const SearchBar = () => {
@@ -30,19 +28,16 @@ const SearchBar = () => {
 
   return (
     <div className={styles.container}>
-      <Input
-        id="searchBar"
-        className={styles.search_input}
-        placeholder={address}
-        onChange={handleSearchInput}
-        onFocus={handleInputFocus}
-        autoComplete="off"
-        startContent={<SearchIcon />}
-        variant="bordered"
-        size="lg"
-        isClearable
-        ref={inputRef}
-      />
+      <div className={styles.search_container}>
+        <input
+          id="searchBar"
+          className={styles.search_input}
+          placeholder="검색해서 찾아볼래요"
+          onChange={handleSearchInput}
+          onFocus={handleInputFocus}
+          ref={inputRef}
+        />
+      </div>
       {listViewState && (
         <SearchResultList placeList={placeList} setListViewState={setListViewState} inputRef={inputRef} />
       )}

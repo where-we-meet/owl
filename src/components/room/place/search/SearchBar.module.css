@@ -5,8 +5,28 @@
   z-index: 12;
 }
 
+.search_container {
+  position: relative;
+  display: flex;
+}
+
 .search_input {
-  width: 100%;
-  border-radius: 12px;
+  width: 30%;
+  margin-left: 1rem;
+  border-radius: 20px;
   background-color: white;
+  box-shadow: 2px 5px 5px darkgray;
+  padding: 0.5rem 2rem;
+  /* search icon */
+  background-image: url(../../../../../public/images/search_icon.png);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: right 20px top 10px;
+  outline: none;
+}
+
+.search_icon {
+  position: absolute;
+  top: calc(50% - 0.5rem);
+  left: calc(50% - 14rem);
 }
