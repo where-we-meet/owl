@@ -20,11 +20,12 @@ type Props = {
 };
 
 const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, handleDateClick, checkInRange }) => {
+  //  entireOfMonth에는 달력에 표시되는 날짜들이 주 단위로 배열에 나뉘어 들어가있다.
   const entireOfMonth = calculateOfMonth(nowDate);
-  alert(entireOfMonth);
   return (
     <div className={styles.dates}>
       {entireOfMonth.map((week, index) => (
+        //  주 단위로 UI를 그린다.
         <ul key={index} className={styles.day_container}>
           {week.map((day) => (
             <li
@@ -32,11 +33,13 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, 
               className={`${styles.days}  ${!checkInRange(day) ? styles.disabled : ''}`}
               onClick={() => handleDateClick(day)}
             >
+              <span className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</span>
+              {/*내가 선택한 날짜를 나타내는 UI */}
               {selectedDate.some((date) => isSameDay(date, day)) && (
                 <span className={styles.selected_date_circle}></span>
               )}
+              {/*다른 사람들이 선택한 날짜를 나타내는 UI */}
               <SchedulesOfUsers userSchedules={userSchedules} day={day} />
-              <span className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</span>
             </li>
           ))}
         </ul>
