@@ -1,6 +1,6 @@
-import type { UserSchedule } from './EntireOfMonth';
-import SchedulesOfMe from './SchedulesOfMe';
-import SchedulesOfUsers from './SchedulesOfUsers';
+import type { UserSchedule } from '../EntireOfMonth';
+import SchedulesOfMe from './SchedulesOfMe/SchedulesOfMe';
+import SchedulesOfUsers from './SchedulesOfUsers/SchedulesOfUsers';
 
 type Props = {
   userSchedules: UserSchedule[];
