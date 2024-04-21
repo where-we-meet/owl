@@ -2,9 +2,9 @@ import React from 'react';
 import { isSameDay } from 'date-fns';
 
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
-import SchedulesOfUsers from './SchedulesOfIUsers';
+import SchedulesOfUsers from './SchedulesOfUsers';
 
-import styles from './Calender.module.css';
+import styles from './EntireOfMonth.module.css';
 import dayColors from '@/utils/calendar/dayColors';
 
 import type { Tables } from '@/types/supabase';

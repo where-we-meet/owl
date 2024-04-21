@@ -1,0 +1,37 @@
+.dates {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+}
+
+.day_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.days {
+  flex: 1;
+  aspect-ratio: 1.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.disabled span {
+  color: #ccc !important;
+  cursor: default;
+}
+
+.selected_date_circle {
+  width: 35px;
+  height: 35px;
+  background-color: #016e9c5a;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
