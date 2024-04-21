@@ -2,12 +2,11 @@
 
 import { useParams } from 'next/navigation';
 import { useQueryUser } from '@/hooks/useQueryUser';
+import { useUpdateStartLocation } from '@/hooks/useMutateUserData';
 import { useSearchDataStore } from '@/store/placeStore';
 import { objectValidate } from '@/utils/objectValidate';
-import { TbPinFilled, TbPin } from 'react-icons/tb';
+import { TbPinFilled } from 'react-icons/tb';
 import styles from './LocationSwitch.module.css';
-import { useUpdateStartLocation } from '@/hooks/useMutateUserData';
-import { Dispatch, SetStateAction } from 'react';
 
 const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
   const { id: roomId }: { id: string } = useParams();
