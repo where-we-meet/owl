@@ -4,9 +4,12 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa6';
 import owl_image from '../../../public/images/about_owl_image.jpg';
+import Header from '@/components/header/Header';
+import Footer from '@/components/Footer';
 export default function AboutPage() {
   return (
     <>
+      <Header />
       <main className={styles.main}>
         <section className={styles.header_image}>
           <header className={styles.header}>
@@ -87,6 +90,7 @@ export default function AboutPage() {
         </section>
         <PayPalDonate />
       </main>
+      <Footer />
     </>
   );
 }
