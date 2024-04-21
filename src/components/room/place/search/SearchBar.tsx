@@ -31,7 +31,7 @@ const SearchBar = () => {
       <div className={styles.search_container}>
         <input
           id="searchBar"
-          className={styles.search_input}
+          className={searchKeyword ? styles.add_search_input : styles.search_input}
           placeholder="검색해서 찾아볼래요"
           onChange={handleSearchInput}
           onFocus={handleInputFocus}
