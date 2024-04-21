@@ -42,6 +42,12 @@ export const getMessageData = async (userId: string) => {
   return data;
 };
 
+export const getUsersData = async (userId: string) => {
+  const { data, error } = await supabase.from('users').select('*');
+  if (error) throw error;
+  return data;
+};
+
 export const getRoomData = async (roomId: string) => {
   const { data, error } = await supabase.from('rooms').select('*').eq('id', roomId);
   if (error) throw error;
