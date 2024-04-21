@@ -1,5 +1,7 @@
 import { useQueryMyRooms } from '@/hooks/useQueryMyRooms';
 import { useRouter } from 'next/navigation';
+import { BsPlusSquareDotted } from 'react-icons/bs';
+import Link from 'next/link';
 import styles from './MyRooms.module.css';
 
 const MyRooms = () => {
@@ -17,6 +19,11 @@ const MyRooms = () => {
           {room.name[0]}
         </li>
       ))}
+      <li className={styles.new_room}>
+        <Link href="/start">
+          <BsPlusSquareDotted size="100%" />
+        </Link>
+      </li>
     </ul>
   );
 };
