@@ -17,7 +17,6 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  cursor: pointer;
 }
 
 .disabled {
@@ -25,6 +24,9 @@
   cursor: default;
 }
 
+.abled {
+  cursor: pointer;
+}
 .selected_date_circle {
   width: 35px;
   height: 35px;
