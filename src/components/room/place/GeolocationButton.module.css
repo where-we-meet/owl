@@ -1,11 +1,10 @@
 .wrapper {
   padding: 0.5rem;
-  position: absolute;
 
-  top: 5%;
-  left: calc(30% - -2rem);
+  width: 2.5rem;
+  height: 2.5rem;
 
-  border-radius: 25px;
+  border-radius: 50%;
 
   background-color: white;
 
