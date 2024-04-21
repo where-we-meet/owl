@@ -1,6 +1,26 @@
 .footer {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #fbf9f9;
+  padding: 1rem 1rem 0.8rem;
   width: 100%;
+}
+
+.footer * {
+  color: #222222;
+}
+
+.about_container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.github {
+  color: rebeccapurple;
+}
+.github * {
+  color: rebeccapurple;
 }
