@@ -9,20 +9,9 @@
   color: white;
 }
 
-.hero {
+.head {
   width: 100%;
-}
-
-.image_background {
-  background-image: url(../../public/images/main_landing_bg.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 50%;
-}
-
-.background_color {
-  background-color: rgb(0, 0, 0, 80%);
-  background-size: cover;
+  background-color: #222222;
 }
 
 .copy_container {
