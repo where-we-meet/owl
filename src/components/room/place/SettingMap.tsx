@@ -24,8 +24,10 @@ const SettingMap = () => {
   return (
     <>
       <div className={styles.map_container}>
-        <SearchBar />
-        <GeolocationButton />
+        <div className={styles.searchBar_container}>
+          <SearchBar />
+          <GeolocationButton />
+        </div>
         <div>
           {isGpsLoading && <Spinner className={styles.center_pin} color="primary" />}
           <div>
