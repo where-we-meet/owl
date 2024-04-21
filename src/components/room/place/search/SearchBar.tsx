@@ -2,8 +2,8 @@
 import { type ChangeEvent, useState, useCallback, useRef } from 'react';
 import debounce from 'lodash-es/debounce';
 import { useQuerySearchPlace } from '@/hooks/useQueryPlace';
-import { useSearchDataStore } from '@/store/placeStore';
 import SearchResultList from './SearchResultList';
+import { SearchIcon } from './SearchIcon';
 import styles from './SearchBar.module.css';
 
 const SearchBar = () => {
@@ -11,8 +11,6 @@ const SearchBar = () => {
   const [listViewState, setListViewState] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const address = useSearchDataStore((state) => state.address);
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(event.target.value);
@@ -31,12 +29,13 @@ const SearchBar = () => {
       <div className={styles.search_container}>
         <input
           id="searchBar"
-          className={searchKeyword ? styles.add_search_input : styles.search_input}
+          className={styles.search_input}
           placeholder="검색해서 찾아볼래요"
           onChange={handleSearchInput}
           onFocus={handleInputFocus}
           ref={inputRef}
         />
+        <SearchIcon />
       </div>
       {listViewState && (
         <SearchResultList placeList={placeList} setListViewState={setListViewState} inputRef={inputRef} />
