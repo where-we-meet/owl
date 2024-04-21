@@ -16,7 +16,7 @@ const MyRooms = () => {
     <ul className={styles.rooms}>
       {myRooms.map((room) => (
         <li key={room.id} className={styles.room} onClick={() => handleClickRoom(room.id)}>
-          {room.name[0]}
+          {room.name}
         </li>
       ))}
       <li className={styles.new_room}>
