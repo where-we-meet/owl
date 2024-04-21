@@ -28,13 +28,22 @@ const SettingMap = () => {
         <SearchBar />
         <div>
           {isGpsLoading && <Spinner className={styles.center_pin} color="primary" />}
-          <Image
-            src={'/pin.svg'}
-            className={`${styles.center_pin} ${isDrag && styles.center_pin_drag} ${isPinned && styles.center_pin_none}`}
-            width={30}
-            height={30}
-            alt="pin"
-          />
+          <div>
+            <Image
+              src={'/pin.svg'}
+              className={`${styles.center_pin} ${isDrag && styles.center_pin_drag} ${
+                isPinned && styles.center_pin_none
+              }`}
+              width={30}
+              height={30}
+              alt="pin"
+            />
+            <div
+              className={`${styles.center_pin_base} ${isDrag && styles.center_pin_base_drag} ${
+                isPinned && styles.center_pin_none
+              }`}
+            />
+          </div>
         </div>
         <Map
           center={location}
