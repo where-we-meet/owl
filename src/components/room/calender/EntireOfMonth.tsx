@@ -31,8 +31,7 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, 
               className={`${styles.days}  ${!checkInRange(day) ? styles.disabled : ''}`}
               onClick={() => handleDateClick(day)}
             >
-              {/*여기 적용 된  CSS는 무슨 CSS인가요?*/}
-              <span className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</span>
+              <p className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</p>
               <Schedules userSchedules={userSchedules} selectedDate={selectedDate} day={day} />
             </li>
           ))}

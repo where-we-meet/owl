@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.disabled span {
+.disabled p {
   color: #ccc !important;
   cursor: default;
 }
@@ -39,7 +39,6 @@
 .weekday {
   color: black;
 }
-
 .today {
   color: pink;
 }
