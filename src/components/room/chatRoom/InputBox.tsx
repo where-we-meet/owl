@@ -5,10 +5,13 @@ import styles from './InputBox.module.css';
 
 export const InputBox = () => {
   const supabase = createClient();
-  const handleSendMessage = (text: string) => {
+  const handleSendMessage = async (text: string) => {
     alert(text);
 
-    supabase.from('message').insert({});
+    const { data, error } = await supabase.from('message').insert({ text });
+
+    if (error) throw error;
+    return data;
   };
 
   return (
