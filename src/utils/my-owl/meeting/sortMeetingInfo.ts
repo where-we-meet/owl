@@ -1,4 +1,4 @@
-import { MeetingInfo } from '@/hooks/useGetSidebarData';
+import type { MeetingInfo } from '@/hooks/useQueryMyRooms';
 
 export const sortMeetingInfo = (meetingInfo: MeetingInfo[]): MeetingInfo[] => {
   return meetingInfo.sort((a, b) => {
