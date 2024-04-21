@@ -21,7 +21,7 @@ type Props = {
 
 const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, handleDateClick, checkInRange }) => {
   const entireOfMonth = calculateOfMonth(nowDate);
-
+  alert(entireOfMonth);
   return (
     <div className={styles.dates}>
       {entireOfMonth.map((week, index) => (

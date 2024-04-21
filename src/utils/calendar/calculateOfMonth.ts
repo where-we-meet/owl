@@ -5,11 +5,12 @@ export const calculateOfMonth = (nowDate: Date) => {
   const monthEnd = endOfMonth(monthStart);
   const startDay = startOfWeek(monthStart);
   const endDay = endOfWeek(monthEnd);
-  const entireOfMonth = [];
 
+  const entireOfMonth = [];
   let startWeek = startDay;
   let entireOfWeek = [];
 
+  //달력에 표시되는 시작일부터, 달력에 표시되는 끝 일까지
   while (startWeek <= endDay) {
     for (let i = 0; i < 7; i++) {
       entireOfWeek.push(startWeek);
