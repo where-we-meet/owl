@@ -8,6 +8,7 @@ import styles from './EntireOfMonth.module.css';
 import dayColors from '@/utils/calendar/dayColors';
 
 import type { Tables } from '@/types/supabase';
+import SchedulesOfMe from './SchedulesOfMe';
 
 export type UserSchedule = Tables<'room_schedule'>;
 
@@ -35,9 +36,7 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, 
             >
               <span className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</span>
               {/*내가 선택한 날짜를 나타내는 UI */}
-              {selectedDate.some((date) => isSameDay(date, day)) && (
-                <span className={styles.selected_date_circle}></span>
-              )}
+              <SchedulesOfMe selectedDate={selectedDate} day={day} />
               {/*다른 사람들이 선택한 날짜를 나타내는 UI */}
               <SchedulesOfUsers userSchedules={userSchedules} day={day} />
             </li>

@@ -1,0 +1,10 @@
+.selected_date_circle {
+  width: 35px;
+  height: 35px;
+  background-color: #016e9c5a;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
