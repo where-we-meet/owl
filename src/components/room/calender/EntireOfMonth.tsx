@@ -1,15 +1,11 @@
 import React from 'react';
-import { isSameDay } from 'date-fns';
+import type { Tables } from '@/types/supabase';
 
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
-import SchedulesOfUsers from './SchedulesOfUsers';
+import { Schedules } from './Schedules/Schedules';
 
-import styles from './EntireOfMonth.module.css';
 import dayColors from '@/utils/calendar/dayColors';
-
-import type { Tables } from '@/types/supabase';
-import SchedulesOfMe from './SchedulesOfMe';
-import { Schedules } from './Schedules';
+import styles from './EntireOfMonth.module.css';
 
 export type UserSchedule = Tables<'room_schedule'>;
 

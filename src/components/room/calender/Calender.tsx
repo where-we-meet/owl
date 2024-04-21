@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { format, subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
+import { subMonths, addMonths, isSameDay, isWithinInterval } from 'date-fns';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import ResetSchedule from './ResetSchedule';
+import ResetSchedule from './ResetSchedule/ResetSchedule';
 import EntireOfMonth from './EntireOfMonth';
 import styles from './Calender.module.css';
 
