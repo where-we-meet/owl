@@ -1,9 +1,9 @@
 .wrapper {
   padding: 0.5rem;
+  position: absolute;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 5%;
+  left: calc(30% - -2rem);
 
   border-radius: 25px;
 

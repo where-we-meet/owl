@@ -6,7 +6,6 @@ import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useSettingMap } from '@/hooks/useSettingMap';
 import { Spinner } from '@nextui-org/react';
 import GeolocationButton from './GeolocationButton';
-import LocationSwitch from './LocationSwitch';
 import SearchBar from './search/SearchBar';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
@@ -26,6 +25,7 @@ const SettingMap = () => {
     <>
       <div className={styles.map_container}>
         <SearchBar />
+        <GeolocationButton />
         <div>
           {isGpsLoading && <Spinner className={styles.center_pin} color="primary" />}
           <div>
@@ -60,10 +60,6 @@ const SettingMap = () => {
             ))}
           {isHalfwayValid && <Halfway location={halfwayPoint} />}
         </Map>
-        <div className={styles.button_wrapper}>
-          <LocationSwitch toggleState={isPinned} />
-          <GeolocationButton />
-        </div>
       </div>
     </>
   );
