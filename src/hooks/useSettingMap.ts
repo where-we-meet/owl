@@ -36,7 +36,7 @@ export const useSettingMap = () => {
     setLocation({ lat: latlng.getLat(), lng: latlng.getLng() });
   };
 
-  const handleChangeCenter = useCallback(debounce(setCenter, 1000), []);
+  const handleChangeCenter = useCallback(debounce(setCenter, 200), []);
 
   useEffect(() => {
     if (roomUser && roomUser.lat && roomUser.lng) setLocation({ lat: +roomUser.lat, lng: +roomUser.lng });
