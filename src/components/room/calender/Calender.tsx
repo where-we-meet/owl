@@ -11,6 +11,8 @@ import styles from './Calender.module.css';
 import { useSubscribeCalendar } from '@/hooks/useSubscribeCalendar';
 import { useMutateSchedule } from '@/hooks/useMutateSchedule';
 
+import { IoChevronBackSharp, IoChevronForwardSharp } from 'react-icons/io5';
+
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 const Calender = () => {
@@ -67,11 +69,15 @@ const Calender = () => {
       <div className={styles.calendar_container}>
         <div className={styles.calendar_header}>
           <div>
-            <button onClick={prevMonth}>◀</button>
+            <button onClick={prevMonth}>
+              <IoChevronBackSharp />
+            </button>
             <span>
               {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
             </span>
-            <button onClick={afterMonth}>▶</button>
+            <button onClick={afterMonth}>
+              <IoChevronForwardSharp />
+            </button>
           </div>
           <ResetSchedule />
         </div>
