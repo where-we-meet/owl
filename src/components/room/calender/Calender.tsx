@@ -12,8 +12,9 @@ import { useSubscribeCalendar } from '@/hooks/useSubscribeCalendar';
 import { useMutateSchedule } from '@/hooks/useMutateSchedule';
 
 import { IoChevronBackSharp, IoChevronForwardSharp } from 'react-icons/io5';
+import { Button } from '@nextui-org/react';
 
-const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 const Calender = () => {
   const { id: userId }: { id: string } = useQueryUser();
@@ -68,31 +69,25 @@ const Calender = () => {
     <>
       <div className={styles.calendar_container}>
         <div className={styles.calendar_header}>
-          <div>
-            <button onClick={prevMonth}>
+          <span className={styles.calendar_month_container}>
+            <Button isIconOnly onPress={prevMonth} className={styles.calendar_month_controller}>
               <IoChevronBackSharp />
-            </button>
-            <span>
-              {format(nowDate, 'yyyy')}년 {format(nowDate, 'M')}월
-            </span>
-            <button onClick={afterMonth}>
+            </Button>
+            <div className={styles.calendar_month}>{`${nowDate.getFullYear()}-${nowDate.getMonth() + 1}`}</div>
+            <Button isIconOnly onPress={afterMonth} className={styles.calendar_month_controller}>
               <IoChevronForwardSharp />
-            </button>
-          </div>
+            </Button>
+          </span>
           <ResetSchedule />
         </div>
-
-        <div className={styles.scehdule_container}>
+        <div className={styles.calendar_body}>
           <ul className={styles.weekday_container}>
-            {WEEKDAYS.map((weekday) => {
-              return (
-                <li key={weekday} className={styles.weekday}>
-                  {weekday}
-                </li>
-              );
-            })}
+            {WEEKDAYS.map((weekday, idx) => (
+              <li key={idx} className={styles.weekday}>
+                {weekday}
+              </li>
+            ))}
           </ul>
-
           <div className={styles.dates}>
             <EntireOfMonth
               nowDate={nowDate}
