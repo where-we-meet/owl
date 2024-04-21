@@ -16,8 +16,10 @@ export type IMessage = {
 
 type Message = {
   messages: IMessage[];
+  addMessage: (message: IMessage) => void;
 };
 
 export const useMessage = create<Message>()((set) => ({
-  messages: []
+  messages: [],
+  addMessage: (message) => set((state) => ({ messages: [...state.messages, message] }))
 }));
