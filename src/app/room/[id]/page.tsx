@@ -2,7 +2,6 @@
 
 import SettingMap from '@/components/room/place/SettingMap';
 import Sidebar from '@/components/room/sidebar/Sidebar';
-import RoomHeader from '@/components/room/header/RoomHeader';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
@@ -28,13 +27,10 @@ const SettingPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.sidebar_wrapper}>
-        <RoomHeader />
-        <Sidebar />
-      </div>
-      <div className={styles.map_wrapper}>
+      <Sidebar />
+      <section className={styles.map}>
         <SettingMap />
-      </div>
+      </section>
     </div>
   );
 };

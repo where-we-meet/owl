@@ -1,14 +1,11 @@
 .wrapper {
   display: flex;
   width: 100vw;
-  height: calc(100vh - 60px - 44px);
+  height: 100vh;
 }
 
-.sidebar_wrapper {
-  width: 20%;
-  overflow: scroll;
-}
-
-.map_wrapper {
-  width: 80%;
+.map {
+  position: relative;
+  width: calc(100% - 400px);
+  left: -6px;
 }
