@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from './ChatRoom.module.css';
 import defaultImage from '../../../../public/images/about_owl_image.jpg';
+import { InputBox } from './InputBox';
 
 export const ChatRoom = () => {
   return (
@@ -8,10 +9,10 @@ export const ChatRoom = () => {
       <section className={styles.container}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
           return (
-            <div className={styles.chatbox_body} key={item.index}>
+            <div className={styles.chatbox_body} key={item}>
               <figure className={styles.profiles}>
                 <div>
-                  <Image src={defaultImage} alt="profileimage" width={30} height={30} />
+                  <Image src={defaultImage} alt="profile_image" width={30} height={30} />
                 </div>
                 <div className={styles.content}>
                   <div className={styles.user_info}>
@@ -26,7 +27,7 @@ export const ChatRoom = () => {
         })}
       </section>
       <div>
-        <textarea placeholder="send message" autoFocus={true} className={styles.input_box} />
+        <InputBox />
       </div>
     </main>
   );
