@@ -1,3 +1,8 @@
+.wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .label {
   padding-left: 0.5rem;
   font-size: small;
