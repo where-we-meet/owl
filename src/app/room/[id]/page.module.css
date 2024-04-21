@@ -6,6 +6,6 @@
 
 .map {
   position: relative;
-  width: calc(100% - 400px);
-  left: -6px;
+  width: 100%;
+  padding-left: 394px;
 }
