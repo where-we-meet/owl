@@ -26,12 +26,10 @@ const EntireOfMonth: React.FC<Props> = ({ nowDate, selectedDate, userSchedules, 
         //  주 단위로 UI를 그린다.
         <ul key={index} className={styles.day_container}>
           {week.map((day) => (
-            <li
-              key={day.toISOString()}
-              className={`${styles.days}  ${!checkInRange(day) ? styles.disabled : ''}`}
-              onClick={() => handleDateClick(day)}
-            >
-              <p className={`${styles[dayColors(nowDate, day)]}`}>{day.getDate()}</p>
+            <li key={day.toISOString()} className={`${styles.days}  `} onClick={() => handleDateClick(day)}>
+              <p className={`${styles[dayColors(nowDate, day)]} ${!checkInRange(day) ? styles.disabled : ''}`}>
+                {day.getDate()}
+              </p>
               <Schedules userSchedules={userSchedules} selectedDate={selectedDate} day={day} />
             </li>
           ))}

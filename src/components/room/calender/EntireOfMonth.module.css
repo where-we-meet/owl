@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.disabled p {
+.disabled {
   color: #ccc !important;
   cursor: default;
 }
