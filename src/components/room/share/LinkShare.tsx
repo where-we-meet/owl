@@ -47,7 +47,7 @@ const LinkShare = () => {
         </ModalContent>
       </Modal>
       <Button isIconOnly onPress={onOpen} variant="light" size="lg">
-        <FaShareAlt />
+        공유하기 <FaShareAlt />
       </Button>
     </>
   );
