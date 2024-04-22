@@ -6,15 +6,21 @@ import type { UserSchedule } from '../../EntireOfMonth';
 type Props = {
   userSchedules: UserSchedule[];
   day: Date;
+  participantNumber: number;
 };
 
-const SchedulesOfUsers: React.FC<Props> = ({ userSchedules, day }) => {
+const SchedulesOfUsers: React.FC<Props> = ({ userSchedules, day, participantNumber }) => {
+  const opacity = 100 / participantNumber;
   return (
     <>
       {userSchedules.map((schedule, index) => {
         return (
           isSameDay(new Date(String(schedule.start_date)), day) && (
-            <span key={index} className={styles.selected_date_circle_of_users}></span>
+            <span
+              key={index}
+              className={styles.selected_date_circle_of_users}
+              style={{ backgroundColor: `rgba(53, 1, 118, ${opacity / 100})` }}
+            ></span>
           )
         );
       })}
