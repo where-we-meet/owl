@@ -11,9 +11,9 @@ type Props = {
 
 export const Schedules: React.FC<Props> = ({ userSchedules, selectedDate, day, participantNumber }) => {
   return (
-    <>
+    <span style={{ zIndex: '0' }}>
       <SchedulesOfMe selectedDate={selectedDate} day={day} />
       <SchedulesOfUsers userSchedules={userSchedules} day={day} participantNumber={participantNumber} />
-    </>
+    </span>
   );
 };

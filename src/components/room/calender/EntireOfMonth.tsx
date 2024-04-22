@@ -37,6 +37,7 @@ const EntireOfMonth: React.FC<Props> = ({
           {week.map((day) => (
             <li key={day.toISOString()} className={`${styles.days}`} onClick={() => handleDateClick(day)}>
               <span
+                style={{ zIndex: 9999 }}
                 className={`${styles[dayColors(nowDate, day)]} ${checkInRange(day) ? styles.abled : styles.disabled} ${
                   checkIsSelectedDate({ selectedDate, day }) ? styles.selected : ''
                 }`}
