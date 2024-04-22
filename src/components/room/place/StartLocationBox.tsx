@@ -2,8 +2,24 @@ import { useSearchDataStore } from '@/store/placeStore';
 import { useRoomUserDataStore } from '@/store/roomUserStore';
 import LocationSwitch from './LocationSwitch';
 import styles from './StartLocationBox.module.css';
+import { useEffect, useRef, useState } from 'react';
 
 const StartLocationBox = () => {
+  const [isDialogVisible, setIsDialogVisible] = useState(true);
+
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dialogRef.current && !dialogRef.current.contains(event.target as Node)) {
+        setIsDialogVisible(false);
+      }
+    };
+    if (isDialogVisible) {
+      document.addEventListener('click', handleClickOutside);
+    }
+  }, [isDialogVisible]);
+
   const roomUser = useRoomUserDataStore((state) => state.roomUser);
   const address = useSearchDataStore((state) => state.address);
 
@@ -11,10 +27,11 @@ const StartLocationBox = () => {
 
   return (
     <div className={styles.start_location_container}>
-      <div className={styles.label}>
-        {' '}
-        {isPinned ? '출발 위치가 확정되었습니다.' : '핀을 클릭하여 출발 위치를 확정해주세요.'}
-      </div>
+      {isDialogVisible && (
+        <div ref={dialogRef} className={styles.label}>
+          핀을 눌러 출발 위치를 확정해주세요.
+        </div>
+      )}
       <div className={styles.wrapper}>
         <div className={`${styles.box} ${isPinned && styles.selected}  `}>
           {isPinned ? roomUser.start_location : address}
