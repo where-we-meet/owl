@@ -1,10 +1,8 @@
 'use client';
-import LinkShare from '../share/LinkShare';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomData } from '@/api/supabaseCSR/supabase';
 import ConfirmedButton from '../ConfirmedButton';
-import { FaCrown } from 'react-icons/fa';
 import styles from './RoomHeader.module.css';
 
 const RoomHeader = () => {
@@ -14,11 +12,7 @@ const RoomHeader = () => {
     <div className={styles.room_header}>
       <div>
         <div className={styles.title_container}>
-          <p>
-            <FaCrown /> 방장 이름
-          </p>
           <h1 className={styles.room_title}>{room ? room.name : '올빼미를 불러오는 중'}</h1>
-          {/* {room && <LinkShare />} */}
         </div>
         <div>
           <ConfirmedButton />
