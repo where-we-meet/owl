@@ -14,30 +14,29 @@ export const InputBox = () => {
   const { data: userData } = useQueryUsersData(user.id);
 
   const handleSendMessage = async (text: string) => {
-    if (text.trim() && userData) {
-      const newMessage = {
-        id: crypto.randomUUID(),
-        text,
-        send_by: user.id,
-        is_edit: false,
-        created_at: new Date().toISOString(),
-        users: {
-          id: userData[0].id,
-          profile_url: userData[0].profile_url,
-          name: userData[0].name,
-          created_at: userData[0].created_at
-        }
-      };
-
-      addMessage(newMessage);
-
-      const { data, error } = await supabase.from('message').insert({ text });
-
-      if (error) throw error;
-      return data;
-    } else {
-      console.error('빈칸 금지관련 에러를 출력합시다');
+    if (!text.trim() && !userData) {
+      return;
     }
+    const newMessage = {
+      id: crypto.randomUUID(),
+      text,
+      send_by: user.id,
+      is_edit: false,
+      created_at: new Date().toISOString(),
+      users: {
+        id: userData[0].id,
+        profile_url: userData[0].profile_url,
+        name: userData[0].name,
+        created_at: userData[0].created_at
+      }
+    };
+
+    addMessage(newMessage);
+
+    const { data, error } = await supabase.from('message').insert({ text });
+
+    if (error) throw error;
+    return data;
   };
 
   return (

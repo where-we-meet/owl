@@ -1,5 +1,4 @@
 import { IMessage } from '@/store/messageStore';
-import Image from 'next/image';
 import styles from './Message.module.css';
 
 export const Message = ({ message }: { message: IMessage }) => {
