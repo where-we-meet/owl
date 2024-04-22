@@ -6,7 +6,7 @@ import { FaGithub } from 'react-icons/fa6';
 import owl_image from '../../../public/images/about_owl_image.jpg';
 import Header from '@/components/header/Header';
 import Footer from '@/components/Footer';
-import { ChatRoom } from '@/components/room/chatRoom/ChatRoom';
+
 export default function AboutPage() {
   return (
     <>
@@ -89,7 +89,6 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-        <ChatRoom />
         <PayPalDonate />
       </main>
       <Footer />
