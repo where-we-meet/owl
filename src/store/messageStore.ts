@@ -20,7 +20,7 @@ type Message = {
   addMessage: (message: IMessage) => void;
 };
 
-export const useMessage = create<Message>()((set) => ({
+export const useMessageStore = create<Message>()((set) => ({
   messages: [],
   addMessage: (message) => set((state) => ({ messages: [...state.messages, message] }))
 }));
