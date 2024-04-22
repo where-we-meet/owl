@@ -13,6 +13,7 @@ import {
   useDisclosure
 } from '@nextui-org/react';
 import { FaShareAlt } from 'react-icons/fa';
+import styles from './LinkShare.module.css';
 
 const LinkShare = () => {
   const { id: roomId } = useParams();
@@ -46,9 +47,11 @@ const LinkShare = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Button isIconOnly onPress={onOpen} variant="light" size="lg">
-        공유하기 <FaShareAlt />
-      </Button>
+      <div className={styles.button_container}>
+        <Button className={styles.button} isIconOnly onPress={onOpen} variant="light" size="lg">
+          <p className={styles.share}>공유하기</p> <FaShareAlt />
+        </Button>
+      </div>
     </>
   );
 };
