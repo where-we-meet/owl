@@ -36,7 +36,7 @@ const UserCard = ({ user }: { user: User }) => {
         <div className={styles.userdata_container}>
           <p className={styles.username}>{userInfo.name}</p>
           <p className={styles.user_address}>
-            {userInfo.startLocation ? userInfo.startLocation : '출발 위치를 설정해주세요.'}
+            {userInfo.startLocation ? userInfo.startLocation : '확정된 출발 위치를 보여줍니다.'}
           </p>
         </div>
       </div>
