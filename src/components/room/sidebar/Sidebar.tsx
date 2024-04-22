@@ -1,4 +1,4 @@
-import { Image, Link } from '@nextui-org/react';
+import { Image, Link, ScrollShadow } from '@nextui-org/react';
 import Calender from '../calender/Calender';
 import StartLocationBox from '../place/StartLocationBox';
 import RoomHeader from '../header/RoomHeader';
@@ -20,6 +20,7 @@ const Sidebar = () => {
           <UserProfile />
         </div>
       </nav>
+
       <div className={styles.room}>
         <Link className={styles.brand} color="foreground" href="/">
           OWL-LiNK

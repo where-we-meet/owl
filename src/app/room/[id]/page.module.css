@@ -35,6 +35,17 @@
   transition: padding ease 0.4s;
 }
 
+.scroll_bar {
+  width: 0.2rem;
+  height: 3rem;
+  background-color: #8a2be2;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  justify-self: right;
+}
+
 @media screen and (max-width: 800px) {
   .opened > .map {
     padding-left: 0;
