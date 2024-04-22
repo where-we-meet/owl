@@ -27,7 +27,7 @@ const Sidebar = () => {
         </Link>
         <RoomHeader />
         <Calender />
-        <StartLocationBox />
+        {/* / <StartLocationBox /> */}
         <LinkShare />
         <UserList />
       </div>

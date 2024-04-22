@@ -9,8 +9,9 @@ import GeolocationButton from './GeolocationButton';
 import SearchBar from './search/SearchBar';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
-import styles from './SettingMap.module.css';
 import { useEffect, useRef } from 'react';
+import StartLocationBox from './StartLocationBox';
+import styles from './SettingMap.module.css';
 
 const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
   const [loading, error] = useKakaoMap();
@@ -30,7 +31,7 @@ const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
   return (
     <>
       <div className={styles.map_container}>
-        <div className={styles.searchBar_container}>
+        <div className={styles.searchbar_container}>
           <SearchBar />
           <GeolocationButton />
         </div>
@@ -53,6 +54,7 @@ const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
             />
           </div>
         </div>
+        <StartLocationBox />
         <Map
           center={location}
           className={styles.map}
