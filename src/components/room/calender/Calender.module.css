@@ -16,7 +16,7 @@
 
 .calendar_month_container {
   display: flex;
-  align-items: center;
+  align-items: last baseline;
   gap: 1rem;
   min-width: 3rem;
 }
