@@ -11,7 +11,10 @@ const StartLocationBox = () => {
 
   return (
     <div>
-      <div className={styles.label}>출발 위치</div>
+      <div className={styles.label}>
+        {' '}
+        {isPinned ? '출발 위치가 확정되었습니다.' : '핀을 클릭하여 출발 위치를 확정해주세요.'}
+      </div>
       <div className={styles.wrapper}>
         <div className={`${styles.box} ${isPinned && styles.selected}  `}>{address}</div>
         <LocationSwitch toggleState={isPinned} />
