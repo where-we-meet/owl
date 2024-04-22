@@ -64,7 +64,10 @@ const Calender = () => {
 
     insertSchedule.mutate({ roomId, userId, date });
   };
-
+  const getMonth = () => {
+    const month = nowDate.getMonth() + 1 + '';
+    return month.length < 2 ? '0' + month : month;
+  };
   return (
     <>
       <div className={styles.calendar_container}>
@@ -73,7 +76,7 @@ const Calender = () => {
             <Button isIconOnly onPress={prevMonth} className={styles.calendar_month_controller}>
               <IoChevronBackSharp />
             </Button>
-            <span className={styles.calendar_month}>{`${nowDate.getFullYear()}-${nowDate.getMonth() + 1}`}</span>
+            <span className={styles.calendar_month}>{`${nowDate.getFullYear()}-${getMonth()}`}</span>
             <Button isIconOnly onPress={afterMonth} className={styles.calendar_month_controller}>
               <IoChevronForwardSharp />
             </Button>
