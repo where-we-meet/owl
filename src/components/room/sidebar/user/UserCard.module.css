@@ -1,19 +1,16 @@
-.usercard_container {
-  display: flex;
-  padding: 0.1rem;
-  border: 1px solid transparent;
-  border-radius: 1rem;
-  background-image: linear-gradient(#fff, #fff), linear-gradient(151deg, #ffb6f7 0%, #ac87ff 90%);
-  border-image-slice: 1;
-  background-clip: content-box, border-box;
-  background-origin: border-box;
-}
-
-.mycard_container {
+.usercard {
   display: flex;
   padding: 0.1rem;
   border: 1px solid;
   border-radius: 1rem;
+  cursor: pointer;
+}
+
+.currentuser {
+  background-image: linear-gradient(#fff, #fff), linear-gradient(151deg, #ffb6f7 0%, #ac87ff 90%);
+  border-image-slice: 1;
+  background-clip: content-box, border-box;
+  background-origin: border-box;
 }
 
 .avatar_container {
