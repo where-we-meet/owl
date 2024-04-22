@@ -10,11 +10,17 @@ import SearchBar from './search/SearchBar';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
 import styles from './SettingMap.module.css';
+import { useEffect, useRef } from 'react';
 
-const SettingMap = () => {
+const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
   const [loading, error] = useKakaoMap();
   const { location, halfwayPoint, roomUsers, isPinned, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } =
     useSettingMap();
+  const mapRef = useRef<kakao.maps.Map | null>(null);
+
+  useEffect(() => {
+    mapRef.current?.relayout();
+  }, [isOpened]);
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
@@ -54,6 +60,7 @@ const SettingMap = () => {
           onDragStart={() => setIsDrag(true)}
           onDragEnd={() => setIsDrag(false)}
           minLevel={11}
+          ref={mapRef}
         >
           {roomUsers
             .filter(({ lat, lng }) => lat !== null && lng !== null)
