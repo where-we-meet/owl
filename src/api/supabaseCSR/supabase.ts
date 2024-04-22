@@ -54,12 +54,6 @@ export const getRoomData = async (roomId: string) => {
   return data[0];
 };
 
-export const getRoomParticipantNumber = async (roomId: string) => {
-  const { data, error } = await supabase.from('userdata_room').select('user_id').eq('room_id', roomId);
-  if (error) throw error;
-  return data.length;
-};
-
 export const getRoomUsersData = async (id: string) => {
   const { data, error } = await supabase
     .from('userdata_room')
