@@ -6,6 +6,7 @@ import { Schedules } from './Schedules/Schedules';
 
 import dayColors from '@/utils/calendar/dayColors';
 import styles from './EntireOfMonth.module.css';
+import { checkIsSelectedDate } from '@/utils/calendar/checkIsSelectedDate';
 
 export type UserSchedule = Tables<'room_schedule'>;
 
@@ -34,9 +35,11 @@ const EntireOfMonth: React.FC<Props> = ({
         //  주 단위로 UI를 그린다.
         <ul key={index} className={styles.day_container}>
           {week.map((day) => (
-            <li key={day.toISOString()} className={`${styles.days}  `} onClick={() => handleDateClick(day)}>
+            <li key={day.toISOString()} className={`${styles.days}`} onClick={() => handleDateClick(day)}>
               <span
-                className={`${styles[dayColors(nowDate, day)]} ${checkInRange(day) ? styles.abled : styles.disabled}`}
+                className={`${styles[dayColors(nowDate, day)]} ${checkInRange(day) ? styles.abled : styles.disabled} ${
+                  checkIsSelectedDate({ selectedDate, day }) ? styles.selected : ''
+                }`}
               >
                 {day.getDate()}
               </span>
