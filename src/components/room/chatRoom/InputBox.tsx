@@ -6,7 +6,7 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { useMessage } from '@/store/messageStore';
 import { useQueryUsersData } from '@/hooks/useQueryUsersData';
 
-export const InputBox = () => {
+export const InputBox = ({ roomId }: { roomId: string }) => {
   const supabase = createClient();
   const user = useQueryUser();
   const addMessage = useMessage((state) => state.addMessage);
@@ -23,6 +23,7 @@ export const InputBox = () => {
       send_by: user.id,
       is_edit: false,
       created_at: new Date().toISOString(),
+      room_id: roomId,
       users: {
         id: userData[0].id,
         profile_url: userData[0].profile_url,
@@ -30,10 +31,9 @@ export const InputBox = () => {
         created_at: userData[0].created_at
       }
     };
-
     addMessage(newMessage);
 
-    const { data, error } = await supabase.from('message').insert({ text });
+    const { data, error } = await supabase.from('message').insert({ text, room_id: roomId });
 
     if (error) throw error;
     return data;

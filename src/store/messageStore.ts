@@ -6,6 +6,7 @@ export type IMessage = {
   is_edit: boolean | null;
   send_by: string;
   text: string | null;
+  room_id: string | null;
   users: {
     created_at: string;
     id: string;
