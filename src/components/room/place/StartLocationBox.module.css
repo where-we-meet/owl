@@ -12,25 +12,11 @@
 
 .wrapper {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
 
   margin-bottom: 1rem;
-}
-
-.label {
-  padding: 1rem;
-
-  width: 100%;
-
-  margin-bottom: 1rem;
-
-  font-size: large;
-  font-weight: bold;
-
-  background-color: #b197fc;
-  border-radius: 50px;
-
-  text-align: center;
 }
 
 .box {
