@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
-import styles from './page.module.css';
 import ToggleSidebar from '@/components/room/sidebar/ToggleSidebar';
+import styles from './page.module.css';
 
 const SettingPage = () => {
   const router = useRouter();
