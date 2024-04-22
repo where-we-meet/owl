@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
 import ToggleSidebar from '@/components/room/sidebar/ToggleSidebar';
 import styles from './page.module.css';
+import { ChatRoom } from '@/components/room/chatRoom/ChatRoom';
 
 const SettingPage = () => {
   const router = useRouter();
@@ -42,6 +43,7 @@ const SettingPage = () => {
       <section className={styles.map}>
         <SettingMap isOpened={isOpened} />
       </section>
+      <ChatRoom roomId={roomId} />
     </div>
   );
 };
