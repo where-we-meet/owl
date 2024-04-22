@@ -43,7 +43,7 @@ export const getMessageData = async (userId: string) => {
 };
 
 export const getUsersData = async (userId: string) => {
-  const { data, error } = await supabase.from('users').select('*');
+  const { data, error } = await supabase.from('users').select('*').eq('id', userId);
   if (error) throw error;
   return data;
 };
