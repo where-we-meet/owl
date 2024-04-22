@@ -89,11 +89,11 @@ const UserProfileUpdate = ({
       window.addEventListener('beforeunload', handleUnload);
     } else {
       window.removeEventListener('popstate', handleClose);
-      window.addEventListener('beforeunload', handleUnload);
+      window.removeEventListener('beforeunload', handleUnload);
     }
     return () => {
       window.removeEventListener('popstate', handleClose);
-      window.addEventListener('beforeunload', handleUnload);
+      window.removeEventListener('beforeunload', handleUnload);
     };
   }, [isOpen]);
 
