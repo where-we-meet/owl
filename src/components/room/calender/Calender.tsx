@@ -13,27 +13,22 @@ import { useMutateSchedule } from '@/hooks/useMutateSchedule';
 
 import { IoChevronBackSharp, IoChevronForwardSharp } from 'react-icons/io5';
 import { Button } from '@nextui-org/react';
-import { getRoomParticipantNumber } from '@/api/supabaseCSR/supabase';
+import { useQueryRoomUsers } from '@/hooks/useQueryRoomUsers';
 
 const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 const Calender = () => {
   const { id: userId }: { id: string } = useQueryUser();
   const { id: roomId }: { id: string } = useParams();
-  const [participantNumber, setParticipantNumber] = useState(1);
+
+  const { roomUsers, isPending } = useQueryRoomUsers(roomId, userId);
+  const participantNumber = roomUsers.length;
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
   const { userSchedules, mySchedules, scheduleRange } = useSubscribeCalendar(roomId, userId);
   const { insertSchedule, deleteSchedule } = useMutateSchedule(roomId);
   const selectedDates = mySchedules.map((schedule) => new Date(schedule.start_date as string));
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const number = await getRoomParticipantNumber(roomId);
-      setParticipantNumber(number);
-    };
-    fetchData();
-  }, []);
   useEffect(() => {
     if (scheduleRange?.start_date) {
       setNowDate(new Date(scheduleRange.start_date));
