@@ -10,7 +10,7 @@ import { upsertRoomUser } from '@/api/room';
 const UserList = () => {
   const { id: userId } = useQueryUser();
   const { id: roomId }: { id: string } = useParams();
-  const { roomUsers } = useGetRoomUsers(roomId, userId);
+  const { roomUsers, isPending } = useGetRoomUsers(roomId, userId);
 
   const joinNewUser = async () => {
     await upsertRoomUser({
@@ -24,11 +24,14 @@ const UserList = () => {
   };
 
   useEffect(() => {
-    const isExistUser = roomUsers.some((user) => user.user_id === userId);
-    if (!isExistUser) {
-      joinNewUser();
+    console.log(isPending);
+    if (!isPending) {
+      const isExistUser = roomUsers.some((user) => user.user_id === userId);
+      if (!isExistUser) {
+        joinNewUser();
+      }
     }
-  }, [roomUsers.length]);
+  }, [isPending]);
 
   return (
     <>

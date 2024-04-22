@@ -8,7 +8,7 @@ import { useRoomUserDataStore } from '@/store/roomUserStore';
 export const useGetRoomUsers = (roomId: string, userId: string) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
-  const { roomUsers } = useQueryRoomUsers(roomId, userId);
+  const { roomUsers, isPending } = useQueryRoomUsers(roomId, userId);
 
   const setRoomUser = useRoomUserDataStore((state) => state.setRoomUser);
 
@@ -62,5 +62,5 @@ export const useGetRoomUsers = (roomId: string, userId: string) => {
     if (userInfo) setRoomUser(userInfo);
   }, [roomUsers]);
 
-  return { roomUsers };
+  return { roomUsers, isPending };
 };
