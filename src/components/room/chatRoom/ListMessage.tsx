@@ -4,12 +4,18 @@ import { IMessage, useMessageStore } from '@/store/messageStore';
 import { Message } from './Message';
 import { useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getMessageData } from '@/api/supabaseCSR/supabase';
 
 export const ListMessage = ({ roomId }: { roomId: string }) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
-  const { messages, addMessage } = useMessageStore((state) => state);
+  // const { messages } = useMessageStore((state) => state);
+
+  const { data: messages = [], isPending } = useQuery({
+    queryKey: ['message', roomId],
+    queryFn: () => getMessageData(roomId)
+  });
 
   useEffect(() => {
     const channel = supabase
@@ -19,7 +25,7 @@ export const ListMessage = ({ roomId }: { roomId: string }) => {
         { event: 'INSERT', schema: 'public', table: 'message', filter: `room_id=eq.${roomId}` },
         (payload) => {
           const newMessage = payload.new as IMessage;
-          addMessage(newMessage);
+          queryClient.invalidateQueries({ queryKey: ['message', roomId] });
         }
       )
       .subscribe();
@@ -28,6 +34,10 @@ export const ListMessage = ({ roomId }: { roomId: string }) => {
       channel.unsubscribe();
     };
   }, [supabase]);
+
+  if (isPending) {
+    return <>Loading</>;
+  }
 
   return (
     <section className={styles.container}>
