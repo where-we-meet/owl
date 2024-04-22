@@ -1,5 +1,5 @@
 'use client';
-import { IMessage, useMessage } from '@/store/messageStore';
+import { IMessage, useMessageStore } from '@/store/messageStore';
 import { useEffect, useRef } from 'react';
 
 export const InitMessages = ({ messages }: { messages: IMessage[] }) => {
@@ -7,7 +7,7 @@ export const InitMessages = ({ messages }: { messages: IMessage[] }) => {
 
   useEffect(() => {
     if (!initState.current) {
-      useMessage.setState({ messages });
+      useMessageStore.setState({ messages });
     }
     initState.current = true;
   }, []);

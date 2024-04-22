@@ -3,13 +3,13 @@
 import { createClient } from '@/utils/supabase/client';
 import styles from './InputBox.module.css';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { useMessage } from '@/store/messageStore';
+import { useMessageStore } from '@/store/messageStore';
 import { useQueryUsersData } from '@/hooks/useQueryUsersData';
 
 export const InputBox = ({ roomId }: { roomId: string }) => {
   const supabase = createClient();
   const user = useQueryUser();
-  const addMessage = useMessage((state) => state.addMessage);
+  const addMessage = useMessageStore((state) => state.addMessage);
 
   const { data: userData } = useQueryUsersData(user.id);
 
