@@ -10,11 +10,13 @@ export const InputBox = () => {
   const supabase = createClient();
   const user = useQueryUser();
   const addMessage = useMessage((state) => state.addMessage);
-  const { userData } = useQueryUsersData(user.id);
+
+  const { data: userData } = useQueryUsersData(user.id);
 
   console.log('받아오는ㄷ ㅔ이터', userData);
+
   const handleSendMessage = async (text: string) => {
-    if (text.trim()) {
+    if (text.trim() && userData) {
       const newMessage = {
         id: crypto.randomUUID(),
         text,
