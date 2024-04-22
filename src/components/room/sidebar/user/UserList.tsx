@@ -24,7 +24,6 @@ const UserList = () => {
   };
 
   useEffect(() => {
-    console.log(isPending);
     if (!isPending) {
       const isExistUser = roomUsers.some((user) => user.user_id === userId);
       if (!isExistUser) {
