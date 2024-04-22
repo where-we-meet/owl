@@ -5,7 +5,6 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { useUpdateStartLocation } from '@/hooks/useMutateUserData';
 import { useSearchDataStore } from '@/store/placeStore';
 import { objectValidate } from '@/utils/objectValidate';
-import { TbPinFilled } from 'react-icons/tb';
 import styles from './LocationSwitch.module.css';
 
 const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
@@ -51,8 +50,8 @@ const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
   };
 
   return (
-    <div className={`${styles.wrapper} ${toggleState && styles.selected}`} onClick={handleSubmitLocation}>
-      <TbPinFilled size={25} color="white" />
+    <div className={`${styles.label} ${toggleState && styles.selected}`} onClick={handleSubmitLocation}>
+      {toggleState ? '출발 위치를 수정하시겠어요?' : '출발 위치를 확정해주세요.'}
     </div>
   );
 };
