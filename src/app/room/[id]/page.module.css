@@ -4,8 +4,39 @@
   height: 100vh;
 }
 
+.aside {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  transform: translateX(-400px);
+  transition: transform ease 0.4s;
+  width: 400px;
+  z-index: 999;
+}
+
 .map {
   position: relative;
   width: 100%;
+}
+
+.opened .aside {
+  transform: translateX(0px);
+  transition: transform ease 0.4s;
+  box-shadow: 4px 0px 5px -3px gray;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.opened > .map {
   padding-left: 394px;
+  transition: padding ease 0.4s;
+}
+
+@media screen and (max-width: 800px) {
+  .opened > .map {
+    padding-left: 0;
+  }
 }
