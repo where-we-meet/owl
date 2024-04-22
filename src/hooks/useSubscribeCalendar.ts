@@ -17,22 +17,9 @@ export const useSubscribeCalendar = (roomId: string, userId: string) => {
       .channel('schedule')
       .on(
         'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${roomId}` },
-        (payload) => {
-          const updatedSchedule = payload.new as UserSchedule;
-          queryClient.setQueryData(['room-user-schedules', roomId], (prevData: UserSchedule[]) => {
-            return [...prevData, updatedSchedule];
-          });
-        }
-      )
-      .on(
-        'postgres_changes',
-        { event: 'DELETE', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${roomId}` },
-        async (payload) => {
-          const deletedScheduleId = payload.old.id;
-          queryClient.setQueryData(['room-user-schedules', roomId], (prevData: UserSchedule[]) => {
-            return prevData.filter((schedule) => schedule.id !== deletedScheduleId);
-          });
+        { event: '*', schema: 'public', table: 'room_schedule', filter: `room_id=eq.${roomId}` },
+        (_payload) => {
+          queryClient.invalidateQueries({ queryKey: ['room-user-schedules', roomId] });
         }
       )
       .subscribe();
