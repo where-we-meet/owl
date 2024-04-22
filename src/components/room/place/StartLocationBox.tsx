@@ -10,7 +10,7 @@ const StartLocationBox = () => {
   const isPinned = !!roomUser?.start_location;
 
   return (
-    <div>
+    <div className={styles.start_location_container}>
       <div className={styles.label}>
         {' '}
         {isPinned ? '출발 위치가 확정되었습니다.' : '핀을 클릭하여 출발 위치를 확정해주세요.'}

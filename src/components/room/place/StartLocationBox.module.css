@@ -1,3 +1,15 @@
+.start_location_container {
+  position: absolute;
+
+  width: 32%;
+  min-width: 250px;
+
+  bottom: 15%;
+  left: calc(40% - 5rem);
+
+  z-index: 13;
+}
+
 .wrapper {
   display: flex;
   gap: 0.5rem;
@@ -6,12 +18,19 @@
 }
 
 .label {
-  padding-left: 0.5rem;
+  padding: 1rem;
 
-  margin-top: 1rem;
+  width: 100%;
 
-  font-size: small;
+  margin-bottom: 1rem;
+
+  font-size: large;
   font-weight: bold;
+
+  background-color: #b197fc;
+  border-radius: 50px;
+
+  text-align: center;
 }
 
 .box {
@@ -27,6 +46,7 @@
 
   text-align: center;
   text-overflow: ellipsis;
+  background: white;
 }
 
 .selected {
