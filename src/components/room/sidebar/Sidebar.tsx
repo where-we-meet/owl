@@ -5,8 +5,8 @@ import RoomHeader from '../header/RoomHeader';
 import UserList from './user/UserList';
 import MyRooms from './MyRooms';
 import UserProfile from '@/components/header/profile/UserProfileButton';
-import styles from './Sidebar.module.css';
 import LinkShare from '../share/LinkShare';
+import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
   return (
