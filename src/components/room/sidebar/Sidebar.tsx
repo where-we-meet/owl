@@ -10,7 +10,7 @@ import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
   return (
-    <aside className={styles.aside}>
+    <>
       <nav className={styles.channel}>
         <Link href="/" title="홈페이지로 가자올">
           <Image src="/images/logo.png" />
@@ -30,7 +30,7 @@ const Sidebar = () => {
         <LinkShare />
         <UserList />
       </div>
-    </aside>
+    </>
   );
 };
 
