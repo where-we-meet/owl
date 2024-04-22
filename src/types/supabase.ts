@@ -14,6 +14,7 @@ export type Database = {
           created_at: string
           id: string
           is_edit: boolean | null
+          room_id: string | null
           send_by: string
           text: string | null
         }
@@ -21,6 +22,7 @@ export type Database = {
           created_at?: string
           id?: string
           is_edit?: boolean | null
+          room_id?: string | null
           send_by?: string
           text?: string | null
         }
@@ -28,10 +30,18 @@ export type Database = {
           created_at?: string
           id?: string
           is_edit?: boolean | null
+          room_id?: string | null
           send_by?: string
           text?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "public_message_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "public_message_send_by_fkey"
             columns: ["send_by"]
