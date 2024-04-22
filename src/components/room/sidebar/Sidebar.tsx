@@ -11,7 +11,9 @@ const Sidebar = () => {
   return (
     <aside className={styles.aside}>
       <nav className={styles.channel}>
-        <Image src="/images/logo.png" />
+        <Link href="/" title="홈페이지로 가자올">
+          <Image src="/images/logo.png" />
+        </Link>
         <MyRooms />
         <div className={styles.profile}>
           <UserProfile />
