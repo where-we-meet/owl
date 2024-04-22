@@ -73,7 +73,7 @@ const Calender = () => {
             <Button isIconOnly onPress={prevMonth} className={styles.calendar_month_controller}>
               <IoChevronBackSharp />
             </Button>
-            <div className={styles.calendar_month}>{`${nowDate.getFullYear()}-${nowDate.getMonth() + 1}`}</div>
+            <span className={styles.calendar_month}>{`${nowDate.getFullYear()}-${nowDate.getMonth() + 1}`}</span>
             <Button isIconOnly onPress={afterMonth} className={styles.calendar_month_controller}>
               <IoChevronForwardSharp />
             </Button>
