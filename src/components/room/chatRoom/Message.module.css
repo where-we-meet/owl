@@ -21,6 +21,13 @@
   flex-direction: column;
 }
 
+.chat_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
 .user_info {
   display: flex;
   flex-direction: row;
