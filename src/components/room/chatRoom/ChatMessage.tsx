@@ -9,7 +9,6 @@ export const ChatMessage = async () => {
   const user = useQueryUser();
   const data = await getMessageData(user.id);
 
-  console.log(data);
   return (
     <Suspense fallback={'loading..'}>
       <ListMessage />

@@ -13,8 +13,6 @@ export const InputBox = () => {
 
   const { data: userData } = useQueryUsersData(user.id);
 
-  console.log('받아오는ㄷ ㅔ이터', userData);
-
   const handleSendMessage = async (text: string) => {
     if (text.trim() && userData) {
       const newMessage = {
