@@ -1,10 +1,11 @@
 .toggle_button {
   position: absolute;
-  right: -15px;
+  right: -20px;
   top: 35%;
   height: 80px;
   width: 20px;
   background: white;
   box-shadow: 4px 0px 5px -3px gray;
-  border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
