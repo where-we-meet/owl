@@ -7,7 +7,7 @@ export const Message = ({ message }: { message: IMessage }) => {
     <div className={styles.chatbox_body} key={message.id}>
       <figure className={styles.profiles}>
         <div>
-          <Image
+          <img
             src={`${message.users?.profile_url}`}
             alt={message.users?.name!}
             width={40}
