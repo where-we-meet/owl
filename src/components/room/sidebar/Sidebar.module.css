@@ -27,6 +27,22 @@
   gap: 1rem;
   padding: 1rem;
   overflow-y: scroll;
+  height: 100%;
+}
+
+.room::-webkit-scrollbar {
+  width: 3px;
+  top: 1rem;
+}
+.room::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.room::-webkit-scrollbar-thumb {
+  background-color: #b797cf;
+  border-radius: 15px;
+}
+.room::-webkit-scrollbar-button {
+  height: 1rem;
 }
 
 .brand {
@@ -42,4 +58,16 @@
   justify-content: center;
   margin-top: auto;
   margin-bottom: 1rem;
+}
+
+.scroll_bar {
+  width: 0.2rem;
+  height: 3rem;
+  background-color: #8a2be2;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-self: right;
 }

@@ -37,6 +37,7 @@ const SettingPage = () => {
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
       <aside className={styles.aside}>
         <Sidebar />
+
         <ToggleSidebar toggleSidebar={toggleSidebar} />
       </aside>
 
