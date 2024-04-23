@@ -8,9 +8,9 @@ import { GrFormNext } from 'react-icons/gr';
 import { IoClose } from 'react-icons/io5';
 
 import styles from './UserProfileRead.module.css';
-import Logout from '../../auth/LogoutButton';
 import { UserProfileData } from './UserProfileButton';
 import { useRoomUserDataStore } from '@/store/userProfileStore';
+import DeleteAccountButton from '@/components/auth/DeleteAccountButton';
 
 const UserProfileRead = ({
   toggleEditMode,
@@ -90,7 +90,7 @@ const UserProfileRead = ({
           </div>
         </div>
         <div className={styles.logout_button}>
-          <Logout />
+          <DeleteAccountButton />
         </div>
       </ModalBody>
     </>
