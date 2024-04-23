@@ -1,5 +1,8 @@
 'use client';
 
+import MyRooms from '@/components/room/sidebar/MyRooms';
+import UserProfile from '@/components/header/profile/UserProfileButton';
+import ToggleSidebar from '@/components/room/sidebar/ToggleSidebar';
 import SettingMap from '@/components/room/place/SettingMap';
 import Sidebar from '@/components/room/sidebar/Sidebar';
 import { useQueryUser } from '@/hooks/useQueryUser';
@@ -7,9 +10,9 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
-import ToggleSidebar from '@/components/room/sidebar/ToggleSidebar';
-import styles from './page.module.css';
 import { ChatRoom } from '@/components/room/chatRoom/ChatRoom';
+import { Image, Link } from '@nextui-org/react';
+import styles from './page.module.css';
 
 const SettingPage = () => {
   const router = useRouter();
@@ -35,9 +38,17 @@ const SettingPage = () => {
 
   return (
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
+      <nav className={styles.channel}>
+        <Link href="/" title="홈페이지로 가자올">
+          <Image src="/images/logo.png" />
+        </Link>
+        <MyRooms />
+        <div className={styles.profile}>
+          <UserProfile />
+        </div>
+      </nav>
       <aside className={styles.aside}>
         <Sidebar />
-
         <ToggleSidebar toggleSidebar={toggleSidebar} />
       </aside>
 
