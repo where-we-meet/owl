@@ -1,10 +1,13 @@
 .room_header {
+  padding: 0.8rem;
+
   display: flex;
   flex-direction: column;
-  padding: 0.8rem;
+
+  border-radius: 0.8rem;
+
   background-color: #4e4e4e;
   color: white;
-  border-radius: 0.8rem;
 }
 
 .room_header > div {
@@ -31,7 +34,7 @@
 .line {
   display: flex;
 
-  width: 10%;
+  width: 68%;
   height: 0.5px;
 
   margin: 0.3rem 0rem;
