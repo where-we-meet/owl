@@ -14,30 +14,12 @@ export const getUserSchedule = async (roomId: string) => {
   return data;
 };
 
-// //supabase에서 roomId와 userId를 통해 내가 선택한 날짜를 반환
-// export const getMySchedule = async (userId: string, roomId: string) => {
-//   const { data, error } = await supabase
-//     .from('room_schedule')
-//     .select('*')
-//     .eq('room_id', roomId)
-//     .eq('created_by', userId);
-//   if (error) throw error;
-//   return data;
-// };
-
-// //supabase에서 roomId와 userId를 통해 내가 아닌 다른 유저들의 날짜를 반환
-// export const getAnotherUsersSchedule = async (userId: string, roomId: string) => {
-//   const { data, error } = await supabase
-//     .from('room_schedule')
-//     .select('*')
-//     .eq('room_id', roomId)
-//     .neq('created_by', userId);
-//   if (error) throw error;
-//   return data;
-// };
-
 export const getMessageData = async (roomId: string) => {
-  const { data, error } = await supabase.from('message').select('*, users(*)').eq('room_id', roomId);
+  const { data, error } = await supabase
+    .from('message')
+    .select('*, users!public_message_send_by_fkey(*)')
+    .eq('room_id', roomId)
+    .order('created_at', { ascending: true });
   if (error) throw error;
   return data;
 };

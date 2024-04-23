@@ -17,6 +17,7 @@ export type Database = {
           room_id: string | null
           send_by: string
           text: string | null
+          user_profile: string | null
         }
         Insert: {
           created_at?: string
@@ -25,6 +26,7 @@ export type Database = {
           room_id?: string | null
           send_by?: string
           text?: string | null
+          user_profile?: string | null
         }
         Update: {
           created_at?: string
@@ -33,6 +35,7 @@ export type Database = {
           room_id?: string | null
           send_by?: string
           text?: string | null
+          user_profile?: string | null
         }
         Relationships: [
           {
@@ -48,6 +51,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_message_user_profile_fkey"
+            columns: ["user_profile"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["profile_url"]
           },
         ]
       }
@@ -150,6 +160,7 @@ export type Database = {
           is_admin: boolean
           lat: string | null
           lng: string | null
+          profile_url: string | null
           room_id: string
           start_location: string | null
           user_id: string
@@ -160,6 +171,7 @@ export type Database = {
           is_admin?: boolean
           lat?: string | null
           lng?: string | null
+          profile_url?: string | null
           room_id: string
           start_location?: string | null
           user_id: string
@@ -170,11 +182,19 @@ export type Database = {
           is_admin?: boolean
           lat?: string | null
           lng?: string | null
+          profile_url?: string | null
           room_id?: string
           start_location?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "public_userdata_room_profile_url_fkey"
+            columns: ["profile_url"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["profile_url"]
+          },
           {
             foreignKeyName: "public_userdata_room_room_id_fkey"
             columns: ["room_id"]
@@ -200,7 +220,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          id?: string
+          id: string
           name: string
           profile_url?: string | null
         }
@@ -210,7 +230,15 @@ export type Database = {
           name?: string
           profile_url?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "public_users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
