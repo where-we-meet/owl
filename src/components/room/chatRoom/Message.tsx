@@ -1,7 +1,5 @@
 'use client';
 import { IMessage } from '@/store/messageStore';
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem, Button } from '@nextui-org/react';
-import { IoIosMore } from 'react-icons/io';
 import styles from './Message.module.css';
 
 export const Message = ({ message }: { message: IMessage }) => {
@@ -23,29 +21,10 @@ export const Message = ({ message }: { message: IMessage }) => {
               <h3 className={styles.name}>{message.users?.name}</h3>
               <h3 className={styles.date_time}>{new Date(message.created_at).toDateString()}</h3>
             </div>
-            <MessageMenu />
           </div>
           <p className={styles.chat_log}>{message.text}</p>
         </div>
       </figure>
     </div>
-  );
-};
-
-export const MessageMenu = () => {
-  return (
-    <Dropdown>
-      <DropdownTrigger>
-        <Button variant="bordered">
-          <IoIosMore />
-        </Button>
-      </DropdownTrigger>
-      <DropdownMenu aria-label="Static Actions">
-        <DropdownItem key="edit">수정</DropdownItem>
-        <DropdownItem key="delete" className="text-danger" color="danger">
-          삭제
-        </DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
   );
 };
