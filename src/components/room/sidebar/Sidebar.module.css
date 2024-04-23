@@ -45,11 +45,29 @@
   height: 1rem;
 }
 
+.wrap {
+  display: flex;
+  margin-bottom: 0.5rem;
+
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .brand {
   padding: 0.2rem 0;
-  margin-bottom: 0.5rem;
+
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.participants {
+  display: flex;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 1.5rem;
+
+  gap: 4px;
 }
 
 .profile {

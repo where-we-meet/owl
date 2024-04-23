@@ -5,9 +5,19 @@ import UserList from './user/UserList';
 import MyRooms from './MyRooms';
 import UserProfile from '@/components/header/profile/UserProfileButton';
 import LinkShare from '../share/LinkShare';
+import { useQueryUser } from '@/hooks/useQueryUser';
+import { useQueryRoomUsers } from '@/hooks/useQueryRoomUsers';
+import { useParams } from 'next/navigation';
+import { IoMdPerson } from 'react-icons/io';
 import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
+  const { id: roomId }: { id: string } = useParams();
+  const { id: userId } = useQueryUser();
+  const { roomUsers, isPending } = useQueryRoomUsers(roomId, userId);
+
+  const participantNumber = roomUsers.length;
+
   return (
     <>
       <nav className={styles.channel}>
@@ -21,9 +31,17 @@ const Sidebar = () => {
       </nav>
 
       <div className={styles.room}>
-        <Link className={styles.brand} color="foreground" href="/">
-          OWL-LiNK
-        </Link>
+        <div className={styles.wrap}>
+          <Link className={styles.brand} color="foreground" href="/">
+            OWL-LiNK
+          </Link>
+
+          <p className={styles.participants}>
+            <IoMdPerson />
+            {participantNumber}
+          </p>
+        </div>
+
         <RoomHeader />
         <Calender />
         <LinkShare />
