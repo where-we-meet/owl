@@ -27,10 +27,6 @@
   flex-direction: column;
 }
 
-.center_address {
-  margin-top: 0.9rem;
-}
-
 .line {
   display: flex;
 
