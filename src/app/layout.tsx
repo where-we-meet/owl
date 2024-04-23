@@ -17,6 +17,7 @@ const APP_TITLE_TEMPLATE = '%s - OWL Link';
 const APP_DESCRIPTION = '그래서 우리, 언제 어디서 만나는 거야';
 
 export const metadata: Metadata = {
+  manifest: '/manifest.json',
   applicationName: APP_NAME,
   title: {
     default: APP_DEFAULT_TITLE,
