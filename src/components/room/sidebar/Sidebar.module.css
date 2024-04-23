@@ -70,6 +70,15 @@
   gap: 4px;
 }
 
+.select_date {
+  margin-left: 0.5rem;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.3rem;
+}
+
 .profile {
   display: flex;
   align-items: center;
