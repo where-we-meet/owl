@@ -1,0 +1,9 @@
+.center_address {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-top: 0.9rem;
+
+  gap: 0.5rem;
+}
