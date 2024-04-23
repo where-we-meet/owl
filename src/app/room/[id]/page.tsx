@@ -43,8 +43,8 @@ const SettingPage = () => {
 
       <section className={styles.map}>
         <SettingMap isOpened={isOpened} />
+        <ChatRoom roomId={roomId} />
       </section>
-      <ChatRoom roomId={roomId} />
     </div>
   );
 };
