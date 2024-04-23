@@ -3,11 +3,11 @@
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 
-import styles from './UserProfileButton.module.css';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { getUserProfileData } from '@/api/profile';
 import { ProfileModal } from './ProfileModal';
 import Logout from '@/components/auth/LogoutButton';
+import styles from './UserProfileButton.module.css';
 
 export type UserProfileData = { name: string; profile_url: string | null };
 const UserProfile = () => {
@@ -51,8 +51,8 @@ const UserProfile = () => {
             />
           </div>
         </DropdownTrigger>
-        <DropdownMenu className={styles.dropdown}>
-          <DropdownItem className={styles.first_item}>
+        <DropdownMenu className={styles.dropdown} aria-label="profile menu">
+          <DropdownItem key="profile" textValue="profile" className={styles.first_item}>
             <div className={styles.view_profile_container}>
               <Avatar
                 className={styles.view_profile}
@@ -68,7 +68,7 @@ const UserProfile = () => {
               </div>
             </div>
           </DropdownItem>
-          <DropdownItem className={styles.logout}>
+          <DropdownItem key="auth" textValue="auth" className={styles.logout}>
             <Logout />
           </DropdownItem>
         </DropdownMenu>
