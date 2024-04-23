@@ -1,6 +1,6 @@
 {
-  "name": "My Awesome PWA app",
-  "short_name": "PWA App",
+  "name": "OWL Link",
+  "short_name": "owl-link",
   "icons": [
     {
       "src": "/icons/android-chrome-192x192.png",
