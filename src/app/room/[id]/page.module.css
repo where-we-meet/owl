@@ -14,7 +14,7 @@
   transform: translateX(-400px);
   transition: transform ease 0.4s;
   width: 400px;
-  z-index: 9;
+  z-index: 15;
 }
 
 .map {
