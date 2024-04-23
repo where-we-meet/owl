@@ -8,7 +8,7 @@ export const Message = ({ message }: { message: IMessage }) => {
       <figure className={styles.profiles}>
         <div>
           <img
-            src={`${message.users?.profile_url}`}
+            src={`${message.user_profile}`}
             alt={message.users?.name!}
             width={40}
             height={40}

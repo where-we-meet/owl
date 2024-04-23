@@ -24,6 +24,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
       is_edit: false,
       created_at: new Date().toISOString(),
       room_id: roomId,
+      user_profile: userData[0].profile_url,
       users: {
         id: userData[0].id,
         profile_url: userData[0].profile_url,
@@ -33,7 +34,9 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
     };
     addMessage(newMessage);
 
-    const { data, error } = await supabase.from('message').insert({ text, room_id: roomId });
+    const { data, error } = await supabase
+      .from('message')
+      .insert({ text, room_id: roomId, user_profile: newMessage.user_profile });
 
     if (error) throw error;
     return data;
