@@ -5,8 +5,8 @@ import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
 import { Schedules } from './Schedules/Schedules';
 
 import dayColors from '@/utils/calendar/dayColors';
-import styles from './EntireOfMonth.module.css';
 import { checkIsSelectedDate } from '@/utils/calendar/checkIsSelectedDate';
+import styles from './EntireOfMonth.module.css';
 
 export type UserSchedule = Tables<'room_schedule'>;
 
