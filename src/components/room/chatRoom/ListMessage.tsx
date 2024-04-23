@@ -2,7 +2,7 @@
 import styles from './ListMessage.module.css';
 import { IMessage, useMessageStore } from '@/store/messageStore';
 import { Message } from './Message';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getMessageData } from '@/api/supabaseCSR/supabase';
@@ -10,12 +10,18 @@ import { getMessageData } from '@/api/supabaseCSR/supabase';
 export const ListMessage = ({ roomId }: { roomId: string }) => {
   const supabase = createClient();
   const queryClient = useQueryClient();
-  // const { messages } = useMessageStore((state) => state);
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
 
   const { data: messages = [], isPending } = useQuery({
     queryKey: ['message', roomId],
     queryFn: () => getMessageData(roomId)
   });
+
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
 
   useEffect(() => {
     const channel = supabase
@@ -44,6 +50,7 @@ export const ListMessage = ({ roomId }: { roomId: string }) => {
       {messages.map((message) => {
         return <Message key={message.id} message={message} />;
       })}
+      <div ref={messageEndRef}></div>
     </section>
   );
 };
