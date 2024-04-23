@@ -1,6 +1,5 @@
-import { Image, Link, ScrollShadow } from '@nextui-org/react';
+import { Image, Link } from '@nextui-org/react';
 import Calender from '../calender/Calender';
-import StartLocationBox from '../place/StartLocationBox';
 import RoomHeader from '../header/RoomHeader';
 import UserList from './user/UserList';
 import MyRooms from './MyRooms';
@@ -27,7 +26,6 @@ const Sidebar = () => {
         </Link>
         <RoomHeader />
         <Calender />
-        {/* / <StartLocationBox /> */}
         <LinkShare />
         <UserList />
       </div>
