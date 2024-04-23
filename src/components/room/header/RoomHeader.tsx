@@ -3,14 +3,14 @@ import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomData } from '@/api/supabaseCSR/supabase';
 import ConfirmedButton from '../ConfirmedButton';
-import { useSettingMap } from '@/hooks/useSettingMap';
+import { useMapController } from '@/hooks/useMapController';
 import styles from './RoomHeader.module.css';
 
 const RoomHeader = () => {
   const { id: roomId }: { id: string } = useParams();
-  const { isPinned, halfwayPoint } = useSettingMap();
+  const { address } = useMapController();
   const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
-
+  console.log(location);
   return (
     <div className={styles.room_header}>
       <div>
@@ -21,7 +21,7 @@ const RoomHeader = () => {
           <ConfirmedButton />
         </div>
       </div>
-      <p className={styles.center_address}>{isPinned ? isPinned : '중심 위치 주소를 보여줍니다.'}</p>
+      <p className={styles.center_address}>{address ? address : '중심 위치 주소를 보여줍니다.'}</p>
     </div>
   );
 };
