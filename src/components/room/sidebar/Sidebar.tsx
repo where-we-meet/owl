@@ -9,6 +9,7 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { useQueryRoomUsers } from '@/hooks/useQueryRoomUsers';
 import { useParams } from 'next/navigation';
 import { IoMdPerson } from 'react-icons/io';
+import { FaRegCheckCircle } from 'react-icons/fa';
 import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
@@ -44,6 +45,9 @@ const Sidebar = () => {
 
         <RoomHeader />
         <Calender />
+        <p className={styles.select_date}>
+          <FaRegCheckCircle /> 참석 가능한 날짜를 선택해주세요.
+        </p>
         <LinkShare />
         <UserList />
       </div>
