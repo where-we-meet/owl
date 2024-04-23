@@ -16,7 +16,7 @@ const ResetSchedule = () => {
 
   return (
     <Button isIconOnly>
-      <LuEraser style={{ cursor: 'pointer' }} onClick={handleResetSchedule} />
+      <LuEraser title="선택된 날짜를 초기화한다올" style={{ cursor: 'pointer' }} onClick={handleResetSchedule} />
     </Button>
   );
 };

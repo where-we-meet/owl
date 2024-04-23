@@ -20,7 +20,7 @@ const MyRooms = () => {
         </li>
       ))}
       <li className={styles.new_room}>
-        <Link href="/start">
+        <Link href="/start" title="새로운 모임방을 만들러 가자올">
           <BsPlusSquareDotted size="100%" />
         </Link>
       </li>
