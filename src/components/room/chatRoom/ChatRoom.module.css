@@ -1,0 +1,12 @@
+.chatroom_modal {
+  position: fixed;
+  right: 6rem;
+  bottom: 6rem;
+  z-index: 99;
+}
+
+.modal_header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
