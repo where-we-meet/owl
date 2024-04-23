@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getRoomData } from '@/api/supabaseCSR/supabase';
 import ConfirmedButton from '../ConfirmedButton';
 import styles from './RoomHeader.module.css';
+import { ChatRoom } from '../chatRoom/ChatRoom';
 
 const RoomHeader = () => {
   const { id: roomId }: { id: string } = useParams();
