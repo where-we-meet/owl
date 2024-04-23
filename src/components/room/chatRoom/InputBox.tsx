@@ -45,6 +45,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
         placeholder="send message"
         autoFocus={true}
         className={styles.input_box}
+        maxLength={120}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             handleSendMessage(e.currentTarget.value);

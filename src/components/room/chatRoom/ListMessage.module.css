@@ -1,43 +1,4 @@
-.constainer {
-  width: 100vw;
-  height: 100%;
-  background-color: black;
-}
-
-.chatbox_body {
-  flex: 1;
-  height: auto;
-  background-color: rgb(49, 49, 49);
-}
-.profiles {
-  display: flex;
-  flex-direction: row;
-  padding: 1.2rem;
-  gap: 0.6rem;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-}
-
-.user_info {
-  display: flex;
-  flex-direction: row;
-  gap: 0.6rem;
-}
-
-.name {
-  font-size: large;
-  font-weight: bold;
-  color: rgb(196, 196, 196);
-}
-
-.date_time {
-  font-size: small;
-  color: rgb(196, 196, 196);
-}
-
-.chat_log {
-  color: rgb(196, 196, 196);
+.container {
+  overflow-y: auto;
+  max-height: 500px;
 }
