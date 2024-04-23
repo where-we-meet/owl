@@ -24,22 +24,20 @@
   flex-direction: column;
 }
 
-.title_container > p {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .center_address {
-  margin: 0.9rem 0;
+  margin-top: 0.9rem;
 }
 
 .line {
   display: flex;
 
-  width: 59%;
-  height: 1%;
+  width: 10%;
+  height: 0.5px;
 
   margin: 0.3rem 0rem;
   background-color: white;
+}
+
+.center_address_copy {
+  margin-bottom: 0.5rem;
 }
