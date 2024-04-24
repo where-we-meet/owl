@@ -1,9 +1,8 @@
 .room_header {
-  padding: 0.8rem;
+  padding: 0.9rem 1.3rem;
 
   display: flex;
   flex-direction: column;
-
   border-radius: 0.8rem;
 
   background-color: #4e4e4e;
@@ -18,8 +17,8 @@
 
 .room_title {
   font-weight: bold;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
+  font-size: 1.4rem;
+  letter-spacing: 0.2rem;
 }
 
 .title_container {
@@ -30,10 +29,10 @@
 .line {
   display: flex;
 
-  width: 68%;
+  width: 100%;
   height: 0.5px;
 
-  margin: 0.3rem 0rem;
+  margin: 0.9rem 0rem;
   background-color: white;
 }
 

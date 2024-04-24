@@ -9,7 +9,16 @@ import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { useQuerySchedule } from '@/hooks/useQuerySchedule';
 import { useRouter } from 'next/navigation';
 import { RoomUserDate, useRoomUserData } from '@/hooks/useMutateUserData';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Tooltip,
+  useDisclosure
+} from '@nextui-org/react';
 import styles from './ConfirmedButton.module.css';
 
 const ConfirmedButton = () => {
@@ -55,9 +64,16 @@ const ConfirmedButton = () => {
 
   return (
     <>
-      <Button size="sm" style={{ backgroundColor: 'black', color: 'white' }} onPress={onOpen} isDisabled={isFetchDone}>
-        {isFetchDone ? '모임 확정 완료' : '확정'}
-      </Button>
+      <Tooltip color="foreground" placement="right-end" content="일정을 확정하기">
+        <Button
+          size="sm"
+          style={{ backgroundColor: 'black', color: 'white' }}
+          onPress={onOpen}
+          isDisabled={isFetchDone}
+        >
+          {isFetchDone ? '모임 확정 완료' : '확정'}
+        </Button>
+      </Tooltip>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

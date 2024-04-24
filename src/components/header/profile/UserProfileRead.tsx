@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button, Image, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
+import { Button, Image, ModalHeader, ModalBody, Avatar, Tooltip } from '@nextui-org/react';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { GrFormNext } from 'react-icons/gr';
@@ -68,9 +68,16 @@ const UserProfileRead = ({
             <p>닉네임</p>
             <div className={styles.user_edit_container}>
               <p>{data.name}</p>
-              <Button onPress={toggleEditMode} className={styles.edit_button}>
-                <GrFormNext className={styles.next_icon} />
-              </Button>
+              <Tooltip color="secondary" placement="top" content="프로필을 수정하기">
+                <Button
+                  onPress={toggleEditMode}
+                  className={styles.edit_button}
+                  variant="light"
+                  endContent={<GrFormNext className={styles.next_icon} />}
+                >
+                  수정하기
+                </Button>
+              </Tooltip>
             </div>
           </div>
           <div className={styles.login_info_container}>

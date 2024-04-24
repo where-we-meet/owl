@@ -57,9 +57,9 @@
 .edit_button {
   background-color: transparent;
   height: fit-content;
-  display: inline-block;
+  display: none;
   right: 0rem;
-  padding: 0rem;
+  padding: 0.4rem;
   display: flex;
   justify-content: right;
 }

@@ -3,7 +3,7 @@
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button, ModalHeader, ModalBody, Avatar } from '@nextui-org/react';
+import { Button, ModalHeader, ModalBody, Avatar, Tooltip } from '@nextui-org/react';
 import { changeUserProfile, deleteProfileImage, updateUserName } from '@/api/supabaseCSR/supabase';
 import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
@@ -99,9 +99,9 @@ const UserProfileUpdate = ({
 
   return (
     <>
-      <Button className={styles.back_btn} isIconOnly onPress={handleEditExit}>
-        <IoChevronBack />
-      </Button>
+      <Tooltip className={styles.tooltip} placement="right" content="돌아가기">
+        <Button className={styles.back_btn} isIconOnly onPress={handleEditExit} endContent={<IoChevronBack />}></Button>
+      </Tooltip>
       <ModalHeader className="flex flex-col gap-1 text-center">
         <h1 className={styles.header_title}>프로필 수정</h1>
       </ModalHeader>

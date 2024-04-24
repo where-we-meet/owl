@@ -1,3 +1,7 @@
+.tooltip {
+  z-index: 999;
+}
+
 .back_btn {
   left: 10px;
   top: 13px;

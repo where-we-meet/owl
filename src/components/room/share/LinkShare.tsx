@@ -10,6 +10,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Tooltip,
   useDisclosure
 } from '@nextui-org/react';
 import { FaShareAlt } from 'react-icons/fa';
@@ -48,9 +49,11 @@ const LinkShare = () => {
         </ModalContent>
       </Modal>
       <div className={styles.button_container}>
-        <Button className={styles.button} isIconOnly onPress={onOpen} variant="light" size="lg">
-          <p className={styles.share}>공유하기</p> <FaShareAlt />
-        </Button>
+        <Tooltip color="secondary" placement="right-end" content="친구들과 공유하기">
+          <Button className={styles.button} onPress={onOpen} color="secondary" endContent={<FaShareAlt />}>
+            공유하기
+          </Button>
+        </Tooltip>
       </div>
     </>
   );
