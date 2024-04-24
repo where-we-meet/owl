@@ -11,10 +11,10 @@ import CategoryMarker from './search/CategoryMarker';
 
 import styles from './ResultMap.module.css';
 
-const ResultMap = ({ roomId }: { roomId: string }) => {
+const ResultMap = () => {
   const [loading, error] = useKakaoMap();
 
-  const { address, halfwayPoint, range, clickId, setClickId, roomUsers, searchCategory = [] } = useMapController();
+  const { halfwayPoint, range, clickId, setClickId, roomUsers, searchCategory = [] } = useMapController();
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
