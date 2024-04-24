@@ -1,5 +1,5 @@
-import StartMeeting from '@/components/rending/StartMeetingBtn';
-import { Article } from '@/components/rending/Article';
+import StartMeeting from '@/components/landing/StartMeetingBtn';
+import { Article } from '@/components/landing/Article';
 import Header from '@/components/header/Header';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
