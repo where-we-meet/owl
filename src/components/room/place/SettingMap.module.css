@@ -4,6 +4,13 @@
   height: 100%;
 }
 
+.map_container_spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .searchbar_container {
   position: absolute;
 
