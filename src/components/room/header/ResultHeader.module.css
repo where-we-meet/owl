@@ -1,0 +1,12 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.address {
+  display: flex;
+  justify-content: space-between;
+}
