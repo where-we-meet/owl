@@ -34,7 +34,7 @@ const Sidebar = () => {
         <RoomHeader />
         <Calender />
         <p className={styles.select_date}>
-          <FaRegCheckCircle /> 참석 가능한 날짜를 선택해주세요.
+          <FaRegCheckCircle /> 가능한 일자를 달력에서 선택해주세요.
         </p>
         <LinkShare />
         <UserList />
