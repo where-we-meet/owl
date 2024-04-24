@@ -1,8 +1,10 @@
-import withSerwistInit from '@serwist/next';
+import withPWAInit from '@ducanh2912/next-pwa';
 
-const withSerwist = withSerwistInit({
-  swSrc: 'src/sw.ts',
-  swDest: 'public/sw.js'
+const withPWA = withPWAInit({
+  dest: 'public',
+  fallbacks: {
+    document: '/~offline'
+  }
 });
 
 /** @type {import('next').NextConfig} */
@@ -17,4 +19,4 @@ const nextConfig = {
   }
 };
 
-export default withSerwist(nextConfig);
+export default withPWA(nextConfig);

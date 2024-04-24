@@ -7,16 +7,14 @@ import { useMapController } from '@/hooks/useMapController';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
 import CategorySelector from './search/CategorySelector';
-import RangeController from './RangeController';
 import CategoryMarker from './search/CategoryMarker';
 
-import { Link } from '@nextui-org/react';
 import styles from './ResultMap.module.css';
 
-const ResultMap = ({ roomId }: { roomId: string }) => {
+const ResultMap = () => {
   const [loading, error] = useKakaoMap();
 
-  const { address, halfwayPoint, range, clickId, setClickId, roomUsers, searchCategory = [] } = useMapController();
+  const { halfwayPoint, range, clickId, setClickId, roomUsers, searchCategory = [] } = useMapController();
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
@@ -26,6 +24,10 @@ const ResultMap = ({ roomId }: { roomId: string }) => {
   return (
     <>
       <div className={styles.map_container}>
+        <div className={styles.category_container}>
+          <CategorySelector />
+        </div>
+
         {isHalfwayValid && (
           <>
             <Map
@@ -58,14 +60,6 @@ const ResultMap = ({ roomId }: { roomId: string }) => {
             </Map>
           </>
         )}
-      </div>
-      <CategorySelector />
-      <div className={styles.box}>
-        <div className={styles.address}>
-          <p>{address}</p>
-          <Link href={`/room/${roomId}/pick-place`}>내 장소 변경하기</Link>
-        </div>
-        <RangeController />
       </div>
     </>
   );

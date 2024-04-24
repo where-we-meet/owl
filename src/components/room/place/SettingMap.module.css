@@ -4,23 +4,35 @@
   height: 100%;
 }
 
+.map_container_spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .searchbar_container {
   position: absolute;
-
-  top: 5%;
-  left: 5%;
-
-  width: 35%;
-  min-width: 250px;
   display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
+  gap: 1rem;
+  top: 2rem;
+  left: 2rem;
+  width: 85%;
+  max-width: 600px;
 }
 
 .map {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.center_spinner {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  z-index: 13;
+  transform: translate(-50%, -50%);
 }
 
 .center_pin {
@@ -45,7 +57,7 @@
   background-color: #00000090;
 
   transform: translate(-50%, -50%);
-  z-index: 11;
+  z-index: 10;
 }
 
 .center_pin_drag {

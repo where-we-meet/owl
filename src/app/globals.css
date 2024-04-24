@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+body {
+  user-select: none;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -34,16 +38,19 @@ h2 {
     font-size: 10px;
   }
 }
+
 @media sreen and (max-width: 992px) {
   html {
     font-size: 10px;
   }
 }
+
 @media sreen and (max-width: 1200px) {
   html {
     font-size: 12px;
   }
 }
+
 @media sreen and (max-width: 1440px) {
   html {
     font-size: 14px;

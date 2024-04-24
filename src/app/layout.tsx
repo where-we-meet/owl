@@ -9,8 +9,6 @@ import { getSession } from '@/api/auth/getSession';
 import { createClient } from '@/utils/supabase/server';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
-
 const APP_NAME = 'OWL Link';
 const APP_DEFAULT_TITLE = 'OWL Link';
 const APP_TITLE_TEMPLATE = '%s - OWL Link';
@@ -63,7 +61,7 @@ export default async function RootLayout({
 
   return (
     <html lang="ko">
-      <body className={inter.className}>
+      <body>
         <Providers>
           <HydrationBoundary state={dehydrate(queryClient)}>
             <div className="container">{children}</div>

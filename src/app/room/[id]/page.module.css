@@ -1,4 +1,5 @@
 .wrapper {
+  position: relative;
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -6,22 +7,23 @@
 
 .aside {
   position: fixed;
-  width: 400px;
-
   top: 0;
   bottom: 0;
-
+  left: -280px;
   display: flex;
-  justify-content: right;
-
+  width: 340px;
   background-color: white;
-  transform: translateX(-340px);
-  transition: transform ease 0.4s;
-
+  transition: left ease 0.4s;
   z-index: 15;
 }
 
 .channel {
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+
   display: flex;
   flex-direction: column;
   width: 60px;
@@ -42,18 +44,20 @@
 .map {
   position: relative;
   width: 100%;
+  padding-left: 60px;
+  transition: padding ease 0.4s;
 }
 
 .opened .aside {
-  transform: translateX(0px);
-  transition: transform ease 0.4s;
+  left: 60px;
+  transition: left ease 0.4s;
   box-shadow: 4px 0px 5px -3px gray;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 }
 
 .opened > .map {
-  padding-left: 340px;
+  padding-left: 400px;
   transition: padding ease 0.4s;
 }
 

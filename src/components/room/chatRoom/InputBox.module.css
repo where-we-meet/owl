@@ -1,7 +1,26 @@
-.input_box {
+.chatbox {
   position: relative;
   display: flex;
+  width: auto;
+}
+
+.icon {
+  position: absolute;
+  right: 2%;
+  top: 20%;
+}
+
+.iconActive {
+  position: absolute;
+  right: 2%;
+  top: 20%;
+  color: blueviolet;
+}
+
+.input_box {
+  resize: none;
   width: 100%;
   border: 2px solid gray;
-  resize: none;
+  padding: 10px;
+  height: 2.5rem;
 }

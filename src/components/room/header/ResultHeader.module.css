@@ -1,0 +1,34 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.title_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.room_title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.wrap {
+  display: flex;
+  gap: 1rem;
+}
+
+.confirm_info {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.pin {
+  width: 15px;
+}

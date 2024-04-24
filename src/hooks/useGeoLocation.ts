@@ -1,41 +1,29 @@
-import { useEffect } from 'react';
 import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
-import { useRoomUserDataStore } from '@/store/roomUserStore';
-import { myGeolocation } from '@/utils/place/myGeolocation';
+import { GeolocationResult, myGeolocation } from '@/utils/place/myGeolocation';
+import { useDisclosure } from '@nextui-org/react';
 
 export const useGeoLocation = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const setLocation = useSearchDataStore((state) => state.setLocation);
   const { setIsGpsLoading, setErrorMessage } = useGpsStatusStore((state) => state);
-  const roomUser = useRoomUserDataStore((state) => state.roomUser);
 
   const handleSetGeolocation = async () => {
-    setIsGpsLoading(true);
-    const {
-      lat,
-      lng,
-      status,
-      errorMessage
-    }: { lat: number | null; lng: number | null; status: boolean; errorMessage: string | null } = await myGeolocation();
-    if (lat && lng) {
-      setLocation({ lat, lng });
-      setIsGpsLoading(status);
-    } else if (errorMessage) {
-      setErrorMessage(errorMessage);
-      setIsGpsLoading(status);
+    try {
+      setIsGpsLoading(true);
+      const { lat, lng, status, errorMessage }: GeolocationResult = await myGeolocation();
+      if (lat && lng) {
+        setLocation({ lat, lng });
+        setIsGpsLoading(status);
+      } else if (errorMessage) {
+        onOpen();
+        setErrorMessage(errorMessage);
+        setIsGpsLoading(status);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  useEffect(() => {
-    if (roomUser) {
-      if (roomUser.start_location !== '' && roomUser.start_location !== null) {
-        setIsGpsLoading(false);
-      } else {
-        handleSetGeolocation();
-      }
-    } else {
-      handleSetGeolocation();
-    }
-  }, []);
-
-  return { handleSetGeolocation };
+  return { handleSetGeolocation, isOpen, onOpen, onOpenChange };
 };
