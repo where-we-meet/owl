@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.6",
     "@nextui-org/react": "^2.2.10",
-    "@serwist/next": "^9.0.1",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.41.1",
     "@tanstack/react-query": "^5.28.9",
@@ -38,7 +38,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "kakao.maps.d.ts": "^0.1.39",
-    "serwist": "^9.0.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0"
   }
 }
