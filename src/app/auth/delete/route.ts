@@ -73,17 +73,14 @@ export async function POST(req: NextRequest) {
       } = await supabaseAdmin.auth.getSession();
 
       if (user.app_metadata.provider === 'google') {
-        await axios.post(
-          'https://oauth2.googleapis.com/revoke',
-          {
-            token: session?.provider_token
+        await axios.post('https://oauth2.googleapis.com/revoke', null, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           },
-          {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            }
+          params: {
+            token: session?.provider_token
           }
-        );
+        });
       } else {
         const kakao_uid = user.user_metadata.sub;
         await axios.post(
