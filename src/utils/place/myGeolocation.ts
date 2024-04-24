@@ -1,4 +1,4 @@
-type GeolocationResult = {
+export type GeolocationResult = {
   lat: number | null;
   lng: number | null;
   status: boolean;
@@ -25,7 +25,7 @@ export const myGeolocation = (): Promise<GeolocationResult> => {
         (err) => {
           result.errorMessage = err.message;
           result.status = false;
-          reject(result);
+          resolve(result);
         }
       );
     } else {
