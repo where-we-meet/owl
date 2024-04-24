@@ -4,22 +4,27 @@ import { createClient } from '@/utils/supabase/client';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useMessageStore } from '@/store/messageStore';
 import { useQueryUsersData } from '@/hooks/useQueryUsersData';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { FiSend } from 'react-icons/fi';
 import styles from './InputBox.module.css';
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 export const InputBox = ({ roomId }: { roomId: string }) => {
   const supabase = createClient();
   const user = useQueryUser();
   const addMessage = useMessageStore((state) => state.addMessage);
   const [inputText, setInputText] = useState('');
+  const [canSend, setCanSend] = useState(true);
 
   const { data: userData } = useQueryUsersData(user.id);
 
   const handleSendMessage = async (text: string) => {
-    if (!text.trim() || !userData) {
+    if (!text.trim() || !userData || !canSend) {
       return;
     }
+
+    setCanSend(false);
+    setTimeout(() => setCanSend(true), 500);
+
     const newMessage = {
       id: crypto.randomUUID(),
       text,
@@ -51,7 +56,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
   };
 
   const handlePrintMessage = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && canSend) {
       handleSendMessage(e.currentTarget.value);
       setInputText('');
     }
