@@ -23,6 +23,14 @@
   height: 100%;
 }
 
+.center_spinner {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  z-index: 13;
+  transform: translate(-50%, -50%);
+}
+
 .center_pin {
   position: absolute;
   top: 48%;
@@ -45,7 +53,7 @@
   background-color: #00000090;
 
   transform: translate(-50%, -50%);
-  z-index: 11;
+  z-index: 10;
 }
 
 .center_pin_drag {
