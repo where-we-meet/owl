@@ -1,12 +1,10 @@
 .start_location_container {
   position: absolute;
-
   width: 32%;
   min-width: 250px;
-
   bottom: 5%;
-  left: calc(40% - 5rem);
-
+  left: 50%;
+  transform: translatex(-50%);
   z-index: 13;
 }
 
