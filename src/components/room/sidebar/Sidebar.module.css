@@ -1,7 +1,7 @@
 .room {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 60px);
+  width: 100%;
   gap: 1rem;
   padding: 1rem;
   overflow-y: scroll;
