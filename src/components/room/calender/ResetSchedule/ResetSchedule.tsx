@@ -1,6 +1,6 @@
 import { useDeleteUserSchedule } from '@/hooks/useMutateUserData';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { Button } from '@nextui-org/react';
+import { Button, Tooltip } from '@nextui-org/react';
 import { useParams } from 'next/navigation';
 import { LuEraser } from 'react-icons/lu';
 
@@ -15,9 +15,11 @@ const ResetSchedule = () => {
   };
 
   return (
-    <Button isIconOnly>
-      <LuEraser title="선택된 날짜를 초기화한다올" style={{ cursor: 'pointer' }} onClick={handleResetSchedule} />
-    </Button>
+    <Tooltip color="secondary" placement="right" content="선택된 일정을 초기화하기">
+      <Button color="secondary" style={{ cursor: 'pointer' }} onClick={handleResetSchedule} endContent={<LuEraser />}>
+        초기화
+      </Button>
+    </Tooltip>
   );
 };
 

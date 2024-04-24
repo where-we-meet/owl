@@ -1,7 +1,7 @@
 'use client';
 import { ChatMessage } from './ChatMessage';
 import { InputBox } from './InputBox';
-import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure } from '@nextui-org/react';
+import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Tooltip } from '@nextui-org/react';
 import { IoChatbubblesSharp } from 'react-icons/io5';
 import styles from './ChatRoom.module.css';
 
@@ -18,9 +18,11 @@ export const ChatRoom = ({ roomId }: { roomId: string }) => {
 
   return (
     <div className={styles.chatroom_modal}>
-      <Button color="secondary" endContent={<IoChatbubblesSharp size="2rem" />} onPress={handleModalControl}>
-        대화하기
-      </Button>
+      <Tooltip color="secondary" content="버튼을 눌러 대화를 나눠보세요">
+        <Button color="secondary" endContent={<IoChatbubblesSharp size="2rem" />} onPress={handleModalControl}>
+          대화하기
+        </Button>
+      </Tooltip>
       <Modal
         closeButton
         size="3xl"

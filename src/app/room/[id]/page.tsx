@@ -11,7 +11,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
 import { ChatRoom } from '@/components/room/chatRoom/ChatRoom';
-import { Image, Link } from '@nextui-org/react';
+import { Image, Link, Tooltip } from '@nextui-org/react';
 import styles from './page.module.css';
 
 const SettingPage = () => {
@@ -39,9 +39,11 @@ const SettingPage = () => {
   return (
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
       <nav className={styles.channel}>
-        <Link href="/" title="홈페이지로 가자올">
-          <Image src="/images/logo.png" />
-        </Link>
+        <Tooltip content="홈페이지로 가기">
+          <Link href="/">
+            <Image src="/images/logo.png" />
+          </Link>
+        </Tooltip>
         <MyRooms />
         <div className={styles.profile}>
           <UserProfile />
@@ -54,6 +56,7 @@ const SettingPage = () => {
 
       <section className={styles.map}>
         <SettingMap isOpened={isOpened} />
+
         <ChatRoom roomId={roomId} />
       </section>
     </div>

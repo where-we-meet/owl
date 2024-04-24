@@ -4,6 +4,7 @@
   border: 1px solid;
   border-radius: 1rem;
   cursor: pointer;
+  margin-bottom: 0.4rem;
 }
 
 .currentuser {
@@ -32,5 +33,5 @@
 
 .user_address {
   padding: 0.3rem 0.5rem 0.3rem 0rem;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
 }

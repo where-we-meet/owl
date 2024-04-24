@@ -6,6 +6,7 @@ import { useUpdateStartLocation } from '@/hooks/useMutateUserData';
 import { useSearchDataStore } from '@/store/placeStore';
 import { objectValidate } from '@/utils/objectValidate';
 import styles from './LocationSwitch.module.css';
+import { Tooltip } from '@nextui-org/react';
 
 const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
   const { id: roomId }: { id: string } = useParams();
@@ -50,9 +51,11 @@ const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
   };
 
   return (
-    <div className={`${styles.label} ${toggleState && styles.selected}`} onClick={handleSubmitLocation}>
-      {toggleState ? '출발 위치를 수정하시겠어요?' : '출발 위치를 확정해주세요.'}
-    </div>
+    <Tooltip color="secondary" placement="right" content={toggleState ? '출발 위치를 수정!' : '출발 위치를 확정!'}>
+      <div className={`${styles.label} ${toggleState && styles.selected}`} onClick={handleSubmitLocation}>
+        {toggleState ? '출발 위치를 수정하시겠어요?' : '출발 위치를 확정해주세요.'}
+      </div>
+    </Tooltip>
   );
 };
 
