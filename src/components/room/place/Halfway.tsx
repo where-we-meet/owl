@@ -6,10 +6,10 @@ const Halfway = ({ location }: { location: { lat: number; lng: number } }) => {
       key={'halfway'}
       position={location}
       image={{
-        src: '/pin.svg',
+        src: '/images/center_owl.png',
         size: {
-          width: 50,
-          height: 50
+          width: 80,
+          height: 70
         }
       }}
     />
