@@ -13,15 +13,12 @@
 
 .searchbar_container {
   position: absolute;
-
-  top: 5%;
-  left: 5%;
-
-  width: 35%;
-  min-width: 250px;
   display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
+  gap: 1rem;
+  top: 2rem;
+  left: 2rem;
+  width: 85%;
+  max-width: 600px;
 }
 
 .map {

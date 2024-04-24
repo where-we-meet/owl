@@ -23,7 +23,9 @@ const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
   const mapRef = useRef<kakao.maps.Map | null>(null);
 
   useEffect(() => {
-    mapRef.current?.relayout();
+    setTimeout(function () {
+      mapRef.current?.relayout();
+    }, 300);
   }, [isOpened]);
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
