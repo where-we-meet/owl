@@ -1,8 +1,11 @@
 .map_container {
+  position: relative;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  position: relative;
+
   aspect-ratio: 1.9;
   border-radius: 12px;
   border: 2px solid #ddd;
@@ -41,19 +44,6 @@
 .center_pin_drag {
   top: 42%;
   opacity: 0.5;
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-.address {
-  display: flex;
-  justify-content: space-between;
 }
 
 .button_wrapper {

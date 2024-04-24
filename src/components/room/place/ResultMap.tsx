@@ -60,11 +60,6 @@ const ResultMap = ({ roomId }: { roomId: string }) => {
           </>
         )}
       </div>
-      <div className={styles.box}>
-        <div className={styles.address}>
-          <p>{address}</p>
-        </div>
-      </div>
     </>
   );
 };
