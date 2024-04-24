@@ -1,15 +1,17 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+
 import { Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useSettingMap } from '@/hooks/useSettingMap';
 import { Spinner } from '@nextui-org/react';
+
 import GeolocationButton from './GeolocationButton';
 import SearchBar from './search/SearchBar';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
-import { useEffect, useRef } from 'react';
 import StartLocationBox from './StartLocationBox';
 import styles from './SettingMap.module.css';
 
@@ -17,6 +19,7 @@ const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
   const [loading, error] = useKakaoMap();
   const { location, halfwayPoint, roomUsers, isPinned, handleChangeCenter, isDrag, setIsDrag, isGpsLoading } =
     useSettingMap();
+
   const mapRef = useRef<kakao.maps.Map | null>(null);
 
   useEffect(() => {
