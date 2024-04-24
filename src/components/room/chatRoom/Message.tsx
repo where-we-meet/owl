@@ -9,7 +9,7 @@ export const Message = ({ message }: { message: IMessage }) => {
         <div>
           <img
             src={`${message.user_profile}`}
-            alt={message.users?.name!}
+            alt={message.name!}
             width={40}
             height={40}
             style={{ width: 40, height: 40 }}
@@ -18,7 +18,7 @@ export const Message = ({ message }: { message: IMessage }) => {
         <div className={styles.content}>
           <div className={styles.chat_info}>
             <div className={styles.user_info}>
-              <h3 className={styles.name}>{message.users?.name}</h3>
+              <h3 className={styles.name}>{message.name}</h3>
               <h3 className={styles.date_time}>{new Date(message.created_at).toDateString()}</h3>
             </div>
           </div>

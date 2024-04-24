@@ -14,7 +14,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
   const { data: userData } = useQueryUsersData(user.id);
 
   const handleSendMessage = async (text: string) => {
-    if (!text.trim() && !userData) {
+    if (!text.trim() || !userData) {
       return;
     }
     const newMessage = {
@@ -25,6 +25,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
       created_at: new Date().toISOString(),
       room_id: roomId,
       user_profile: userData[0].profile_url,
+      name: userData[0].name,
       users: {
         id: userData[0].id,
         profile_url: userData[0].profile_url,
@@ -36,7 +37,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
 
     const { data, error } = await supabase
       .from('message')
-      .insert({ text, room_id: roomId, user_profile: newMessage.user_profile });
+      .insert({ name: newMessage.name, text, room_id: roomId, user_profile: newMessage.user_profile });
 
     if (error) throw error;
     return data;
