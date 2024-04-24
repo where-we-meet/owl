@@ -40,4 +40,4 @@ next-env.d.ts
 
 # pwa
 **/public/sw**
-**/public/workbox-*.js
+**/public/workbox-**
