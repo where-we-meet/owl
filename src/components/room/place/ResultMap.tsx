@@ -7,10 +7,8 @@ import { useMapController } from '@/hooks/useMapController';
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
 import CategorySelector from './search/CategorySelector';
-import RangeController from './RangeController';
 import CategoryMarker from './search/CategoryMarker';
 
-import { Link } from '@nextui-org/react';
 import styles from './ResultMap.module.css';
 
 const ResultMap = ({ roomId }: { roomId: string }) => {
@@ -28,6 +26,9 @@ const ResultMap = ({ roomId }: { roomId: string }) => {
       <div className={styles.map_container}>
         {isHalfwayValid && (
           <>
+            <div className={styles.category_container}>
+              <CategorySelector />
+            </div>
             <Map
               center={halfwayPoint}
               className={styles.map}
@@ -59,13 +60,10 @@ const ResultMap = ({ roomId }: { roomId: string }) => {
           </>
         )}
       </div>
-      <CategorySelector />
       <div className={styles.box}>
         <div className={styles.address}>
           <p>{address}</p>
-          <Link href={`/room/${roomId}/pick-place`}>내 장소 변경하기</Link>
         </div>
-        <RangeController />
       </div>
     </>
   );

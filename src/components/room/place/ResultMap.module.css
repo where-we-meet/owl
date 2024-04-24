@@ -9,6 +9,11 @@
   overflow: hidden;
 }
 
+.category_container {
+  display: flex;
+  z-index: 2;
+}
+
 .map {
   position: absolute;
   width: 100%;
