@@ -30,7 +30,6 @@ export const ListMessage = ({ roomId }: { roomId: string }) => {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'message', filter: `room_id=eq.${roomId}` },
         (payload) => {
-          console.log(payload);
           queryClient.setQueryData<IMessage[]>(['message', roomId], (oldMessages = []) => {
             return [...oldMessages, payload.new as IMessage];
           });
