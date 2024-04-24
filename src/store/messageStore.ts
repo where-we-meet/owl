@@ -8,6 +8,7 @@ export type IMessage = {
   text: string | null;
   room_id: string | null;
   user_profile: string | null;
+  name: string | null;
   users: {
     created_at: string;
     id: string;

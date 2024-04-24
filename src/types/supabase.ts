@@ -14,6 +14,7 @@ export type Database = {
           created_at: string
           id: string
           is_edit: boolean | null
+          name: string | null
           room_id: string | null
           send_by: string
           text: string | null
@@ -23,6 +24,7 @@ export type Database = {
           created_at?: string
           id?: string
           is_edit?: boolean | null
+          name?: string | null
           room_id?: string | null
           send_by?: string
           text?: string | null
@@ -32,12 +34,27 @@ export type Database = {
           created_at?: string
           id?: string
           is_edit?: boolean | null
+          name?: string | null
           room_id?: string | null
           send_by?: string
           text?: string | null
           user_profile?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "message_name_fkey"
+            columns: ["name"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "message_user_profile_fkey"
+            columns: ["user_profile"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["profile_url"]
+          },
           {
             foreignKeyName: "public_message_room_id_fkey"
             columns: ["room_id"]
@@ -51,13 +68,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "public_message_user_profile_fkey"
-            columns: ["user_profile"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["profile_url"]
           },
         ]
       }
@@ -160,7 +170,6 @@ export type Database = {
           is_admin: boolean
           lat: string | null
           lng: string | null
-          profile_url: string | null
           room_id: string
           start_location: string | null
           user_id: string
@@ -171,7 +180,6 @@ export type Database = {
           is_admin?: boolean
           lat?: string | null
           lng?: string | null
-          profile_url?: string | null
           room_id: string
           start_location?: string | null
           user_id: string
@@ -182,19 +190,11 @@ export type Database = {
           is_admin?: boolean
           lat?: string | null
           lng?: string | null
-          profile_url?: string | null
           room_id?: string
           start_location?: string | null
           user_id?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "public_userdata_room_profile_url_fkey"
-            columns: ["profile_url"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["profile_url"]
-          },
           {
             foreignKeyName: "public_userdata_room_room_id_fkey"
             columns: ["room_id"]
