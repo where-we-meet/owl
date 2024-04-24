@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  Avatar,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Tooltip,
-  useDisclosure
-} from '@nextui-org/react';
+import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 
 import { useQueryUser } from '@/hooks/useQueryUser';

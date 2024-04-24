@@ -22,15 +22,12 @@
 }
 
 .channel {
-  width: 60px;
-
   display: flex;
   flex-direction: column;
-
+  width: 60px;
   background: white;
   border-right: 1px solid rgba(138, 43, 226, 0.25);
   box-shadow: 0px 0px 2px -1px #8a2be2;
-
   z-index: 16;
 }
 
@@ -38,8 +35,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
+  margin-top: 1rem;
 }
 
 .map {
