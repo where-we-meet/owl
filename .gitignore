@@ -38,6 +38,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-#serwist
+# pwa
 **/public/sw**
-**/public/swe**
+**/public/workbox-*.js
