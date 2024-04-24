@@ -33,8 +33,8 @@ export const useSearchDataStore = create(
   persist<SearchData>(
     (set, get) => ({
       location: {
-        lat: 33.450701,
-        lng: 126.570667
+        lat: 37.50232593365278,
+        lng: 127.04444559870342
       },
       address: '',
       addressName: '',
@@ -57,7 +57,7 @@ export const useRangeStore = create<Range>((set) => ({
 }));
 
 export const useGpsStatusStore = create<GpsStatus>((set) => ({
-  isGpsLoading: true,
+  isGpsLoading: false,
   errorMessage: null,
   setIsGpsLoading: (payload) => set({ isGpsLoading: payload }),
   setErrorMessage: (payload) => set({ errorMessage: payload })
