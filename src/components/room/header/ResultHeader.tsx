@@ -5,8 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getRoomData } from '@/api/supabaseCSR/supabase';
 import UserProfile from '@/components/header/profile/UserProfileButton';
 import LinkShare from '../share/LinkShare';
-import styles from './ResultHeader.module.css';
 import { Image } from '@nextui-org/react';
+import styles from './ResultHeader.module.css';
 
 const ResultHeader = ({ roomId }: { roomId: string }) => {
   const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
@@ -25,6 +25,7 @@ const ResultHeader = ({ roomId }: { roomId: string }) => {
         <div className={styles.confirm_info}>
           <Image src="/pin.svg" className={styles.pin} />
           <p>{address}</p>
+
           <span>/</span>
           <p>{room ? room.confirmed_date : '확정 날짜를 불러오는 중'}</p>
         </div>
