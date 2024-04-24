@@ -24,11 +24,12 @@ const ResultMap = ({ roomId }: { roomId: string }) => {
   return (
     <>
       <div className={styles.map_container}>
+        <div className={styles.category_container}>
+          <CategorySelector />
+        </div>
+
         {isHalfwayValid && (
           <>
-            <div className={styles.category_container}>
-              <CategorySelector />
-            </div>
             <Map
               center={halfwayPoint}
               className={styles.map}
