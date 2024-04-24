@@ -36,7 +36,7 @@ const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
           <GeolocationButton />
         </div>
         <div>
-          {isGpsLoading && <Spinner className={styles.center_pin} color="primary" />}
+          {isGpsLoading && <Spinner className={styles.center_spinner} color="primary" />}
           <div>
             <Image
               src={'/pin.svg'}
