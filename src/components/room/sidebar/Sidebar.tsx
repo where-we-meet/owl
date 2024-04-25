@@ -1,19 +1,15 @@
-import { Link, Tooltip } from '@nextui-org/react';
 import Calender from '../calender/Calender';
 import RoomHeader from '../header/RoomHeader';
 import UserList from './user/UserList';
 import LinkShare from '../share/LinkShare';
-import { useQueryUser } from '@/hooks/useQueryUser';
-import { useQueryRoomUsers } from '@/hooks/useQueryRoomUsers';
 import { useParams } from 'next/navigation';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { ExitRoomButton } from '../ExitRoomButton';
+import { Link, Tooltip } from '@nextui-org/react';
 import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
   const { id: roomId }: { id: string } = useParams();
-  const { id: userId } = useQueryUser();
-  const { roomUsers, isPending } = useQueryRoomUsers(roomId, userId);
 
   return (
     <>
