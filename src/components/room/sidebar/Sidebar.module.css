@@ -32,7 +32,7 @@
 .exit {
   position: relative;
 
-  top: 1px;
+  right: -15px;
 
   display: flex;
   align-items: center;
