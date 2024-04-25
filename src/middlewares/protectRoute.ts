@@ -6,14 +6,21 @@ import { createClient } from '@/utils/supabase/server';
 export function protectRoute(middleware: CustomMiddleware) {
   return async (request: NextRequest, event: NextFetchEvent, response: NextResponse) => {
     const supabase = createClient();
-    const { data, error } = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error
+    } = await supabase.auth.getUser();
 
     const pathname = request.nextUrl.pathname;
     const protectedPath = ['/start', '/room', '/my-owl'];
 
-    if (protectedPath.some((path) => pathname.startsWith(path))) {
-      if (error || !data?.user) {
+    if (error || !user) {
+      if (protectedPath.some((path) => pathname.startsWith(path))) {
         return NextResponse.redirect(new URL(`/login?next=${request.nextUrl.pathname}`, request.url));
+      }
+    } else {
+      if (pathname.startsWith('/login')) {
+        return NextResponse.redirect(new URL('/', request.url));
       }
     }
 
