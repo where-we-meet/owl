@@ -13,7 +13,7 @@ export function protectRoute(middleware: CustomMiddleware) {
 
     if (protectedPath.some((path) => pathname.startsWith(path))) {
       if (error || !data?.user) {
-        return NextResponse.redirect(new URL(`/login`, request.url));
+        return NextResponse.redirect(new URL(`/login?next=${request.nextUrl.pathname}`, request.url));
       }
     }
 
