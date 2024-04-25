@@ -1,7 +1,7 @@
 import { Image } from '@nextui-org/react';
 import styles from './Article.module.css';
 
-const IMAGE_WIDTH_SIZE = 250;
+const IMAGE_WIDTH_SIZE = 270;
 export const Article = ({
   image_url,
   subtitle,

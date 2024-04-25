@@ -46,7 +46,7 @@ export default function Home() {
             contents={`OWL-LiNK는 모임에 참가한 유저들의 출발 위치에 기반하여\n최적의 모임 장소를 선정합니다.\n또한, 모임 확정 이후에는 모임 방에서 일정을 한 눈에 확인할 수 있어요.`}
           />
           <Article
-            image_url="images/landing_third.png"
+            image_url="images/landing_fourth.png"
             subtitle={`주변 인프라 조회 및\n실시간 채팅`}
             contents={`확정된 모임 방에서 주변 인프라를 조회하며 실시간으로 채팅 할 수 있어요.\nOWL-LiNK로 가볼만한 장소들을 쉽게 알아볼 수 있어요.`}
           />
