@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import Head from 'next/head';
 
 import Providers from './providers';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
@@ -61,9 +61,9 @@ export default async function RootLayout({
 
   return (
     <html lang="ko">
-      <head>
-        <style>@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');</style>
-      </head>
+      <Head>
+        <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet" />
+      </Head>
       <body>
         <Providers>
           <HydrationBoundary state={dehydrate(queryClient)}>
