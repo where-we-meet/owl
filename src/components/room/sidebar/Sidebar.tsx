@@ -11,9 +11,9 @@ import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
   const { id: roomId }: { id: string } = useParams();
-<<<<<<< HEAD
+  const { roomUsers, isPending } = useQueryRoomUsers();
 
-  return (
+  const participantNumber = roomUsers.length;
 
   return (
     <div className={styles.room}>
@@ -31,9 +31,9 @@ const Sidebar = () => {
             <IoMdPerson />
             {participantNumber}
           </p> */}
->>>>>>> c33fde8 (refactor: useQueryRoomUsers 리팩토링으로 매개변수 수정하고 안쓰는 전역 상태 대체)
       </div>
 
+      <RoomHeader />
       <Calender />
       <p className={styles.select_date}>
         <FaRegCheckCircle /> 가능한 일자를 달력에서 선택해주세요.
