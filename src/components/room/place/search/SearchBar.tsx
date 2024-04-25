@@ -1,4 +1,5 @@
 'use client';
+
 import { type ChangeEvent, useState, useCallback, useRef } from 'react';
 import debounce from 'lodash-es/debounce';
 import { useQuerySearchPlace } from '@/hooks/useQueryPlace';

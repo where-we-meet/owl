@@ -1,5 +1,6 @@
-import React from 'react';
-export const SearchIcon = (props: any) => (
+import { CSSProperties } from 'react';
+
+export const SearchIcon = (props: { style?: CSSProperties }) => (
   <svg
     aria-hidden="true"
     fill="none"
