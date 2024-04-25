@@ -212,3 +212,9 @@ export const deleteSelectedDate = async ({ roomId, userId, date }: { roomId: str
 
   if (error) throw error;
 };
+
+export const deleteExitUserData = async (payload: { roomId: string; userId: string }) => {
+  const { error } = await supabase.from('userdata_room').delete().eq('user_id', payload.userId);
+
+  if (error) throw error;
+};
