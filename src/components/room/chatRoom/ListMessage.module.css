@@ -1,4 +1,27 @@
 .container {
-  overflow-y: auto;
   max-height: 500px;
+
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+
+  overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  top: 1rem;
+}
+
+.container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #d1d1d1;
+  border-radius: 15px;
+}
+
+.container::-webkit-scrollbar-button {
+  height: 1rem;
 }
