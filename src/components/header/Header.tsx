@@ -15,7 +15,7 @@ const Header = async () => {
     <header className={styles.header}>
       <Link href="/" title="홈으로 이동">
         <span className={styles.logo}>
-          <img src="images/real_logo_without_text.png" width={40} alt="OWL-LiNK logo" />
+          <img src="images/real_logo_without_text_white.png" width={40} alt="OWL-LiNK logo" />
           <p>OWL-LiNK</p>
         </span>
       </Link>
