@@ -1,5 +1,9 @@
 'use client';
+import { Button } from '@nextui-org/react';
 import { useEffect } from 'react';
+
+import styles from './InstallAppButton.module.css';
+import { LuDownload } from 'react-icons/lu';
 
 const InstallAppButton = () => {
   let deferredPrompt: any;
@@ -22,7 +26,9 @@ const InstallAppButton = () => {
 
   return (
     <>
-      <button onClick={installApp}>앱 설치하기</button>
+      <Button className={styles.install_button} onPress={installApp} endContent={<LuDownload />}>
+        앱 설치하기
+      </Button>
     </>
   );
 };
