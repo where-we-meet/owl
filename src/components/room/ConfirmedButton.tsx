@@ -3,7 +3,7 @@ import { mostSchedule } from '@/utils/mostSchedule';
 import { useParams } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { useQuerySchedule } from '@/hooks/useQuerySchedule';
@@ -23,6 +23,7 @@ import styles from './ConfirmedButton.module.css';
 
 const ConfirmedButton = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();
   const { data: userSchedules } = useQuerySchedule({ roomId, userId });
@@ -41,6 +42,7 @@ const ConfirmedButton = () => {
 
   const handleConfirm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!lat || !lng) return;
     const confirmed_date = e.currentTarget.date.value;
     const roomUsersData: { roomId: string; updated: RoomUserDate } = {
@@ -55,8 +57,12 @@ const ConfirmedButton = () => {
     };
 
     await mutateAsync(roomUsersData);
+
+    queryClient.invalidateQueries({
+      queryKey: ['room', 'confirmed', 'createdBy']
+    });
+
     setIsFetchDone(true);
-    router.push(`/room/${roomId}/confirm`);
   };
 
   if (!room || isPending) return null;

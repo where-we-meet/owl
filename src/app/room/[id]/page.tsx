@@ -27,10 +27,10 @@ const SettingPage = () => {
   });
 
   useEffect(() => {
-    if (room && room.verified && room.created_by !== userId) {
-      router.push(`/room/${roomId}/confirm`);
+    if (room && room.verified) {
+      router.replace(`/room/${roomId}/confirm`);
     }
-  }, [room?.verified]);
+  }, [room]);
 
   const toggleSidebar = () => {
     setIsOpened((prev) => !prev);
