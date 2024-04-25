@@ -73,8 +73,8 @@ const SettingMap = ({ isOpened }: { isOpened: boolean }) => {
           >
             {roomUsers
               .filter(({ lat, lng }) => lat !== null && lng !== null)
-              .map(({ id, lat, lng, users }) => (
-                <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} user={users} />
+              .map((user) => (
+                <UserMarker key={user.id} user={user} />
               ))}
             {isHalfwayValid && <Halfway location={halfwayPoint} />}
           </Map>
