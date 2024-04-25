@@ -1,6 +1,6 @@
-import type { RoomUserDate } from '@/hooks/useMutateUserData';
-import { RoomUser } from '@/types/roomUser';
 import { createClient } from '@/utils/supabase/client';
+import type { RoomUserDate } from '@/hooks/useMutateUserData';
+import type { UpsertRoomUsers } from '@/types/roomUser';
 
 const supabase = createClient();
 
@@ -20,9 +20,7 @@ export const insertNewRoom = async ({
   return data;
 };
 
-export const upsertRoomUser = async (
-  userData: Pick<RoomUser, 'room_id' | 'user_id' | 'start_location' | 'is_admin' | 'lat' | 'lng'>
-) => {
+export const upsertRoomUser = async (userData: UpsertRoomUsers) => {
   const { data, error } = await supabase.from('userdata_room').upsert([{ ...userData }]);
   if (error) throw error;
   return data;
