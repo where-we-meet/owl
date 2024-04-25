@@ -8,6 +8,7 @@
   font-weight: 400;
   font-style: normal;
   justify-content: center;
+  background-color: #222222;
 }
 
 .logo {
@@ -18,12 +19,14 @@
 
 .logo > p {
   font-size: 1rem;
+  color: white;
 }
 .menu {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-left: auto;
+  color: white;
 }
 
 .header > a {
