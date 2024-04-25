@@ -25,7 +25,7 @@ export const ChatRoom = ({ roomId }: { roomId: string }) => {
       </Tooltip>
       <Modal
         closeButton
-        size="3xl"
+        size="xl"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         isDismissable={false}
