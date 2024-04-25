@@ -1,9 +1,12 @@
 import type { RoomUser } from '@/types/roomUser';
 
-export function mergeRoomUsersById(roomUsers: any, userProfiles: any) {
+export function mergeRoomUsersById(
+  roomUsers: Omit<RoomUser, 'name' | 'profile_url'>[],
+  userProfiles: Pick<RoomUser, 'name' | 'profile_url'>[]
+) {
   let mergedArray: RoomUser[] = [];
 
-  roomUsers.forEach((roomUser: RoomUser) => {
+  roomUsers.forEach((roomUser) => {
     let userProfile = userProfiles.find((profile: Partial<RoomUser>) => profile.id === roomUser.user_id);
 
     if (userProfile) {
