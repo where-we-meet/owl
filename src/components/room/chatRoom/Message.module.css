@@ -5,15 +5,25 @@
 }
 
 .chatbox_body {
-  flex: 1;
   height: auto;
-  background-color: rgb(49, 49, 49);
+  background-color: white;
 }
+
 .profiles {
+  padding: 1.2rem;
+
   display: flex;
   flex-direction: row;
-  padding: 1.2rem;
+  align-items: center;
+
   gap: 0.6rem;
+}
+
+.profile_image {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-image: cover;
 }
 
 .content {
@@ -31,20 +41,24 @@
 .user_info {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 0.6rem;
 }
 
 .name {
   font-size: large;
   font-weight: bold;
-  color: rgb(196, 196, 196);
+  color: rgb(18 18 18);
 }
 
 .date_time {
   font-size: small;
-  color: rgb(196, 196, 196);
+  color: rgb(182 182 182);
 }
 
 .chat_log {
-  color: rgb(196, 196, 196);
+  color: rgb(23 23 23);
+  background-color: #e4e4e4;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
 }
