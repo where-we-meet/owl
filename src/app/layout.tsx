@@ -61,6 +61,9 @@ export default async function RootLayout({
 
   return (
     <html lang="ko">
+      <head>
+        <style>@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');</style>
+      </head>
       <body>
         <Providers>
           <HydrationBoundary state={dehydrate(queryClient)}>
