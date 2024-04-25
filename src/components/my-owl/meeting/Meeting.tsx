@@ -7,6 +7,7 @@ import { RiVerifiedBadgeFill } from 'react-icons/ri';
 import { UserInfo, useQueryMyRooms } from '@/hooks/useQueryMyRooms';
 import { Avatar, AvatarGroup } from '@nextui-org/react';
 import styles from './Meeting.module.css';
+import { MeetingIsPending } from './MeetingIsPending';
 
 export const Meeting = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ export const Meeting = () => {
     router.push(`/room/${roomId}`);
   };
 
-  if (isPending) return <>로딩중</>;
+  if (isPending) return <MeetingIsPending />;
 
   return (
     <div className={styles.rooms_box}>
