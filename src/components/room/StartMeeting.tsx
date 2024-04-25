@@ -3,10 +3,10 @@
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCurrentFormattedDate } from '@/utils/getCurrentFormattedDate';
-import { MdStart } from 'react-icons/md';
 import { insertNewRoom, upsertRoomUser } from '@/api/room';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import roomNameGenerator from '@/utils/roomNameGenerator';
+import { MdStart } from 'react-icons/md';
 import { Button, Input } from '@nextui-org/react';
 import styles from './StartMeeting.module.css';
 
