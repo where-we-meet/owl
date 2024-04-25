@@ -11,6 +11,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
 import { ChatRoom } from '@/components/room/chatRoom/ChatRoom';
+import { ExitRoomButton } from '@/components/room/ExitRoomButton';
 import styles from './page.module.css';
 
 const SettingPage = () => {
@@ -39,6 +40,7 @@ const SettingPage = () => {
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
       <nav className={styles.channel}>
         <div className={styles.profile}>
+          <ExitRoomButton />
           <UserProfile />
         </div>
         <MyRooms />
