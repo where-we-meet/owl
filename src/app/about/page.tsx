@@ -1,6 +1,7 @@
 import { MemberCard } from '@/components/about/MemberCard';
 import PayPalDonate from '@/components/auth/PayPalDonate';
 import styles from './page.module.css';
+import Image from 'next/image';
 
 const DEVELOPERS_INFO = [
   { name: '양희철', githubURL: 'https://github.com/heechul94' },
@@ -16,6 +17,7 @@ export default function AboutPage() {
       <title>Team OWNLP</title>
       <main className={styles.main}>
         <header className={styles.header}>
+          <Image src="/images/real_logo_without_text_white.png" alt="logo" width={100} height={100} />
           <h1 className={styles.title}>We</h1>
         </header>
         <div className={styles.divider}>
@@ -23,11 +25,11 @@ export default function AboutPage() {
           <span className={styles.divider_text}>Member & Project</span>
           <div className={styles.divider_bar} />
         </div>
-        <section className={styles.section}>
+        <div className={styles.section}>
           {DEVELOPERS_INFO.map((developer, index) => (
             <MemberCard key={index} name={developer.name} githubURL={developer.githubURL} />
           ))}
-        </section>
+        </div>
         <PayPalDonate />
       </main>
     </>
