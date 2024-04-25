@@ -21,7 +21,7 @@ const Calender = () => {
   const { id: userId }: { id: string } = useQueryUser();
   const { id: roomId }: { id: string } = useParams();
 
-  const { roomUsers, isPending } = useQueryRoomUsers(roomId, userId);
+  const { roomUsers, isPending } = useQueryRoomUsers();
   const participantNumber = roomUsers.length;
 
   const [nowDate, setNowDate] = useState<Date>(new Date());
