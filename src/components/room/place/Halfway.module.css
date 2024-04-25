@@ -1,0 +1,14 @@
+.halfway_container {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+}
+
+.marker {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
