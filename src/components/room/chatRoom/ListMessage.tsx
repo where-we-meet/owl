@@ -1,11 +1,12 @@
 'use client';
-import styles from './ListMessage.module.css';
-import { IMessage, useMessageStore } from '@/store/messageStore';
+
+import { IMessage } from '@/store/messageStore';
 import { Message } from './Message';
 import { useEffect, useRef } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getMessageData } from '@/api/supabaseCSR/supabase';
+import styles from './ListMessage.module.css';
 
 export const ListMessage = ({ roomId }: { roomId: string }) => {
   const supabase = createClient();
