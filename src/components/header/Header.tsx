@@ -27,7 +27,9 @@ const Header = async () => {
             <UserProfile />
           </>
         ) : (
-          <Link href="/login">로그인</Link>
+          <Link href="/login" className={styles.login}>
+            로그인
+          </Link>
         )}
       </div>
     </header>
