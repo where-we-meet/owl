@@ -6,21 +6,29 @@
 
 .icon {
   position: absolute;
-  right: 2%;
-  top: 20%;
+  right: 3%;
+  top: 16%;
 }
 
 .iconActive {
   position: absolute;
-  right: 2%;
-  top: 20%;
-  color: blueviolet;
+  right: 3%;
+  top: 16%;
+  color: #7828c8;
 }
 
 .input_box {
-  resize: none;
+  padding: 10px 20px;
+
+  margin-bottom: 1rem;
+
   width: 100%;
-  border: 2px solid gray;
-  padding: 10px;
   height: 2.5rem;
+
+  border-radius: 20px;
+  background-color: #e4e4e4;
+}
+
+.input_box:focus {
+  outline: 2px solid #b197fc;
 }
