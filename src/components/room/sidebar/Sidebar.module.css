@@ -29,6 +29,17 @@
   justify-content: space-between;
 }
 
+.exit {
+  position: relative;
+
+  top: 1px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
 .brand {
   padding: 0.2rem 0;
 
