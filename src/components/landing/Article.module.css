@@ -4,7 +4,8 @@
   justify-content: center; /* 가로 중앙 정렬을 위해 추가 */
   width: 100%;
   padding: 3rem;
-  gap: 1rem;
+  margin: 2rem 0;
+  gap: 2.3rem;
   text-align: left;
 }
 
@@ -12,40 +13,46 @@
   background-color: #fbf9f9;
 }
 
+.image {
+  flex: 1;
+}
+
 .description {
   padding-left: 1rem;
-  flex: 1;
+  width: 31rem;
 }
 
 .subtitle {
   font-size: clamp(1.3rem, 5vw, 2rem);
   font-weight: 500;
   white-space: pre-wrap;
-}
-
-.image {
-  max-height: 100px;
+  line-height: 105%;
 }
 
 .use_case {
-  font-size: 1rem;
+  padding-top: 0.8rem;
+  font-size: clamp(0.7rem, 4vw, 1rem);
   white-space: pre-wrap;
 }
 
 @media only screen and (max-width: 600px) {
   .article {
     flex-direction: column;
-    align-items: center; /* 세로 중앙 정렬을 위해 수정 */
+    align-items: center;
     padding: 1rem;
     text-align: center;
   }
 
   .description {
-    padding-left: 0; /* Adjusted padding for smaller screens */
-    width: 100%;
+    width: 90%;
+    justify-content: center;
   }
 
   .image {
     width: 100%;
+  }
+
+  .use_case {
+    white-space: normal;
   }
 }
