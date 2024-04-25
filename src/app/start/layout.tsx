@@ -1,11 +1,15 @@
 import { ReactNode } from 'react';
 import styles from './layout.module.css';
+import Header from '@/components/header/Header';
+import Footer from '@/components/Footer';
 
 const RoomLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <main className={styles.main}>
-      <div>{children}</div>
-    </main>
+    <>
+      <Header />
+      <main className={styles.main}>{children}</main>
+      <Footer />
+    </>
   );
 };
 
