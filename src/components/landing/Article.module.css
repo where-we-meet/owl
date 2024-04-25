@@ -5,7 +5,7 @@
   width: 100%;
   padding: 3rem;
   margin: 2rem 0;
-  gap: 2.3rem;
+  gap: 5rem;
   text-align: left;
 }
 
@@ -19,18 +19,18 @@
 
 .description {
   padding-left: 1rem;
-  width: 31rem;
+  width: 30rem;
 }
 
 .subtitle {
   font-size: clamp(1.5rem, 5vw, 2rem);
-  font-weight: 500;
+  font-weight: 600;
   white-space: pre-wrap;
   line-height: 105%;
 }
 
 .use_case {
-  padding-top: 0.8rem;
+  padding-top: 1rem;
   font-size: clamp(0.7rem, 4vw, 1rem);
   white-space: pre-wrap;
 }
