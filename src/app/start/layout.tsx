@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import styles from './layout.module.css';
-import Header from '@/components/header/Header';
-import Footer from '@/components/Footer';
 
 const RoomLayout = ({ children }: { children: ReactNode }) => {
   return (

@@ -1,7 +1,7 @@
 import StartMeeting from '@/components/landing/StartMeetingBtn';
 import { Article } from '@/components/landing/Article';
-import Header from '@/components/header/Header';
-import Footer from '@/components/Footer';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import styles from './page.module.css';
 
 export default function Home() {
