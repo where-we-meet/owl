@@ -1,10 +1,9 @@
 'use client';
-import { Meeting } from '../my-owl/meeting/Meeting';
+import { Meeting } from '../meeting/Meeting';
 import { HiRectangleStack } from 'react-icons/hi2';
 import { Modal, ModalBody, ModalContent, useDisclosure } from '@nextui-org/react';
 import { MouseEvent } from 'react';
 import styles from './MeetingModalButton.module.css';
-import { exit } from 'process';
 
 export const MeetingModalButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

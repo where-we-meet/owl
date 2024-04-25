@@ -1,14 +1,12 @@
 import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
-import { deleteProfileImage, uploadImage } from '@/api/supabaseCSR/supabase';
-import { byteCalculator } from '@/utils/my-owl/profile/modal/byteCalculator';
 import { useRoomUserDataStore } from '@/store/userProfileStore';
-
-import styles from './Modal.module.css';
-
 import { IoIosClose, IoIosLink } from 'react-icons/io';
 import { MdOutlineUploadFile } from 'react-icons/md';
 import { AiOutlinePicture } from 'react-icons/ai';
+import { byteCalculator } from '@/utils/profile/byteCalculator';
+import { deleteProfileImage, uploadImage } from '@/api/profile';
+import styles from './ImageUploadModal.module.css';
 
 const MAX_FILE_SIZE_BYTE = 2097152; //2MB
 
@@ -120,6 +118,7 @@ export const ImageUploadModal = ({
       setPreview(null);
     }
   }, [file]);
+
   return (
     <div className={styles.background} onClick={handleToggleModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>

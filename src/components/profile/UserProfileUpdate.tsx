@@ -1,18 +1,15 @@
 'use client';
 
-import type { ChangeEvent } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button, ModalHeader, ModalBody, Avatar, Tooltip } from '@nextui-org/react';
-import { changeUserProfile, deleteProfileImage, updateUserName } from '@/api/supabaseCSR/supabase';
-import { getUserProfileData } from '@/api/profile';
+import { changeUserProfile, deleteProfileImage, getUserProfileData, updateUserName } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { ImageUploadModal } from '../../my-owl/profile/modal/Modal';
-
+import { useRoomUserDataStore } from '@/store/userProfileStore';
+import { ImageUploadModal } from './ImageUploadModal';
 import { IoChevronBack } from 'react-icons/io5';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import styles from './UserProfileUpdate.module.css';
-import { useRoomUserDataStore } from '@/store/userProfileStore';
 
 const MAX_NAME_LENGTH = 8;
 
