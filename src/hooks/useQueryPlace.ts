@@ -26,7 +26,7 @@ export const useQuerySearchCategory = (searchOption: SearchOptionData) => {
   const { data, isPending } = useQuery<Place[]>({
     queryKey: ['search-category', searchOption],
     queryFn: async () => await getSearchPlace('', searchOption),
-    enabled: !!searchOption,
+    enabled: !!searchOption?.query,
     gcTime: 300_000
   });
   return { data, isPending };
