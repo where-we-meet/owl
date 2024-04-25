@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-
 import type { SearchOptionData } from '@/types/place.types';
 
 type SearchData = {

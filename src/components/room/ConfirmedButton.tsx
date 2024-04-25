@@ -1,4 +1,5 @@
 'use client';
+
 import { mostSchedule } from '@/utils/mostSchedule';
 import { useParams } from 'next/navigation';
 import { FormEvent, useState } from 'react';
@@ -7,7 +8,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { useQuerySchedule } from '@/hooks/useQuerySchedule';
-import { useRouter } from 'next/navigation';
 import { RoomUserDate, useRoomUserData } from '@/hooks/useMutateUserData';
 import {
   Button,
@@ -22,7 +22,6 @@ import {
 import styles from './ConfirmedButton.module.css';
 
 const ConfirmedButton = () => {
-  const router = useRouter();
   const queryClient = useQueryClient();
   const { id: roomId }: { id: string } = useParams();
   const { id: userId } = useQueryUser();

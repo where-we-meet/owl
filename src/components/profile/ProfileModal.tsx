@@ -1,12 +1,11 @@
+import { useState } from 'react';
 import { Modal, ModalContent } from '@nextui-org/react';
 import UserProfileUpdate from './UserProfileUpdate';
 import UserProfileRead from './UserProfileRead';
-import { useState } from 'react';
-
-import styles from './ProfileModal.module.css';
 import { useRoomUserDataStore } from '@/store/userProfileStore';
-import { deleteProfileImage } from '@/api/supabaseCSR/supabase';
 import { useQueryUser } from '@/hooks/useQueryUser';
+import { deleteProfileImage } from '@/api/profile';
+import styles from './ProfileModal.module.css';
 
 export const ProfileModal = ({ onClose, isOpen }: { onClose: () => void; isOpen: boolean }) => {
   const [editMode, setEditMode] = useState(false);
