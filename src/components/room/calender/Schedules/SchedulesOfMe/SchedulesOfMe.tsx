@@ -1,4 +1,3 @@
-import React from 'react';
 import { isSameDay } from 'date-fns';
 import styles from './SchedulesOfMe.module.css';
 

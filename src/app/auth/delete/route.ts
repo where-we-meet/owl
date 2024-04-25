@@ -46,8 +46,8 @@ export async function POST(req: NextRequest) {
     if (user.identities?.length === 2) {
       const googleIdentity = user.identities.find((identity) => identity.provider === 'google');
       if (googleIdentity) {
-        const { data, error } = await supabaseAdmin.auth.unlinkIdentity(googleIdentity);
-        console.log('data => ', data, 'error => ', error);
+        const { error } = await supabaseAdmin.auth.unlinkIdentity(googleIdentity);
+        if (error) throw error;
       }
 
       const kakaoIdentity = user.identities.find((identity) => identity.provider === 'kakao');
