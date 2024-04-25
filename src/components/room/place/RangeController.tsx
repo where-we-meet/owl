@@ -1,7 +1,8 @@
-import { ChangeEvent } from 'react';
-import styles from './RangeController.module.css';
+'use client';
+
+import { type MouseEvent, useState } from 'react';
 import { useRangeStore } from '@/store/placeStore';
-import { Button } from '@nextui-org/react';
+import styles from './RangeController.module.css';
 
 const RADIUS_RANGES = [200, 700, 2000, 4000];
 
@@ -10,37 +11,27 @@ const rangeConversion = (value: number) => {
 };
 
 const RangeController = () => {
+  const [currentRange, setCurrentRange] = useState('r_200');
   const { range, setRange } = useRangeStore((state) => state);
 
-  const handleChangeRange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRange(+e.currentTarget.value);
-  };
-
-  const resetRange = () => {
-    setRange(0);
+  const handleChangeRange = (e: MouseEvent<HTMLDivElement>) => {
+    setRange(+e.currentTarget.id);
+    setCurrentRange(`r_${e.currentTarget.id}`);
   };
 
   return (
-    <>
-      <div className={styles.range_controller}>
-        <form className={styles.range_wrap}>
-          {RADIUS_RANGES.map((value) => (
-            <label key={value} htmlFor={`radius-${value}`} data-radius={`${rangeConversion(value)}`}>
-              <input
-                id={`radius-${value}`}
-                name="radius"
-                type="radio"
-                value={value}
-                checked={range === value}
-                onChange={handleChangeRange}
-                required
-              />
-            </label>
-          ))}
-        </form>
-        <Button onClick={resetRange}>검색범위 초기화!</Button>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <span className={styles.select_range}>{`${rangeConversion(range)}`}</span>
+        <div className={styles.range_bar}></div>
+        <div className={`${styles.range_select_circle} ${styles[currentRange]}`}></div>
+        {RADIUS_RANGES.map((value) => (
+          <>
+            <div key={value} id={`${value}`} className={styles.range_circle} onClick={handleChangeRange} />
+          </>
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 
