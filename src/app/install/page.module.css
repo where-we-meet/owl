@@ -1,17 +1,12 @@
 .main {
+  width: 100%;
+  height: 100vh;
+  background-color: #222222;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
-}
-
-.start {
-  color: white;
-}
-
-.head {
-  width: 100%;
-  background-color: #222222;
 }
 
 .copy_container {
@@ -24,13 +19,12 @@
   position: relative;
 }
 
-.head_copy {
-  margin-bottom: 1.5rem;
+.service_name {
   color: white;
-  font-weight: bold;
-  font-size: clamp(1.8rem, 8vw, 3.2rem);
-  word-break: keep-all;
-  line-height: 1.2;
+  font-size: 6rem;
+  font-family: 'Poiret One', sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .middle_copy {
