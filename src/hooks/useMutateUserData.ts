@@ -1,11 +1,5 @@
-import { updateRoomData } from '@/api/room';
-import {
-  upsertSchedule,
-  updateStartLocation,
-  deleteMySchedules,
-  deleteExitUserData,
-  deleteExitUserSchedule
-} from '@/api/supabaseCSR/supabase';
+import { deleteExitUserData, deleteExitUserSchedule, deleteRoomByAdmin, updateRoomData } from '@/api/room';
+import { upsertSchedule, updateStartLocation, deleteMySchedules } from '@/api/supabaseCSR/supabase';
 import type { UserLocationData } from '@/types/place.types';
 import { UpsertUserSchedule } from '@/types/roomUser';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -73,6 +67,15 @@ export const useDeleteExitUser = (roomId: string) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['left-room-user', roomId] });
+    }
+  });
+  return { mutateAsync, isSuccess };
+};
+
+export const useDeleteRoom = () => {
+  const { mutateAsync, isSuccess } = useMutation({
+    mutationFn: async (payload: { roomId: string; userId: string }) => {
+      await deleteRoomByAdmin(payload);
     }
   });
   return { mutateAsync, isSuccess };
