@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
@@ -42,11 +44,11 @@ const CategorySelector = () => {
       {SEARCH_CATEGORY.map((item) => (
         <li
           key={item.name}
-          className={searchOption && searchOption.query === item.name ? `${styles.selected}` : ''}
+          className={`${searchOption && searchOption.query === item.name && styles.selected}`}
           onClick={() => handleSearch(item.name)}
         >
-          {item.icon}
-          <span>{item.name}</span>
+          <div>{item.icon}</div>
+          <span className={styles.name}>{item.name}</span>
         </li>
       ))}
     </ul>
