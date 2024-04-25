@@ -56,7 +56,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
   };
 
   const handlePrintMessage = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && canSend) {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing && canSend) {
       handleSendMessage(e.currentTarget.value);
       setInputText('');
     }
