@@ -23,7 +23,7 @@
 }
 
 .subtitle {
-  font-size: clamp(1.3rem, 5vw, 2rem);
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: 500;
   white-space: pre-wrap;
   line-height: 105%;
