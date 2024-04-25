@@ -218,3 +218,13 @@ export const deleteExitUserData = async (payload: { roomId: string; userId: stri
 
   if (error) throw error;
 };
+
+export const deleteExitUserSchedule = async (payload: { roomId: string; userId: string }) => {
+  const { error } = await supabase
+    .from('room_schedule')
+    .delete()
+    .eq('room_id', payload.roomId)
+    .eq('created_by', payload.userId);
+
+  if (error) throw error;
+};
