@@ -18,7 +18,11 @@ export default function AboutPage() {
         <header className={styles.header}>
           <h1 className={styles.title}>We</h1>
         </header>
-        <p className={styles.divider_text}>Member & Project</p>
+        <div className={styles.divider}>
+          <div className={styles.divider_bar} />
+          <span className={styles.divider_text}>Member & Project</span>
+          <div className={styles.divider_bar} />
+        </div>
         <section className={styles.section}>
           {DEVELOPERS_INFO.map((developer, index) => (
             <MemberCard key={index} name={developer.name} githubURL={developer.githubURL} />
