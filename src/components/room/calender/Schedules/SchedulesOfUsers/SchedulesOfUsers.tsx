@@ -1,7 +1,6 @@
-import React from 'react';
 import { isSameDay } from 'date-fns';
-import styles from './SchedulesOfUsers.module.css';
 import type { UserSchedule } from '../../EntireOfMonth';
+import styles from './SchedulesOfUsers.module.css';
 
 type Props = {
   userSchedules: UserSchedule[];

@@ -1,10 +1,10 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { IMessage } from '@/store/messageStore';
 import { Message } from './Message';
-import { useEffect, useRef } from 'react';
 import { createClient } from '@/utils/supabase/client';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getMessageData } from '@/api/supabaseCSR/supabase';
 import styles from './ListMessage.module.css';
 
@@ -26,7 +26,7 @@ export const ListMessage = ({ roomId }: { roomId: string }) => {
 
   useEffect(() => {
     const channel = supabase
-      .channel('chatMessage')
+      .channel(`chatMessage-${roomId}`)
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'message', filter: `room_id=eq.${roomId}` },

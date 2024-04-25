@@ -1,11 +1,8 @@
-import React from 'react';
-import type { Tables } from '@/types/supabase';
-
 import calculateOfMonth from '@/utils/calendar/calculateOfMonth';
-import { Schedules } from './Schedules/Schedules';
-
 import dayColors from '@/utils/calendar/dayColors';
 import { checkIsSelectedDate } from '@/utils/calendar/checkIsSelectedDate';
+import { Schedules } from './Schedules/Schedules';
+import type { Tables } from '@/types/supabase';
 import styles from './EntireOfMonth.module.css';
 
 export type UserSchedule = Tables<'room_schedule'>;
