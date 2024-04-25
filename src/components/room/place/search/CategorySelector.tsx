@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { IoCafe, IoRestaurant } from 'react-icons/io5';
@@ -20,19 +20,27 @@ const SEARCH_CATEGORY = [
 ];
 
 const CategorySelector = () => {
+  const [currentSelected, setCurrentSelected] = useState('');
+
   const searchOption = useSearchDataStore((state) => state.searchOption);
   const { setSearchOption, updateSearchRange } = useSearchDataStore((state) => state);
   const { lat, lng } = useHalfwayDataStore((state) => state);
   const range = useRangeStore((state) => state.range);
 
   const handleSearch = (category: string) => {
-    const newSearchOption = {
-      query: category,
-      x: '' + lng,
-      y: '' + lat,
-      radius: range
-    };
-    setSearchOption(newSearchOption);
+    if (currentSelected === category) {
+      setCurrentSelected('');
+      setSearchOption(null);
+    } else {
+      const newSearchOption = {
+        query: category,
+        x: '' + lng,
+        y: '' + lat,
+        radius: range
+      };
+      setCurrentSelected(category);
+      setSearchOption(newSearchOption);
+    }
   };
 
   useEffect(() => {
