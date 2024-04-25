@@ -4,7 +4,7 @@ import { type MouseEvent, useState } from 'react';
 import { useRangeStore } from '@/store/placeStore';
 import styles from './RangeController.module.css';
 
-const RADIUS_RANGES = [200, 700, 2000, 4000];
+const RADIUS_RANGES = [200, 500, 1000, 2000];
 
 const rangeConversion = (value: number) => {
   return value >= 1000 ? `${value / 1000}km` : `${value}m`;
