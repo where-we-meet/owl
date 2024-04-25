@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 import UserCard from './UserCard';
 import { upsertRoomUser } from '@/api/room';
+import styles from './UserList.module.css';
 
 const UserList = () => {
   const { id: userId } = useQueryUser();
@@ -33,11 +34,11 @@ const UserList = () => {
   }, [isPending]);
 
   return (
-    <>
+    <ul className={styles.user_list}>
       {roomUsers.map((user) => (
         <UserCard key={user.user_id} user={user} />
       ))}
-    </>
+    </ul>
   );
 };
 

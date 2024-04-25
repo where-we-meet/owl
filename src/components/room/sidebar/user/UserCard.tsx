@@ -38,7 +38,7 @@ const UserCard = ({ user }: { user: User }) => {
 
   return (
     <Tooltip placement="bottom-end" color="secondary" content="친구들의 위치를 확인하기">
-      <div
+      <li
         className={`${styles.usercard} ${isCurrentUser ? styles.currentuser : ''}`}
         onClick={() => handleClickUser(user)}
       >
@@ -51,7 +51,7 @@ const UserCard = ({ user }: { user: User }) => {
             {userInfo.startLocation ? userInfo.startLocation : '확정된 출발 위치를 보여줍니다.'}
           </p>
         </div>
-      </div>
+      </li>
     </Tooltip>
   );
 };
