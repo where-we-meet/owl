@@ -3,7 +3,6 @@ import styles from './Header.module.css';
 import Link from 'next/link';
 import { MeetingModalButton } from './MeetingModalButton';
 import UserProfile from './profile/UserProfileButton';
-import { Image } from '@nextui-org/react';
 
 const Header = async () => {
   const supabase = createClient();
