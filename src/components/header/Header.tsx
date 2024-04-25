@@ -3,6 +3,7 @@ import styles from './Header.module.css';
 import Link from 'next/link';
 import { MeetingModalButton } from './MeetingModalButton';
 import UserProfile from './profile/UserProfileButton';
+import { Image } from '@nextui-org/react';
 
 const Header = async () => {
   const supabase = createClient();
@@ -14,8 +15,12 @@ const Header = async () => {
   return (
     <header className={styles.header}>
       <Link href="/" title="홈으로 이동">
-        OWL-LiNK
+        <span className={styles.logo}>
+          <img src="images/real_logo_without_text.png" width={40} alt="OWL-LiNK logo" />
+          <p>OWL-LiNK</p>
+        </span>
       </Link>
+
       <div className={styles.menu}>
         {user ? (
           <>
