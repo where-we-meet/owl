@@ -33,6 +33,7 @@
   padding-top: 1rem;
   font-size: clamp(0.7rem, 4vw, 1rem);
   white-space: pre-wrap;
+  color: #4e4e4e;
 }
 
 @media only screen and (max-width: 600px) {
