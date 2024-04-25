@@ -34,3 +34,7 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+.login:hover {
+  color: #a281f5;
+}
