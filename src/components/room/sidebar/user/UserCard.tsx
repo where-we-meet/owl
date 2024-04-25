@@ -37,7 +37,12 @@ const UserCard = ({ user }: { user: User }) => {
   };
 
   return (
-    <Tooltip placement="bottom-end" color="secondary" content="친구들의 위치를 확인하기">
+    <Tooltip
+      placement="bottom-end"
+      color="secondary"
+      content="친구들의 위치를 확인하기"
+      isDisabled={!user.lat || !user.lng}
+    >
       <li
         className={`${styles.usercard} ${isCurrentUser ? styles.currentuser : ''}`}
         onClick={() => handleClickUser(user)}
