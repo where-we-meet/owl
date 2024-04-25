@@ -7,6 +7,13 @@ import Footer from '@/components/layout/Footer';
 import { FaGithub } from 'react-icons/fa6';
 import styles from './page.module.css';
 
+const DEVELOPERS_INFO = {
+  양희철: 'https://github.com/heechul94',
+  이참: 'https://github.com/ketchup0211',
+  나의찬: 'https://github.com/lauichan',
+  오소향: 'https://github.com/SohyangO',
+  박강토: 'https://github.com/gidalim'
+};
 export default function AboutPage() {
   return (
     <>
