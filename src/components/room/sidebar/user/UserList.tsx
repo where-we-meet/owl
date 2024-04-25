@@ -3,7 +3,7 @@
 import { useGetRoomUsers } from '@/hooks/useGetRoomUsers';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import { useParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import UserCard from './UserCard';
 import { upsertRoomUser } from '@/api/room';
 import styles from './UserList.module.css';

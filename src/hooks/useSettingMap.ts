@@ -1,31 +1,25 @@
 'use client';
 
-import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import debounce from 'lodash-es/debounce';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import { useQueryAddress } from './useQueryPlace';
-import { useRoomUserDataStore } from '@/store/roomUserStore';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
-import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
+import { useQueryRoomUsers } from './useQueryRoomUsers';
 
 export const useSettingMap = () => {
-  const { id: roomId }: { id: string } = useParams();
   const [isDrag, setIsDrag] = useState(false);
+  const { roomUsers } = useQueryRoomUsers();
+  const {
+    currentUser: [roomUser]
+  } = useQueryRoomUsers();
 
   const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
   const isGpsLoading = useGpsStatusStore((state) => state.isGpsLoading);
-  const { data: searchAddress, isPending: isAddressPending } = useQueryAddress(location, isDrag);
-  const { data: roomUsers = [] } = useQuery({
-    queryKey: ['room-users', roomId],
-    queryFn: () => getRoomUsersData(roomId)
-  });
-
   const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
-  const roomUser = useRoomUserDataStore((state) => state.roomUser);
+  const { data: searchAddress, isPending: isAddressPending } = useQueryAddress(location, isDrag);
 
   const isPinned = !!roomUser?.start_location;
 
@@ -37,10 +31,6 @@ export const useSettingMap = () => {
   };
 
   const handleChangeCenter = useCallback(debounce(setCenter, 200), []);
-
-  useEffect(() => {
-    if (roomUser && roomUser.lat && roomUser.lng) setLocation({ lat: +roomUser.lat, lng: +roomUser.lng });
-  }, [roomUser]);
 
   useEffect(() => {
     if (searchAddress) {
