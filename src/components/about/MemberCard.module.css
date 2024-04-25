@@ -32,6 +32,7 @@
 .default_info > p:first-child {
   font-size: 1.2rem;
 }
+
 .github_link {
   display: flex;
   flex-direction: column;
