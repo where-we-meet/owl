@@ -15,8 +15,6 @@ const Sidebar = () => {
   const { id: userId } = useQueryUser();
   const { roomUsers, isPending } = useQueryRoomUsers(roomId, userId);
 
-  const participantNumber = roomUsers.length;
-
   return (
     <>
       <div className={styles.room}>
@@ -29,11 +27,6 @@ const Sidebar = () => {
               <ExitRoomButton roomId={roomId} />
             </p>
           </Tooltip>
-
-          {/* <p className={styles.participants}>
-            <IoMdPerson />
-            {participantNumber}
-          </p> */}
         </div>
 
         <RoomHeader />
