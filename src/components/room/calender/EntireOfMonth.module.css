@@ -40,8 +40,9 @@
 .weekday {
   color: black;
 }
+
 .today {
-  color: pink;
+  color: DeepPink;
 }
 
 .sunday {
