@@ -40,7 +40,7 @@ const SettingPage = () => {
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
       <nav className={styles.channel}>
         <div className={styles.profile}>
-          <ExitRoomButton />
+          <ExitRoomButton roomId={roomId} />
           <UserProfile />
         </div>
         <MyRooms />
