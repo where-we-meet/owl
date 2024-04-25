@@ -1,11 +1,9 @@
 .room {
   display: flex;
   flex-direction: column;
-  width: 100%;
   gap: 1rem;
   padding: 1rem;
   overflow-y: scroll;
-  height: 100%;
 }
 
 .room::-webkit-scrollbar {
