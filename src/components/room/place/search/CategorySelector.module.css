@@ -3,29 +3,41 @@
   flex-direction: row;
   gap: 0.5rem;
 
-  width: 80%;
-  margin-top: 0.5rem;
+  padding-left: 1rem;
+  width: 100%;
+
+  background-color: inherit;
+
+  overflow-x: scroll;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@media screen and (max-width: 600px) {
-  .category > li > span {
-    display: none;
-  }
+.category::-webkit-scrollbar {
+  display: none;
 }
 
 .category > li {
-  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
-  height: 3rem;
+
   padding: 0.2rem 0.5rem;
-  border-radius: 12px;
-  background: white;
+
+  width: auto;
+
   border: 1px solid #ddd;
+  border-radius: 12px;
+
+  background: white;
   font-size: 0.9rem;
   cursor: pointer;
+}
+
+.name {
+  white-space: nowrap;
 }
 
 .category > li.selected {
