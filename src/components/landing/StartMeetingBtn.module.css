@@ -2,10 +2,11 @@
   top: 2.5rem;
 
   padding: 1rem 3rem;
-  background-color: #7a1fbffc;
-  color: rgb(241 241 241);
+  border: 2px solid #875cf6;
+  background-color: #222222;
+  color: #875cf6;
 
   margin: auto;
   font-size: clamp(0.8rem, 8vw, 1.2rem);
-  font-weight: 600;
+  font-weight: 500;
 }
