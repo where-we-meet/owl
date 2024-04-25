@@ -1,8 +1,8 @@
-import { createClient } from '@/utils/supabase/server';
-import styles from './Header.module.css';
 import Link from 'next/link';
-import { MeetingModalButton } from './MeetingModalButton';
-import UserProfile from './profile/UserProfileButton';
+import { createClient } from '@/utils/supabase/server';
+import { MeetingModalButton } from '../meeting/MeetingModalButton';
+import UserProfile from '../profile/UserProfileButton';
+import styles from './Header.module.css';
 
 const Header = async () => {
   const supabase = createClient();

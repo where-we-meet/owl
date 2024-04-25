@@ -1,11 +1,11 @@
-import PayPalDonate from '@/components/auth/PayPalDonate';
 import Image from 'next/image';
-import styles from './page.module.css';
 import Link from 'next/link';
-import { FaGithub } from 'react-icons/fa6';
 import owl_image from '../../../public/images/about_owl_image.jpg';
-import Header from '@/components/header/Header';
-import Footer from '@/components/Footer';
+import PayPalDonate from '@/components/auth/PayPalDonate';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import { FaGithub } from 'react-icons/fa6';
+import styles from './page.module.css';
 
 export default function AboutPage() {
   return (

@@ -1,6 +1,7 @@
 import { Link } from '@nextui-org/react';
-import styles from './Footer.module.css';
 import { FaGithub } from 'react-icons/fa';
+import styles from './Footer.module.css';
+
 const Footer = () => {
   return (
     <footer className={styles.footer}>
@@ -17,6 +18,3 @@ const Footer = () => {
 };
 
 export default Footer;
-{
-  /* <Link href="/about">@about us</Link> */
-}
