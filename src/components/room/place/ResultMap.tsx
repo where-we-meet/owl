@@ -3,8 +3,6 @@
 import { Circle, Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useMapController } from '@/hooks/useMapController';
-import { useSearchDataStore } from '@/store/placeStore';
-
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
 import CategoryMarker from './search/CategoryMarker';
@@ -45,8 +43,8 @@ const ResultMap = () => {
         >
           {roomUsers
             .filter(({ lat, lng }) => lat !== null && lng !== null)
-            .map(({ id, lat, lng, users }) => (
-              <UserMarker key={id} id={id} lat={lat as string} lng={lng as string} user={users} />
+            .map((user) => (
+              <UserMarker key={user.id} user={user} />
             ))}
           {searchCategory.map((info) => (
             <CategoryMarker key={info.id} info={info} clickId={clickId} setClickId={setClickId} />
