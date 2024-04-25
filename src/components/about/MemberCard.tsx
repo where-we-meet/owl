@@ -2,23 +2,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './MemberCard.module.css';
 import { FaGithub } from 'react-icons/fa6';
+import { Avatar } from '@nextui-org/react';
 
 export const MemberCard = ({ name, githubURL }: { name: string; githubURL: string }) => {
   return (
     <div className={styles.profile}>
-      <figure className={styles.figure}>
-        <Image src="/images/about_owl_image.jpg" width={125} height={125} alt="default image" />
-      </figure>
-      <div className={styles.profiles_contents}>
-        <p>{name}</p>
-        <p>저희는 이번 프로젝트를 통해...</p>
+      <div className={styles.profile_contents}>
+        <Avatar src="/images/about_owl_image.jpg" className={styles.profile_avatar} />
+        <div className={styles.default_info}>
+          <p>{name}</p>
+          <p>dev</p>
+        </div>
       </div>
-      <div className={styles.github_link}>
+      {/* <div className={styles.github_link}>
         <Link href={githubURL}>
           <FaGithub color="#8a2be2" size={45} />
         </Link>
         <p>{`${name}의 GitHub 바로가기`}</p>
-      </div>
+      </div> */}
     </div>
   );
 };

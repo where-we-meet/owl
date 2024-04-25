@@ -1,8 +1,6 @@
 .profile {
   display: flex;
   flex-direction: column;
-  border: 2px solid #875cf6;
-  min-width: 250px;
   padding: 1rem;
 }
 
@@ -14,12 +12,26 @@
   padding: 1.6rem;
 }
 
-.profiles_contents {
+.profile_contents {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
+.profile_avatar {
+  width: 3rem;
+  height: 3rem;
+}
+
+.default_info {
+  color: white;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.default_info > p:first-child {
+  font-size: 1.2rem;
+}
 .github_link {
   display: flex;
   flex-direction: column;
