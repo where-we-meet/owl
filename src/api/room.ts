@@ -39,3 +39,31 @@ export const updateRoomData = async (payload: { roomId: string; updated: RoomUse
   if (error) throw error;
   return data;
 };
+
+export const deleteExitUserData = async (payload: { roomId: string; userId: string }) => {
+  const { error } = await supabase.from('userdata_room').delete().eq('user_id', payload.userId);
+
+  if (error) throw error;
+};
+
+export const deleteExitUserSchedule = async (payload: { roomId: string; userId: string }) => {
+  const { error } = await supabase
+    .from('room_schedule')
+    .delete()
+    .eq('room_id', payload.roomId)
+    .eq('created_by', payload.userId);
+
+  if (error) throw error;
+};
+
+export const deleteRoomByAdmin = async (payload: { roomId: string; userId: string }) => {
+  const { error } = await supabase.from('rooms').delete().eq('id', payload.roomId).eq('created_by', payload.userId);
+
+  if (error) throw error;
+};
+
+export const getIsAdmin = async (roomId: string, userId: string) => {
+  const { data, error } = await supabase.from('rooms').select('created_by').eq('id', roomId).eq('created_by', userId);
+  if (error) throw error;
+  return data;
+};
