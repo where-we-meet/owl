@@ -1,9 +1,9 @@
 'use client';
 
-import { getMyParticipatingRoomsData, getUserMeetingsId } from '@/api/supabaseCSR/supabase';
-import { sortMeetingInfo } from '@/utils/my-owl/meeting/sortMeetingInfo';
+import { getMyRoomsData, getUserMeetingsId } from '@/api/supabaseCSR/supabase';
 import { useQueryUser } from './useQueryUser';
 import { useQuery } from '@tanstack/react-query';
+import { sortMeetingInfo } from '@/utils/profile/sortMeetingInfo';
 
 export type UserInfo = {
   user_id: string;
@@ -28,7 +28,7 @@ export const useQueryMyRooms = () => {
   const fetchMeetingInfo = async () => {
     const roomData = await getUserMeetingsId(userId);
     const roomIds = roomData.map((item) => item.room_id);
-    return await getMyParticipatingRoomsData(roomIds);
+    return await getMyRoomsData(roomIds);
   };
 
   const { data = [], isPending } = useQuery({ queryKey: ['myRooms', userId], queryFn: fetchMeetingInfo });

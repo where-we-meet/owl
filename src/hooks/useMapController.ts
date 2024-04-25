@@ -1,16 +1,12 @@
-import { useQueryAddress, useQuerySearchCategory } from '@/hooks/useQueryPlace';
+import { debounce } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useQueryAddress, useQuerySearchCategory } from '@/hooks/useQueryPlace';
 import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
-import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
-import { debounce } from 'lodash';
+import { useQueryRoomUsers } from './useQueryRoomUsers';
 
 export const useMapController = () => {
-  const { id: roomId }: { id: string } = useParams();
-
   const [isDrag, setIsDrag] = useState(false);
   const [address, setAddress] = useState('');
   const [clickId, setClickId] = useState('');
@@ -19,10 +15,7 @@ export const useMapController = () => {
   const range = useRangeStore((state) => state.range);
   const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
 
-  const { data: roomUsers = [] } = useQuery({
-    queryKey: ['room-users', roomId],
-    queryFn: () => getRoomUsersData(roomId)
-  });
+  const { roomUsers } = useQueryRoomUsers();
   const { data: searchCategory, isPending: isCategoryPending } = useQuerySearchCategory(searchOption);
 
   const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
