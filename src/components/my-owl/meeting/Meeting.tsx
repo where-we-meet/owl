@@ -4,17 +4,17 @@ import { useRouter } from 'next/navigation';
 import { BsCalendarDateFill } from 'react-icons/bs';
 import { FaMapLocationDot } from 'react-icons/fa6';
 import { RiVerifiedBadgeFill } from 'react-icons/ri';
-import { UserInfo, useQueryMyRooms } from '@/hooks/useQueryMyRooms';
+import { MeetingInfo, UserInfo, useQueryMyRooms } from '@/hooks/useQueryMyRooms';
 import { Avatar, AvatarGroup } from '@nextui-org/react';
-import styles from './Meeting.module.css';
 import { MeetingIsPending } from './MeetingIsPending';
+import styles from './Meeting.module.css';
 
 export const Meeting = () => {
   const router = useRouter();
   const { myRooms, isPending } = useQueryMyRooms();
 
-  const handleClickRoom = (roomId: string | null) => {
-    router.push(`/room/${roomId}`);
+  const handleClickRoom = (roomId: string | null, meeting: MeetingInfo) => {
+    meeting.verified ? router.push(`/room/${roomId}/confirm`) : router.push(`/room/${roomId}`);
   };
 
   if (isPending) return <MeetingIsPending />;
@@ -25,7 +25,7 @@ export const Meeting = () => {
         <p>현재 참여중인 모임이 없습니다.</p>
       ) : (
         myRooms.map((meeting, index) => (
-          <div key={index} onClick={() => handleClickRoom(meeting.id)}>
+          <div key={index} onClick={() => handleClickRoom(meeting.id, meeting)}>
             <div className={styles.room_box}>
               <div className={styles.room_box_left}>
                 <div className={styles.meeting_main_info}>
