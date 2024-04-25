@@ -1,8 +1,9 @@
-import ResultMap from '@/components/room/place/ResultMap';
 import ResultHeader from '@/components/room/header/ResultHeader';
+import ResultMap from '@/components/room/place/ResultMap';
+import CategorySelector from '@/components/room/place/search/CategorySelector';
+import RangeController from '@/components/room/place/RangeController';
 import { ChatRoom } from '@/components/room/chatRoom/ChatRoom';
 import styles from './page.module.css';
-import CategorySelector from '@/components/room/place/search/CategorySelector';
 
 const RoomPage = ({ params }: { params: { id: string } }) => {
   return (
@@ -12,6 +13,7 @@ const RoomPage = ({ params }: { params: { id: string } }) => {
         <CategorySelector />
       </div>
       <ResultMap />
+      <RangeController />
       <ChatRoom roomId={params.id} />
     </div>
   );
