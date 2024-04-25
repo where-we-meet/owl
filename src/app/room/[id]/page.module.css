@@ -12,7 +12,7 @@
   left: -280px;
   display: flex;
   max-width: 340px;
-  width: calc(100% - 80px);
+  width: 100%;
   background-color: white;
   transition: left ease 0.4s;
   z-index: 15;
@@ -53,6 +53,7 @@
   box-shadow: 4px 0px 5px -3px gray;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
+  width: calc(100% - 85px);
 }
 
 .opened > .map {
@@ -74,11 +75,5 @@
 @media screen and (max-width: 800px) {
   .opened > .map {
     padding-left: 0;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  #toggle {
-    left: -40px;
   }
 }
