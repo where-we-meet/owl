@@ -3,6 +3,7 @@
 import { Circle, Map } from 'react-kakao-maps-sdk';
 import { useKakaoMap } from '@/hooks/useKakaoMap';
 import { useMapController } from '@/hooks/useMapController';
+import { useSearchDataStore } from '@/store/placeStore';
 
 import UserMarker from './UserMarker';
 import Halfway from './Halfway';
@@ -13,7 +14,17 @@ import styles from './ResultMap.module.css';
 const ResultMap = () => {
   const [loading, error] = useKakaoMap();
 
-  const { halfwayPoint, range, clickId, setClickId, roomUsers, searchCategory = [] } = useMapController();
+  const {
+    location,
+    halfwayPoint,
+    range,
+    clickId,
+    setClickId,
+    setIsDrag,
+    handleChangeCenter,
+    roomUsers,
+    searchCategory = []
+  } = useMapController();
 
   const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
 
@@ -24,8 +35,11 @@ const ResultMap = () => {
     <>
       {isHalfwayValid && (
         <Map
-          center={halfwayPoint}
+          center={location}
           className={styles.map}
+          onCenterChanged={(map) => handleChangeCenter(map)}
+          onDragStart={() => setIsDrag(true)}
+          onDragEnd={() => setIsDrag(false)}
           onClick={() => setClickId('')}
           onTouchEnd={() => setClickId('')}
         >
