@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/client';
+import { mergeRoomUsersById } from '@/utils/mergeRoomUsersById';
 import type { UserLocationData } from '@/types/place.types';
 import type { UpsertUserSchedule } from '@/types/roomUser';
 
@@ -33,10 +34,18 @@ export const getRoomData = async (roomId: string) => {
   return data[0];
 };
 
+// export const getRoomUsersData = async (roomId: string) => {
+//   const { data, error } = await supabase.from('userdata_room').select(`*`).eq('room_id', roomId);
+//   if (error) throw error;
+//   return data;
+// };
 export const getRoomUsersData = async (roomId: string) => {
-  const { data, error } = await supabase.from('userdata_room').select(`*`).eq('room_id', roomId);
+  const { data, error } = await supabase.from('userdata_room').select('*').eq('room_id', roomId);
   if (error) throw error;
-  return data;
+  const userIds = data.map((roomUserData) => roomUserData.user_id);
+  const { data: usersData, error: usersError } = await supabase.from('users').select('*').in('id', userIds);
+  if (usersError) throw usersError;
+  return mergeRoomUsersById(data, usersData);
 };
 
 export const getRoomUsersId = async (roomId: string) => {
@@ -45,11 +54,11 @@ export const getRoomUsersId = async (roomId: string) => {
   return data;
 };
 
-export const getRoomUsersProfile = async (userIds: string[]) => {
-  const { data, error } = await supabase.from('users').select(`*`).in('id', userIds);
-  if (error) throw error;
-  return data;
-};
+// export const getRoomUsersProfile = async (userIds: string[]) => {
+//   const { data, error } = await supabase.from('users').select(`*`).in('id', userIds);
+//   if (error) throw error;
+//   return data;
+// };
 
 export const getMyRoomsData = async (id: string[]) => {
   const { data, error } = await supabase
