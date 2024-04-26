@@ -36,7 +36,7 @@ const CategoryMarker = ({
     <>
       <MapMarker position={{ lat: +y, lng: +x }} onClick={handleClickMarker} />
       {isOpen && (
-        <CustomOverlayMap position={{ lat: +y, lng: +x }} yAnchor={1.4}>
+        <CustomOverlayMap position={{ lat: +y, lng: +x }} yAnchor={1.4} zIndex={7}>
           <Card className={styles.card}>
             <CardHeader className={styles.card_header}>
               <div className={styles.card_header_content}>
