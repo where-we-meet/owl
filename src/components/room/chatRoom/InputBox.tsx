@@ -12,6 +12,7 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
   const supabase = createClient();
   const user = useQueryUser();
   const addMessage = useMessageStore((state) => state.addMessage);
+
   const [inputText, setInputText] = useState('');
   const [canSend, setCanSend] = useState(true);
 
@@ -62,9 +63,21 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
     }
   };
 
+  const handleTouchIcon = () => {
+    if (inputText && canSend) {
+      handleSendMessage(inputText);
+      setInputText('');
+    }
+  };
+
   return (
     <div className={styles.chatbox}>
-      <FiSend className={inputText ? styles.iconActive : styles.icon} size="1.6rem" />
+      <FiSend
+        className={inputText ? styles.iconActive : styles.icon}
+        size="1.6rem"
+        onClick={handleTouchIcon}
+        onTouchEnd={handleTouchIcon}
+      />
       <input
         type="text"
         className={styles.input_box}
