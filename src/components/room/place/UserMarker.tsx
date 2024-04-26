@@ -6,7 +6,7 @@ import styles from './UserMarker.module.css';
 
 const UserMarker = ({ user }: { user: RoomUser }) => {
   return (
-    <CustomOverlayMap position={{ lat: Number(user.lat), lng: Number(user.lng) }} yAnchor={1.4}>
+    <CustomOverlayMap position={{ lat: Number(user.lat), lng: Number(user.lng) }} yAnchor={1.4} zIndex={4}>
       <div className={styles.marker_container}>
         <div className={styles.avatar}>
           <img src={`${user.profile_url}`} alt="user-avatar" />
