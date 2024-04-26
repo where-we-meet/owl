@@ -12,10 +12,13 @@ export const useQueryRoomUsers = () => {
     queryFn: () => getRoomUsersData(roomId)
   });
 
-  const adminUser = userList.filter((user) => user.is_admin);
-  const currentUser = userList.filter((user) => !user.is_admin && user.user_id === userId);
+  const currentUser = userList.filter((user) => user.user_id === userId);
+  const adminUser = userList.filter((user) => user.user_id !== userId && user.is_admin);
   const otherUsers = userList.filter((user) => !user.is_admin && user.user_id !== userId);
-  const roomUsers = [...adminUser, ...currentUser, ...otherUsers];
+  const roomUsers =
+    currentUser[0]?.user_id === adminUser[0]?.user_id
+      ? [...currentUser, ...otherUsers]
+      : [...adminUser, ...currentUser, ...otherUsers];
 
   return { roomUsers, currentUser, isPending };
 };
