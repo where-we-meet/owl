@@ -6,7 +6,7 @@ const placeApi = axios.create({
   headers: { Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}` }
 });
 
-export const getAddress = async (center: { lat: number; lng: number }) => {
+export const getAddress = async (center: { lat: number | null; lng: number | null }) => {
   const { lng, lat } = center;
   const { data } = await placeApi.get('/geo/coord2address', {
     params: {
