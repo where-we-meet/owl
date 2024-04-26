@@ -17,13 +17,14 @@ export const useSettingMap = () => {
 
   const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
   const isGpsLoading = useGpsStatusStore((state) => state.isGpsLoading);
-  const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
+  const { setHalfwayPoint, setHalfwayAddress } = useHalfwayDataStore((state) => state);
 
-  const { data: searchAddress, isPending: isAddressPending } = useQueryAddress(location, isDrag);
+  const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
 
   const isPinned = !!roomUser?.start_location;
 
-  const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
+  const { data: searchAddress, isPending: isAddressPending } = useQueryAddress(location, isDrag);
+  const { data: halfwayPointAddress, isPending: halfwayPointAddressPending } = useQueryAddress(halfwayPoint, false);
 
   const setCenter = (map: kakao.maps.Map) => {
     const latlng = map.getCenter();
@@ -40,10 +41,12 @@ export const useSettingMap = () => {
   }, [searchAddress]);
 
   useEffect(() => {
-    if (halfwayPoint) {
-      updateHalfwayData({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
+    if (halfwayPoint.lat && halfwayPoint.lng) {
+      const address = halfwayPointAddress.road_address?.address_name || halfwayPointAddress.address?.address_name;
+      setHalfwayPoint({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
+      setHalfwayAddress(address);
     }
-  }, [halfwayPoint]);
+  }, [halfwayPoint.lat, halfwayPoint.lng]);
 
   return {
     location,
