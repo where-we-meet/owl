@@ -10,7 +10,7 @@ import { useHalfwayDataStore } from '@/store/halfwayStore';
 const RoomHeader = () => {
   const { id: roomId }: { id: string } = useParams();
 
-  const location = useHalfwayDataStore((state) => state.location);
+  const address = useHalfwayDataStore((state) => state.address);
   const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
 
   return (
@@ -25,7 +25,7 @@ const RoomHeader = () => {
       </div>
       <HalfwayButton />
       <span className={styles.line}></span>
-      <p className={styles.center_address_copy}>{location ? location : '중심 위치 주소를 보여줍니다.'}</p>
+      <p className={styles.center_address_copy}>{address ? address : '중심 위치 주소를 보여줍니다.'}</p>
     </div>
   );
 };
