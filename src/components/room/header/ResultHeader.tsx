@@ -11,12 +11,11 @@ import styles from './ResultHeader.module.css';
 
 const ResultHeader = ({ roomId }: { roomId: string }) => {
   const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
-  const { lat, lng, location } = useHalfwayDataStore((state) => state);
   const setLocation = useSearchDataStore((state) => state.setLocation);
 
   const handleMoveHalfway = () => {
-    if (!lat || !lng) return;
-    setLocation({ lat, lng });
+    if (!room || !room.lat || !room.lng) return;
+    setLocation({ lat: +room.lat, lng: +room.lng });
   };
 
   return (
@@ -30,7 +29,7 @@ const ResultHeader = ({ roomId }: { roomId: string }) => {
       </div>
       <div className={styles.confirm_info} onClick={handleMoveHalfway}>
         <Image src="/pin.svg" className={styles.pin} />
-        <p>{location}</p>
+        <p>{room ? room.location : '주소를 불러오는 중'}</p>
         <span>/</span>
         <p>{room ? room.confirmed_date : '확정 날짜를 불러오는 중'}</p>
       </div>
