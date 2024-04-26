@@ -1,19 +1,25 @@
 import { create } from 'zustand';
 
 type HalfwayData = {
-  lat: number | null;
-  lng: number | null;
-  location: string | null;
+  halfwayPoint: {
+    lat: number | null;
+    lng: number | null;
+  };
+  address: string | null;
   verified: false;
 
-  updateHalfwayData: (payload: { [key: string]: string | number | null }) => void;
+  setHalfwayPoint: (payload: HalfwayData['halfwayPoint']) => void;
+  setHalfwayAddress: (payload: string | null) => void;
 };
 
 export const useHalfwayDataStore = create<HalfwayData>((set) => ({
-  lat: null,
-  lng: null,
-  location: null,
+  halfwayPoint: {
+    lat: null,
+    lng: null
+  },
+  address: null,
   verified: false,
 
-  updateHalfwayData: (payload) => set((state) => ({ ...state, ...payload }))
+  setHalfwayPoint: (payload) => set({ halfwayPoint: payload }),
+  setHalfwayAddress: (payload) => set({ address: payload })
 }));

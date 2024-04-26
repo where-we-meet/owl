@@ -27,7 +27,10 @@ const ConfirmedButton = () => {
   const { id: userId } = useQueryUser();
   const { data: userSchedules } = useQuerySchedule({ roomId, userId });
   const { maxDates } = mostSchedule(userSchedules);
-  const { lat, lng, location } = useHalfwayDataStore();
+  const {
+    halfwayPoint: { lat, lng },
+    address: location
+  } = useHalfwayDataStore();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const { data: room, isPending } = useQuery({

@@ -24,7 +24,7 @@ const CategorySelector = () => {
 
   const searchOption = useSearchDataStore((state) => state.searchOption);
   const { setSearchOption, updateSearchRange } = useSearchDataStore((state) => state);
-  const { lat, lng } = useHalfwayDataStore((state) => state);
+  const { lat, lng } = useHalfwayDataStore((state) => state.halfwayPoint);
   const range = useRangeStore((state) => state.range);
 
   const handleSearch = (category: string) => {

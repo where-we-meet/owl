@@ -2,7 +2,7 @@ import { getAddress, getSearchPlace } from '@/api/place/placeData';
 import type { Place, SearchOptionData } from '@/types/place.types';
 import { useQuery } from '@tanstack/react-query';
 
-export const useQueryAddress = (location: { lat: number; lng: number }, isDrag: boolean) => {
+export const useQueryAddress = (location: { lat: number | null; lng: number | null }, isDrag: boolean) => {
   const { data, isPending } = useQuery({
     queryKey: ['address', location],
     queryFn: async () => await getAddress(location),

@@ -6,7 +6,7 @@ import { Button, Tooltip } from '@nextui-org/react';
 
 const HalfwayButton = () => {
   const setLocation = useSearchDataStore((state) => state.setLocation);
-  const { lat, lng } = useHalfwayDataStore();
+  const { lat, lng } = useHalfwayDataStore((state) => state.halfwayPoint);
 
   const moveToCenter = () => {
     if (!lat || !lng) return;

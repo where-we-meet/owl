@@ -13,7 +13,7 @@ export const useMapController = () => {
 
   const { location, setLocation, searchOption } = useSearchDataStore((state) => state);
   const range = useRangeStore((state) => state.range);
-  const updateHalfwayData = useHalfwayDataStore((state) => state.updateHalfwayData);
+  const { setHalfwayPoint, setHalfwayAddress } = useHalfwayDataStore((state) => state);
 
   const { roomUsers } = useQueryRoomUsers();
   const { data: searchCategory, isPending: isCategoryPending } = useQuerySearchCategory(searchOption);
@@ -30,16 +30,16 @@ export const useMapController = () => {
 
   useEffect(() => {
     if (halfwayPoint.lat && halfwayPoint.lng) {
-      updateHalfwayData({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
+      setHalfwayPoint({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
       setLocation({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
     }
-  }, [halfwayPoint]);
+  }, []);
 
   useEffect(() => {
     if (data) {
       const address = data.road_address?.address_name || data.address?.address_name;
       setAddress(address);
-      updateHalfwayData({ location: address });
+      setHalfwayAddress(address);
     }
   }, [data]);
 
