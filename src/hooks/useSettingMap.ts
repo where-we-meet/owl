@@ -1,22 +1,22 @@
 'use client';
 
-import debounce from 'lodash-es/debounce';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import debounce from 'lodash-es/debounce';
 import { useGpsStatusStore, useSearchDataStore } from '@/store/placeStore';
 import { useQueryAddress } from './useQueryPlace';
+import { useQueryRoomUsers } from './useQueryRoomUsers';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { calcHalfwayPoint } from '@/utils/place/calcHalfwayPoint';
-import { useQueryRoomUsers } from './useQueryRoomUsers';
 
 export const useSettingMap = () => {
   const [isDrag, setIsDrag] = useState(false);
-  const { roomUsers } = useQueryRoomUsers();
   const {
+    roomUsers,
     currentUser: [roomUser]
   } = useQueryRoomUsers();
 
-  const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
   const isGpsLoading = useGpsStatusStore((state) => state.isGpsLoading);
+  const { location, address, setLocation, setAddress } = useSearchDataStore((state) => state);
   const { setHalfwayPoint, setHalfwayAddress } = useHalfwayDataStore((state) => state);
 
   const halfwayPoint = useMemo(() => calcHalfwayPoint(roomUsers), [roomUsers]);
@@ -41,12 +41,12 @@ export const useSettingMap = () => {
   }, [searchAddress]);
 
   useEffect(() => {
-    if (halfwayPoint.lat && halfwayPoint.lng) {
+    if (halfwayPoint.lat && halfwayPoint.lng && halfwayPointAddress) {
       const address = halfwayPointAddress.road_address?.address_name || halfwayPointAddress.address?.address_name;
       setHalfwayPoint({ lat: halfwayPoint.lat, lng: halfwayPoint.lng });
       setHalfwayAddress(address);
     }
-  }, [halfwayPoint.lat, halfwayPoint.lng]);
+  }, [halfwayPoint.lat, halfwayPoint.lng, halfwayPointAddress]);
 
   return {
     location,
