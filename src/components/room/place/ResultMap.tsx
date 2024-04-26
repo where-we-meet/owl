@@ -24,14 +24,12 @@ const ResultMap = () => {
     searchCategory = []
   } = useMapController();
 
-  const isHalfwayValid = halfwayPoint.lat && halfwayPoint.lng;
-
   if (loading) return <div>loading...</div>;
   if (error) return <div>error</div>;
 
   return (
     <>
-      {isHalfwayValid && (
+      {halfwayPoint.lat && halfwayPoint.lng && (
         <Map
           center={location}
           className={styles.map}
@@ -50,9 +48,9 @@ const ResultMap = () => {
             <CategoryMarker key={info.id} info={info} clickId={clickId} setClickId={setClickId} />
           ))}
 
-          <Halfway location={halfwayPoint} />
+          <Halfway location={{ lat: halfwayPoint.lat, lng: halfwayPoint.lng }} />
           <Circle
-            center={halfwayPoint}
+            center={{ lat: halfwayPoint.lat, lng: halfwayPoint.lng }}
             radius={range as number}
             strokeWeight={3}
             strokeColor={'#000000'}
