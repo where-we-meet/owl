@@ -12,7 +12,6 @@ export default function LoginPage() {
         <section className={styles.hero}>
           <LoginButton />
         </section>
-        <PayPalDonate />
       </main>
       <Footer />
     </>
