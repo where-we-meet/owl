@@ -56,8 +56,10 @@ const CategorySelector = () => {
           className={`${searchOption && searchOption.query === item.name && styles.selected}`}
           onClick={() => handleSearch(item.name)}
         >
-          <div>{item.icon}</div>
-          <span className={styles.name}>{item.name}</span>
+          <div key={`${item.name}-icon`}>{item.icon}</div>
+          <span key={`${item.name}-label`} className={styles.name}>
+            {item.name}
+          </span>
         </li>
       ))}
     </ul>
