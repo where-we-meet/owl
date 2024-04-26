@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
-import { useHalfwayDataStore } from '@/store/halfwayStore';
 import { IoCafe, IoRestaurant } from 'react-icons/io5';
 import { FaTrainSubway, FaLandmark } from 'react-icons/fa6';
 import { RiMovie2Line, RiHotelBedFill } from 'react-icons/ri';
 import { BiSolidParking } from 'react-icons/bi';
 import styles from './CategorySelector.module.css';
+import { useQueryRoomData } from '@/hooks/useQueryRoomData';
 
 const SEARCH_CATEGORY = [
   { name: '맛집', icon: <IoRestaurant /> },
@@ -21,10 +21,9 @@ const SEARCH_CATEGORY = [
 
 const CategorySelector = () => {
   const [currentSelected, setCurrentSelected] = useState('');
-
+  const { data: room } = useQueryRoomData();
   const searchOption = useSearchDataStore((state) => state.searchOption);
   const { setSearchOption, updateSearchRange } = useSearchDataStore((state) => state);
-  const { lat, lng } = useHalfwayDataStore((state) => state.halfwayPoint);
   const range = useRangeStore((state) => state.range);
 
   const handleSearch = (category: string) => {
@@ -32,14 +31,16 @@ const CategorySelector = () => {
       setCurrentSelected('');
       setSearchOption(null);
     } else {
-      const newSearchOption = {
-        query: category,
-        x: '' + lng,
-        y: '' + lat,
-        radius: range
-      };
-      setCurrentSelected(category);
-      setSearchOption(newSearchOption);
+      if (room && room.lat && room.lng) {
+        const newSearchOption = {
+          query: category,
+          x: room.lng,
+          y: room.lat,
+          radius: range
+        };
+        setCurrentSelected(category);
+        setSearchOption(newSearchOption);
+      }
     }
   };
 
