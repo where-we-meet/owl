@@ -1,4 +1,10 @@
-import { deleteExitUserData, deleteExitUserSchedule, deleteRoomByAdmin, updateRoomData } from '@/api/room';
+import {
+  deleteExitUserData,
+  deleteExitUserSchedule,
+  deleteRoomByAdmin,
+  updateRoomData,
+  upsertRoomUser
+} from '@/api/room';
 import { upsertSchedule, updateStartLocation, deleteMySchedules } from '@/api/supabaseCSR/supabase';
 import type { UserLocationData } from '@/types/place.types';
 import { UpsertUserSchedule } from '@/types/roomUser';
@@ -79,4 +85,14 @@ export const useDeleteRoom = () => {
     }
   });
   return { mutateAsync, isSuccess };
+};
+
+export const useUpsertRoomUser = (roomId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: upsertRoomUser,
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: ['room-users', roomId] });
+    }
+  });
 };
