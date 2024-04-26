@@ -9,7 +9,7 @@ const RoomPage = ({ params }: { params: { id: string } }) => {
   return (
     <div className={styles.container}>
       <div className={styles.header_container}>
-        <ResultHeader roomId={params.id} />
+        <ResultHeader />
         <CategorySelector />
       </div>
       <ResultMap />

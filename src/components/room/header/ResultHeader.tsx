@@ -1,16 +1,14 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { getRoomData } from '@/api/supabaseCSR/supabase';
-import { useHalfwayDataStore } from '@/store/halfwayStore';
-import { useSearchDataStore } from '@/store/placeStore';
-import LinkShare from '../share/LinkShare';
-import UserProfile from '@/components/profile/UserProfileButton';
 import { Image } from '@nextui-org/react';
+import { useQueryRoomData } from '@/hooks/useQueryRoomData';
+import { useSearchDataStore } from '@/store/placeStore';
+import UserProfile from '@/components/profile/UserProfileButton';
+import LinkShare from '../share/LinkShare';
 import styles from './ResultHeader.module.css';
 
-const ResultHeader = ({ roomId }: { roomId: string }) => {
-  const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
+const ResultHeader = () => {
+  const { data: room } = useQueryRoomData();
   const setLocation = useSearchDataStore((state) => state.setLocation);
 
   const handleMoveHalfway = () => {
