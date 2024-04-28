@@ -16,7 +16,7 @@ const ResetSchedule = () => {
 
   return (
     <Tooltip color="secondary" placement="right" content="선택된 일정을 초기화하기">
-      <Button color="secondary" style={{ cursor: 'pointer' }} onClick={handleResetSchedule} endContent={<LuEraser />}>
+      <Button color="primary" style={{ cursor: 'pointer' }} onClick={handleResetSchedule}>
         초기화
       </Button>
     </Tooltip>

@@ -14,19 +14,21 @@ const RoomHeader = () => {
   const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
 
   return (
-    <div className={styles.room_header}>
-      <div>
-        <div className={styles.title_container}>
-          <h1 className={styles.room_title}>{room ? room.name : '올빼미를 불러오는 중'}</h1>
-        </div>
+    <>
+      <div className={styles.room_header}>
         <div>
-          <ConfirmedButton />
+          <div className={styles.title_container}>
+            <h1 className={styles.room_title}>{room ? room.name : '올빼미를 불러오는 중'}</h1>
+          </div>
         </div>
+        <HalfwayButton />
+        <span className={styles.line}></span>
+        <p className={styles.center_address_copy}>{address ? address : '중심 위치 주소를 보여줍니다.'}</p>
       </div>
-      <HalfwayButton />
-      <span className={styles.line}></span>
-      <p className={styles.center_address_copy}>{address ? address : '중심 위치 주소를 보여줍니다.'}</p>
-    </div>
+      <div>
+        <ConfirmedButton />
+      </div>
+    </>
   );
 };
 

@@ -74,10 +74,11 @@ const ConfirmedButton = () => {
     <>
       <Tooltip color="foreground" placement="right-end" content="일정을 확정하기">
         <Button
-          size="sm"
-          style={{ backgroundColor: 'black', color: 'white' }}
+          // style={{ backgroundColor: 'black', color: 'white' }}
           onPress={onOpen}
           isDisabled={isFetchDone}
+          fullWidth={true}
+          color="primary"
         >
           {isFetchDone ? '모임 확정 완료' : '확정'}
         </Button>
