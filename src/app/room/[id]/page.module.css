@@ -11,6 +11,7 @@
   bottom: 0;
   left: -280px;
   display: flex;
+  justify-content: center;
   max-width: 340px;
   width: 100%;
   background-color: white;
