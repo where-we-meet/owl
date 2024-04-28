@@ -21,7 +21,7 @@ const config = {
             primary: {
               //... 50 to 900
               foreground: '#FFFFFF',
-              DEFAULT: '#8a2be2'
+              DEFAULT: '#6f40d1'
             }
             // ... rest of the colors
           }
@@ -33,7 +33,7 @@ const config = {
             primary: {
               //... 50 to 900
               foreground: '#FFFFFF',
-              DEFAULT: '#8a2be2'
+              DEFAULT: '#6f40d1'
             }
           }
           // ... rest of the colors
@@ -46,7 +46,7 @@ const config = {
               DEFAULT: '#8a2be2',
               foreground: '#000000'
             },
-            focus: '#8a2be2'
+            focus: '#6f40d1'
           }
         }
       }
