@@ -1,8 +1,8 @@
 .chatroom_modal {
   position: fixed;
-  right: 2rem;
-  bottom: 2rem;
-  z-index: 12;
+  right: 1%;
+  bottom: 2.5rem;
+  z-index: 14;
 }
 
 .modal_header {
