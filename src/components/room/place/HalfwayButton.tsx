@@ -22,7 +22,7 @@ const HalfwayButton = () => {
           startContent={<IoMdPin size="1.4rem" />}
           onClick={moveToCenter}
         >
-          중심 위치 주소
+          중심 위치로 이동
         </Button>
       </Tooltip>
     </>
