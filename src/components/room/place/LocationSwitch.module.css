@@ -1,11 +1,10 @@
 .label {
   padding: 0.5rem;
   width: 100%;
-  margin-bottom: 1rem;
   font-weight: normal;
   background-color: white;
   border: 1px solid darkgray;
-  border-radius: 50px;
+  border-radius: 10px;
   text-align: center;
   cursor: pointer;
 }
