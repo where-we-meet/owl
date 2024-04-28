@@ -19,8 +19,8 @@ export const ChatRoom = ({ roomId }: { roomId: string }) => {
   return (
     <div className={styles.chatroom_modal}>
       <Tooltip color="secondary" content="버튼을 눌러 대화를 나눠보세요">
-        <Button color="primary" startContent={<IoChatbubblesSharp size="2rem" />} onPress={handleModalControl}>
-          대화하기
+        <Button isIconOnly color="primary" radius="full" onPress={handleModalControl} aria-label="chat-button">
+          <IoChatbubblesSharp size="1.5rem" />
         </Button>
       </Tooltip>
       <Modal
