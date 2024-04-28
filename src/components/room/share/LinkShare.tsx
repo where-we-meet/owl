@@ -50,7 +50,7 @@ const LinkShare = () => {
       </Modal>
       <div className={styles.button_container}>
         <Tooltip color="secondary" placement="right-end" content="친구들과 공유하기">
-          <Button className={styles.button} onPress={onOpen} color="secondary" endContent={<FaShareAlt />}>
+          <Button className={styles.button} onPress={onOpen} color="primary">
             공유하기
           </Button>
         </Tooltip>
