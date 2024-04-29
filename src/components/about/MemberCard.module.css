@@ -42,8 +42,8 @@
   padding: 10px;
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 430px) {
   .default_info > p:first-child {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 }

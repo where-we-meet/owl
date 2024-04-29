@@ -90,7 +90,7 @@
   justify-content: flex-start;
 
   width: 100%;
-  margin-top: 30px;
+  margin: 30px;
 
   -webkit-box-align: center;
   -webkit-box-pack: start;
@@ -124,7 +124,7 @@
   align-items: center;
 
   width: 100%;
-  height: 200px;
+  height: 180px;
   padding: 10px;
 
   -webkit-box-pack: start;
@@ -132,15 +132,18 @@
 }
 
 .owl_link_img_box {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 180px;
-  margin-right: 10px;
-  width: 180px;
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: center;
   justify-content: center;
+
+  width: 180px;
+  height: 100%;
+
+  margin-right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
 }
 
 .owl_link_content_box {
@@ -188,38 +191,55 @@
   width: 100%;
 
   padding: 0px 10px 10px;
-  margin: 0px;
 }
 
 .review_card_wrap {
-  width: 100%;
-
   display: flex;
   justify-content: flex-start;
   align-items: center;
 
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+
+  gap: 2rem;
 
   -webkit-box-pack: start;
   -webkit-box-align: center;
 }
 
+.review_card_wrap::-webkit-scrollbar {
+  width: 3px;
+  top: 1rem;
+}
+
+.review_card_wrap::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.review_card_wrap::-webkit-scrollbar-thumb {
+  background-color: #a3a3a3;
+  border-radius: 15px;
+}
+.review_card_wrap::-webkit-scrollbar-button {
+  height: 1rem;
+  border-radius: 15px;
+}
+
 .profile_image_box {
-  width: 150px;
+  width: 20%;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  margin-top: 0px;
-  margin-right: 5px;
+  margin: 0 5px;
   -webkit-box-align: center;
   -webkit-box-pack: center;
 }
 
 .profile_image {
-  width: 50%;
+  width: 100%;
   height: 100%;
 
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -227,30 +247,22 @@
 }
 
 .review_box {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  width: 80%;
+  height: 16vh;
 
   margin-top: 0px;
   -webkit-box-pack: center;
 }
 
 .review_title {
-  font-size: 14px;
-  margin-bottom: 6px;
+  font-size: 16px;
   color: white;
 }
 
 .review_content {
-  font-size: 12px;
-  margin-bottom: 6px;
+  font-size: 15px;
+  margin-top: 0.5rem;
   color: rgb(184, 184, 184);
-}
-
-.review_end {
-  font-size: 12px;
-  opacity: 0.4;
-  color: white;
 }
 
 @media screen and (max-width: 800px) {
@@ -265,6 +277,13 @@
 
 @media screen and (max-width: 415px) {
   .introduce {
+    font-size: 0.8rem;
+  }
+  .review_title {
+    font-size: 0.9rem;
+  }
+
+  .review_content {
     font-size: 0.8rem;
   }
 }
