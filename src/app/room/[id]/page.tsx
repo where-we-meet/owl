@@ -6,7 +6,7 @@ import ToggleSidebar from '@/components/room/sidebar/ToggleSidebar';
 import SettingMap from '@/components/room/place/SettingMap';
 import Sidebar from '@/components/room/sidebar/Sidebar';
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { notFound, useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getRoomIsConfirmed } from '@/api/room';
 import { ChatRoom } from '@/components/room/chatRoom/ChatRoom';
@@ -17,10 +17,9 @@ const SettingPage = () => {
   const { id: roomId }: { id: string } = useParams();
   const [isOpened, setIsOpened] = useState(true);
 
-  const { data: room } = useQuery({
-    queryKey: ['room', 'confirmed', 'createdBy', roomId],
-    queryFn: () => getRoomIsConfirmed(roomId),
-    select: (data) => data[0]
+  const { data: room, isError } = useQuery({
+    queryKey: ['is-confirmed-room', roomId],
+    queryFn: () => getRoomIsConfirmed(roomId)
   });
 
   useEffect(() => {
@@ -32,6 +31,8 @@ const SettingPage = () => {
   const toggleSidebar = () => {
     setIsOpened((prev) => !prev);
   };
+
+  if (isError) notFound();
 
   return (
     <div className={`${styles.wrapper} ${isOpened ? styles.opened : ''}`}>
