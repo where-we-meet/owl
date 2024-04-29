@@ -21,15 +21,11 @@ export const MemberCard = ({
         <Avatar src="/images/about_owl_image.jpg" className={styles.profile_avatar} />
         <div className={styles.default_info}>
           <p>{name}</p>
-          <p>dev</p>
+          <Link href={githubURL} style={{ color: '#9d9d9d' }}>
+            github
+          </Link>
         </div>
       </div>
-      {/* <div className={styles.github_link}>
-        <Link href={githubURL}>
-          <FaGithub color="#8a2be2" size={45} />
-        </Link>
-        <p>{`${name}의 GitHub 바로가기`}</p>
-      </div> */}
     </div>
   );
 };

@@ -9,7 +9,7 @@ import { DEVELOPERS_INFO } from '../../components/about/MemberInfo';
 import styles from './page.module.css';
 
 export default function AboutPage() {
-  const [selectedMember, setSelectedMember] = useState<MemberInfo | null>(null);
+  const [selectedMember, setSelectedMember] = useState<MemberInfo>(DEVELOPERS_INFO[0]);
 
   const handleMemberClick = (index: number) => {
     setSelectedMember(DEVELOPERS_INFO[index]);
