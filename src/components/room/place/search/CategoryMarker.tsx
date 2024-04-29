@@ -34,7 +34,18 @@ const CategoryMarker = ({
 
   return (
     <>
-      <MapMarker position={{ lat: +y, lng: +x }} onClick={handleClickMarker} />
+      <MapMarker
+        position={{ lat: +y, lng: +x }}
+        image={{
+          src: '/images/category_marker.svg',
+          size: {
+            width: 50,
+            height: 50
+          }
+        }}
+        zIndex={6}
+        onClick={handleClickMarker}
+      />
       {isOpen && (
         <CustomOverlayMap position={{ lat: +y, lng: +x }} yAnchor={1.4} zIndex={7}>
           <Card className={styles.card}>
