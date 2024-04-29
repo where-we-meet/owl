@@ -35,6 +35,7 @@ export default function AboutPage() {
                 key={index}
                 name={developer.name}
                 githubURL={developer.githubURL}
+                profile={developer.profile_image}
                 handleMemberClick={handleMemberClick}
                 index={index}
               />
@@ -56,18 +57,17 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-              <div className={styles.review_card}>
+              <div className={styles.review_card_container}>
                 <div className={styles.review_card_wrap}>
                   <div className={styles.profile_image_box}>
-                    <img src="/images/real_logo_without_text_white.png" className={styles.profile_image}></img>
+                    <img src={selectedMember.profile_image} className={styles.profile_image}></img>
                   </div>
 
                   <div className={styles.review_box}>
                     {selectedMember && (
                       <>
-                        <span className={styles.review_title}>{selectedMember.review_title}</span>
+                        <span className={styles.review_title}>프로젝트 후기</span>
                         <p className={styles.review_content}>{selectedMember.review}</p>
-                        <span className={styles.review_end}>{selectedMember.review_end}</span>
                       </>
                     )}
                   </div>
