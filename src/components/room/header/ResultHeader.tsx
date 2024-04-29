@@ -26,7 +26,7 @@ const ResultHeader = () => {
         </div>
       </div>
       <div className={styles.confirm_info} onClick={handleMoveHalfway}>
-        <Image src="/pin.svg" className={styles.pin} />
+        <Image src="/pin.svg" alt="pin" className={styles.pin} />
         <p>{room ? room.location : '주소를 불러오는 중'}</p>
         <span>/</span>
         <p>{room ? room.confirmed_date : '확정 날짜를 불러오는 중'}</p>
