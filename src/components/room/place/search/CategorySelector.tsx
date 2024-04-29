@@ -2,21 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import { useRangeStore, useSearchDataStore } from '@/store/placeStore';
-import { IoCafe, IoRestaurant } from 'react-icons/io5';
-import { FaTrainSubway, FaLandmark } from 'react-icons/fa6';
-import { RiMovie2Line, RiHotelBedFill } from 'react-icons/ri';
-import { BiSolidParking } from 'react-icons/bi';
 import styles from './CategorySelector.module.css';
 import { useQueryRoomData } from '@/hooks/useQueryRoomData';
+import { BedIcon, BusIcon, CafeIcon, MovieIcon, PantheonIcon, ParkingIcon, SpoonIcon } from './CategoryIcons';
 
 const SEARCH_CATEGORY = [
-  { name: '맛집', icon: <IoRestaurant /> },
-  { name: '카페', icon: <IoCafe /> },
-  { name: '문화시설', icon: <RiMovie2Line /> },
-  { name: '관광명소', icon: <FaLandmark /> },
-  { name: '지하철역', icon: <FaTrainSubway /> },
-  { name: '주차장', icon: <BiSolidParking /> },
-  { name: '숙박', icon: <RiHotelBedFill /> }
+  { name: '맛집', icon: <SpoonIcon style={{ width: '1.8rem', height: '1.8rem' }} /> },
+  { name: '카페', icon: <CafeIcon style={{ width: '1.8rem', height: '1.8rem' }} /> },
+  { name: '문화시설', icon: <MovieIcon style={{ width: '1.8rem', height: '1.8rem' }} /> },
+  { name: '관광명소', icon: <PantheonIcon style={{ width: '1.8rem', height: '1.8rem' }} /> },
+  { name: '지하철역', icon: <BusIcon style={{ width: '1.8rem', height: '1.8rem' }} /> },
+  { name: '주차장', icon: <ParkingIcon style={{ width: '1.8rem', height: '1.8rem' }} /> },
+  { name: '숙박', icon: <BedIcon style={{ width: '1.8rem', height: '1.8rem' }} /> }
 ];
 
 const CategorySelector = () => {
