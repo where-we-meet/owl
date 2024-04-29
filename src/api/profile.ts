@@ -2,6 +2,7 @@ import { extractFileNameFromURL } from '@/utils/extractFileNameFromURL';
 import { getFileName } from '@/utils/profile/getFileName';
 import { createClient } from '@/utils/supabase/client';
 import { Dispatch, SetStateAction } from 'react';
+
 const supabase = createClient();
 
 export const getUserProfileData = async (id: string) => {
