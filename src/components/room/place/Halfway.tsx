@@ -1,4 +1,4 @@
-import { CustomOverlayMap, MapMarker } from 'react-kakao-maps-sdk';
+import { CustomOverlayMap } from 'react-kakao-maps-sdk';
 import styles from './Halfway.module.css';
 
 const Halfway = ({ location }: { location: { lat: number; lng: number } }) => {
