@@ -1,16 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button, Image, ModalHeader, ModalBody, Avatar, Tooltip } from '@nextui-org/react';
-import { getUserProfileData } from '@/api/profile';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { GrFormNext } from 'react-icons/gr';
-import { IoClose } from 'react-icons/io5';
-
-import styles from './UserProfileRead.module.css';
-import { UserProfileData } from './UserProfileButton';
 import { useRoomUserDataStore } from '@/store/userProfileStore';
 import DeleteAccountButton from '@/components/auth/DeleteAccountButton';
+import { useQueryProfile } from '@/hooks/useQueryProfile';
+import { GrFormNext } from 'react-icons/gr';
+import { IoClose } from 'react-icons/io5';
+import styles from './UserProfileRead.module.css';
 
 const UserProfileRead = ({
   toggleEditMode,
@@ -22,27 +20,23 @@ const UserProfileRead = ({
   isOpen: boolean;
 }) => {
   const user = useQueryUser();
+  const { data, isPending } = useQueryProfile(user.id);
   const { setCurrentProfileURL, setUploadedProfileURL } = useRoomUserDataStore();
-  //state for recent profile data (from supabase DB)
-  const [data, setData] = useState<UserProfileData>({
-    name: '',
-    profile_url: ''
-  });
 
-  // useEffect for take recent data
   useEffect(() => {
     const fetchData = async () => {
+      if (!data) return;
       try {
-        const data = await getUserProfileData(user.id);
-        setData({ name: data.name, profile_url: data.profile_url });
         setCurrentProfileURL(data.profile_url);
         setUploadedProfileURL('');
       } catch (error) {
         console.error('Error fetching user profile data:', error);
       }
     };
+
     fetchData();
   }, []);
+
   useEffect(() => {
     if (isOpen) {
       window.addEventListener('popstate', handleClose);
@@ -53,6 +47,9 @@ const UserProfileRead = ({
       window.removeEventListener('popstate', handleClose);
     };
   }, [isOpen]);
+
+  if (!data || isPending) return null;
+
   return (
     <>
       <Button className={styles.close_btn} isIconOnly onPress={handleClose}>
