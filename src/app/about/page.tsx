@@ -26,7 +26,7 @@ export default function AboutPage() {
           </header>
           <div className={styles.divider}>
             <div className={styles.divider_bar} />
-            <span className={styles.divider_text}>Member & Project</span>
+            <span className={styles.divider_text}>5 Member & Project</span>
             <div className={styles.divider_bar} />
           </div>
           <div className={styles.section}>
