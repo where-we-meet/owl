@@ -1,22 +1,19 @@
 'use client';
 
-import { createClient } from '@/utils/supabase/client';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { useMessageStore } from '@/store/messageStore';
-import { useQueryUsersData } from '@/hooks/useQueryUsersData';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { insertMessage } from '@/api/message';
 import { FiSend } from 'react-icons/fi';
+import { useQueryProfile } from '@/hooks/useQueryProfile';
 import styles from './InputBox.module.css';
 
 export const InputBox = ({ roomId }: { roomId: string }) => {
-  const supabase = createClient();
-  const user = useQueryUser();
-  const addMessage = useMessageStore((state) => state.addMessage);
+  const { id: userId } = useQueryUser();
 
   const [inputText, setInputText] = useState('');
   const [canSend, setCanSend] = useState(true);
 
-  const { data: userData } = useQueryUsersData(user.id);
+  const { data: userData } = useQueryProfile(userId);
 
   const handleSendMessage = async (text: string) => {
     if (!text.trim() || !userData || !canSend) {
@@ -29,27 +26,15 @@ export const InputBox = ({ roomId }: { roomId: string }) => {
     const newMessage = {
       id: crypto.randomUUID(),
       text,
-      send_by: user.id,
+      send_by: userId,
       is_edit: false,
       created_at: new Date().toISOString(),
       room_id: roomId,
-      user_profile: userData[0].profile_url,
-      name: userData[0].name,
-      users: {
-        id: userData[0].id,
-        profile_url: userData[0].profile_url,
-        name: userData[0].name,
-        created_at: userData[0].created_at
-      }
+      user_profile: userData.profile_url,
+      name: userData.name
     };
-    addMessage(newMessage);
 
-    const { data, error } = await supabase
-      .from('message')
-      .insert({ name: newMessage.name, text, room_id: roomId, user_profile: newMessage.user_profile });
-
-    if (error) throw error;
-    return data;
+    await insertMessage(newMessage);
   };
 
   const handleChangeInputBoxState = (e: ChangeEvent<HTMLInputElement>) => {

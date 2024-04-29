@@ -1,6 +1,7 @@
 'use client';
-import { IMessage } from '@/store/messageStore';
+
 import { Avatar } from '@nextui-org/react';
+import type { IMessage } from '@/types/message';
 import styles from './Message.module.css';
 
 export const Message = ({ message }: { message: IMessage }) => {
