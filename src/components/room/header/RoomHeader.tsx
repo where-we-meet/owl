@@ -1,17 +1,14 @@
 'use client';
-import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { getRoomData } from '@/api/supabaseCSR/supabase';
+
 import ConfirmedButton from '../ConfirmedButton';
 import HalfwayButton from '../place/HalfwayButton';
-import styles from './RoomHeader.module.css';
 import { useHalfwayDataStore } from '@/store/halfwayStore';
+import { useQueryRoomData } from '@/hooks/useQueryRoomData';
+import styles from './RoomHeader.module.css';
 
 const RoomHeader = () => {
-  const { id: roomId }: { id: string } = useParams();
-
   const address = useHalfwayDataStore((state) => state.address);
-  const { data: room } = useQuery({ queryKey: ['room', roomId], queryFn: () => getRoomData(roomId) });
+  const { data: room } = useQueryRoomData();
 
   return (
     <>
