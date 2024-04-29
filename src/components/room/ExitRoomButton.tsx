@@ -1,11 +1,10 @@
-import { getIsAdmin } from '@/api/room';
 import { useDeleteExitUser, useDeleteRoom } from '@/hooks/useMutateUserData';
 import { useQueryUser } from '@/hooks/useQueryUser';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { ImExit } from 'react-icons/im';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
 import styles from './ExitRoomButton.module.css';
+import { useQueryRoomData } from '@/hooks/useQueryRoomData';
 
 export const ExitRoomButton = ({ roomId }: { roomId: string }) => {
   const { id: userId } = useQueryUser();
@@ -14,11 +13,7 @@ export const ExitRoomButton = ({ roomId }: { roomId: string }) => {
   const { mutateAsync: deleteRoom } = useDeleteRoom();
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
-  const { data: room, isPending } = useQuery({
-    queryKey: ['room', 'confirmed', 'createdBy'],
-    queryFn: () => getIsAdmin(roomId, userId),
-    select: (data) => data[0]
-  });
+  const { data: room } = useQueryRoomData();
 
   const handleDeleteUser = async () => {
     if (room?.created_by !== userId) {

@@ -34,12 +34,11 @@ const ConfirmedButton = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const { data: room, isPending } = useQuery({
-    queryKey: ['room', 'confirmed', 'createdBy'],
-    queryFn: () => getRoomIsConfirmed(roomId),
-    select: (data) => data[0]
+    queryKey: ['is-confirmed-room', roomId],
+    queryFn: () => getRoomIsConfirmed(roomId)
   });
 
-  const { mutateAsync, isSuccess } = useRoomUserData();
+  const { mutateAsync } = useRoomUserData();
   const [isFetchDone, setIsFetchDone] = useState(false);
 
   const handleConfirm = async (e: FormEvent<HTMLFormElement>) => {
@@ -73,13 +72,7 @@ const ConfirmedButton = () => {
   return (
     <>
       <Tooltip color="foreground" placement="right-end" content="일정을 확정하기">
-        <Button
-          // style={{ backgroundColor: 'black', color: 'white' }}
-          onPress={onOpen}
-          isDisabled={isFetchDone}
-          fullWidth={true}
-          color="primary"
-        >
+        <Button onPress={onOpen} isDisabled={isFetchDone} fullWidth={true} color="primary">
           {isFetchDone ? '모임 확정 완료' : '확정'}
         </Button>
       </Tooltip>
