@@ -25,3 +25,20 @@ export type UpsertRoomUsers = {
   lat: string | null;
   lng: string | null;
 };
+
+export type UserInfo = {
+  user_id: string;
+  users: {
+    profile_url: string | null;
+  } | null;
+};
+
+export type MeetingInfo = {
+  id: string;
+  name: string | null;
+  confirmed_date: string | null;
+  created_at: string;
+  location: string | null;
+  verified: boolean | null;
+  userdata_room: UserInfo[];
+};
