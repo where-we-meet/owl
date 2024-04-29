@@ -13,7 +13,7 @@ export const Article = ({
 }) => {
   return (
     <article className={styles.article}>
-      <Image src={image_url} width={IMAGE_WIDTH_SIZE} className={`${styles.image} ${styles.item}`} />
+      <Image src={image_url} alt={subtitle} width={IMAGE_WIDTH_SIZE} className={`${styles.image} ${styles.item}`} />
       <span className={`${styles.description} ${styles.item}`}>
         <h3 className={styles.subtitle}>{subtitle}</h3>
         <p className={styles.use_case}>{contents}</p>
