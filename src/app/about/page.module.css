@@ -23,7 +23,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 4rem;
+  padding: 3rem;
   background-size: cover;
 }
 
@@ -106,7 +106,7 @@
   transition: all 0.3s ease-in-out 0s;
 }
 
-.owl_link_produce_container {
+.owl_link_introduce_container {
   height: 200px;
   width: 100%;
   display: flex;
@@ -131,10 +131,10 @@
 
 .owl_link_content_box {
   width: calc(100% - 20%);
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   padding-left: 30px;
   padding-right: 30px;
-  height: 180px;
   display: flex;
   flex-direction: column;
   -webkit-box-pack: center;
@@ -142,26 +142,27 @@
   align-items: flex-start;
 }
 
-.title {
-  font-weight: 500;
+.service_title {
+  font-weight: 700;
   font-size: 18px;
   margin-bottom: 10px;
+  color: white;
 }
 
 .introduce {
   font-size: 14px;
   opacity: 0.4;
   margin-bottom: 12px;
-  color: aliceblue;
+  color: rgb(223, 223, 223);
 }
 
-.button_wrap {
+.introduce_wrap {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.link_button {
+.introduce {
   margin-right: 10px;
   color: rgb(255 255 255 / 80%);
   background-color: rgb(0, 0, 0);
@@ -172,7 +173,6 @@
 }
 
 .review_card_container {
-  height: 100px;
   width: 100%;
   padding: 0px 10px 10px;
   margin: 0px;
@@ -186,13 +186,13 @@
   justify-content: flex-start;
   -webkit-box-align: center;
   align-items: center;
-  height: 90px;
+  padding: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .profile_image_box {
-  width: 90px;
-  height: 90px;
+  width: 40%;
+  /* height: 90px; */
   display: flex;
   margin-right: 5px;
   -webkit-box-pack: center;
@@ -224,6 +224,12 @@
 }
 
 .review_content {
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: rgb(184, 184, 184);
+}
+
+.review_end {
   font-size: 12px;
   opacity: 0.4;
   color: white;

@@ -34,17 +34,17 @@ export default function AboutPage() {
           </div>
           <div className={styles.content_container}>
             <div className={styles.content_wrap}>
-              <div className={styles.owl_link_produce_container}>
+              <div className={styles.owl_link_introduce_container}>
                 <div className={styles.owl_link_img_box}>
                   <Image src="/images/center_owl.png" alt="logo" width={100} height={100} />
                 </div>
                 <div className={styles.owl_link_content_box}>
-                  <span className={styles.title}>OWL-LiNK</span>
-                  <div className={styles.button_wrap}>
-                    <div className={styles.link_button}>
-                      약속을 잡을 때 결정사항과 고민거리를 줄여주어 편리하고, 더 나아가 다음 모임을 기대하게 만드는
-                      서비스를 제공하고자 합니다.
-                    </div>
+                  <h3 className={styles.service_title}>OWL-LiNK</h3>
+                  <div className={styles.introduce_wrap}>
+                    <p className={styles.introduce}>
+                      약속을 잡을 때 결정사항과 고민거리를 줄여주어 편리하고, <br />더 나아가 다음 모임을 기대하게
+                      만드는 서비스를 제공하고자 합니다.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -54,10 +54,13 @@ export default function AboutPage() {
                     <img src="" className={styles.profile_image}></img>
                   </div>
                   <div className={styles.review_box}>
-                    <span className={styles.review_title}>
-                      좋은 팀원분들과 함께 할 수 있어서 많이 배우는 시간이었습니다.
-                    </span>
-                    <span className={styles.review_content}>올빼미, Team We</span>
+                    <span className={styles.review_title}>경험은 무엇보다도 소중한 지식의 한 페이지입니다.</span>
+                    <p className={styles.review_content}>
+                      이번 프로젝트를 거치면서 부족했던 많은 점을 해결하고 문제를 다루고 대처하는 능력을 기를 수
+                      있었습니다. 문제는 늘 발생하지만, 항상 외부에 의존하던 모습에서 스스로 처리할 수 있는 능동적인
+                      개발자가 될 수 있는 초석이 되었습니다. 이제 우리는 스스로가 첫 발을 내딛을 일만 남았습니다.
+                    </p>
+                    <span className={styles.review_end}>우리의 지금은 우리의 명함에 값지게 새겨졌습니다. -박강토</span>
                   </div>
                 </div>
               </div>
