@@ -19,7 +19,7 @@ export const useMapController = () => {
   const range = useRangeStore((state) => state.range);
 
   const { roomUsers } = useQueryRoomUsers();
-  const { data: searchCategory, isPending: isCategoryPending } = useQuerySearchCategory(searchOption);
+  const { data: searchCategory } = useQuerySearchCategory(searchOption);
 
   const { data: room } = useQueryRoomData();
 

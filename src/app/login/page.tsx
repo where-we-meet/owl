@@ -1,5 +1,4 @@
 import LoginButton from '@/components/auth/LoginButton';
-import PayPalDonate from '@/components/auth/PayPalDonate';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import styles from './page.module.css';

@@ -3,12 +3,13 @@ import {
   deleteExitUserSchedule,
   deleteRoomByAdmin,
   updateRoomData,
+  updateStartLocation,
   upsertRoomUser
 } from '@/api/room';
-import { upsertSchedule, updateStartLocation, deleteMySchedules } from '@/api/supabaseCSR/supabase';
-import type { UserLocationData } from '@/types/place.types';
+import { deleteMySchedules, upsertSchedule } from '@/api/schedules';
 import { UpsertUserSchedule } from '@/types/roomUser';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { UserLocationData } from '@/types/place.types';
 
 type Payload = {
   userLocationData: UserLocationData;

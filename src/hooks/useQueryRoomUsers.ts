@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
-import { getRoomUsersData } from '@/api/supabaseCSR/supabase';
 import { useQueryUser } from './useQueryUser';
+import { getRoomUsersData } from '@/api/room';
 
 export const useQueryRoomUsers = () => {
   const { id: roomId }: { id: string } = useParams();

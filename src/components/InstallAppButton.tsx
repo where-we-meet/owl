@@ -1,9 +1,9 @@
 'use client';
-import { Button } from '@nextui-org/react';
-import { useEffect } from 'react';
 
-import styles from './InstallAppButton.module.css';
+import { useEffect } from 'react';
 import { LuDownload } from 'react-icons/lu';
+import { Button } from '@nextui-org/react';
+import styles from './InstallAppButton.module.css';
 
 const InstallAppButton = () => {
   let deferredPrompt: any;

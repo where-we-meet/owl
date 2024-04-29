@@ -1,4 +1,4 @@
-import { getRangeOfSchedule, getUserSchedule } from '@/api/supabaseCSR/supabase';
+import { getRangeOfSchedule, getUserSchedule } from '@/api/schedules';
 import { useQuery } from '@tanstack/react-query';
 
 export const useQuerySchedule = ({ roomId, userId }: { roomId: string; userId: string }) => {
@@ -11,7 +11,6 @@ export const useQuerySchedule = ({ roomId, userId }: { roomId: string; userId: s
   const { data: scheduleRange } = useQuery({
     queryKey: ['range', roomId],
     queryFn: () => getRangeOfSchedule(roomId),
-    select: (data) => data[0]
   });
 
   const userSchedules = data.filter((schedule) => schedule.created_by !== userId);
