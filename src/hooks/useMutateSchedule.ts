@@ -1,4 +1,4 @@
-import { deleteSelectedDate, upsertSelectedDate } from '@/api/supabaseCSR/supabase';
+import { deleteSelectedDate, upsertSelectedDate } from '@/api/schedules';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useMutateSchedule = (roomId: string) => {

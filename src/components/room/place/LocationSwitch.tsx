@@ -5,8 +5,8 @@ import { useQueryUser } from '@/hooks/useQueryUser';
 import { useUpdateStartLocation } from '@/hooks/useMutateUserData';
 import { useSearchDataStore } from '@/store/placeStore';
 import { objectValidate } from '@/utils/objectValidate';
-import styles from './LocationSwitch.module.css';
 import { Tooltip } from '@nextui-org/react';
+import styles from './LocationSwitch.module.css';
 
 const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
   const { id: roomId }: { id: string } = useParams();
@@ -16,7 +16,7 @@ const LocationSwitch = ({ toggleState }: { toggleState: boolean }) => {
     address
   } = useSearchDataStore((state) => state);
 
-  const { mutateAsync, isSuccess } = useUpdateStartLocation();
+  const { mutateAsync } = useUpdateStartLocation();
 
   const handleSubmitLocation = async () => {
     try {

@@ -1,4 +1,4 @@
-import { getRoomData } from '@/api/supabaseCSR/supabase';
+import { getRoomData } from '@/api/room';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 

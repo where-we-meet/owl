@@ -1,4 +1,4 @@
-import type { MeetingInfo } from '@/hooks/useQueryMyRooms';
+import type { MeetingInfo } from "@/types/roomUser";
 
 export const sortMeetingInfo = (meetingInfo: MeetingInfo[]): MeetingInfo[] => {
   return meetingInfo.sort((a, b) => {

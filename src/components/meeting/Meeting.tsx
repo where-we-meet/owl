@@ -1,12 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useQueryMyRooms } from '@/hooks/useQueryMyRooms';
+import { MeetingIsPending } from './MeetingIsPending';
+import type { MeetingInfo, UserInfo } from '@/types/roomUser';
 import { BsCalendarDateFill } from 'react-icons/bs';
 import { FaMapLocationDot } from 'react-icons/fa6';
 import { RiVerifiedBadgeFill } from 'react-icons/ri';
-import { MeetingInfo, UserInfo, useQueryMyRooms } from '@/hooks/useQueryMyRooms';
 import { Avatar, AvatarGroup } from '@nextui-org/react';
-import { MeetingIsPending } from './MeetingIsPending';
 import styles from './Meeting.module.css';
 
 export const Meeting = () => {

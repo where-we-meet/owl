@@ -23,8 +23,8 @@ export const useSettingMap = () => {
 
   const isPinned = !!roomUser?.start_location;
 
-  const { data: searchAddress, isPending: isAddressPending } = useQueryAddress(location, isDrag);
-  const { data: halfwayPointAddress, isPending: halfwayPointAddressPending } = useQueryAddress(halfwayPoint, false);
+  const { data: searchAddress } = useQueryAddress(location, isDrag);
+  const { data: halfwayPointAddress } = useQueryAddress(halfwayPoint, false);
 
   const setCenter = (map: kakao.maps.Map) => {
     const latlng = map.getCenter();

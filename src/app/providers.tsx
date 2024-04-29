@@ -9,7 +9,7 @@ function Providers({ children }: React.PropsWithChildren) {
   return (
     <QueryClientProvider client={queryClient}>
       <NextUIProvider>{children}</NextUIProvider>
-      {/* <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-right" /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

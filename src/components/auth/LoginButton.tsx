@@ -2,9 +2,9 @@
 
 import KakaoSymbol from './KakaoSymbol';
 import GoogleLogo from './GoogleLogo';
-import styles from './LoginButton.module.css';
 import { signInWithOAuth } from '@/api/auth/signInWithOAuth';
 import { useSearchParams } from 'next/navigation';
+import styles from './LoginButton.module.css';
 
 const LoginButton = () => {
   const params = useSearchParams();
