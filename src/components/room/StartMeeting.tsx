@@ -28,6 +28,7 @@ const StartMeeting = () => {
 
   const createRoomOption = async () => {
     setIsFetching(true);
+
     const [newRoom] = await insertNewRoom({
       name: roomNameGenerator(),
       created_by: userId,
@@ -47,6 +48,7 @@ const StartMeeting = () => {
       lat: null,
       lng: null
     });
+
     router.replace(`/room/${newRoom.id}`);
   };
 
