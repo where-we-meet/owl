@@ -41,3 +41,9 @@
   margin-top: auto;
   padding: 10px;
 }
+
+@media screen and (max-width: 400px) {
+  .default_info > p:first-child {
+    font-size: 0.8rem;
+  }
+}
