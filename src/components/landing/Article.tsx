@@ -1,21 +1,30 @@
 import { Image } from '@nextui-org/react';
 import styles from './Article.module.css';
 
-const IMAGE_WIDTH_SIZE = 270;
 export const Article = ({
   image_url,
   subtitle,
-  contents
+  contents,
+  width,
+  height
 }: {
   image_url: string;
   subtitle: string;
   contents: string;
+  width: number;
+  height: number;
 }) => {
   return (
     <article className={styles.article}>
-      <Image src={image_url} alt={subtitle} width={IMAGE_WIDTH_SIZE} className={`${styles.image} ${styles.item}`} />
+      <Image
+        src={image_url}
+        alt={subtitle}
+        width={width}
+        height={height}
+        className={`${styles.image} ${styles.item}`}
+      />
       <span className={`${styles.description} ${styles.item}`}>
-        <h3 className={styles.subtitle}>{subtitle}</h3>
+        <h2 className={styles.subtitle}>{subtitle}</h2>
         <p className={styles.use_case}>{contents}</p>
       </span>
     </article>
