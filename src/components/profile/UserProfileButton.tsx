@@ -41,17 +41,16 @@ const UserProfile = () => {
     <>
       <Dropdown>
         <DropdownTrigger>
-          <div className="flex gap-4 items-center" title="내 프로필 설정 및 보기">
-            <Avatar
-              className={styles.profile}
-              showFallback
-              name={user.user_metadata.user_name}
-              isBordered={true}
-              src={`${data.profile_url}`}
-            />
-          </div>
+          <Avatar
+            as="button"
+            className={styles.profile}
+            showFallback
+            name={user.user_metadata.user_name}
+            isBordered={true}
+            src={`${data.profile_url}`}
+          />
         </DropdownTrigger>
-        <DropdownMenu className={styles.dropdown} aria-label="profile menu">
+        <DropdownMenu className={styles.dropdown} aria-label="profile">
           <DropdownItem key="profile" textValue="profile" className={styles.first_item}>
             <div className={styles.view_profile_container}>
               <Avatar
