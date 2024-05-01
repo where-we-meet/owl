@@ -7,7 +7,7 @@ import { insertNewRoom, upsertRoomUser } from '@/api/room';
 import { useQueryUser } from '@/hooks/useQueryUser';
 import roomNameGenerator from '@/utils/roomNameGenerator';
 import { MdStart } from 'react-icons/md';
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input, Tooltip } from '@nextui-org/react';
 import styles from './StartMeeting.module.css';
 
 const StartMeeting = () => {
@@ -58,18 +58,22 @@ const StartMeeting = () => {
       <div className={styles.date}>
         <label>
           시작일
-          <Input
-            type="date"
-            min={getCurrentFormattedDate()}
-            name="start"
-            value={startDate}
-            onChange={changeStartDate}
-          />
+          <Tooltip placement="bottom" color="secondary" content="시작일을 직접 입력 할 수 있어요.">
+            <Input
+              type="date"
+              min={getCurrentFormattedDate()}
+              name="start"
+              value={startDate}
+              onChange={changeStartDate}
+            />
+          </Tooltip>
         </label>
         <p>~</p>
         <label>
           종료일
-          <Input type="date" min={startDate} name="end" value={endDate} onChange={changeEndDate} />
+          <Tooltip placement="bottom" color="secondary" content="종료일을 직접 입력 할 수 있어요.">
+            <Input type="date" min={startDate} name="end" value={endDate} onChange={changeEndDate} />
+          </Tooltip>
         </label>
       </div>
       <div className={styles.start_button}>
