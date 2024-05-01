@@ -1,11 +1,10 @@
 .places_container {
-  max-height: 500px;
+  max-height: 450px;
   width: 100%;
   background-color: inherit;
   overflow: hidden;
   overflow-y: overlay;
   cursor: pointer;
-  z-index: 9999;
 }
 
 .places_container > ul {
